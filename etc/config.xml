@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+    <default>
+        <payment>
+            <moipcc>
+                <model>Moip\Magento2\Model\PaymentMethodCc</model>
+				<payment_action>authorize</payment_action>
+                <active>1</active>
+                <title>Moip Cartão de Crédito</title>
+            </moipcc>
+            <moipboleto>
+                <model>Moip\Magento2\Model\PaymentMethodBoleto</model>
+                <payment_action>authorize</payment_action>
+                <active>1</active>
+                <title>Moip Boleto</title>
+            </moipboleto>
+        </payment>
+    </default>
+</config>

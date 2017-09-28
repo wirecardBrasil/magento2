@@ -1,0 +1,38 @@
+<?php
+$_init                      = $block->getLinkPay();
+$_getLinkPrintPay           = $block->getLinkPrintPay();
+$_getLineCodeBoleto         = $block->getLineCodeBoleto();
+$_getExpirationDateBoleto   = $block->getExpirationDateBoleto(); 
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+?>
+<dl class="payment-method">
+    <dt class="title"><?php /* @noEscape */ echo $title; ?></dt>
+
+    <?php if ($_init):?>
+        <dd class="content">
+            <table class="data table">
+                    <tr>
+                            <th scope="row"><?php echo $block->escapeHtml('Linha Digitável')?></th>
+                            <td>
+                                <?php echo $_getLineCodeBoleto; ?>
+                            </td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><?php echo $block->escapeHtml('Link')?></th>
+                        <td>
+                            <a href="<?php echo $_getLinkPrintPay; ?>" class="btn btn-link" target="_blank">
+                                Imprimir Boleto
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                            <th scope="row"><?php echo $block->escapeHtml('Vencimento')?></th>
+                            <td>
+                                <?php echo $_getExpirationDateBoleto; ?>
+                            </td>
+                    </tr>
+            </table>
+        </dd>
+    <?php endif;?>
+</dl>
+

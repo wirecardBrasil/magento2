@@ -1,0 +1,41 @@
+<?php /* @var $block \MageWorx\AlsoBought\Block\System\Config\oauth */ ?>
+
+<script>
+    require([
+        'jquery',
+        'prototype'
+    ], function(jQuery){
+
+        var oauthSpan = jQuery('#oauth_span');
+
+        jQuery('#oauth').click(function () {
+            <?php if($block->getTypeJs() === "getautorization"): ?>
+            window.location.href = "<?php echo $block->getUrltoConnect() ?>";
+            <?php else: ?>
+                var params = {};
+                new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                    parameters:     params,
+                    loaderArea:     false,
+                    asynchronous:   true,
+                    onCreate: function() {
+                        oauthSpan.find('.oauthed').hide();
+                        oauthSpan.find('.processing').show();
+                        jQuery('#oauth_message_span').text('');
+                    },
+                    onSuccess: function(response) {
+                        location.reload();
+                    }
+                });
+            <?php endif; ?>
+
+        });
+
+    });
+</script>
+
+<?php echo $block->getButtonHtml() ?>
+<span class="oauth-indicator" id="oauth_span">
+    <img class="processing" hidden="hidden" alt="oauthing" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+    <img class="oauthed" hidden="hidden" alt="oauthed" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+    <span id="oauth_message_span"></span>
+</span>

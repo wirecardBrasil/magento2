@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<body>
+    <referenceContainer name="order.success.additional.info">
+        <block class="Moip\Magento2\Block\Success"
+               name="moip.order.success"
+               template="Moip_Magento2::order/success/additional.phtml"
+               after="-">
+        </block>
+    </referenceContainer>
+</body>
