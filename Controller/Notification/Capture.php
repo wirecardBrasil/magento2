@@ -35,9 +35,11 @@ class Capture extends \Magento\Framework\App\Action\Action
 	
 	public function execute()
 	{
+			$this->_logger->debug("entrou na capture");
 			$moip = $this->_moipHelper->AuthorizationValidate();
 			$response = file_get_contents('php://input');
 			$originalNotification = json_decode($response, true);
+			$this->_logger->debug($response);
 
 			$httpRequestObject = new \Zend_Controller_Request_Http();
 
@@ -46,8 +48,10 @@ class Capture extends \Magento\Framework\App\Action\Action
 			$token = $this->_moipHelper->getInfoUrlPreferenceToken('capture');
 			
 			if($authorization != $token){
+				$this->_logger->debug("Authorization Invalida ".$authorization);
 				return $this;
 			} 
+			
 			$order_id = $originalNotification['resource']['payment']['_links']['order']['title']; 
 			$order = $moip->orders()->get($order_id);
 			$transaction_id= $order->getOwnId();

@@ -23,7 +23,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
 
 	const REDIRECT_URI_PRODUCTION	= "http://loja.moip.com.br/magento2/redirect/";
-	const URL_KEY_PRODUCTION		= "https://sandbox.moip.com.br/v2/keys/";
+	const URL_KEY_PRODUCTION		= "https://api.moip.com.br/v2/keys/";
 	const APP_ID_PRODUCTION			= "APP-ZDVW5HTDKG16";
 	const CLIENT_SECRECT_PRODUCTION	= "cb49330579e144fdb40e22b50e04269e";
 	
@@ -226,79 +226,79 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 	}
 
 	public function getTypeForCNPJ(){
-		$typecpf = $this->_scopeConfig->getValue('payment/moipbase/type_cnpj', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$typecpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/type_cnpj', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $typecpf;
 	}
 
 	public function getTypeForCpf(){
-		$typecpf = $this->_scopeConfig->getValue('payment/moipbase/type_cpf', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$typecpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/type_cpf', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $typecpf;
 	}
 
 	public function getTypeNameCompany(){
-		$type_name_company = $this->_scopeConfig->getValue('payment/moipbase/type_name_company', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$type_name_company = $this->_scopeConfig->getValue('payment/moipbase/advanced/type_name_company', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 
 		return $type_name_company;
 	}
 
 	public function getCpfAttributeForCustomer(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/cpf_for_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/cpf_for_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getCpfAttributeForAddress(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/cpf_for_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/cpf_for_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getCNPJAttributeForCustomer(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/cnpj_for_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/cnpj_for_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getCNPJAttributeForAddress(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/cnpj_for_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/cnpj_for_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getCompanyAttributeForAddress(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/company_name_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/company_name_address', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getCompanyAttributeForCustomer(){
-		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/company_name_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$attribute_cpf = $this->_scopeConfig->getValue('payment/moipbase/advanced/company_name_customer', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $attribute_cpf;
 	}
 
 	public function getStreetPositionLogradouro(){
-		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/street_logradouro', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/advanced/street_logradouro', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $street_logradouro;
 	}
 
 	public function getStreetPositionNumber(){
-		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/street_number', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/advanced/street_number', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $street_logradouro;
 	}
 
 	public function getStreetPositionComplemento(){
-		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/street_complemento', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/advanced/street_complemento', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $street_logradouro;
 	}
 
 	public function getStreetPositionDistrict(){
-		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/street_district', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$street_logradouro = $this->_scopeConfig->getValue('payment/moipbase/advanced/street_district', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $street_logradouro;
 	}

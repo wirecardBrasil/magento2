@@ -61,10 +61,16 @@ class Oauth extends Field
     public function getInfoTextBtn(){
         
         $_environment = $this->_moipHelper->getEnvironmentMode();
-        if($this->_moipHelper->getOauth($_environment)){
-            $text = sprintf(__('Apagar configuração de %s'), $_environment);
+        if($_environment === "production"){
+            $label = "Produção";
         } else {
-            $text = sprintf(__('Autorizar moip em %s'), $_environment);
+            $label = "Ambiente de Teste";
+        }
+
+        if($this->_moipHelper->getOauth($_environment)){
+            $text = sprintf(__('Apagar configuração de %s'), $label);
+        } else {
+            $text = sprintf(__('Autorizar moip em %s'), $label);
         }
         return $text;
     }
@@ -94,8 +100,12 @@ class Oauth extends Field
        
         $scope = true;
         
+        if($_environment == "production") {
+            $connect = new Connect($redirect_uri, $client_id, $scope, Connect::ENDPOINT_PRODUCTION);
+        } else {
+           $connect = new Connect($redirect_uri, $client_id, $scope, Connect::ENDPOINT_SANDBOX);
+        }
 
-        $connect = new Connect($redirect_uri, $client_id, $scope, Connect::ENDPOINT_SANDBOX);
         $connect->setScope(Connect::RECEIVE_FUNDS)
             ->setScope(Connect::REFUND)
             ->setScope(Connect::MANAGE_ACCOUNT_INFO)

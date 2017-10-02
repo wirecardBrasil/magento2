@@ -2,17 +2,61 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
     <default>
         <payment>
+            <moipbase>
+                <title>Config Moip</title>
+                <model>Moip\Magento2\Model\PaymentMethodCc</model>
+                <environment_mode>production</environment_mode>
+                <advanced>
+                    <title>Config Avançada</title>
+                    <type_cpf>address</type_cpf>
+                    <cpf_for_address>vat_id</cpf_for_address>
+                    <cpf_for_customer>taxvat</cpf_for_customer>
+                    <type_cnpj>use_cpf</type_cnpj>
+                    <cnpj_for_address>vat_id</cnpj_for_address>
+                    <cnpj_for_customer>taxvat</cnpj_for_customer>
+                    <type_name_company>address</type_name_company>
+                    <company_name_address>company</company_name_address>
+                    <company_name_customer>firstname</company_name_customer>
+                    <street_logradouro>0</street_logradouro>
+                    <street_number>1</street_number>
+                    <street_complemento>2</street_complemento>
+                    <street_district>3</street_district>
+                </advanced>
+            </moipbase>
             <moipcc>
                 <model>Moip\Magento2\Model\PaymentMethodCc</model>
 				<payment_action>authorize</payment_action>
                 <active>1</active>
-                <title>Moip Cartão de Crédito</title>
+                <title>Cartão de Crédito</title>
+                <min_installment>5</min_installment>
+                <max_installment>12</max_installment>
+                <install_1>0</install_1>
+                <install_2>1.99</install_2>
+                <install_3>1.99</install_3>
+                <install_4>1.99</install_4>
+                <install_5>1.99</install_5>
+                <install_6>1.99</install_6>
+                <install_7>1.99</install_7>
+                <install_8>1.99</install_8>
+                <install_9>1.99</install_9>
+                <install_10>1.99</install_10>
+                <install_11>1.99</install_11>
+                <install_12>1.99</install_12>
             </moipcc>
             <moipboleto>
                 <model>Moip\Magento2\Model\PaymentMethodBoleto</model>
                 <payment_action>authorize</payment_action>
                 <active>1</active>
-                <title>Moip Boleto</title>
+                <title>Boleto Bancário</title>
+                <expiration>3</expiration>
+                <instrucao1>Não receber após vencimento</instrucao1>
+                <instrucao2>Não pagar em cheque</instrucao2>
+                <instrucao3>Mais info em nosso site</instrucao3>
+                <instruction><![CDATA[
+                    Pagar o boleto em qualquer casa lotérica.
+                    O boleto não será enviado ao seu endereço.
+                    Não parcelamos no boleto.
+                ]]></instruction>
             </moipboleto>
         </payment>
     </default>

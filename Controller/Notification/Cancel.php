@@ -25,16 +25,19 @@ class Cancel extends \Magento\Framework\App\Action\Action
 	
 	public function execute()
 	{
+			
 			$moip = $this->_moipHelper->AuthorizationValidate();
 			$response = file_get_contents('php://input');
 			$originalNotification = json_decode($response, true);
-			$this->_logger->debug(print_r($originalNotification, true));
+			$this->_logger->debug($response);
+
 			$httpRequestObject = new \Zend_Controller_Request_Http();
 			$authorization = $httpRequestObject->getHeader('Authorization');
 			
 			$token = $this->_moipHelper->getInfoUrlPreferenceToken('cancel');
 			
 			if($authorization != $token){
+				$this->_logger->debug("Authorization Invalida ".$authorization);
 				return $this;
 			} 
 			$order_id = $originalNotification['resource']['payment']['_links']['order']['title'];

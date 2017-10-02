@@ -1,5 +1,3 @@
-<?php /* @var $block \MageWorx\AlsoBought\Block\System\Config\oauth */ ?>
-
 <script>
     require([
         'jquery',
@@ -7,7 +5,9 @@
     ], function(jQuery){
 
         var oauthSpan = jQuery('#oauth_span');
-
+        jQuery('#payment_other_moipbase_environment_mode').change(function(){
+            jQuery('#elements_for_oauth').html('Após mudar o ambiente é necessário salvar a configuração antes de usar a função de autenticação.');
+        });
         jQuery('#oauth').click(function () {
             <?php if($block->getTypeJs() === "getautorization"): ?>
             window.location.href = "<?php echo $block->getUrltoConnect() ?>";
@@ -32,10 +32,11 @@
 
     });
 </script>
-
-<?php echo $block->getButtonHtml() ?>
-<span class="oauth-indicator" id="oauth_span">
-    <img class="processing" hidden="hidden" alt="oauthing" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
-    <img class="oauthed" hidden="hidden" alt="oauthed" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
-    <span id="oauth_message_span"></span>
-</span>
+<div id="elements_for_oauth">
+    <?php echo $block->getButtonHtml() ?>
+    <span class="oauth-indicator" id="oauth_span">
+        <img class="processing" hidden="hidden" alt="oauthing" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
+        <img class="oauthed" hidden="hidden" alt="oauthed" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+        <span id="oauth_message_span"></span>
+    </span>
+</div>
