@@ -135,11 +135,12 @@ class ConfigProviderCc implements ConfigProviderInterface
                 $config['payment'][$code]['months'] = $this->getMonths();
                 $config['payment'][$code]['icons'] = $this->getIcons();
 				$config['payment'][$code]['currency'] = $this->getCurrencyData();
-				$config['payment'][$code]['infoparcelamentojuros'] = $this->getInfoParcelamentoJuros();
-				$config['payment'][$code]['config_parcelas_maximo'] = $this->ParcelasMaximo();
-				$config['payment'][$code]['config_parcelas_minimo'] = $this->ParcelasMinimo();
+                $config['payment'][$code]['type_interest'] = $this->TypeInstallment();
+				$config['payment'][$code]['info_interest'] = $this->getInfoParcelamentoJuros();
+				$config['payment'][$code]['max_installment'] = $this->MaxInstallment();
+				$config['payment'][$code]['min_installment'] = $this->MinInstallment();
                 $config['payment'][$code]['publickey'] = $this->getPublicKey();
-               
+                $config['payment'][$code]['image_cvv'] = $this->getCvvImg();
 			}
         }
 		
@@ -154,6 +155,11 @@ class ConfigProviderCc implements ConfigProviderInterface
         return $this->_ccoptions;
     }
 
+    public function getCvvImg(){
+        $asset = $this->ccConfig
+                    ->createAsset('Moip_Magento2::images/cc/cvv.gif');
+        return $asset->getUrl();
+    }
     /**
      * @return array
      */
@@ -219,37 +225,37 @@ class ConfigProviderCc implements ConfigProviderInterface
         $juros['0'] = 0;
 		$juros['1'] = 0;
 
-        $juros['2'] =  $this->scopeConfig->getValue("payment/moipcc/install_2");
+        $juros['2'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_2");
 
         
-        $juros['3'] =  $this->scopeConfig->getValue("payment/moipcc/install_3");
+        $juros['3'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_3");
 
         
-        $juros['4'] =  $this->scopeConfig->getValue("payment/moipcc/install_4");
+        $juros['4'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_4");
 
         
-        $juros['5'] =  $this->scopeConfig->getValue("payment/moipcc/install_5");
+        $juros['5'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_5");
 
 
-        $juros['6'] =  $this->scopeConfig->getValue("payment/moipcc/install_6");
+        $juros['6'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_6");
 
 
-        $juros['7'] =  $this->scopeConfig->getValue("payment/moipcc/install_7");
+        $juros['7'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_7");
 
 
-        $juros['8'] =  $this->scopeConfig->getValue("payment/moipcc/install_8");
+        $juros['8'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_8");
 
 
-        $juros['9'] =  $this->scopeConfig->getValue("payment/moipcc/install_9");
+        $juros['9'] =  $this->scopeConfig->getValue("payment/moipcc/installment/installment_9");
        
 
-        $juros['10'] = $this->scopeConfig->getValue("payment/moipcc/install_10");
+        $juros['10'] = $this->scopeConfig->getValue("payment/moipcc/installment/installment_10");
        
 
-        $juros['11'] = $this->scopeConfig->getValue("payment/moipcc/install_11");
+        $juros['11'] = $this->scopeConfig->getValue("payment/moipcc/installment/installment_11");
        
 
-        $juros['12'] = $this->scopeConfig->getValue("payment/moipcc/install_12");
+        $juros['12'] = $this->scopeConfig->getValue("payment/moipcc/installment/installment_12");
        
         return $juros;
     }
@@ -261,15 +267,21 @@ class ConfigProviderCc implements ConfigProviderInterface
         return $currencySymbol;
     }
 	
-	public function ParcelasMinimo()
+    public function TypeInstallment()
     {
-        $parcelasMinimo = $this->scopeConfig->getValue('payment/moipcc/min_installment');
+        $parcelasMinimo = $this->scopeConfig->getValue('payment/moipcc/installment/type_installment');
+        return $parcelasMinimo;
+    }
+
+	public function MinInstallment()
+    {
+        $parcelasMinimo = $this->scopeConfig->getValue('payment/moipcc/installment/min_installment');
         return $parcelasMinimo;
     }
 	
-	public function ParcelasMaximo()
+	public function MaxInstallment()
     {
-        $parcelasMaximo = $this->scopeConfig->getValue('payment/moipcc/max_installment');
+        $parcelasMaximo = $this->scopeConfig->getValue('payment/moipcc/installment/max_installment');
         return $parcelasMaximo;
     }
 

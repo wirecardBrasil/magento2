@@ -68,9 +68,9 @@ class Oauth extends Field
         }
 
         if($this->_moipHelper->getOauth($_environment)){
-            $text = sprintf(__('Apagar configuração de %s'), $label);
+            $text = sprintf(__('Desconectar a conta Moip de %s'), $label);
         } else {
-            $text = sprintf(__('Autorizar moip em %s'), $label);
+            $text = sprintf(__('Conectar a conta Moip em %s'), $label);
         }
         return $text;
     }

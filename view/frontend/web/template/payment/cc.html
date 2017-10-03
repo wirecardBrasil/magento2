@@ -115,7 +115,7 @@
 					<label data-bind="attr: {for: getCode() + '_cc_cvv'}" class="label">
 						<span><!-- ko i18n: 'Credit Card CVV'--><!-- /ko --></span>
 					</label>
-					<div class="control">
+					<div class="control _with-tooltip">
 						<input type="text" name="cc_cvv" class="input-text" value="" maxlength="4"
 							   data-bind="attr: {id: getCode() + '_cc_cid',
 											title: $t('Credit Card CVV'),
@@ -123,12 +123,23 @@
 											'data-validate': JSON.stringify({'required-number':true, 'validate-card-cvv2':'#' + getCode() + '_cc_type'})},
 											enable: isActive($parents),
 											value: creditCardVerificationNumber" />
+						            <div class="field-tooltip toggle">
+						                <span class="field-tooltip-action action-cvv"
+						                      tabindex="0"
+						                      data-toggle="dropdown"
+						                      data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
+						                    <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
+						                </span>
+						                <div class="field-tooltip-content"
+						                     data-target="dropdown"
+						                     data-bind="html: getCvvImageHtml()"></div>
+						            </div>
 					</div>
 				</div>
 				
 				<!-- ko if: (getInstallmentsActive() == 1) -->
-					<div data-bind="visible: getInstallmentsActive()">
-						<div class="field name required">
+					<div class="field instament required" data-bind="visible: getInstallmentsActive()">
+						
 							<label data-bind="attr: {for: getCode() + '_installments'}" class="label">
 								<span><!-- ko i18n: 'Installments'--><!-- /ko --></span>
 							</label>
@@ -144,7 +155,7 @@
 												   ">
 								</select>
 							</div>
-						</div>
+						
 					</div>
 				<!-- /ko -->
 				<div class="field name required">
@@ -161,6 +172,7 @@
 												'data-validate': JSON.stringify({'required':true})}"/>
 					</div>
 				</div>
+				
 			</fieldset>
         </form>
 		<div class="checkout-agreements-block">

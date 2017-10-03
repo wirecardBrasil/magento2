@@ -24,7 +24,7 @@
         <!-- ko if: getInstruction() || getDue() -->
         <dl class="items check payable">
             <!-- ko if: getDue() -->
-            <dt class="title"><!-- ko i18n: 'Due:' --><!-- /ko --></dt>
+            <dt class="title"><!-- ko i18n: 'Due' --><!-- /ko --></dt>
             <dd class="content">
                 <address class="moipboleto due address" data-bind="html: getDue()"></address>
             </dd>
@@ -32,7 +32,7 @@
           
             <!-- /ko -->
             <!-- ko if: getInstruction() -->
-            <dt class="title"><!-- ko i18n: 'Instruction:' --><!-- /ko --></dt>
+            <dt class="title"><!-- ko i18n: 'Instruction' --><!-- /ko --></dt>
             <dd class="content">
                 <address class="moipboleto instruction address" data-bind="html: getInstruction()"></address>
             </dd>

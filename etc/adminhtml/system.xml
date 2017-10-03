@@ -2,7 +2,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="payment">
-            <group id="moipbase" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="moipbase" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Moip Base</label>
                 <field id="environment_mode" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Ambiente</label>
@@ -11,7 +11,7 @@
                 </field>
                 <field id="oauth" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
                     <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\Oauth</frontend_model>
-                    <label>Autênticação:</label>
+                    <label>Autenticação da conta Moip:</label>
                     <comment>Atenção pois a conta de sandbox não é mesma de produção</comment>
                 </field>
                 <group id="advanced" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -147,61 +147,67 @@
 			 	<field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
-				
-				<field id="min_installment" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Valor mínimo da parcela</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="max_installment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Máximo Parcela</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				
-				<field id="install_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 2</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 3</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 4</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 5</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 6</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 7</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 8</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 9</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 10</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 11</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				<field id="install_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Parcela 12</label>
-                    <validate>required-entry validate-number</validate>
-                </field>
-				
+				<group id="installment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Configurações de parcelamento e juros</label>
+                        <field id="type_interest" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                            <label>Tipo de Juros</label>
+                            <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeInterest</source_model>
+                        </field>
+
+        				<field id="min_installment" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Valor mínimo da parcela</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="max_installment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Máximo Parcela</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				
+        				<field id="installment_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 2</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 3</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 4</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 5</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 6</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 7</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 8</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 9</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 10</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 11</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+        				<field id="installment_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                            <label>Parcela 12</label>
+                            <validate>required-entry validate-number</validate>
+                        </field>
+				</group>
 				<field id="sort_order" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
                 </field>

@@ -349,11 +349,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		
 		if($count > 1){
 			$rate 				= $this->getRate($count);
-			$parcela 			= $this->getJurosComposto($order->getGrandTotal(), $rate, $count); 
+			$type_interest		= $this->getTypeInterest();
+			if($type_interest == "compound"){
+				$parcela 			= $this->getJurosComposto($order->getGrandTotal(), $rate, $count);
+			} else {
+				$parcela 			= $this->getJurosSimples($order->getGrandTotal(), $rate, $count);
+			}
+			 
 			$total_parcelado 	= $parcela * $count;
 			$additionalPrice 	= $total_parcelado - $order->getGrandTotal();
 			$additionalPrice 	= number_format((float)$additionalPrice, 2, '.', '') * self::ROUND_UP; 
 			$additionalPrice 	= $additionalPrice + $tax;
+			
 		} else {
 			$additionalPrice =  $tax;
 		}
@@ -402,6 +409,15 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
         return  $date;
     }
 
+    public function getJurosSimples($valor, $juros, $parcela)
+    {
+        $principal = $valor;
+        $taxa = $juros/100;
+        $valjuros = $principal * $taxa;
+        $valParcela = ($principal + $valjuros)/$parcela;
+        return $valParcela;
+    }
+    
     public function getJurosComposto($valor, $juros, $parcela)
     { 
         $principal = $valor;
@@ -441,9 +457,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		return $instrucao1;
 	}
 
+	public function getTypeInterest(){
+		$type_interest = $this->_scopeConfig->getValue('payment/moipcc/installment/type_interest', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		
+		return $type_interest;
+
+	}
+
 	public function getRate($installment) 
 	{
-		$rate = $this->_scopeConfig->getValue('payment/moipcc/install_'.$installment, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+		$rate = $this->_scopeConfig->getValue('payment/moipcc/installment/installment_'.$installment, \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
 		
 		return $rate;
 	}

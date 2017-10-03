@@ -28,20 +28,23 @@
 				<payment_action>authorize</payment_action>
                 <active>1</active>
                 <title>Cartão de Crédito</title>
-                <min_installment>5</min_installment>
-                <max_installment>12</max_installment>
-                <install_1>0</install_1>
-                <install_2>1.99</install_2>
-                <install_3>1.99</install_3>
-                <install_4>1.99</install_4>
-                <install_5>1.99</install_5>
-                <install_6>1.99</install_6>
-                <install_7>1.99</install_7>
-                <install_8>1.99</install_8>
-                <install_9>1.99</install_9>
-                <install_10>1.99</install_10>
-                <install_11>1.99</install_11>
-                <install_12>1.99</install_12>
+                <installment>
+                    <type_interest>simple</type_interest>
+                    <min_installment>5</min_installment>
+                    <max_installment>12</max_installment>
+                    <installment_1>0</installment_1>
+                    <installment_2>4.50</installment_2>
+                    <installment_3>5.00</installment_3>
+                    <installment_4>5.50</installment_4>
+                    <installment_5>6.50</installment_5>
+                    <installment_6>7.50</installment_6>
+                    <installment_7>8.50</installment_7>
+                    <installment_8>9.50</installment_8>
+                    <installment_9>10.50</installment_9>
+                    <installment_10>11.50</installment_10>
+                    <installment_11>12.00</installment_11>
+                    <installment_12>12.50</installment_12>
+                </installment>
             </moipcc>
             <moipboleto>
                 <model>Moip\Magento2\Model\PaymentMethodBoleto</model>

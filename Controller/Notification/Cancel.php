@@ -4,6 +4,7 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Api\OrderManagementInterface;
 use Moip\Moip;
 use Moip\Auth\BasicAuth;
+use Magento\Sales\Model\Order\Email\Sender\OrderCommentSender;
 class Cancel extends \Magento\Framework\App\Action\Action
 {	
 	protected $_logger;
@@ -41,11 +42,42 @@ class Cancel extends \Magento\Framework\App\Action\Action
 				return $this;
 			} 
 			$order_id = $originalNotification['resource']['payment']['_links']['order']['title'];
+
 			  $order = $moip->orders()->get($order_id);
 			  $transaction_id= $order->getOwnId();
 		 	if($transaction_id){
 				$order = $this->order->loadByIncrementId($transaction_id);
 				$this->orderManagement->cancel($order->getEntityId());
+				
+				try {
+					if(isset($originalNotification['resource']['payment']['cancellationDetails'])){
+						$description_cancel = $originalNotification['resource']['payment']['cancellationDetails']['description'];
+						$description = __($description_cancel);
+						$this->addCancelDetails($description, $order, $this->orderManagement);
+						
+					}
+				} catch(\Exception $e) {
+		            throw new LocalizedException(__('Payment not update ' . $e->getMessage()));
+		        }
+				
 			}
+
+			
+
+	}
+
+	public function addCancelDetails($comment, $order){
+		$status = $this->orderManagement->getStatus($order->getEntityId());
+		$history = $order->addStatusHistoryComment($comment, $status);
+	    $history->setIsVisibleOnFront(1);
+	    $history->setIsCustomerNotified(1);
+	    $history->save();
+	    $comment = trim(strip_tags($comment));
+	    $order->save();
+	    /** @var OrderCommentSender $orderCommentSender */
+	    $orderCommentSender = $this->_objectManager
+	        ->create(\Magento\Sales\Model\Order\Email\Sender\OrderCommentSender::class);
+	    $orderCommentSender->send($order, 1, $comment);
+	    return $this;
 	}
 }

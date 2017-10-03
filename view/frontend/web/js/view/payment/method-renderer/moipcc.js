@@ -123,7 +123,14 @@ function (
         
 				
 			},
-		
+			getCvvImageUrl: function () {
+	            return window.checkoutConfig.payment.moipcc.image_cvv;
+	        },
+
+	        getCvvImageHtml: function () {
+	            return '<img src="' + this.getCvvImageUrl() +
+	                '" alt="Referencia visual do CVV" title="Referencia visual do CVV" />';
+	        },
 			getCcAvailableTypes: function() {
                 return window.checkoutConfig.payment.this.item.method.ccavailableTypes;
             },
@@ -180,9 +187,10 @@ function (
 			getInstall: function () {
 				var valor = quote.totals().base_grand_total;
 				//console.log(valor);
-				var config_parcelas_juros = window.checkoutConfig.payment.moipcc.infoparcelamentojuros;
-				var config_parcelas_minimo = window.checkoutConfig.payment.moipcc.config_parcelas_minimo;
-				var config_parcelas_maximo = window.checkoutConfig.payment.moipcc.config_parcelas_maximo;
+				var type_interest 	= window.checkoutConfig.payment.moipcc.type_interest
+				var info_interest 	= window.checkoutConfig.payment.moipcc.info_interest;
+				var min_installment = window.checkoutConfig.payment.moipcc.min_installment;
+				var max_installment = window.checkoutConfig.payment.moipcc.max_installment;
 				
 				var json_parcelas = {};
 				var count = 0;
@@ -193,11 +201,11 @@ function (
                              'juros' : 0
 							};
 					
-				var max_div = (valor/config_parcelas_minimo);
+				var max_div = (valor/min_installment);
 					max_div = parseInt(max_div);
 
-				if(max_div > config_parcelas_maximo) {
-					max_div = config_parcelas_maximo;
+				if(max_div > max_installment) {
+					max_div = max_installment;
 				}else{
 					if(max_div > 12) {
 						max_div = 12;
@@ -205,18 +213,23 @@ function (
 				}
 				var limite = max_div;
 
-				_.each( config_parcelas_juros, function( key, value ) {
+				_.each( info_interest, function( key, value ) {
 					if(count <= max_div){
-						value = config_parcelas_juros[value];
+						value = info_interest[value];
 						if(value > 0){
 						
 							var taxa = value/100;
-							var pw = Math.pow((1 / (1 + taxa)), count);
-							var parcela = ((valor * taxa) / (1 - pw));
+							if(type_interest == "compound"){
+								var pw = Math.pow((1 / (1 + taxa)), count);
+								var parcela = ((valor * taxa) / (1 - pw));
+							} else {
+								var parcela = ((valor*taxa)+valor) / count;
+							}
+							
 							var total_parcelado = parcela*count;
 							
 							var juros = value;
-							if(parcela > 5 && parcela > config_parcelas_minimo){
+							if(parcela > 5 && parcela > min_installment){
 								json_parcelas[count] = {
 									'parcela' : priceUtils.formatPrice(parcela, quote.getPriceFormat()),
 									'total_parcelado': priceUtils.formatPrice(total_parcelado, quote.getPriceFormat()),
