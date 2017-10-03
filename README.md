@@ -1,22 +1,30 @@
-Moip_Magento2
--------------
-  README
--------------
+# Moip para Magento 2.x
 
-===== 1.0.1 =====
- * Initial stable M2 release
- Following Feature contain
- => place order using Moip Payment
- => update order status based on trigger
- => From backend not update order status on payment side
-===============================
+Integração oficial para lojas em Magento 2 via Moip API V2.
 
-How to install module
-you need to add Moip Library using below command from root folder of magento
-=> composer require moip/moip-sdk-php
+## Receba pagamentos transparente
 
-=============
-How to register your controller as trigger of payment method for update order status
-=> copy trigger.php file from module to root folder of magento
-=> then run yourdomain.com/trigger.php
+  - Cartão de crédito, 7 bandeiras.
+    - Visa, Mastercard, Dinners, American Express, Elo, Hiper e Hipercard 
+  - Boleto Bancário
+  - Transferência Bancária (TED) 
 
+# Recursos
+
+  - Módulo 100% transparente, todo processo de finalização é **feito no seu checkout**, sem redirecionamentos!
+  - Personalização completa das regras das suas parcelamento
+  - Relaciomaneto de atributos da sua loja com a nossa API
+  - Retorno de status automático, com tratamento de informação de cancelamento direto em sua loja
+  - Homologação máxima na PCI, toda a compra em seu site é segura! 
+  
+
+
+# Instalação e Configuração em minutos
+ Via composer ou Magento Marketplace, você mesmo pode realizar sua instalação.
+ Além disso pode nos contactar e ter todo o processo de instalação feito pelo time de forma **gratuita**!
+  
+# Wiki e Tutorias
+Embreve nosso git você terá acesso a tutorias em video e uma [Wiki Completa][wiki]  para facilitar sua integração e instalação.
+
+
+   [Wiki]: <https://github.com/moip/magento2/wiki>
