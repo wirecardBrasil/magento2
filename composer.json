@@ -2,7 +2,7 @@
   "name": "moip/magento2",
   "description": "MOIP Magento2 Extension for Magento 2 By Moip",
   "type": "magento2-module",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": [
         "proprietary"
    ],
