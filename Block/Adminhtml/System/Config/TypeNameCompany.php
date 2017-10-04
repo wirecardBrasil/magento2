@@ -16,4 +16,3 @@ class TypeNameCompany implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

@@ -16,4 +16,3 @@ class TypeInterest implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

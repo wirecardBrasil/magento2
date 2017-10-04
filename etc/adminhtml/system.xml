@@ -98,11 +98,6 @@
                 <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Title</label>
                 </field>
-                <field id="logo_boleto" translate="label comment" type="image" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Logo do boleto</label>
-                    <backend_model>Moip\Magento2\Block\Adminhtml\System\Config\Image</backend_model>
-                    <base_url type="media" scope_info="1">moip</base_url>
-                </field>
                 <field id="expiration" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Dias de Vencimento</label>
                     <comment>Em dias corridos.</comment>

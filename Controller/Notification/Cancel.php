@@ -4,39 +4,42 @@ use Magento\Sales\Model\Order;
 use Magento\Sales\Api\OrderManagementInterface;
 use Moip\Moip;
 use Moip\Auth\BasicAuth;
-use Magento\Sales\Model\Order\Email\Sender\OrderCommentSender;
+
 class Cancel extends \Magento\Framework\App\Action\Action
 {	
 	protected $_logger;
 	protected $_moipHelper;
+	protected $_orderCommentSender;
 	
 	public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Psr\Log\LoggerInterface $logger,
 		 \Magento\Sales\Api\Data\OrderInterface $order,
 		 OrderManagementInterface $orderManagement,
-		 \Moip\Magento2\Helper\Data $moipHelper
+		 \Moip\Magento2\Helper\Data $moipHelper,
+		 \Magento\Sales\Model\Order\Email\Sender\OrderCommentSender $orderCommentSender
     ) {
         $this->_logger = $logger;
 		$this->order = $order;
 		$this->orderManagement = $orderManagement;
 		$this->_moipHelper = $moipHelper;
+		$this->_orderCommentSender = $orderCommentSender;
         parent::__construct($context);
     }
 	
 	public function execute()
 	{
 			
+			
 			$moip = $this->_moipHelper->AuthorizationValidate();
 			$response = file_get_contents('php://input');
 			$originalNotification = json_decode($response, true);
-			$this->_logger->debug($response);
+			/*$this->_logger->debug($response);*/
 
-			$httpRequestObject = new \Zend_Controller_Request_Http();
-			$authorization = $httpRequestObject->getHeader('Authorization');
+			$authorization = $this->getRequest()->getHeader('Authorization');
 			
 			$token = $this->_moipHelper->getInfoUrlPreferenceToken('cancel');
-			
+
 			if($authorization != $token){
 				$this->_logger->debug("Authorization Invalida ".$authorization);
 				return $this;
@@ -55,9 +58,13 @@ class Cancel extends \Magento\Framework\App\Action\Action
 						$description = __($description_cancel);
 						$this->addCancelDetails($description, $order, $this->orderManagement);
 						
+					} else {
+						$description_cancel = "Prazo limite excedido";
+						$description = __($description_cancel);
+						$this->addCancelDetails($description, $order, $this->orderManagement);
 					}
 				} catch(\Exception $e) {
-		            throw new LocalizedException(__('Payment not update ' . $e->getMessage()));
+		            throw new \Magento\Framework\Exception\LocalizedException(__('Payment not update ' . $e->getMessage()));
 		        }
 				
 			}
@@ -66,7 +73,7 @@ class Cancel extends \Magento\Framework\App\Action\Action
 
 	}
 
-	public function addCancelDetails($comment, $order){
+	private function addCancelDetails($comment, $order){
 		$status = $this->orderManagement->getStatus($order->getEntityId());
 		$history = $order->addStatusHistoryComment($comment, $status);
 	    $history->setIsVisibleOnFront(1);
@@ -74,10 +81,7 @@ class Cancel extends \Magento\Framework\App\Action\Action
 	    $history->save();
 	    $comment = trim(strip_tags($comment));
 	    $order->save();
-	    /** @var OrderCommentSender $orderCommentSender */
-	    $orderCommentSender = $this->_objectManager
-	        ->create(\Magento\Sales\Model\Order\Email\Sender\OrderCommentSender::class);
-	    $orderCommentSender->send($order, 1, $comment);
+	    $this->_orderCommentSender->send($order, 1, $comment);
 	    return $this;
 	}
 }

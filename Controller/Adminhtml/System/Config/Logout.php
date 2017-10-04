@@ -47,7 +47,7 @@ class Logout extends \Magento\Backend\App\Action
         $resultJson = $this->resultJsonFactory->create();
       
         
-        $type_url       =  array('cancel','capture','refund');
+        $type_url       = ['cancel','capture','refund'];
             
         foreach ($type_url as $_type_url) {
             $id = $this->_moipHelper->getInfoUrlPreferenceInfo($_type_url);
@@ -67,13 +67,13 @@ class Logout extends \Magento\Backend\App\Action
 
     
 
-    public function urlDeleteNotication($id){
+    private function urlDeleteNotication($id){
             $moip           = $this->_moipHelper->AuthorizationValidate();
             $moip->notifications()->delete($id);
         return $this;
     }
 
-    public function setClearUrlInfo($type_url){
+    private function setClearUrlInfo($type_url){
 
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->deleteConfig(
@@ -89,7 +89,7 @@ class Logout extends \Magento\Backend\App\Action
         return $this;
     }
 
-    public function setClearOauth(){
+    private function setClearOauth(){
         $_environment   = $this->_moipHelper->getEnvironmentMode();
 
         $this->_resourceConfig->deleteConfig(
@@ -106,4 +106,3 @@ class Logout extends \Magento\Backend\App\Action
     }
 
 }
-?>

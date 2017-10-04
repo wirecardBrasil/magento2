@@ -58,12 +58,12 @@ class Preference extends \Magento\Backend\App\Action
         return $resultRedirect;
     }
 
-    public function getUrlConfig()
+    private function getUrlConfig()
     {
         return $this->getUrl('adminhtml/system_config/edit/section/payment/');
     }
 
-    public function setUrlInfoRefund($url_refund){
+    private function setUrlInfoRefund($url_refund){
 
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->saveConfig(
@@ -81,7 +81,7 @@ class Preference extends \Magento\Backend\App\Action
        return $this;
     }
 
-    public function setUrlInfoCancel($url_cancel){
+    private function setUrlInfoCancel($url_cancel){
 
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->saveConfig(
@@ -99,7 +99,7 @@ class Preference extends \Magento\Backend\App\Action
        return $this;
     }
 
-    public function setUrlInfoCapture($url_capture){
+    private function setUrlInfoCapture($url_capture){
 
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->saveConfig(
@@ -119,7 +119,7 @@ class Preference extends \Magento\Backend\App\Action
 
     
 
-    public function urlNoticationRefunded($moip){
+    private function urlNoticationRefunded($moip){
         
         $domainName     = $this->_storeManager->getStore()->getBaseUrl();
 
@@ -130,7 +130,7 @@ class Preference extends \Magento\Backend\App\Action
         return $webhooks;
     }
 
-    public function urlNoticationCancel($moip){
+    private function urlNoticationCancel($moip){
        
         $domainName     = $this->_storeManager->getStore()->getBaseUrl();
 
@@ -141,7 +141,7 @@ class Preference extends \Magento\Backend\App\Action
         return $webhooks;
     }
 
-    public function urlNoticationCapture($moip){
+    private function urlNoticationCapture($moip){
         
         $domainName     = $this->_storeManager->getStore()->getBaseUrl();
 
@@ -153,4 +153,3 @@ class Preference extends \Magento\Backend\App\Action
     }
 
 }
-?>

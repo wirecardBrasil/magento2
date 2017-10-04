@@ -24,7 +24,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	protected $_canCancel              = true;
 	protected $_canUseForMultishipping = false;
     protected $_countryFactory;
-    protected $_supportedCurrencyCodes = array('BRL');
+    protected $_supportedCurrencyCodes = ['BRL'];
     protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc'];
 	protected $_cart;
 	protected $_moipHelper;
@@ -42,7 +42,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
         \Magento\Directory\Model\CountryFactory $countryFactory,
 		\Magento\Checkout\Model\Cart $cart,
 		\Moip\Magento2\Helper\Data $moipHelper,
-        array $data = array()
+        array $data = []
     ) {
         parent::__construct(
             $context,
@@ -133,7 +133,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 					$payMoip =  $this->_moipHelper->addPayCcMoip($moipOrder, $customerMoip, $InfoInstance, $payment);
 					
 
-					$data_payment = array(
+					$data_payment = [
 											'customer_id'=>$moipOrder->getCustomer()->getId(),
 											'ownId'=>$moipOrder->getOwnId(),
 											'installments'=> $payMoip->getInstallmentCount(),
@@ -141,7 +141,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 											'Pay' => json_encode($payMoip),
 											'Order' => json_encode($moipOrder),
 											'hash' => $InfoInstance->getAdditionalInformation('hash')
-										);
+									];
 					
 					$payment->setTransactionId($moipOrder->getId())
 							->setIsTransactionClosed(0)

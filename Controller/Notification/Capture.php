@@ -41,9 +41,7 @@ class Capture extends \Magento\Framework\App\Action\Action
 			$originalNotification = json_decode($response, true);
 			$this->_logger->debug($response);
 
-			$httpRequestObject = new \Zend_Controller_Request_Http();
-
-			$authorization = $httpRequestObject->getHeader('Authorization');
+			$authorization = $this->getRequest()->getHeader('Authorization');
 			
 			$token = $this->_moipHelper->getInfoUrlPreferenceToken('capture');
 			

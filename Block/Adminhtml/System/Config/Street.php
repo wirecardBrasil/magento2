@@ -18,4 +18,3 @@ class Street implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

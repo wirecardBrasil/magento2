@@ -221,7 +221,7 @@ class ConfigProviderCc implements ConfigProviderInterface
     }
 	
 	public function getInfoParcelamentoJuros() {
-        $juros = array();
+        $juros = [];
         $juros['0'] = 0;
 		$juros['1'] = 0;
 

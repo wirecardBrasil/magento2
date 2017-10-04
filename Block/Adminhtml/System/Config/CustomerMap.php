@@ -23,16 +23,15 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
     {
         $customer_attributes = $this->objectManager->get('Magento\Customer\Model\Customer')->getAttributes();
 
-        $attributesArrays = array();
+        $attributesArrays = [];
 
            foreach($customer_attributes as $cal=>$val){
-               $attributesArrays[] = array(
+               $attributesArrays[] = [
                    'label' => $cal,
                    'value' => $cal
-               );
+               ];
            }
 
         return $attributesArrays;
     }
 }
-?>

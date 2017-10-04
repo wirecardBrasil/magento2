@@ -16,4 +16,3 @@ class TypeCPF implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

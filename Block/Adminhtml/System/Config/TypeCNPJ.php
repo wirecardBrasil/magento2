@@ -17,4 +17,3 @@ class TypeCNPJ implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

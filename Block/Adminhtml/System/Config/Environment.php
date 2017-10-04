@@ -16,4 +16,3 @@ class Environment implements \Magento\Framework\Option\ArrayInterface
         ];
     }
 }
-?>

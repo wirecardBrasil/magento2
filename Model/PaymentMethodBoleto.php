@@ -24,7 +24,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 	protected $_canCancel              = true;
 	protected $_canUseForMultishipping = false;
     protected $_countryFactory;
-    protected $_supportedCurrencyCodes = array('BRL');
+    protected $_supportedCurrencyCodes = ['BRL'];
 	protected $_cart;
 	protected $_moipHelper;
 	protected $_infoBlockType = 'Moip\Magento2\Block\Info\Boleto';
@@ -42,7 +42,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
         \Magento\Directory\Model\CountryFactory $countryFactory,
 		\Magento\Checkout\Model\Cart $cart,
 		\Moip\Magento2\Helper\Data $moipHelper,
-        array $data = array()
+        array $data = []
     ) {
         parent::__construct(
             $context,
@@ -129,17 +129,17 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 
 					$payMoip 			= $this->_moipHelper->addPayBoletoMoip($moipOrder);
 				
-					$data_payment = array(
-											'customer_id'=>$moipOrder->getCustomer()->getId(),
-											'ownId'=>$moipOrder->getOwnId(),
-											'href_boleto'=> $payMoip->getHrefBoleto(),
-											'href_boleto_print'=> $payMoip->getHrefPrintBoleto(),
-											'line_code_boleto'	=> $payMoip->getLineCodeBoleto(),
-											'expiration_date_boleto' => $payMoip->getExpirationDateBoleto(),
-											'payid' =>  $payMoip->getId(),
-											'Pay' => json_encode($payMoip),
-											'Order' => json_encode($moipOrder)
-										);
+					$data_payment = [
+										'customer_id'=>$moipOrder->getCustomer()->getId(),
+										'ownId'=>$moipOrder->getOwnId(),
+										'href_boleto'=> $payMoip->getHrefBoleto(),
+										'href_boleto_print'=> $payMoip->getHrefPrintBoleto(),
+										'line_code_boleto'	=> $payMoip->getLineCodeBoleto(),
+										'expiration_date_boleto' => $payMoip->getExpirationDateBoleto(),
+										'payid' =>  $payMoip->getId(),
+										'Pay' => json_encode($payMoip),
+										'Order' => json_encode($moipOrder)
+									];
 
 
 					$payment->setTransactionId($moipOrder->getId())

@@ -64,13 +64,13 @@ class Oauth extends \Magento\Backend\App\Action
 
     
 
-    public function getUrlPreference()
+    private function getUrlPreference()
     {
         return $this->getUrl('moip/system_config/preference');
     }
 
 
-    public function setKeyPublic($publickey){
+    private function setKeyPublic($publickey){
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->saveConfig(
                     'payment/moipbase/publickey_'.$_environment,
@@ -81,7 +81,7 @@ class Oauth extends \Magento\Backend\App\Action
        return $this;
     }
 
-    public function setOauth($oauth){
+    private function setOauth($oauth){
         $_environment   = $this->_moipHelper->getEnvironmentMode();
         $this->_resourceConfig->saveConfig(
                     'payment/moipbase/oauth_'.$_environment,
@@ -94,7 +94,7 @@ class Oauth extends \Magento\Backend\App\Action
 
     
 
-    public function getAuthorize($code){
+    private function getAuthorize($code){
 
         $_environment   = $this->_moipHelper->getEnvironmentMode();
 
@@ -122,7 +122,7 @@ class Oauth extends \Magento\Backend\App\Action
 
     }
 
-    public function getKeyPublic($oauth) {
+    private function getKeyPublic($oauth) {
             $documento = 'Content-Type: application/json; charset=utf-8';
 
             $_environment   = $this->_moipHelper->getEnvironmentMode();
@@ -135,11 +135,11 @@ class Oauth extends \Magento\Backend\App\Action
 
             $header = "Authorization: OAuth " . $oauth;
 
-            $result = array();
+            
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array($header));
+            curl_setopt($ch, CURLOPT_HTTPHEADER, [$header, $documento]);
             curl_setopt($ch,CURLOPT_USERAGENT,'MoipMagento2/2.0.0');
             $responseBody = curl_exec($ch);
             curl_close($ch);
@@ -152,4 +152,3 @@ class Oauth extends \Magento\Backend\App\Action
    
 
 }
-?>
