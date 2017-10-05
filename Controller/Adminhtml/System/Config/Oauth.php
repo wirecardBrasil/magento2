@@ -2,7 +2,7 @@
 namespace Moip\Magento2\Controller\Adminhtml\System\Config;
 
 use Moip\Moip;
-use Moip\Auth\Connect;
+
 use Magento\Framework\Controller\ResultFactory; 
 class Oauth extends \Magento\Backend\App\Action
 {
@@ -19,7 +19,8 @@ class Oauth extends \Magento\Backend\App\Action
         \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
         \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,
         \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
-        \Magento\Config\Model\ResourceModel\Config $resourceConfig
+        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
+        \Moip\Auth\Connect $connect
         
         ) 
     {
@@ -28,6 +29,7 @@ class Oauth extends \Magento\Backend\App\Action
         $this->_cacheFrontendPool = $cacheFrontendPool;
         $this->_configInterface = $configInterface;
         $this->_resourceConfig = $resourceConfig;
+        $this->_connect = $connect;
         parent::__construct($context);
     }
 
@@ -101,19 +103,19 @@ class Oauth extends \Magento\Backend\App\Action
         if($_environment === "production"){
             $redirect_uri   = $this->_moipHelper::REDIRECT_URI_PRODUCTION;
             $client_id      = $this->_moipHelper::APP_ID_PRODUCTION;
-            $url            = Connect::ENDPOINT_PRODUCTION;
+            $url            = $this->_connect::ENDPOINT_PRODUCTION;
             $client_secrect = $this->_moipHelper::CLIENT_SECRECT_PRODUCTION;
 
         } else {
             $redirect_uri   = $this->_moipHelper::REDIRECT_URI_SANDBOX;
             $client_id      = $this->_moipHelper::APP_ID_SANDBOX;
-            $url            = Connect::ENDPOINT_SANDBOX;
+            $url            = $this->_connect::ENDPOINT_SANDBOX;
             $client_secrect = $this->_moipHelper::CLIENT_SECRECT_SANDBOX;
         }
         
 
 
-        $connect = new Connect($redirect_uri, $client_id, true, $url);
+        $connect = new $this->_connect($redirect_uri, $client_id, true, $url);
         $connect->setClientSecret($client_secrect);
         $connect->setCode($code);
         $auth = $connect->authorize();

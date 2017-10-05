@@ -17,6 +17,8 @@ class Preference extends \Magento\Backend\App\Action
     public function __construct(
         \Moip\Magento2\Helper\Data $moipHelper,
         \Magento\Backend\App\Action\Context $context,
+        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
+        \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,
         \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
         \Magento\Config\Model\ResourceModel\Config $resourceConfig,
         \Magento\Store\Model\StoreManagerInterface $storeManager
@@ -24,6 +26,8 @@ class Preference extends \Magento\Backend\App\Action
         ) 
     {
         $this->_moipHelper = $moipHelper;
+        $this->_cacheTypeList = $cacheTypeList;
+        $this->_cacheFrontendPool = $cacheFrontendPool;
         $this->_configInterface = $configInterface;
         $this->_resourceConfig = $resourceConfig;
         $this->_storeManager = $storeManager;
@@ -39,7 +43,7 @@ class Preference extends \Magento\Backend\App\Action
     {
         $params = $this->getRequest()->getParams();
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
-     
+        $this->_cacheTypeList->cleanType("config");
         $moip           = $this->_moipHelper->AuthorizationValidate();
         
         
@@ -51,9 +55,10 @@ class Preference extends \Magento\Backend\App\Action
 
             $url_capture = $this->urlNoticationCapture($moip);
             $this->setUrlInfoCapture($url_capture);
-            $authorize = "success";
+            
         
         $this->messageManager->addSuccess(__('Seu módulo está autorizado. =)'));
+        $this->_cacheTypeList->cleanType("config");
         $resultRedirect->setUrl($this->getUrlConfig());
         return $resultRedirect;
     }
@@ -124,7 +129,7 @@ class Preference extends \Magento\Backend\App\Action
         $domainName     = $this->_storeManager->getStore()->getBaseUrl();
 
         $webhooks = $moip->notifications()
-            ->addEvent('PAYMENT.REFUNDED')
+            ->addEvent('REFUND.REQUESTED')
             ->setTarget($domainName.'moip/notification/Refund')
             ->create();
         return $webhooks;

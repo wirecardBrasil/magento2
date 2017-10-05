@@ -45,7 +45,7 @@ class Logout extends \Magento\Backend\App\Action
     {
         $params = $this->getRequest()->getParams();
         $resultJson = $this->resultJsonFactory->create();
-      
+        $this->_cacheTypeList->cleanType("config");
         
         $type_url       = ['cancel','capture','refund'];
             

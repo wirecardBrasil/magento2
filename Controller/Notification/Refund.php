@@ -32,20 +32,24 @@ class Refund extends \Magento\Framework\App\Action\Action
 
 	public function execute()
 	{
+		
 			$moip = $this->_moipHelper->AuthorizationValidate();
 			$response = file_get_contents('php://input');
 			$originalNotification = json_decode($response, true);
-			$this->_logger->debug(print_r($originalNotification, true));
+			$this->_logger->debug($response);
 
 			$authorization = $this->getRequest()->getHeader('Authorization');
 			
-			$token = $this->_moipHelper->getInfoUrlPreferenceToken('cancel');
+			$token = $this->_moipHelper->getInfoUrlPreferenceToken('refund');
 			
 			if($authorization != $token){
+
 				return $this;
 			} 
 			
-			$order_id = $originalNotification['resource']['refund']['_links']['order']['title']; 
+			$order_id = $originalNotification['resource']['refund']['_links']['order']['title'];
+			
+
 			$order = $moip->orders()->get($order_id);
 			$transaction_id= $order->getOwnId();
 			if($transaction_id){
@@ -57,10 +61,10 @@ class Refund extends \Magento\Framework\App\Action\Action
 					}
 					$invoiceobj =  $this->Invoice->loadByIncrementId($invoiceincrementid);
 					$creditmemo = $this->creditmemoFactory->createByOrder($order);
-					//Don't set invoice if you want to do offline refund
+					
 					$creditmemo->setInvoice($invoiceobj);
 					$this->CreditmemoService->refund($creditmemo); 
-			 }
+			 	}
 			}	
 	}
 }
