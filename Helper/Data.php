@@ -377,7 +377,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$expiration_date = $this->getDateDue($number_date);
 		$mediaUrl = $this ->_storeManager-> getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA );
 
-		$logo_uri = $mediaUrl."moip/".$this->getImgForBoleto();
+		$logo_uri = "";
 
 		$instruction_lines = [$this->getInstructionLines(1), $this->getInstructionLines(2), $this->getInstructionLines(3)];
 				
