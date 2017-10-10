@@ -9,7 +9,7 @@
   "require": {
     "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
     "magento/framework": "101.0.*",
-    "moip/moip-sdk-php": "2.*"
+    "moip/moip-sdk-php": "2.0.0"
   },
   "autoload": {
     "files": [
