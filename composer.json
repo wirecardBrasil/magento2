@@ -7,7 +7,7 @@
         "proprietary"
    ],
   "require": {
-    "moip/moip-sdk-php": "2.*"
+    "moip/moip-sdk-php": "2.0.0"
   },
   "autoload": {
     "files": [
