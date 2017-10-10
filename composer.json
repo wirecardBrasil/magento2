@@ -2,14 +2,14 @@
   "name": "moip/magento2",
   "description": "MOIP Magento2 Extension for Magento 2 By Moip",
   "type": "magento2-module",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "license": [
         "proprietary"
    ],
   "require": {
     "php": "7.0.2|7.0.4|~7.0.6|~7.1.0",
-    "magento/framework": "101.0.*",
-    "moip/moip-sdk-php": "2.0.0"
+    "magento/community-edition": "2.2.*",
+    "moip/moip-sdk-php": "2.*"
   },
   "autoload": {
     "files": [
