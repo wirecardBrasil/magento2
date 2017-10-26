@@ -1,4 +1,4 @@
-# Moip para Magento 2.x
+# Moip para Magento 2.2 ou superior
 
 Integração oficial para lojas em Magento 2 via Moip API V2.
 
