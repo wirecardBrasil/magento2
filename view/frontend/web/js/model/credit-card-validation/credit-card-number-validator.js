@@ -44,7 +44,7 @@ define(
 
             cardType = potentialTypes[0];
 			
-            if (cardType.type === 'unionpay') {  // UnionPay is not Luhn 10 compliant
+            if (cardType.type === 'unionpay') { 
                 valid = true;
             } else {
                 valid = luhn10(value);

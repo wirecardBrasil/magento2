@@ -85,18 +85,7 @@ define(
                     name: 'CVV',
                     size: 3
                 }
-            },
-            {
-                title: 'Aura',
-                type: 'aura',
-                pattern: '^50[0-9]{14,17}$',
-                gaps: [4, 8, 12],
-                lengths: [12, 13, 14, 15, 16, 17, 18, 19],
-                code: {
-                    name: 'CVV',
-                    size: 3
-                }
-            },
+            }
 			{
                 title: 'HIPER',
                 type: 'hiper',
