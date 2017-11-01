@@ -1,6 +1,9 @@
-# Moip para Magento 2.x
+# Moip para Magento 2
 
 Integração oficial para lojas em Magento 2 via Moip API V2.
+
+## Pre-requisitos
+O módulo é compatível apenas com Magento 2.2
 
 ## Receba pagamentos transparente
 
@@ -26,5 +29,20 @@ Integração oficial para lojas em Magento 2 via Moip API V2.
 # Wiki e Tutorias
 Embreve nosso git você terá acesso a tutorias em video e uma [Wiki Completa][wiki]  para facilitar sua integração e instalação.
 
+### Instalação via composer
+
+Na pasta do projeto execute:
+
+```composer
+composer require moip/magento2
+php bin/magento setup:upgrade
+```
+
+#### Recomendação:
+o comando:
+```composer 
+composer clearcache
+```
+pode ser usado para limpar cache do composer. Em caso de erros na instalação acima, execute e tente novamente.
 
    [Wiki]: <https://github.com/moip/magento2/wiki>
