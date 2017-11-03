@@ -23,26 +23,8 @@ O módulo é compatível apenas com Magento 2.2
 
 
 # Instalação e Configuração em minutos
- Via composer ou Magento Marketplace, você mesmo pode realizar sua instalação.
- Além disso pode nos contactar e ter todo o processo de instalação feito pelo time de forma **gratuita**!
-  
-# Wiki e Tutorias
-Embreve nosso git você terá acesso a tutorias em video e uma [Wiki Completa][wiki]  para facilitar sua integração e instalação.
 
-### Instalação via composer
-
-Na pasta do projeto execute:
-
-```composer
-composer require moip/magento2
-php bin/magento setup:upgrade
-```
-
-#### Recomendação:
-o comando:
-```composer 
-composer clearcache
-```
-pode ser usado para limpar cache do composer. Em caso de erros na instalação acima, execute e tente novamente.
+Visite nossa [Wiki][wiki] e veja como configurar e instalar nosso módulo.
 
    [Wiki]: <https://github.com/moip/magento2/wiki>
+
