@@ -62,15 +62,15 @@ class Oauth extends Field
         
         $_environment = $this->_moipHelper->getEnvironmentMode();
         if($_environment === "production"){
-            $label = "Produção";
+            $label = __('Production');
         } else {
-            $label = "Ambiente de Teste";
+            $label = __('Environment for tests');
         }
 
         if($this->_moipHelper->getOauth($_environment)){
-            $text = sprintf(__('Desconectar a conta Moip de %s'), $label);
+            $text = sprintf(__('Disallow in %s'), $label);
         } else {
-            $text = sprintf(__('Conectar a conta Moip em %s'), $label);
+            $text = sprintf(__('Authorize in %s'), $label);
         }
         return $text;
     }

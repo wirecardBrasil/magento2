@@ -11,8 +11,8 @@ class TypeCPF implements \Magento\Framework\Option\ArrayInterface
    public function toOptionArray()
     {
         return [
-            'customer' => 'Obtido pelo Customer form',
-            'address' => 'Obtido pelo Address form',
+            'customer' => __ ('by customer form (customer account)'),
+            'address' => __('by address form (checkout)'),
         ];
     }
 }

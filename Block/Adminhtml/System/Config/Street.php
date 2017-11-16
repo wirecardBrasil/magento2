@@ -11,10 +11,10 @@ class Street implements \Magento\Framework\Option\ArrayInterface
    public function toOptionArray()
     {
         return [
-            '0' => 'Do array de street 1ª posição',
-            '1' => 'Do array de street 2ª posição',
-            '2' => 'Do array de street 3ª posição',
-            '3' => 'Do array de street 4ª posição'
+            '0' => '1st line of the street',
+            '1' => '2st line of the street',
+            '2' => '3st line of the street',
+            '3' => '4st line of the street'
         ];
     }
 }

@@ -85,7 +85,7 @@ define(
                     name: 'CVV',
                     size: 3
                 }
-            }
+            },
 			{
                 title: 'HIPER',
                 type: 'hiper',

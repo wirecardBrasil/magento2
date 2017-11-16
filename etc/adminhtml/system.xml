@@ -4,86 +4,87 @@
         <section id="payment">
             <group id="moipbase" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Moip Base</label>
-                <field id="environment_mode" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Ambiente</label>
+                <field id="environment_mode" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Developer Mode</label>
                     <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
-                    <comment>Para vendas reais use o ambiente de produção, para testes o de sandbox.</comment>
+                    <comment>For testing use the sandbox environment.</comment>
                 </field>
                 <field id="oauth" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
                     <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\Oauth</frontend_model>
-                    <label>Autenticação da conta Moip:</label>
-                    <comment>Atenção pois a conta de sandbox não é mesma de produção</comment>
+                    <label>Module Authorization</label>
+                    <comment>Warning because the sandbox account is not the same as production</comment>
                 </field>
                 <group id="advanced" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                	<label>Configurações Avançadas</label>
-                	<field id="type_cpf" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O CPF será um atributo</label>
+                	<label>Advanced Settings</label>
+                    <comment>List the attributes of your Magento the data expected by our API.</comment>
+                	<field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+	                    <label>The CPF will be an attribute obtained from the</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
 	                </field>
 	                <field id="cpf_for_address" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do CPF é</label>
+	                    <label>The CPF attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_cpf">address</field>
 	                    </depends>
 	                </field>
 	                <field id="cpf_for_customer" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do CPF é</label>
+	                    <label>The CPF attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_cpf">customer</field>
 	                    </depends>
 	                </field>
-	                <field id="type_cnpj" translate="label" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O CNPJ será</label>
+	                <field id="type_cnpj" translate="label select" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
+	                    <label>The attribute CNPJ will be obtained from the</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCNPJ</source_model>
 	                </field>
 	                <field id="cnpj_for_address" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do CNPJ é</label>
+	                    <label>The CNPJ attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_cnpj">use_address</field>
 	                    </depends>
 	                </field>
 	                <field id="cnpj_for_customer" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do CNPJ é</label>
+	                    <label>The CNPJ attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_cnpj">use_customer</field>
 	                    </depends>
 	                </field>
 	                <field id="type_name_company" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O nome da empresa será</label>
+	                    <label>The attribute Company Name will be obtained from the</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeNameCompany</source_model>
 	                </field>
 	                <field id="company_name_address" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do Nome da Empresa é</label>
+	                    <label>The Company Name attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_name_company">address</field>
 	                    </depends>
 	                </field>
 	                <field id="company_name_customer" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>O atributo do Nome da Empresa é</label>
+	                    <label>The Company Name attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
 	                    <depends>
 	                        <field id="*/*/*/type_name_company">customer</field>
 	                    </depends>
 	                </field>
 	                <field id="street_logradouro" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>Atributo do Logradouro</label>
+	                    <label>The Street attribute is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
 	                </field>
 	                <field id="street_number" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>Atributo do Número</label>
+	                    <label>The address number is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
 	                </field>
 	                <field id="street_complemento" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>Atributo do Complemento</label>
+	                    <label>The address complement is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
 	                </field>
 	                <field id="street_district" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>Atributo do Bairro</label>
+	                    <label>The address district is</label>
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
 	                </field>
                	</group>
@@ -99,25 +100,25 @@
                     <label>Title</label>
                 </field>
                 <field id="expiration" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Dias de Vencimento</label>
-                    <comment>Em dias corridos.</comment>
+                    <label>Days due</label>
+                    <comment>Consecutive days.</comment>
                     <validate>required-entry validate-number</validate>
                 </field>
                 <field id="instrucao1" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instrução - 1ª linha</label>
-                    <comment>Informação impressa no boleto.</comment>
+                    <label>Instruction - 1st line</label>
+                    <comment>Information will be printed on the boleto.</comment>
                 </field>
                 <field id="instrucao2" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instrução - 2ª linha</label>
-                    <comment>Informação impressa no boleto.</comment>
+                    <label>Instruction - 2st line</label>
+                    <comment>Information will be printed on the boleto.</comment>
                 </field>
                 <field id="instrucao3" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instrução - 3ª linha</label>
-                    <comment>Informação impressa no boleto.</comment>
+                    <label>Instruction - 3st line</label>
+                    <comment>Information will be printed on the boleto.</comment>
                 </field>
                 <field id="instruction" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Oritentação ao cliente no checkout</label>
-                    <comment>Informação exbida no checkout.</comment>
+                    <label>Customer orientation at checkout</label>
+                    <comment>Information displayed on checkout.</comment>
                 </field>
                 <field id="sort_order" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Sort Order</label>
@@ -133,7 +134,7 @@
                     <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
                 </field>
             </group>
-            <group id="moipcc" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <group id="moipcc" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Moip Cartão de Crédito</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
@@ -143,63 +144,63 @@
                     <label>Title</label>
                 </field>
 				<group id="installment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Configurações de parcelamento e juros</label>
+                    <label>Installment and interest</label>
                         <field id="type_interest" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
-                            <label>Tipo de Juros</label>
+                            <label>Interest rate</label>
                             <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeInterest</source_model>
                         </field>
 
         				<field id="min_installment" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Valor mínimo da parcela</label>
+                            <label>Minimum value of installment</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="max_installment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Máximo Parcela</label>
+                            <label>Maximum number of installments</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				
         				<field id="installment_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 2</label>
+                            <label>Interest on the 2nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 3</label>
+                            <label>Interest on the 3nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 4</label>
+                            <label>Interest on the 4nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 5</label>
+                            <label>Interest on the 5nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 6</label>
+                            <label>Interest on the 6nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 7</label>
+                            <label>Interest on the 7nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 8</label>
+                            <label>Interest on the 8nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 9</label>
+                            <label>Interest on the 9nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 10</label>
+                            <label>Interest on the 10nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 11</label>
+                            <label>Interest on the 11nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
         				<field id="installment_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
-                            <label>Parcela 12</label>
+                            <label>Interest on the 12nd tranche</label>
                             <validate>required-entry validate-number</validate>
                         </field>
 				</group>

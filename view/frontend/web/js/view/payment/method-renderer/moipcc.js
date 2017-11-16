@@ -287,13 +287,13 @@ function (
 		            expYear : this.creditCardExpYear(),
 		            pubKey  : this.getPublickey()
 		          });
-		          console.log(cc);
+		          /*console.log(cc);*/
 		          if( cc.isValid()){
 		          	jQuery('#'+this.getCode()+'_hash').val(cc.hash());
 		            console.log(cc.hash());
 		          }
 		          else{
-		            console.log('Invalid credit card. Verify parameters: number, cvc, expiration Month, expiration Year');
+		           /* console.log('Invalid credit card. Verify parameters: number, cvc, expiration Month, expiration Year');*/
 		          }
 		         return cc;
 			},

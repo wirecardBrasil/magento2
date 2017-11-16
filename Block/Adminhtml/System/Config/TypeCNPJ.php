@@ -11,9 +11,9 @@ class TypeCNPJ implements \Magento\Framework\Option\ArrayInterface
    public function toOptionArray()
     {
         return [
-            'use_cpf' => 'Usar o mesmo campo do cpf',
-            'use_customer' => 'Obtido pelo Customer form',
-            'use_address' => 'Obtido pelo Address form',
+            'use_cpf' => __('will use the same value as the CPF'),
+            'use_customer' => __ ('by customer form (customer account)'),
+            'use_address' => __('by address form (checkout)'),
         ];
     }
 }

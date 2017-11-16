@@ -11,8 +11,8 @@ class Environment implements \Magento\Framework\Option\ArrayInterface
    public function toOptionArray()
     {
         return [
-            'production' => 'Produção',
-            'sandbox' => 'Sandbox - Ambiente de Teste',
+            'production' => __('Production'),
+            'sandbox' => __('Sandbox - Environment for tests'),
         ];
     }
 }

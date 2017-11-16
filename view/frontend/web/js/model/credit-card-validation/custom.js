@@ -20,12 +20,10 @@
         'visa': [new RegExp('^4[0-9]{12}([0-9]{3})?$'), new RegExp('^[0-9]{3}$'), true],
         'mastercard': [new RegExp('^5([1-5]\\d*)?$'), new RegExp('^[0-9]{3}$'), true],
         'amex': [new RegExp('^3([47]\\d*)?$'), new RegExp('^[0-9]{4}$'), true],
-        'discover': [new RegExp('^6(?:011|5[0-9]{2})[0-9]{12}$'), true],
         'elo': [new RegExp('^(636368|438935|504175|451416|636297|5067|4576|4011|50904|50905|50906)'), true],
         'diners': [new RegExp('^3((0([0-5]\\d*)?)|[689]\\d*)?$'), new RegExp('^[0-9]{3}$'), true],
         'hipercard': [new RegExp('^(606282|3841)[0-9]{5,}$'), new RegExp('^[0-9]{3}$'), true],
-		'hiper': [new RegExp('^(637095|637612|637599|637609|637568)'), true],
-		'aura': [new RegExp('^50[0-9]{14,17}$'), true]
+		'hiper': [new RegExp('^(637095|637612|637599|637609|637568)'), true]
     };
     $.each({
         'validate-cc-type2': [
