@@ -1,13 +1,13 @@
 <?php if($block->getMethodCode() === "moipboleto"): ?>
 	<p>
-		<?php echo __('O código de barras do seu boleto é:') ?> 
+		<?php echo __('The barcode of your ticket bank is:') ?> 
 		<input type="text" id="copyTarget" value="<?php echo $block->getInfo('line_code_boleto'); ?>" class="input-text"> <button id="copyButton"  class="action primary continue">
-			<?php echo __('Copiar') ?> 
+			<?php echo __('Copy') ?> 
 		</button>
 	</p>
 	<p>
 		<a href="<?php echo $block->getInfo('href_boleto_print'); ?>" target="_blank" class="action primary continue">
-			<?php echo __('Imprimir Boleto') ?> 
+			<?php echo __('Print your ticket bank') ?> 
 		</a>
 	</p>
 

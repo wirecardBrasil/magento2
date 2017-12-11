@@ -70,3 +70,8 @@
 "Política de segurança do Moip","Pagamento não autorizado"
 "Politica do banco emissor","O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo antes de refazer o pagamento."
 "Prazo limite excedido","O prazo limite do pagamento foi excedido"
+"Expiration in %s days","Vencimento em %s dias"
+"Expiration in %s day","Vencimento em %s dia"
+"The barcode of your ticket bank is:","O código de barras do seu boleto é:"
+"Copy":"Copiar"
+"Print your ticket bank","Imprimir Boleto"
