@@ -133,31 +133,18 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
 		
 		$email = $order->getCustomerEmail();
-		
-		
+
 		$ddd_telephone 		= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), true);
 		$number_telephone 	= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), false);
 
 		$street_billing  	= $order->getBillingAddress()->getStreet();
-		$street_shipping 	= $order->getShippingAddress()->getStreet();
-		
-		
 		
 		$city_billing 		= $order->getBillingAddress()->getData('city');
-		$city_shipping 		= $order->getShippingAddress()->getData('city');
 		
-
 		$region_billing 	= $order->getBillingAddress()->getRegionCode();
-		$region_shipping 	= $order->getShippingAddress()->getRegionCode();
 		
-
-
 		$postcode_billing 	= substr(preg_replace("/[^0-9]/", "", $order->getBillingAddress()->getData('postcode')) . '00000000', 0, 8);
-		$postcode_shipping 	= substr(preg_replace("/[^0-9]/", "", $order->getShippingAddress()->getData('postcode')) . '00000000', 0, 8);
 		
-
-
-
 		$billing_logradouro 	= $street_billing[$this->getStreetPositionLogradouro()];
 
 		$billing_number 		= $street_billing[$this->getStreetPositionNumber()];
@@ -176,24 +163,29 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		}
 
 
+		if (!$order->getIsVirtual()) {
+			$city_shipping 		= $order->getShippingAddress()->getData('city');
+			$street_shipping 	= $order->getShippingAddress()->getStreet();
+			$region_shipping 	= $order->getShippingAddress()->getRegionCode();
+			$postcode_shipping 	= substr(preg_replace("/[^0-9]/", "", $order->getShippingAddress()->getData('postcode')) . '00000000', 0, 8);
 
-		$shipping_logradouro 	= $street_shipping[$this->getStreetPositionLogradouro()];
+			$shipping_logradouro 	= $street_shipping[$this->getStreetPositionLogradouro()];
 
-		$shipping_number 		= $street_shipping[$this->getStreetPositionNumber()];
+			$shipping_number 		= $street_shipping[$this->getStreetPositionNumber()];
 
-		if(count($street_billing) >= 3) {
-			$shipping_district 		= $street_shipping[$this->getStreetPositionDistrict()];
-		} else {
-			$shipping_district 		= $street_shipping[$this->getStreetPositionLogradouro()];
+			if(count($street_billing) >= 3) {
+				$shipping_district 		= $street_shipping[$this->getStreetPositionDistrict()];
+			} else {
+				$shipping_district 		= $street_shipping[$this->getStreetPositionLogradouro()];
+			}
+			
+
+			if(count($street_shipping) == 4){
+				$shipping_complemento	=  $street_shipping[$this->getStreetPositionComplemento()];
+			} else {
+				$shipping_complemento	=  "";
+			}
 		}
-		
-
-		if(count($street_shipping) == 4){
-			$shipping_complemento	=  $street_shipping[$this->getStreetPositionComplemento()];
-		} else {
-			$shipping_complemento	=  "";
-		}
-		
 
 
 
@@ -203,7 +195,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 			        ->setBirthDate('1985-10-10')
 			        ->setTaxDocument($taxvat, $_typedocument)
 			        ->setPhone($ddd_telephone, $number_telephone)
-				        ->addAddress('BILLING',
+			        	->addAddress('BILLING',
 								            $billing_logradouro, 
 								            $billing_number,
 								            $billing_district, 
@@ -211,8 +203,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 								            $region_billing,
 								            $postcode_billing, 
 								            $billing_complemento
-								     )
-				        ->addAddress('SHIPPING',
+								     );
+		if (!$order->getIsVirtual()) {
+			        $customer->addAddress('SHIPPING',
 								            $shipping_logradouro, 
 								            $billing_number,
 								            $shipping_district, 
@@ -221,6 +214,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 								            $postcode_shipping, 
 								            $shipping_complemento
 				            );
+		}
+
 		$customer = $customer->create();
 		return $customer;
 	}
