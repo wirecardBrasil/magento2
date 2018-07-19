@@ -23,6 +23,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	protected $_canVoid                = true;
 	protected $_canCancel              = true;
 	protected $_canUseForMultishipping = false;
+	/*protected $_isInitializeNeeded 	= true;*/
     protected $_countryFactory;
     protected $_supportedCurrencyCodes = ['BRL'];
     protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc'];
@@ -63,7 +64,12 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 		$this->_cart = $cart;
 		$this->_moipHelper = $moipHelper;
     }
-	
+
+	/*public function getConfigPaymentAction()
+	{
+	    return ($this->getConfigData('order_status') == 'pending')? null : parent::getConfigPaymentAction();
+	}*/
+
 	public function assignData(\Magento\Framework\DataObject $data)
 	 {
 		parent::assignData($data);

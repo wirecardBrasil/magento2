@@ -52,7 +52,7 @@ class Logout extends \Magento\Backend\App\Action
         foreach ($type_url as $_type_url) {
             $id = $this->_moipHelper->getInfoUrlPreferenceInfo($_type_url);
             if($id){
-                $this->urlDeleteNotication($id);
+               # $this->urlDeleteNotication($id);
                 $this->setClearUrlInfo($_type_url);    
             }
             
@@ -69,7 +69,13 @@ class Logout extends \Magento\Backend\App\Action
 
     private function urlDeleteNotication($id){
             $moip           = $this->_moipHelper->AuthorizationValidate();
-            $moip->notifications()->delete($id);
+            try {
+                $moip->notifications()->delete($id); 
+            } catch (Exception $e) {
+                 return $this;
+            }
+            
+            
         return $this;
     }
 

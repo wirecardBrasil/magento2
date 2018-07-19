@@ -8,17 +8,8 @@ define(
     function ($, utils) {
         'use strict';
         var types = [
-			{
-                title: 'Discover',
-                type: 'discover',
-                pattern: '^6(?:011|5[0-9]{2})[0-9]{12}$',
-                gaps: [4, 8, 12],
-                lengths: [16], 
-                code: { 
-                    name: 'CID',
-                    size: 3
-                }
-            },
+			
+            
             {
                 title: 'Visa',
                 type: 'visa',
@@ -53,17 +44,7 @@ define(
                     size: 4
                 }
             },
-            {
-                title: 'Diners',
-                type: 'diners',
-                pattern: '^3((0([0-5]\\d*)?)|[689]\\d*)?$',
-                gaps: [4, 10],
-                lengths: [14],
-                code: {
-                    name: 'CVV',
-                    size: 3
-                }
-            },
+            
 			{
                 title: 'Hipercard',
                 type: 'hipercard',
@@ -78,8 +59,8 @@ define(
             {
                 title: 'Elo',
                 type: 'elo',
-                pattern: '^(636368|438935|504175|451416|636297|5067|4576|4011|50904|50905|50906)',
-                gaps: [4, 8, 12],
+                pattern: '^(636368|438935|504175|451416|636297|5067|4576|4011|50904|50905|50906|65)',
+                gaps: [4, 6, 8,10,12,14,15],
                 lengths: [16],
                 code: {
                     name: 'CVV',
