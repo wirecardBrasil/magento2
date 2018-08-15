@@ -391,7 +391,6 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 					$customerMoip
 			)
 		->setInstallmentCount($InfoInstance->getAdditionalInformation('installments'))
-		->setStatementDescriptor('teste de pag')
 		->execute();
 		return $payMoip;
     }
