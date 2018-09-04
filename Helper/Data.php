@@ -315,7 +315,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 				$price = $item->getPrice();
 				$price = ($price * self::ROUND_UP);
 				$setprice = (int)$price;
-				$moipOrder->addItem("$name",$qty, "$sku", $setprice);
+				$setqty = (int)$qty;
+				$moipOrder->addItem("$name",$setqty, "$sku", $setprice);
 		}
 		return $moipOrder;
     }
