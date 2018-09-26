@@ -1,4 +1,5 @@
 "Developer Mode","Ambiente"
+"ACQUIRER","banco emissor do cartão"
 "Production","Produção"
 "Sandbox - Environment for tests","Sandbox - Ambiente de testes"
 "Disallow in Production","Desconectar da produção"

@@ -313,8 +313,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 				$sku = $item->getSku();
 				$qty = $item->getQty();
 				$price = $item->getPrice();
-				$price = bcmul($price, self::ROUND_UP);
-				$setprice = (int) $price;
+				$price = ($price * self::ROUND_UP);
+				$setprice = (int)$price;
 				$setqty = (int)$qty;
 				$moipOrder->addItem("$name",$setqty, "$sku", $setprice);
 		}

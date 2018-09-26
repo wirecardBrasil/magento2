@@ -52,31 +52,12 @@ class Capture extends \Magento\Framework\App\Action\Action
 			
 			$order_id = $originalNotification['resource']['payment']['_links']['order']['title']; 
 			$order = $moip->orders()->get($order_id);
-			$transaction_id= $order->getOwnId();
+			$transaction_id = $order->getOwnId();
 			if($transaction_id){
 						$this->_logger->debug($transaction_id);
 						$order = $this->order->loadByIncrementId($transaction_id);
-						 if($order->canInvoice()) {
-								$invoice = $this->_invoiceService->prepareInvoice($order);
-								$invoice->setRequestedCaptureCase(Invoice::CAPTURE_ONLINE);
-								$invoice->register();
-								$invoice->save();
-								$transactionSave = $this->_transaction->addObject(
-									$invoice
-								)->addObject(
-									$invoice->getOrder()
-								);
-								$transactionSave->save();
-								$this->invoiceSender->send($invoice);
-								//send notification code
-								$order->addStatusHistoryComment(
-									__('Notified customer about invoice #%1.', $invoice->getId())
-								)
-								->setIsCustomerNotified(true)
-								->save();
-						 } else {
-						 	$this->_logger->debug("Not canInvoice".$transaction_id);
-						 }
+						$order->getPayment()->capture(null);
+						$order->save();
 						
 			}
 	}

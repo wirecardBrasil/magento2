@@ -91,7 +91,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
      * @return $this
      * @throws \Magento\Framework\Validator\Exception
      */
-    public function authorize(\Magento\Payment\Model\InfoInterface $payment, $amount)
+    public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
 		//parent::authorize($payment, $amount);  
 		$order = $payment->getOrder();
@@ -143,16 +143,18 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 
 
 					$payment->setTransactionId($moipOrder->getId())
-							->setIsTransactionClosed(0)
+							
+							->setIsTransactionClosed(1)
+							->setIsTransactionPending(1)
 							->setTransactionAdditionalInfo('raw_details_info', $data_payment);
 					$this->getInfoInstance()->setAdditionalInformation($data_payment);
 					
 
 				}catch(\Exception $e) {
-		            throw new LocalizedException(__('Payment failed ' . $e->getMessage()));
+		            throw new LocalizedException(__( $e->getMessage()));
 		        }
 			} catch(\Exception $e) {
-            	throw new LocalizedException(__('Payment failed ' . $e->getMessage()));
+            	throw new LocalizedException(__($e->getMessage()));
         	}
         return $this;
     }

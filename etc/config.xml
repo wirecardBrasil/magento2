@@ -25,10 +25,9 @@
             </moipbase>
             <moipcc>
                 <model>Moip\Magento2\Model\PaymentMethodCc</model>
-				<payment_action>authorize</payment_action>
+				<payment_action>order</payment_action>
                 <active>1</active>
                 <title>Cartão de Crédito</title>
-                <order_status>pending</order_status>
                 <installment>
                     <type_interest>simple</type_interest>
                     <min_installment>5</min_installment>
@@ -49,10 +48,9 @@
             </moipcc>
             <moipboleto>
                 <model>Moip\Magento2\Model\PaymentMethodBoleto</model>
-                <payment_action>authorize</payment_action>
+                <payment_action>order</payment_action>
                 <active>1</active>
                 <title>Boleto Bancário</title>
-                <order_status>pending</order_status>
                 <expiration>3</expiration>
                 <instrucao1>Não receber após vencimento</instrucao1>
                 <instrucao2>Não pagar em cheque</instrucao2>

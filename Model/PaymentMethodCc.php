@@ -22,8 +22,9 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
     protected $_canRefundInvoicePartial = true;
 	protected $_canVoid                = true;
 	protected $_canCancel              = true;
+	protected $_canReviewPayment 		= true;
 	protected $_canUseForMultishipping = false;
-	/*protected $_isInitializeNeeded 	= true;*/
+	protected $_isInitializeNeeded 		= false;
     protected $_countryFactory;
     protected $_supportedCurrencyCodes = ['BRL'];
     protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc'];
@@ -69,6 +70,12 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	{
 	    return ($this->getConfigData('order_status') == 'pending')? null : parent::getConfigPaymentAction();
 	}*/
+	/*public function initialize($paymentAction, $stateObject)
+    {
+ 		$stateObject->setState(\Magento\Sales\Model\Order::STATE_PENDING_PAYMENT);
+        $stateObject->setStatus('pending_payment');
+        $stateObject->setIsNotified(false);
+    }*/
 
 	public function assignData(\Magento\Framework\DataObject $data)
 	 {
@@ -90,7 +97,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	
 
 
-    /**
+   /**
      * Payment authorize
      *
      * @param \Magento\Payment\Model\InfoInterface $payment
@@ -98,7 +105,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
      * @return $this
      * @throws \Magento\Framework\Validator\Exception
      */
-    public function authorize(\Magento\Payment\Model\InfoInterface $payment, $amount)
+    public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
 		//parent::authorize($payment, $amount);  
 		$order = $payment->getOrder();
@@ -151,6 +158,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 					
 					$payment->setTransactionId($moipOrder->getId())
 							->setIsTransactionClosed(0)
+							->setIsTransactionPending(1)
 							->setTransactionAdditionalInfo('raw_details_info',$data_payment);
 				}catch(\Exception $e) {
 		            throw new LocalizedException(__('Payment failed ' . $e->getMessage()));
@@ -161,7 +169,16 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
         return $this;
     }
 	
-	
+	public function canReviewPayment()
+	{
+		    return parent::canReviewPayment();
+	}
+
+	public function denyPayment(\Magento\Payment\Model\InfoInterface $payment)
+    {
+        parent::denyPayment($payment);
+      
+    }
 	
 	public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {
