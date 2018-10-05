@@ -133,6 +133,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
 		
 		$email = $order->getCustomerEmail();
+		
+		$dob = $order->getCustomerDob() ?: '1985-10-10';
 
 		$ddd_telephone 		= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), true);
 		$number_telephone 	= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), false);
@@ -192,7 +194,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$customer =  $moip->customers()->setOwnId(uniqid())
 			        ->setFullname($name)
 			        ->setEmail($email)
-			        ->setBirthDate('1985-10-10')
+			        ->setBirthDate($dob)
 			        ->setTaxDocument($taxvat, $_typedocument)
 			        ->setPhone($ddd_telephone, $number_telephone)
 			        	->addAddress('BILLING',
