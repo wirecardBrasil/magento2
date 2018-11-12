@@ -19,8 +19,8 @@
                     <company_name_customer>firstname</company_name_customer>
                     <street_logradouro>0</street_logradouro>
                     <street_number>1</street_number>
-                    <street_complemento>2</street_complemento>
-                    <street_district>3</street_district>
+                    <street_complemento>3</street_complemento>
+                    <street_district>2</street_district>
                 </advanced>
             </moipbase>
             <moipcc>
