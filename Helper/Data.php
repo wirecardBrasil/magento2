@@ -134,8 +134,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		
 		$email = $order->getCustomerEmail();
 		
-		$dob = $order->getCustomerDob() ?: '1985-10-10';
-
+		$dob = $order->getCustomerDob()
+            		? date('Y-m-d', strtotime($order->getCustomerDob()))
+            		: '1985-10-10';
+		
 		$ddd_telephone 		= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), true);
 		$number_telephone 	= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), false);
 
