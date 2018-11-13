@@ -23,6 +23,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 	protected $_canVoid                = true;
 	protected $_canCancel              = true;
 	protected $_canUseForMultishipping = false;
+	protected $_canReviewPayment = true;
     protected $_countryFactory;
     protected $_supportedCurrencyCodes = ['BRL'];
 	protected $_cart;
@@ -159,7 +160,25 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
         return $this;
     }
 	
-	
+	public function denyPayment(\Magento\Payment\Model\InfoInterface $payment)
+    {
+        parent::denyPayment($payment);
+        $order = $payment->getOrder();
+        $description_for_store = "Pagamento negado pelo admin";
+        $order->registerCancellation($description_for_store);
+      
+    }
+
+    public function acceptPayment(\Magento\Payment\Model\InfoInterface $payment)
+    {
+        parent::acceptPayment($payment);
+        $order = $payment->getOrder();
+        $order->getPayment()->capture(null);
+		$order->save();
+      
+    }
+
+   
 	
 	 public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {
