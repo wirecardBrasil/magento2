@@ -261,7 +261,7 @@ function (
 			
 			getInstallments: function () {
 			var temp = _.map(this.getInstall(), function (value, key) {
-				var inst = key+' x '+ value['parcela']+' Valor Total =' + value['total_parcelado'];
+				var inst = key+' x '+ value['parcela']+' Valor Total = ' + value['total_parcelado'];
                     return {
                         'value': key,
                         'installments': inst
