@@ -387,13 +387,162 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		return $payMoip;
     }
 
-    public function addPayCcMoip($moipOrder, $customerMoip, $InfoInstance, $payment){
+    public function addPayCcMoip($moipOrder, $order, $InfoInstance, $payment){
+    	$moip = $this->AuthorizationValidate();
 
+
+		if (!$order->getCustomerFirstname()) {
+				$name = $order->getBillingAddress()->getName();
+		} else {
+				$name = $order->getCustomerFirstname() . ' ' . $order->getCustomerLastname();
+		}
+
+		$type_cpf 	= $this->getTypeForCpf();
+
+		if($type_cpf === "customer"){
+			$attribute_cpf_customer = $this->getCpfAttributeForCustomer();
+			$_taxvat = $order->getData('customer_'.$attribute_cpf_customer);
+		} else {
+			$attribute_cpf_address = $this->getCpfAttributeForAddress();
+			$_taxvat = $order->getBillingAddress()->getData($attribute_cpf_address);
+		}
+
+		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
+
+		$type_cnpj 	= $this->getTypeForCNPJ();
+
+		if($type_cnpj === "use_cpf"){
+
+			if(strlen($taxvat) > 11) {
+				$_typedocument = "CNPJ";
+				$type_name_company = $this->getTypeNameCompany();
+
+				if($type_name_company === "customer"){
+					$attribute_name = $this->getCompanyAttributeForCustomer();
+					$name 		= $order->getData('customer_'.$attribute_name);
+				} else {
+					$attribute_name = $this->getCompanyAttributeForAddress();
+					$name 		= $order->getBillingAddress()->getData($attribute_name);
+				}
+
+			} else {
+				$_typedocument = "CPF";
+			}
+
+		} elseif ($type_cnpj === "use_customer") {
+			$attribute_cnpj = $this->getCNPJAttributeForCustomer();
+			$_taxvat 		= $order->getData('customer_'.$attribute_cnpj);
+			if($_taxvat){
+				$_typedocument = "CNPJ";
+				$type_name_company = $this->getTypeNameCompany();
+				if($type_name_company === "customer"){
+					$attribute_name = $this->getCompanyAttributeForCustomer();
+					$name 		= $order->getData('customer_'.$attribute_name);
+				} else {
+					$attribute_name = $this->getCompanyAttributeForAddress();
+					$name 		= $order->getBillingAddress()->getData($attribute_name);
+				}
+
+			}
+		} elseif($type_cnpj === "use_address"){
+			$attribute_cnpj_address = $this->getCNPJAttributeForAddress();
+			$_taxvat = $order->getBillingAddress()->getData($attribute_cnpj_address);
+			if($_taxvat){
+				$_typedocument = "CNPJ";
+				$type_name_company = $this->getTypeNameCompany();
+				if($type_name_company === "customer"){
+					$attribute_name = $this->getCompanyAttributeForCustomer();
+					$name 		= $order->getData('customer_'.$attribute_name);
+				} else {
+					$attribute_name = $this->getCompanyAttributeForAddress();
+					$name 		= $order->getBillingAddress()->getData($attribute_name);
+				}
+			}
+		}
+
+		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
+		
+		$email = $order->getCustomerEmail();
+		
+		$dob = $order->getCustomerDob()
+            		? date('Y-m-d', strtotime($order->getCustomerDob()))
+            		: '1985-10-10';
+		
+		$ddd_telephone 		= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), true);
+		$number_telephone 	= $this->getNumberOrDDD($order->getBillingAddress()->getTelephone(), false);
+
+		$street_billing  	= $order->getBillingAddress()->getStreet();
+		
+		$city_billing 		= $order->getBillingAddress()->getData('city');
+		
+		$region_billing 	= $order->getBillingAddress()->getRegionCode();
+		
+		$postcode_billing 	= substr(preg_replace("/[^0-9]/", "", $order->getBillingAddress()->getData('postcode')) . '00000000', 0, 8);
+		
+		$billing_logradouro 	= $street_billing[$this->getStreetPositionLogradouro()];
+
+		$billing_number 		= $street_billing[$this->getStreetPositionNumber()];
+		
+		if(count($street_billing) >= 3){
+			$billing_district 		= $street_billing[$this->getStreetPositionDistrict()];
+		} else {
+			$billing_district 		= $street_billing[$this->getStreetPositionLogradouro()];
+		}
+
+
+		if(count($street_billing) == 4){
+			$billing_complemento	= $street_billing[$this->getStreetPositionComplemento()];
+		} else {
+			$billing_complemento	= "";
+		}
+
+
+		if (!$order->getIsVirtual()) {
+			$city_shipping 		= $order->getShippingAddress()->getData('city');
+			$street_shipping 	= $order->getShippingAddress()->getStreet();
+			$region_shipping 	= $order->getShippingAddress()->getRegionCode();
+			$postcode_shipping 	= substr(preg_replace("/[^0-9]/", "", $order->getShippingAddress()->getData('postcode')) . '00000000', 0, 8);
+
+			$shipping_logradouro 	= $street_shipping[$this->getStreetPositionLogradouro()];
+
+			$shipping_number 		= $street_shipping[$this->getStreetPositionNumber()];
+
+			if(count($street_billing) >= 3) {
+				$shipping_district 		= $street_shipping[$this->getStreetPositionDistrict()];
+			} else {
+				$shipping_district 		= $street_shipping[$this->getStreetPositionLogradouro()];
+			}
+			
+
+			if(count($street_shipping) == 4){
+				$shipping_complemento	=  $street_shipping[$this->getStreetPositionComplemento()];
+			} else {
+				$shipping_complemento	=  "";
+			}
+		}
+
+
+
+		$holder =  $moip->holders()
+			        ->setFullname($InfoInstance->getAdditionalInformation('fullname'))
+			       
+			        ->setBirthDate($dob)
+			        ->setTaxDocument($taxvat, $_typedocument)
+			        ->setPhone($ddd_telephone, $number_telephone)
+			        	->setAddress('BILLING',
+								            $billing_logradouro, 
+								            $billing_number,
+								            $billing_district, 
+								            $city_billing, 
+								            $region_billing,
+								            $postcode_billing, 
+								            $billing_complemento
+								     );
     	
 					
 		$payMoip = $moipOrder->payments()->setCreditCardHash(
 					$InfoInstance->getAdditionalInformation('hash'),
-					$InfoInstance->getAdditionalInformation('fullname')
+					$holder
 			)
 		->setInstallmentCount($InfoInstance->getAdditionalInformation('installments'))
 		->execute();

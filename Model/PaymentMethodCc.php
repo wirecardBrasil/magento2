@@ -143,7 +143,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 					$moipOrder->create();
 					
 
-					$payMoip =  $this->_moipHelper->addPayCcMoip($moipOrder, $customerMoip, $InfoInstance, $payment);
+					$payMoip =  $this->_moipHelper->addPayCcMoip($moipOrder, $order, $InfoInstance, $payment);
 					
 
 					$data_payment = [
