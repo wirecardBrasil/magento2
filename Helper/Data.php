@@ -389,11 +389,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
     public function addPayCcMoip($moipOrder, $customerMoip, $InfoInstance, $payment){
 
-    	$customerMoip->setFullname($InfoInstance->getAdditionalInformation('fullname'));
+    	
 					
 		$payMoip = $moipOrder->payments()->setCreditCardHash(
 					$InfoInstance->getAdditionalInformation('hash'),
-					$customerMoip
+					$InfoInstance->getAdditionalInformation('fullname')
 			)
 		->setInstallmentCount($InfoInstance->getAdditionalInformation('installments'))
 		->execute();
