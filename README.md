@@ -3,7 +3,7 @@
 Integração oficial para lojas em Magento 2 via Moip API V2.
 
 ## Pre-requisitos
-O módulo é compatível apenas com Magento 2.2
+O módulo é compatível apenas com Magento 2.2 e 2.3
 
 ## Receba pagamentos transparente
 
