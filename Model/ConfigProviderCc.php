@@ -269,8 +269,8 @@ class ConfigProviderCc implements ConfigProviderInterface
 	
     public function TypeInstallment()
     {
-        $parcelasMinimo = $this->scopeConfig->getValue('payment/moipcc/installment/type_installment');
-        return $parcelasMinimo;
+        $type = $this->scopeConfig->getValue('payment/moipcc/installment/type_interest');
+        return $type;
     }
 
 	public function MinInstallment()
