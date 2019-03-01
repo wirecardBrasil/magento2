@@ -29,6 +29,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 	protected $_cart;
 	protected $_moipHelper;
 	protected $_infoBlockType = 'Moip\Magento2\Block\Info\Boleto';
+	protected $_canUseInternal          = false;
 
     public function __construct(
         \Magento\Framework\Model\Context $context,

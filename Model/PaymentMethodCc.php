@@ -30,6 +30,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
     protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc'];
 	protected $_cart;
 	protected $_moipHelper;
+	protected $_canUseInternal          = false;
 	
     public function __construct(
         \Magento\Framework\Model\Context $context,
