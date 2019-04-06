@@ -45,6 +45,7 @@ class Cancel extends \Magento\Framework\App\Action\Action
 		$originalNotification = json_decode($response, true);
 		$authorization = $this->getRequest()->getHeader('Authorization');
 		$token = $this->_moipHelper->getInfoUrlPreferenceToken('cancel');
+		$this->_logger->debug($token);
 		if($authorization != $token){
 			$this->_logger->debug("Authorization Invalida ".$authorization);
 			return $this;
@@ -70,9 +71,9 @@ class Cancel extends \Magento\Framework\App\Action\Action
 						$description_for_store = "Motivo indefinido";
 						$description_for_customer = __($description_cancel);
 					}
+					$payment = $order->getPayment();
+					$payment->setIsTransactionDenied(true)->save();
 					
-					$order->registerCancellation($description_for_store);
-					$order->save();
 					$this->addCancelDetails($description_for_customer, $order);
 					$this->_logger->info("Order Cancel Successfully with Id ".$order->getId());						
 				}catch(\Exception $e){

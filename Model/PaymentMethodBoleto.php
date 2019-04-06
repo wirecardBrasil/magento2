@@ -13,22 +13,24 @@ use Moip\Auth\BasicAuth;
 class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 {
 	const ROUND_UP = 100;
-	protected $_canAuthorize = true;
-	protected $_canCapture = true;
-	protected $_canRefund = true;
-    protected $_code = 'moipboleto';
-    protected $_isGateway               = true;
-    protected $_canCapturePartial       = true;
-    protected $_canRefundInvoicePartial = true;
-	protected $_canVoid                = true;
-	protected $_canCancel              = true;
-	protected $_canUseForMultishipping = false;
-	protected $_canReviewPayment = true;
+	protected $_canAuthorize 				= false;
+	protected $_canCapture 					= true;
+	protected $_canRefund 					= true;
+    protected $_code 						= 'moipboleto';
+    protected $_isGateway               	= true;
+    protected $_canCapturePartial       	= true;
+    protected $_canRefundInvoicePartial 	= true;
+	protected $_canVoid                		= true;
+	protected $_canCancel              		= true;
+	protected $_canUseForMultishipping 		= false;
+	protected $_canReviewPayment 			= true;
     protected $_countryFactory;
-    protected $_supportedCurrencyCodes = ['BRL'];
+    protected $_supportedCurrencyCodes 		= ['BRL'];
+    protected $_canUseInternal          	= false;
 	protected $_cart;
 	protected $_moipHelper;
-	protected $_infoBlockType = 'Moip\Magento2\Block\Info\Boleto';
+	protected $_infoBlockType 				= 'Moip\Magento2\Block\Info\Boleto';
+	protected $_canFetchTransactionInfo 	= true;
 
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -68,7 +70,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 	public function assignData(\Magento\Framework\DataObject $data)
 	 {
 		parent::assignData($data);
-		$infoInstance = $this->getInfoInstance();
+		// $infoInstance = $this->getInfoInstance();
 		/*$currentData = $data->getAdditionalData();
 		foreach($currentData as $key=>$value){
 			$infoInstance->setAdditionalInformation($key,$value);
@@ -127,9 +129,9 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 
 					$moipOrder->setCustomer($customerMoip);
 					$moipOrder->create();
-
+					$this->_logger->debug(print_r($moipOrder, true));
 					$payMoip 			= $this->_moipHelper->addPayBoletoMoip($moipOrder);
-				
+					$this->_logger->debug(print_r($payMoip, true));
 					$data_payment = [
 										'customer_id'=>$moipOrder->getCustomer()->getId(),
 										'ownId'=>$moipOrder->getOwnId(),
@@ -150,35 +152,57 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 							->setTransactionAdditionalInfo('raw_details_info', $data_payment);
 					$this->getInfoInstance()->setAdditionalInformation($data_payment);
 					
+					
 
 				}catch(\Exception $e) {
-		            throw new LocalizedException(__( $e->getMessage()));
+		            throw new LocalizedException(__( "Erro na criação pagamento ".$e->getMessage()));
 		        }
 			} catch(\Exception $e) {
-            	throw new LocalizedException(__($e->getMessage()));
+            	throw new LocalizedException(__("Erro na criação pedidoy ".$e->getMessage()));
         	}
         return $this;
     }
 	
-	public function denyPayment(\Magento\Payment\Model\InfoInterface $payment)
+	
+  	public function denyPayment(\Magento\Payment\Model\InfoInterface $payment)
     {
-        parent::denyPayment($payment);
-        $order = $payment->getOrder();
-        $description_for_store = "Pagamento negado pelo admin";
-        $order->registerCancellation($description_for_store);
+        
+        $payment->setIsTransactionDenied(true)->save();
+	
+        return $this;
       
     }
-
     public function acceptPayment(\Magento\Payment\Model\InfoInterface $payment)
     {
-        parent::acceptPayment($payment);
-        $order = $payment->getOrder();
-        $order->getPayment()->capture(null);
-		$order->save();
+        $payment->setIsTransactionApproved(true)->save();
+    	$payment->capture(null)->save();
+        return $this;
       
     }
 
    
+   
+    public function fetchTransactionInfo(\Magento\Payment\Model\InfoInterface $payment, $transactionId)
+    {	
+    	$stateMoip = $this->_moipHelper->getStateOrderMoip($transactionId);
+    
+		
+		if($stateMoip == "PAID"){
+			$payment->setIsTransactionApproved(true)->save();
+    		$payment->capture(null)->save();
+		} elseif($stateMoip == "NOT_PAID"){
+			$payment->setIsTransactionDenied(true)->save();
+			
+		} else {
+			parent::fetchTransactionInfo($payment, $transactionId);
+		}
+		
+
+    	
+        return $this;
+
+    }
+
 	
 	 public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {

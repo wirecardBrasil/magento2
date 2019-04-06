@@ -3,7 +3,7 @@
     <system>
         <section id="payment">
             <group id="moipbase" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Moip Base</label>
+                <label>Wirecard Brasil - Configuração Base</label>
                 <field id="environment_mode" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Developer Mode</label>
                     <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
@@ -91,7 +91,7 @@
                 
             </group>
              <group id="moipboleto" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Moip boleto</label>
+                <label>Wirecard Brasil - boleto</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
@@ -135,7 +135,7 @@
                 </field>
             </group>
             <group id="moipcc" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Moip Cartão de Crédito</label>
+                <label>Wirecard Brasil - Cartão de Crédito</label>
                 <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
                     <label>Enabled</label>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>

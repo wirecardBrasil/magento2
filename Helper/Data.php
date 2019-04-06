@@ -83,7 +83,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
 		if($type_cnpj === "use_cpf"){
 
-			if(strlen($taxvat) > 11) {
+			if(strlen($taxvat) === 14) {
 				$_typedocument = "CNPJ";
 				$type_name_company = $this->getTypeNameCompany();
 
@@ -313,6 +313,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
     	foreach ($items as $item) {
 			if ($item->getParentItem()) continue;
+			if ($item->getPrice() == 0) continue;
 				$name = $item->getName();
 				$sku = $item->getSku();
 				$qty = $item->getQty();
@@ -667,4 +668,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
         
         return $token;
     }
+
+    public function getStateOrderMoip($moip_order_id){
+		$moip = $this->AuthorizationValidate();
+		$order = $moip->orders()->get($moip_order_id);
+		return $order->getStatus();
+	}
 }

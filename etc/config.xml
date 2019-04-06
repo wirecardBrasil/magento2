@@ -26,6 +26,7 @@
             <moipcc>
                 <model>Moip\Magento2\Model\PaymentMethodCc</model>
 				<payment_action>order</payment_action>
+                <order_status>payment_review</order_status>
                 <active>1</active>
                 <title>Cartão de Crédito</title>
                 <installment>
@@ -49,6 +50,7 @@
             <moipboleto>
                 <model>Moip\Magento2\Model\PaymentMethodBoleto</model>
                 <payment_action>order</payment_action>
+                <order_status>payment_review</order_status>
                 <active>1</active>
                 <title>Boleto Bancário</title>
                 <expiration>3</expiration>

@@ -13,24 +13,26 @@ use Moip\Auth\BasicAuth;
 
 class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 {
-	const ROUND_UP = 100;
-	protected $_canAuthorize = true;
-	protected $_canCapture = true;
-	protected $_canRefund = true;
-    protected $_code = 'moipcc';
-    protected $_isGateway               = true;
-    protected $_canCapturePartial       = true;
-    protected $_canRefundInvoicePartial = true;
-	protected $_canVoid                = true;
-	protected $_canCancel              = true;
-	protected $_canReviewPayment 		= true;
-	protected $_canUseForMultishipping = false;
-	protected $_isInitializeNeeded 		= false;
+	const ROUND_UP 								= 100;
+	protected $_canAuthorize 					= true;
+	protected $_canCapture 						= true;
+	protected $_canRefund 						= true;
+    protected $_code 							= 'moipcc';
+    protected $_isGateway               		= true;
+    protected $_canCapturePartial       		= true;
+    protected $_canRefundInvoicePartial 		= true;
+	protected $_canVoid                			= true;
+	protected $_canCancel              			= true;
+	protected $_canReviewPayment 				= false;
+	protected $_canUseForMultishipping 			= false;
+	protected $_isInitializeNeeded 				= false;
     protected $_countryFactory;
-    protected $_supportedCurrencyCodes = ['BRL'];
-    protected $_debugReplacePrivateDataKeys = ['number', 'exp_month', 'exp_year', 'cvc'];
+    protected $_supportedCurrencyCodes 			= ['BRL'];
+    protected $_debugReplacePrivateDataKeys 	= ['number', 'exp_month', 'exp_year', 'cvc','hash'];
 	protected $_cart;
 	protected $_moipHelper;
+	protected $_canUseInternal          		= false;
+	protected $_canFetchTransactionInfo 		= true;
 	
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -67,16 +69,6 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 		$this->_moipHelper = $moipHelper;
     }
 
-	/*public function getConfigPaymentAction()
-	{
-	    return ($this->getConfigData('order_status') == 'pending')? null : parent::getConfigPaymentAction();
-	}*/
-	/*public function initialize($paymentAction, $stateObject)
-    {
- 		$stateObject->setState(\Magento\Sales\Model\Order::STATE_PENDING_PAYMENT);
-        $stateObject->setStatus('pending_payment');
-        $stateObject->setIsNotified(false);
-    }*/
 
 	public function assignData(\Magento\Framework\DataObject $data)
 	 {
@@ -104,18 +96,9 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	
 	
 
-
-   /**
-     * Payment authorize
-     *
-     * @param \Magento\Payment\Model\InfoInterface $payment
-     * @param float $amount
-     * @return $this
-     * @throws \Magento\Framework\Validator\Exception
-     */
     public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
-		//parent::authorize($payment, $amount);  
+		
 		$order = $payment->getOrder();
 		
 		try{
@@ -128,7 +111,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 			$objectManager = \Magento\Framework\App\ObjectManager::getInstance();
 			
 			$customerMoip = $this->_moipHelper->generateCustomerMoip($order);
-
+			$this->_logger->debug(print_r($customerMoip, true));
 			
 			try {
 				
@@ -149,10 +132,10 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 					
 					$moipOrder->setCustomer($customerMoip);
 					$moipOrder->create();
-					
+					$this->_logger->debug(print_r($moipOrder, true));
 
 					$payMoip =  $this->_moipHelper->addPayCcMoip($moipOrder, $order, $InfoInstance, $payment);
-					
+					$this->_logger->debug(print_r($payMoip, true));
 
 					$data_payment = [
 											'customer_id'=>$moipOrder->getCustomer()->getId(),
@@ -169,23 +152,33 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 							->setIsTransactionPending(1)
 							->setTransactionAdditionalInfo('raw_details_info',$data_payment);
 				}catch(\Exception $e) {
-		            throw new LocalizedException(__('Payment failed ' . $e->getMessage()));
+		            throw new LocalizedException(__('Erro na criação do pagamento ' . $e->getMessage()));
 		        }
 			} catch(\Exception $e) {
-            	throw new LocalizedException(__('Payment failed ' . $e->getMessage()));
+            	throw new LocalizedException(__('Erro na criação da order ' . $e->getMessage()));
         	}
         return $this;
     }
 	
-	public function canReviewPayment()
-	{
-		    return parent::canReviewPayment();
-	}
+	public function fetchTransactionInfo(\Magento\Payment\Model\InfoInterface $payment, $transactionId)
+    {	
+    	$stateMoip = $this->_moipHelper->getStateOrderMoip($transactionId);
+    
+		
+		if($stateMoip == "PAID"){
+			$payment->setIsTransactionApproved(true)->save();
+    		$payment->capture(null)->save();
+		} elseif($stateMoip == "NOT_PAID"){
+			$payment->setIsTransactionDenied(true)->save();
 
-	public function denyPayment(\Magento\Payment\Model\InfoInterface $payment)
-    {
-        parent::denyPayment($payment);
-      
+		} else {
+			parent::fetchTransactionInfo($payment, $transactionId);
+		}
+		
+
+    	
+        return $this;
+
     }
 	
 	public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
