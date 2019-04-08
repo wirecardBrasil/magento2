@@ -141,6 +141,7 @@ class ConfigProviderCc implements ConfigProviderInterface
 				$config['payment'][$code]['min_installment'] = $this->MinInstallment();
                 $config['payment'][$code]['publickey'] = $this->getPublicKey();
                 $config['payment'][$code]['image_cvv'] = $this->getCvvImg();
+                $config['payment'][$code]['get_document'] = $this->getUseDocument();
 			}
         }
 		
@@ -218,6 +219,10 @@ class ConfigProviderCc implements ConfigProviderInterface
             $years[$year] = $year;
         }
         return $years;
+    }
+
+    public function getUseDocument(){
+      return $this->scopeConfig->getValue("payment/moipcc/document/getdocument");
     }
 	
 	public function getInfoParcelamentoJuros() {

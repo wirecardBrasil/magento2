@@ -46,6 +46,9 @@
                     <installment_11>12.00</installment_11>
                     <installment_12>12.50</installment_12>
                 </installment>
+                <document>
+                    <getdocument>0</getdocument>
+                </document>
             </moipcc>
             <moipboleto>
                 <model>Moip\Magento2\Model\PaymentMethodBoleto</model>

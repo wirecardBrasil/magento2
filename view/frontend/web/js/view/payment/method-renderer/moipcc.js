@@ -176,6 +176,10 @@ function (
                     };
                 });
             },
+            getUseDocument: function(){
+            	console.log(window.checkoutConfig.payment.moipcc.get_document);
+            	return window.checkoutConfig.payment.moipcc.get_document;
+            },
 			isActive :function(){
 				return true;
 			},
@@ -261,7 +265,12 @@ function (
 			
 			getInstallments: function () {
 			var temp = _.map(this.getInstall(), function (value, key) {
-				var inst = key+' x '+ value['parcela']+' Valor Total =' + value['total_parcelado'];
+				if(value['juros'] == 0){
+					var info_interest = "sem juros";
+				} else {
+					var info_interest = "com juros total de " + value['total_juros'];
+				}
+				var inst = key+' x '+ value['parcela']+' no valor total de ' + value['total_parcelado'] + ' ' + info_interest;
                     return {
                         'value': key,
                         'installments': inst
@@ -307,6 +316,7 @@ function (
 						'cc_exp_month': this.creditCardExpMonth(),
 						'cc_exp_year': this.creditCardExpYear(),
 						'fullname': jQuery('#'+this.getCode()+'_fullname').val(),
+						'document': jQuery('#'+this.getCode()+'_document').val(),
 						'installments': jQuery('#'+this.getCode()+'_installments').val(),
 						'hash': jQuery('#'+this.getCode()+'_hash').val()
                     }

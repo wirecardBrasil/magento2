@@ -99,67 +99,87 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 		//parent::authorize($payment, $amount);  
 		$order = $payment->getOrder();
 		
-		try{
+		
 			
-			if ($amount <= 0) {
-                throw new LocalizedException(__('Invalid amount for authorization.'));
-            }
-			
+		if ($amount <= 0) {
+            throw new LocalizedException(__('Invalid amount for authorization.'));
+        }
+		try {
 			$moip 			= $this->_moipHelper->AuthorizationValidate();
+		} catch(\Exception $e) {
+			throw new LocalizedException(__( "Erro de conexão ".$e->getMessage()));
+			return $this;
+		}
+		
 
-			$objectManager 	= \Magento\Framework\App\ObjectManager::getInstance();
-			
+		$objectManager 	= \Magento\Framework\App\ObjectManager::getInstance();
+		
+		
+		try {
 			$customerMoip 	= $this->_moipHelper->generateCustomerMoip($order);
-			$this->_logger->debug(print_r($customerMoip, true));
+		} catch(\Exception $e) {
+			throw new LocalizedException(__( "Erro de na criação do cliente ".$e->getMessage()));
+			return $this;
+		}
+		$this->_logger->debug(print_r($customerMoip, true));
+
+		
+				$items 				= $this->_cart->getQuote()->getAllItems();
+
+				$moipOrder 			= $this->_moipHelper->initOrderMoip($moip, $order);
+				
+				$itemsMoip 			= $this->_moipHelper->addProductItemsMoip($moipOrder, $items);
+				
+				$shippingPriceMoip 	= $this->_moipHelper->addShippingPriceMoip($moipOrder, $order);
+
+				$discountPriceMoip 	= $this->_moipHelper->addDiscountPriceMoip($moipOrder, $order);
+				
+				$additionalPrice	= $this->_moipHelper->addAdditionalPriceMoip($moipOrder, $order);
+				
+
+				$moipOrder->setCustomer($customerMoip);
+				try {
+					$moipOrder->create();
+				} catch(\Exception $e) {
+					throw new LocalizedException(__( "Erro na criação do pedido ".$e->getMessage()));
+					return $this;
+				}
+				$this->_logger->debug(print_r($moipOrder, true));
+				
+				try {
+					$payMoip 			= $this->_moipHelper->addPayBoletoMoip($moipOrder);
+				} catch(\Exception $e) {
+					throw new LocalizedException(__( "Erro na processar o pagamento ".$e->getMessage()));
+					return $this;
+				}
+
+				$this->_logger->debug(print_r($payMoip, true));
+				$data_payment = [
+									'customer_id'=>$moipOrder->getCustomer()->getId(),
+									'ownId'=>$moipOrder->getOwnId(),
+									'href_boleto'=> $payMoip->getHrefBoleto(),
+									'href_boleto_print'=> $payMoip->getHrefPrintBoleto(),
+									'line_code_boleto'	=> $payMoip->getLineCodeBoleto(),
+									'expiration_date_boleto' => $payMoip->getExpirationDateBoleto(),
+									'payid' =>  $payMoip->getId(),
+									'Pay' => json_encode($payMoip),
+									'Order' => json_encode($moipOrder)
+								];
+
+
+				$payment->setTransactionId($moipOrder->getId())
+						
+						->setIsTransactionClosed(1)
+						->setIsTransactionPending(1)
+						->setTransactionAdditionalInfo('raw_details_info', $data_payment);
+
+
+				$this->getInfoInstance()->setAdditionalInformation($data_payment);
+				
+				
 
 			
-			try {
-					$items 				= $this->_cart->getQuote()->getAllItems();
-
-					$moipOrder 			= $this->_moipHelper->initOrderMoip($moip, $order);
-					
-					$itemsMoip 			= $this->_moipHelper->addProductItemsMoip($moipOrder, $items);
-					
-					$shippingPriceMoip 	= $this->_moipHelper->addShippingPriceMoip($moipOrder, $order);
-
-					$discountPriceMoip 	= $this->_moipHelper->addDiscountPriceMoip($moipOrder, $order);
-					
-					$additionalPrice	= $this->_moipHelper->addAdditionalPriceMoip($moipOrder, $order);
-					
-
-					$moipOrder->setCustomer($customerMoip);
-					$moipOrder->create();
-					$this->_logger->debug(print_r($moipOrder, true));
-					$payMoip 			= $this->_moipHelper->addPayBoletoMoip($moipOrder);
-					$this->_logger->debug(print_r($payMoip, true));
-					$data_payment = [
-										'customer_id'=>$moipOrder->getCustomer()->getId(),
-										'ownId'=>$moipOrder->getOwnId(),
-										'href_boleto'=> $payMoip->getHrefBoleto(),
-										'href_boleto_print'=> $payMoip->getHrefPrintBoleto(),
-										'line_code_boleto'	=> $payMoip->getLineCodeBoleto(),
-										'expiration_date_boleto' => $payMoip->getExpirationDateBoleto(),
-										'payid' =>  $payMoip->getId(),
-										'Pay' => json_encode($payMoip),
-										'Order' => json_encode($moipOrder)
-									];
-
-
-					$payment->setTransactionId($moipOrder->getId())
-							
-							->setIsTransactionClosed(1)
-							->setIsTransactionPending(1)
-							->setTransactionAdditionalInfo('raw_details_info', $data_payment);
-					$this->getInfoInstance()->setAdditionalInformation($data_payment);
-					
-					
-
-				}catch(\Exception $e) {
-		            throw new LocalizedException(__( "Erro na criação pagamento ".$e->getMessage()));
-		        }
-			} catch(\Exception $e) {
-            	throw new LocalizedException(__("Erro na criação pedidoy ".$e->getMessage()));
-        	}
+			
         return $this;
     }
 	

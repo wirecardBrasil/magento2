@@ -219,8 +219,16 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 								            $shipping_complemento
 				            );
 		}
+		try{
+			if($taxvat != ""){
+				$customer = $customer->create();
+			}
+		} catch(\Exception $e) {
+			throw new LocalizedException(__( "Documento fiscal inválido, CPF ou CNPJ não preenchido."));
+			return $this;
+		}
 
-		$customer = $customer->create();
+		
 		return $customer;
 	}
 
@@ -407,6 +415,10 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 			$attribute_cpf_address = $this->getCpfAttributeForAddress();
 			$_taxvat = $order->getBillingAddress()->getData($attribute_cpf_address);
 		}
+		if($InfoInstance->getAdditionalInformation('document')){
+			$_taxvat = $InfoInstance->getAdditionalInformation('document');
+		}
+		
 
 		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
 
@@ -414,7 +426,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 
 		if($type_cnpj === "use_cpf"){
 
-			if(strlen($taxvat) > 11) {
+			if(strlen($taxvat) === 14) {
 				$_typedocument = "CNPJ";
 				$type_name_company = $this->getTypeNameCompany();
 

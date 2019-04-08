@@ -172,6 +172,26 @@
 												'data-validate': JSON.stringify({'required':true})}"/>
 					</div>
 				</div>
+
+				<!-- ko if: (getUseDocument() == 1) -->
+					<div class="field document required">
+						<label data-bind="attr: {for: getCode() + '_document'}" class="label">
+							<span><!-- ko i18n: 'CPF do titular do cartão'--><!-- /ko --></span>
+						</label>
+						<div class="control">
+							<input type="text" name="document" class="input-text"  value=""
+								   data-bind="attr: {
+													autocomplete: off,
+													id: getCode() + '_document',
+													title: $t('CPF do titular do cartão'),
+													'data-container': getCode() + '-document',
+													'data-validate': JSON.stringify({'required':true,'validate-cpf':'#' + getCode() + '_document'})}"/>
+						</div>
+					</div>
+				<!--/ko-->
+
+
+				
 				
 			</fieldset>
         </form>
@@ -180,7 +200,7 @@
             <!-- ko template: getTemplate() --><!-- /ko -->
             <!--/ko-->
         </div>
-        <div class="actions-toolbar">
+        <div class="actions-toolbar" style="margin-top: 15px;">
             <div class="primary">
                 <button class="action primary checkout"
                         type="submit"
