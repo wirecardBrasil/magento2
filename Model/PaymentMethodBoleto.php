@@ -166,7 +166,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 									'Order' => json_encode($moipOrder)
 								];
 
-
+						
 				$payment->setTransactionId($moipOrder->getId())
 						
 						->setIsTransactionClosed(1)

@@ -4,5 +4,8 @@
 	    <route id="moip" frontName="moip">
 	        <module name="Moip_Magento2" before='Magento_Backend' />
 	    </route>
+	    <route id="orderupdate" frontName="moipupdate">
+            <module name="Moip_Magento2" before='Magento_Backend' />
+        </route>
 	</router>
 </config>

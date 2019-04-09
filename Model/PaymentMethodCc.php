@@ -160,7 +160,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
         return $this;
     }
 	
-	public function fetchTransactionInfo(\Magento\Payment\Model\InfoInterface $payment, $transactionId)
+	public function fetchTransactionInfo(\Magento\Payment\Model\InfoInterface $payment, $transactionId, $comment = null)
     {	
     	$stateMoip = $this->_moipHelper->getStateOrderMoip($transactionId);
     
@@ -169,7 +169,15 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 			$payment->setIsTransactionApproved(true)->save();
     		$payment->capture(null)->save();
 		} elseif($stateMoip == "NOT_PAID"){
+
 			$payment->setIsTransactionDenied(true)->save();
+			$order = $payment->getOrder();
+			if($comment){
+				$order->registerCancellation($comment)->save();
+			} else {
+				$order->registerCancellation('Pagamento não autorizado')->save();
+			}
+			
 
 		} else {
 			parent::fetchTransactionInfo($payment, $transactionId);
