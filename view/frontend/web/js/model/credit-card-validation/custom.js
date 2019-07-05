@@ -22,7 +22,8 @@
         'amex': [new RegExp('^3([47]\\d*)?$'), new RegExp('^[0-9]{4}$'), true],
         'elo': [new RegExp('^(636368|438935|504175|451416|636297|5067|4576|4011|50904|50905|50906|65)'), true],
         'hipercard': [new RegExp('^(606282|3841)[0-9]{5,}$'), new RegExp('^[0-9]{3}$'), true],
-		'hiper': [new RegExp('^(637095|637612|637599|637609|637568)'), true]
+		'hiper': [new RegExp('^(637095|637612|637599|637609|637568)'), true],
+        'diners': [new RegExp('^(3(0[0-5]|095|6|[8-9]))\\d*$'), new RegExp('^[0-9]{3}$'), true]
     };
     $.each({
         'validate-cc-type2': [

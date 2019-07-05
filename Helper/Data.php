@@ -75,6 +75,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		} else {
 			$attribute_cpf_address = $this->getCpfAttributeForAddress();
 			$_taxvat = $order->getBillingAddress()->getData($attribute_cpf_address);
+			if(!$_taxvat){
+				$_taxvat = $order->getShippingAddress()->getData($attribute_cpf_address);
+			}
 		}
 
 		$taxvat = preg_replace("/[^0-9]/", "",$_taxvat);
@@ -386,7 +389,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$expiration_date = $this->getDateDue($number_date);
 		$mediaUrl = $this ->_storeManager-> getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA );
 
-		$logo_uri = "";
+		$logo_uri = null;
 
 		$instruction_lines = [$this->getInstructionLines(1), $this->getInstructionLines(2), $this->getInstructionLines(3)];
 				
@@ -414,6 +417,9 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		} else {
 			$attribute_cpf_address = $this->getCpfAttributeForAddress();
 			$_taxvat = $order->getBillingAddress()->getData($attribute_cpf_address);
+			if(!$_taxvat){
+				$_taxvat = $order->getShippingAddress()->getData($attribute_cpf_address);
+			}
 		}
 		if($InfoInstance->getAdditionalInformation('document')){
 			$_taxvat = $InfoInstance->getAdditionalInformation('document');

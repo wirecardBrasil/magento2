@@ -77,6 +77,17 @@ define(
                     name: 'CVV',
                     size: 3
                 }
+            },
+            {
+                title: 'Diners',
+                type: 'diners',
+                pattern: '^(3(0[0-5]|095|6|[8-9]))\\d*$',
+                gaps: [4, 10],
+                lengths: [14, 16, 17, 18, 19],
+                code: {
+                    name: 'CVV',
+                    size: 3
+                }
             }
         ];
         return {
