@@ -157,7 +157,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 		$billing_number 		= $street_billing[$this->getStreetPositionNumber()];
 		
 		if(count($street_billing) >= 3){
-			$billing_district 		= $street_billing[$this->getStreetPositionDistrict()];
+			if (!isset($street_billing[$this->getStreetPositionDistrict()])){
+				$billing_district = '';
+			}else{
+				$billing_district 		= $street_billing[$this->getStreetPositionDistrict()];
+			}
 		} else {
 			$billing_district 		= $street_billing[$this->getStreetPositionLogradouro()];
 		}
@@ -181,7 +185,11 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 			$shipping_number 		= $street_shipping[$this->getStreetPositionNumber()];
 
 			if(count($street_billing) >= 3) {
-				$shipping_district 		= $street_shipping[$this->getStreetPositionDistrict()];
+				if (!isset($street_shipping[$this->getStreetPositionDistrict()])){
+					$shipping_district = '';
+				}else{
+					$shipping_district 		= $street_shipping[$this->getStreetPositionDistrict()];
+				}
 			} else {
 				$shipping_district 		= $street_shipping[$this->getStreetPositionLogradouro()];
 			}
