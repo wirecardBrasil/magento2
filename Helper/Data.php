@@ -1,7 +1,6 @@
 <?php 
 namespace Moip\Magento2\Helper;
-use Magento\Framework\App\Filesystem\DirectoryList;
-use Magento\Backend\App\Action;
+use Magento\Framework\Exception\LocalizedException;
 use Moip\Moip;
 use Moip\Auth\OAuth;
 
