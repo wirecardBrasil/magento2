@@ -77,8 +77,10 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 
 				$method = $payment->getMethodInstance();
 				try {
-					$method->fetchTransactionInfo($payment, $transactionId);
-					$order->save();
+					if(!$order->getInvoiceCollection()->count()){
+						$method->fetchTransactionInfo($payment, $transactionId);
+						$order->save();
+					}
 				} catch(\Exception $e) {
 					return $resultJson->setData(['success' => 0]);
 				}

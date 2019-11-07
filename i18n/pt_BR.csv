@@ -75,4 +75,5 @@
 "Expiration in %s day","Vencimento em %s dia"
 "The barcode of your ticket bank is:","O código de barras do seu boleto é:"
 "Copy":"Copiar"
-"Print your ticket bank","Imprimir Boleto"
+"Print your ticket bank","Imprimir Boleto",
+"Brand","Bandeira"

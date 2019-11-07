@@ -1,15 +1,30 @@
 <?php 
 namespace Moip\Magento2\Controller\Notification;
+
 use Magento\Sales\Model\Order;
 use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Api\OrderManagementInterface;
+use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\RequestInterface;
+use Magento\Framework\App\Request\InvalidRequestException;
 use Moip\Moip;
 use Moip\Auth\BasicAuth;
-class Refund extends \Magento\Framework\App\Action\Action
+
+class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareActionInterface
 {	
+
 	protected $_logger;
 	protected $_moipHelper;
-	
+
+	public function createCsrfValidationException(RequestInterface $request): ?InvalidRequestException
+    {
+        return null;
+    }
+
+    public function validateForCsrf(RequestInterface $request): ?bool
+    {
+        return true;
+    }
 	public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Psr\Log\LoggerInterface $logger,

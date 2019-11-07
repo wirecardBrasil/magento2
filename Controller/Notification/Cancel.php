@@ -74,7 +74,7 @@ class Cancel extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 			$transaction_id = $order->getOwnId();
 			
 			if($transaction_id){
-				$this->_logger->debug("Autoriza pagamento do pedido ".$transaction_id);
+				$this->_logger->debug("Cancelamento do pagamento do pedido ".$transaction_id);
 				$order = $this->order->loadByIncrementId($transaction_id);
 
 				$payment = $order->getPayment();
@@ -96,12 +96,12 @@ class Cancel extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 						$description_for_customer = __($description_cancel);
 					}
 					
-
-					$method->fetchTransactionInfo($payment, $transactionId, $description_for_customer);
-					$order->save();
+					if(Order::STATE_CANCELED !== $order->getState()){
+						$method->fetchTransactionInfo($payment, $transactionId, $description_for_customer);
+						$order->save();
+						$this->addCancelDetails($description_for_customer, $order);
+					}
 					
-					$order->save();
-					$this->addCancelDetails($description_for_customer, $order);
 
 				} catch(\Exception $e) {
 					return $resultJson->setData(['success' => 0]);
