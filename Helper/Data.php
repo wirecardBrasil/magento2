@@ -1,5 +1,6 @@
 <?php 
 namespace Moip\Magento2\Helper;
+
 use Magento\Framework\Exception\LocalizedException;
 use Moip\Moip;
 use Moip\Auth\OAuth;
@@ -315,6 +316,12 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
     public function initOrderMoip($moip, $order){
     	
     	$moipOrder = $moip->orders()->setOwnId($order->getIncrementId());
+    	if($this->_scopeConfig->getValue('payment/moipbase/split/active', \Magento\Store\Model\ScopeInterface::SCOPE_STORE)){
+    		$mpaSecondary 	= $this->_scopeConfig->getValue('payment/moipbase/split/mpa', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    		$feeSecnondary 	= $this->_scopeConfig->getValue('payment/moipbase/split/fee', \Magento\Store\Model\ScopeInterface::SCOPE_STORE);
+    		$moipOrder->addReceiver($mpaSecondary, 'SECONDARY', NULL, $feeSecnondary, FALSE);
+    	}
+    	
     	return $moipOrder;
     }
 

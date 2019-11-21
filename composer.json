@@ -1,8 +1,8 @@
 {
   "name": "moip/magento2",
-  "description": "MOIP Magento2 Extension for Magento 2 By Wirecard Brasil",
+  "description": "MOIP Magento2 Extension for Magento 2 By Moip",
   "type": "magento2-module",
-  "version": "1.0.24",
+  "version": "1.0.22",
   "license": [
         "proprietary"
    ],

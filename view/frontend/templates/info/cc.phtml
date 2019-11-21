@@ -17,25 +17,25 @@ $title = $block->escapeHtml($block->getMethod()->getTitle());
         <dd class="content">
             <table class="data table">
                     <tr>
-                        <th scope="row"><?php echo $block->escapeHtml('Instalmments')?></th>
+                        <th scope="row"><?= __('Installments')?></th>
                         <td>
                             <?= $block->getInstallments(); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php echo $block->escapeHtml('Brand')?></th>
+                        <th scope="row"><?= __('Brand')?></th>
                         <td>
                             <?= $block->getBrand(); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php echo $block->escapeHtml('Full Name')?></th>
+                        <th scope="row"><?= __('Full Name')?></th>
                         <td>
                             <?= $block->getOwner(); ?>
                         </td>
                     </tr>
                     <tr>
-                        <th scope="row"><?php echo $block->escapeHtml('Credit Card Number')?></th>
+                        <th scope="row"><?= __('Credit Card Number')?></th>
                         <td>
                             <?= $block->getLastNumber(); ?>
                         </td>

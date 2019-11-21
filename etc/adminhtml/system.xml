@@ -88,7 +88,27 @@
 	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
 	                </field>
                	</group>
-                
+                <group id="split" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Single Split</label>
+                    <comment>Send all sales a commission to another seller?</comment>
+                    <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="mpa" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>MPA from secondary seller</label>
+                        <depends>
+                            <field id="*/*/*/active">1</field>
+                        </depends>
+                    </field>
+                    <field id="fee" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Fee</label>
+                        <validate>required-entry validate-number</validate>
+                        <depends>
+                            <field id="*/*/*/active">1</field>
+                        </depends>
+                    </field>
+                </group>
             </group>
              <group id="moipboleto" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                 <label>Wirecard Brasil - Boleto</label>

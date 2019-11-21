@@ -33,6 +33,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 	protected $_moipHelper;
 	protected $_canUseInternal          		= false;
 	protected $_canFetchTransactionInfo 		= true;
+	protected $_infoBlockType 					= 'Moip\Magento2\Block\Info\Cc';
 	
     public function __construct(
         \Magento\Framework\Model\Context $context,
@@ -139,6 +140,7 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 
 					$data_payment = [
 											'customer_id'=>$moipOrder->getCustomer()->getId(),
+											'fullname' 	=> $payMoip->getFundingInstrument()->creditCard->holder->fullname,
 											'ownId'=>$moipOrder->getOwnId(),
 											'installments'=> $payMoip->getInstallmentCount(),
 											'payid' =>  $payMoip->getId(),
