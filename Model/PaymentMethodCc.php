@@ -81,22 +81,24 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
 		$infoInstance = $this->getInfoInstance();
 		$currentData = $data->getAdditionalData();
 		foreach($currentData as $key=>$value){
+			if($key == "cc_number"){
+				$value = substr($value, -4);
+			}
 			if ($key === \Magento\Framework\Api\ExtensibleDataInterface::EXTENSION_ATTRIBUTES_KEY) {
 				continue;
 			}
+
 			$infoInstance->setAdditionalInformation($key,$value);
 		}
 		return $this;
 	 }
 	
-	 public function validate()
+	public function validate()
     {
 		$moip = $this->_moipHelper->AuthorizationValidate();
         return $this;
     } 
 	
-	
-
     public function order(\Magento\Payment\Model\InfoInterface $payment, $amount)
     {
 		
@@ -168,8 +170,9 @@ class PaymentMethodCc extends \Magento\Payment\Model\Method\Cc
     
 		
 		if($stateMoip == "PAID"){
-			$payment->setIsTransactionApproved(true)->save();
+			$payment->setIsTransactionApproved(true)->setIsCustomerNotified(true)->setEmailSent(true)->save();
     		$payment->capture(null)->save();
+
 		} elseif($stateMoip == "NOT_PAID"){
 
 			$payment->setIsTransactionDenied(true)->save();
