@@ -36,7 +36,8 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 		\Magento\Sales\Api\Data\OrderInterface $order,
 		\Magento\Sales\Model\OrderFactory $orderFactory,
 		\Moip\Magento2\Helper\Data $moipHelper,
-		\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+		\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
+		\Magento\Sales\Model\Order\Email\Sender\OrderCommentSender $orderCommentSender
 	) {
     	parent::__construct($context);
     	$this->resultJsonFactory = $resultJsonFactory;
@@ -44,6 +45,7 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 		$this->order = $order;
 		$this->_orderFactory = $orderFactory;
 		$this->_moipHelper = $moipHelper;
+		$this->_orderCommentSender = $orderCommentSender;
 	}
 	
 	public function execute()
@@ -79,6 +81,7 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 				try {
 					if(!$order->getInvoiceCollection()->count()){
 						$method->fetchTransactionInfo($payment, $transactionId);
+						$this->_orderCommentSender->send($order, 1, __('Pagamento Autorizado'));
 						$order->save();
 					}
 				} catch(\Exception $e) {
