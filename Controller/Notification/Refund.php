@@ -34,7 +34,7 @@ class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 		\Magento\Sales\Model\Order\CreditmemoFactory $creditmemoFactory,
 		\Magento\Sales\Model\Order\Invoice $Invoice,
 		\Magento\Sales\Model\Service\CreditmemoService $CreditmemoService,
-		\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
+		\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
 		\Moip\Magento2\Helper\Data $moipHelper
     ) {
 		$this->_logger = $logger;
@@ -42,8 +42,8 @@ class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 		$this->_resultJsonFactory = $resultJsonFactory;
 		$this->orderManagement = $orderManagement;
 		$this->creditmemoFactory = $creditmemoFactory;
-        $this->CreditmemoService = $CreditmemoService;
-        $this->Invoice = $Invoice;
+		$this->CreditmemoService = $CreditmemoService;
+		$this->Invoice = $Invoice;
 		$this->_moipHelper = $moipHelper;
 		parent::__construct($context);
     }
