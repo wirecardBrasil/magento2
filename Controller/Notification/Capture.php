@@ -40,7 +40,7 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 		\Magento\Sales\Model\Order\Email\Sender\OrderCommentSender $orderCommentSender
 	) {
     	parent::__construct($context);
-    	$this->resultJsonFactory = $resultJsonFactory;
+    	$this->_resultJsonFactory = $resultJsonFactory;
         $this->_logger = $logger;
 		$this->order = $order;
 		$this->_orderFactory = $orderFactory;
@@ -51,8 +51,7 @@ class Capture extends \Magento\Framework\App\Action\Action implements CsrfAwareA
 	public function execute()
 	{
 
-		$resultJson = $this->resultJsonFactory->create();
-		$this->_logger->debug("entrou na capture");
+		$resultJson = $this->_resultJsonFactory->create();
 		$moip = $this->_moipHelper->AuthorizationValidate();
 		$response = file_get_contents('php://input');
 		$originalNotification = json_decode($response, true);

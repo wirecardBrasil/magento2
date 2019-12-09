@@ -25,18 +25,21 @@ class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
     {
         return true;
     }
+    
 	public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Psr\Log\LoggerInterface $logger,
-		 \Magento\Sales\Api\Data\OrderInterface $order,
-		 OrderManagementInterface $orderManagement,
-		 \Magento\Sales\Model\Order\CreditmemoFactory $creditmemoFactory,
-		 \Magento\Sales\Model\Order\Invoice $Invoice,
+		\Magento\Sales\Api\Data\OrderInterface $order,
+		OrderManagementInterface $orderManagement,
+		\Magento\Sales\Model\Order\CreditmemoFactory $creditmemoFactory,
+		\Magento\Sales\Model\Order\Invoice $Invoice,
 		\Magento\Sales\Model\Service\CreditmemoService $CreditmemoService,
+		\Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory
 		\Moip\Magento2\Helper\Data $moipHelper
     ) {
 		$this->_logger = $logger;
 		$this->order = $order;
+		$this->_resultJsonFactory = $resultJsonFactory;
 		$this->orderManagement = $orderManagement;
 		$this->creditmemoFactory = $creditmemoFactory;
         $this->CreditmemoService = $CreditmemoService;
@@ -47,24 +50,17 @@ class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 
 	public function execute()
 	{
-		
+			$resultJson = $this->_resultJsonFactory->create();
 			$moip = $this->_moipHelper->AuthorizationValidate();
 			$response = file_get_contents('php://input');
 			$originalNotification = json_decode($response, true);
 			$this->_logger->debug($response);
-
 			$authorization = $this->getRequest()->getHeader('Authorization');
-			
 			$token = $this->_moipHelper->getInfoUrlPreferenceToken('refund');
-			
 			if($authorization != $token){
-
 				return $this;
 			} 
-			
 			$order_id = $originalNotification['resource']['refund']['_links']['order']['title'];
-			
-
 			$order = $moip->orders()->get($order_id);
 			$transaction_id= $order->getOwnId();
 			if($transaction_id){
@@ -76,9 +72,13 @@ class Refund extends \Magento\Framework\App\Action\Action implements CsrfAwareAc
 					}
 					$invoiceobj =  $this->Invoice->loadByIncrementId($invoiceincrementid);
 					$creditmemo = $this->creditmemoFactory->createByOrder($order);
-					
 					$creditmemo->setInvoice($invoiceobj);
-					$this->CreditmemoService->refund($creditmemo); 
+					try {
+						$this->CreditmemoService->refund($creditmemo); 
+					} catch(\Exception $e) {
+						return $resultJson->setData(['success' => 0]);
+					}
+					return $resultJson->setData(['success' => 1]);
 			 	}
 			}	
 	}
