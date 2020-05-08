@@ -77,9 +77,9 @@ class ConfigProviderBoleto implements ConfigProviderInterface
     {
         $day = (int)$this->scopeConfig->getValue("payment/moipboleto/expiration");
         if($day > 1) {
-            return nl2br(sprintf(__('Expiration in %s days'), $day));    
+            return nl2br(__('Expiration in %s days', $day));    
         } else {
-            return nl2br(sprintf(__('Expiration in %s day'), $day));    
+            return nl2br(__('Expiration in %s day', $day));    
         }
         
     }
