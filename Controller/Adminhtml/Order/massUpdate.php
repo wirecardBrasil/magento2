@@ -35,11 +35,12 @@ class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassA
     {
         $countUpdateOrder = 0;
         $countUpdateOrderWaiting = 0;
-        $model = $this->_objectManager->create('Magento\Sales\Model\Order');
+        
         foreach ($collection->getItems() as $order) {
             if (!$order->getEntityId()) {
                 continue;
             }
+            $model = $this->_objectManager->create('Magento\Sales\Model\Order');
             $loadedOrder = $model->load($order->getEntityId());
           
             if ($loadedOrder->canFetchPaymentReviewUpdate()) {
