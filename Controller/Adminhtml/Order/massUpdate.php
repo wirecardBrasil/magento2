@@ -40,7 +40,6 @@ class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassA
             if (!$order->getEntityId()) {
                 continue;
             }
-            
             $model = $this->_objectManager->create('Magento\Sales\Model\Order');
             $loadedOrder = $model->load($order->getEntityId());
           
