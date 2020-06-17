@@ -79,6 +79,7 @@ class ConfigProviderCc implements ConfigProviderInterface
      * @var \Magento\Framework\View\Asset\Source
      */
     protected $assetSource;
+    
     protected $_priceFiler;
 
     /**
@@ -130,6 +131,7 @@ class ConfigProviderCc implements ConfigProviderInterface
 		$config = [];
         foreach ($this->methodCodes as $code) {
             if ($this->methods[$code]->isAvailable()) {
+                $config['payment'][$code]['paymentlogo'] = $this->getPaymentLogo();
                 $config['payment'][$code]['ccavailabletypes'] = $this->getCcAvailableTypes();
                 $config['payment'][$code]['years'] = $this->getYears();
                 $config['payment'][$code]['months'] = $this->getMonths();
@@ -164,6 +166,26 @@ class ConfigProviderCc implements ConfigProviderInterface
     /**
      * @return array
      */
+    public function getPaymentLogo()
+    {           
+       
+        $paymentLogo = [];
+        $asset = $this->ccConfig
+            ->createAsset('Moip_Magento2::images/cc/logo.svg');
+        $placeholder = $this->assetSource->findSource($asset);
+        if ($placeholder) {
+            list($width, $height) = getimagesize($asset->getSourceFile());
+            $paymentLogo = [
+                'url' => $asset->getUrl(),
+                'width' => $width,
+                'height' => $height
+            ];
+        }
+        return $paymentLogo;
+    }
+    /**
+     * @return array
+     */
     public function getIcons()
     {
         if (!empty($this->icons)) {
@@ -175,7 +197,7 @@ class ConfigProviderCc implements ConfigProviderInterface
 
             if (!array_key_exists($code, $this->icons)) {
                 $asset = $this->ccConfig
-                    ->createAsset('Moip_Magento2::images/cc/' . strtolower($code) . '.png');
+                    ->createAsset('Moip_Magento2::images/cc/' . strtolower($code) . '.svg');
                 $placeholder = $this->assetSource->findSource($asset);
                 if ($placeholder) {
                     list($width, $height) = getimagesize($asset->getSourceFile());

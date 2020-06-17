@@ -17,6 +17,7 @@ define(
     'Magento_Checkout/js/model/payment/additional-validators',
 	'Moip_Magento2/js/model/credit-card-validation/credit-card-number-validator',
 	'Moip_Magento2/js/model/credit-card-validation/custom',
+	'Moip_Magento2/js/model/credit-card-validation/wirecard-brasil',
     'mage/url',
 	'mage/calendar',
 	'mage/translate'
@@ -146,6 +147,12 @@ function (
                 return window.checkoutConfig.payment.moipcc.publickey;
             },
 
+            getPaymentLogo: function () {
+                return window.checkoutConfig.payment.moipcc.paymentlogo ?
+                    window.checkoutConfig.payment.moipcc.paymentlogo
+                    : false;
+            },
+
 			getIcons: function (type) {
                 return window.checkoutConfig.payment.moipcc.icons.hasOwnProperty(type) ?
                     window.checkoutConfig.payment.moipcc.icons[type]
@@ -177,7 +184,6 @@ function (
                 });
             },
             getUseDocument: function(){
-            	console.log(window.checkoutConfig.payment.moipcc.get_document);
             	return window.checkoutConfig.payment.moipcc.get_document;
             },
 			isActive :function(){

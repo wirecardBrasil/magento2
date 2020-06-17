@@ -2,10 +2,12 @@
 namespace Moip\Magento2\Model;
 
 use Magento\Framework\UrlInterface;
-use \Magento\Payment\Model\Method\AbstractMethod;
+use Magento\Framework\App\ObjectManager;
+use Magento\Framework\DataObject;
+use Magento\Payment\Model\Method\AbstractMethod;
 use Magento\Sales\Model\Order;
-use \Magento\Framework\Exception\LocalizedException;
-use \Magento\Sales\Model\Order\Payment;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Sales\Model\Order\Payment;
 use Moip\Moip;
 use Moip\Auth\BasicAuth;
 
@@ -168,12 +170,26 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
 		}
         return $this;
     }
-	
-	public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
+
+    public function isAvailable(\Magento\Quote\Api\Data\CartInterface $quote = null)
     {
         if (!$this->isActive($quote ? $quote->getStoreId() : null)) {
             return false;
         }
-		return true;
-	}
+
+        $checkResult = new DataObject();
+        $checkResult->setData('is_available', true);
+
+        // for future use in observers
+        $this->_eventManager->dispatch(
+            'payment_method_is_active',
+            [
+                'result' => $checkResult,
+                'method_instance' => $this,
+                'quote' => $quote
+            ]
+        );
+
+        return $checkResult->getData('is_available');
+    }
 }

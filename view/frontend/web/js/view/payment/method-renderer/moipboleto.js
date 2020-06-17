@@ -24,9 +24,16 @@ define(
             /** Returns payable to info */
             getDue: function() {
                 return window.checkoutConfig.payment.moipboleto.due;
-            }
+            },
 
-           
+            getIconUrl: function () {
+                return window.checkoutConfig.payment.moipboleto.icon;
+            },
+
+            getIconHtml: function () {
+                return '<img src="' + this.getIconUrl() +
+                    '" alt="Boleto" title="Boleto Bancário" />';
+            }
         });
     }
 );

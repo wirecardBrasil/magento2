@@ -1,9 +1,19 @@
 <?php if($block->getMethodCode() === "moipboleto"): ?>
 	<p>
 		<?php echo __('The barcode of your ticket bank is:') ?> 
-		<input type="text" id="copyTarget" value="<?php echo $block->getInfo('line_code_boleto'); ?>" class="input-text"> <button id="copyButton"  class="action primary continue">
-			<?php echo __('Copy') ?> 
-		</button>
+		<div class="field osc-input-group">
+			<div class="control _with-tooltip">
+				<input type="text" id="copyTarget" value="<?php echo $block->getInfo('line_code_boleto'); ?>" class="input-text"> 
+				<div class="field-tooltip toggle">
+					<button id="copyButton">
+						<?php echo __('Copy') ?> 
+					</button>
+				</div>
+				
+			</div>
+			
+		</div>
+		
 	</p>
 	<p>
 		<a href="<?php echo $block->getInfo('href_boleto_print'); ?>" target="_blank" class="action primary continue">

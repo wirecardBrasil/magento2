@@ -3,6 +3,8 @@ namespace Moip\Magento2\Model;
 
 use Magento\Checkout\Model\ConfigProviderInterface;
 use Magento\Framework\Escaper;
+use Magento\Payment\Model\CcConfig;
+use Magento\Framework\View\Asset\Source;
 use Magento\Payment\Helper\Data as PaymentHelper;
 
 
@@ -25,8 +27,17 @@ class ConfigProviderBoleto implements ConfigProviderInterface
     protected $escaper;
 
     protected $scopeConfig;
-   
+    /**
+     * @var CcConfig
+     */
+    protected $ccConfig;
 
+    /**
+     * @var array
+     */
+    private $icon = [];
+
+    protected $assetSource;
     /**
      * @param PaymentHelper $paymentHelper
      * @param Escaper $escaper
@@ -34,9 +45,13 @@ class ConfigProviderBoleto implements ConfigProviderInterface
     public function __construct(
         PaymentHelper $paymentHelper,
         Escaper $escaper,
+        CcConfig $ccConfig,
+        Source $assetSource,
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
     ) {
+        $this->ccConfig = $ccConfig;
         $this->escaper = $escaper;
+        $this->assetSource = $assetSource;
         $this->method = $paymentHelper->getMethodInstance($this->methodCode);
         $this->scopeConfig = $scopeConfig;
 
@@ -52,9 +67,20 @@ class ConfigProviderBoleto implements ConfigProviderInterface
                 'moipboleto' => [
                     'instruction' =>  $this->getInstruction(),
                     'due' => $this->getDue(),
+                    'icon' => $this->getIcon()
                 ],
             ],
         ] : [];
+    }
+
+    /**
+     * @return array
+     */
+    public function getIcon()
+    {
+        $asset = $this->ccConfig
+                    ->createAsset('Moip_Magento2::images/boleto/moipboleto.svg');
+        return $asset->getUrl();
     }
 
     /**
@@ -77,9 +103,9 @@ class ConfigProviderBoleto implements ConfigProviderInterface
     {
         $day = (int)$this->scopeConfig->getValue("payment/moipboleto/expiration");
         if($day > 1) {
-            return nl2br(__('Expiration in %s days', $day));    
+            return nl2br(__('Expiration in %1 days', $day));    
         } else {
-            return nl2br(__('Expiration in %s day', $day));    
+            return nl2br(__('Expiration in %1 day', $day));;    
         }
         
     }

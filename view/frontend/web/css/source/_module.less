@@ -1,0 +1,358 @@
+@label_floating-padding-x: 1rem;
+@label_floating-padding-y: 1rem;
+@elements__box-shadow: 0 3px 5px rgba(57, 22, 58, 0.05);
+@elements__border-radius: 5px;
+@elements__margin-adjust: 21px;
+& when (@media-common = true) {
+     #payment_form_moipboleto, #payment_form_moipcc {
+        .payment-method-wirecard-label {
+            display: flex;
+            align-items: center;
+            .payment-method-wirecard-label-icon {
+                width: 30px;
+                text-align: center;
+                line-height: 1;
+                padding-right: 10px;
+            }
+        }
+    }
+    #payment_form_moipcc {
+        .checkout-payment-method {
+            .payments {
+                .legend {
+                    &:extend(.abs-add-clearfix all);
+                    &:extend(.abs-visually-hidden-reset all);
+                }
+            }
+            .legend {
+                &:extend(.abs-add-clearfix all);
+                &:extend(.abs-visually-hidden-reset all);
+            }
+           
+        }
+        #payment_form_cc_moipcc {
+            border: 1px solid;
+            border-color: @color-gray-light2;
+            border-radius: 4px;
+            .legend {
+                align-items: center;
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                &:extend(.abs-visually-hidden-reset all);
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+                border-bottom: 1px solid;
+                border-color: @color-gray-light2;
+                padding: 10px 20px;
+                background-color: @color-gray-light01;
+                width: 100%;
+                &-icon {
+                    margin-right: 0;
+                }
+            }
+            .not-editable-title {
+                text-align: center;
+                .lib-heading(h3);
+                padding: @indent__base;
+            }
+        }
+        .fieldset {
+                .field {
+                    &.wirecard-input-group {
+                        position: relative;
+                        .control {
+                            input[type="text"], input[type="password"], input[type="url"], input[type="tel"], input[type="search"], input[type="number"], input[type="datetime"], input[type="email"], select {
+                                height: unset;
+                                &::focus {
+                                    box-shadow: @elements__box-shadow;
+                                    border-color: @border-color__base;
+                                }
+                                &::placeholder {
+                                    color: transparent;
+                                }
+                                &::-webkit-input-placeholder {
+                                    color: transparent;
+                                }
+                                &::-ms-input-placeholder {
+                                    color: transparent;
+                                }
+                                &::-moz-placeholder {
+                                    color: transparent;
+                                }
+                            }
+                            .label {
+                                padding: @label_floating-padding-x @label_floating-padding-x;
+                                font-weight: normal;
+                                pointer-events: none;
+                                position: absolute;
+                                top: 0;
+                                display: block;
+                                margin-bottom: 0;
+                                transition: all .1s ease-in-out;
+                                width: 80%;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                color: #000;
+                            }
+                            
+                            input, select {
+                                padding: @label_floating-padding-x @label_floating-padding-x;
+                                font-weight: 600;
+                                border-radius: 5px;
+                            }
+                            &._with-tooltip {
+                                // position: unset;
+                                input {
+                                    width: 100%;
+                                }
+                                .field-tooltip {
+                                    top: 6px;
+                                    right: @indent__xs;
+                                }
+                            }
+                            select:not(:checked),
+                            input:not(:placeholder-shown) {
+                                padding-top: calc(@label_floating-padding-y + @label_floating-padding-y * (2 / 3)) !important;
+                                padding-bottom: calc(@label_floating-padding-y / 3) !important;
+                            }
+                            select:not(:checked) ~ .label ,
+                            input:not(:placeholder-shown)  ~ .label  {
+                                padding-top: calc(@label_floating-padding-y/3) !important;
+                                padding-bottom: calc(@label_floating-padding-y/3) !important;
+                                font-size: 10px ;
+                            }
+                        }
+                    }
+                }
+            }
+        .credit-card-types {
+            padding: 0;
+            .item {
+                display: inline-block;
+                list-style: none;
+                margin: 0 @indent__xs 0 0;
+                vertical-align: top;
+                &._hidden {
+                    &:extend(.abs-visually-hidden all);
+                }
+                &._active {
+                    font-weight: @font-weight__bold;
+                    img {
+                        -webkit-filter: grayscale(0%);
+                    }
+                }
+                &._inactive {
+                    opacity: .4;
+                }
+                span {
+                    display: inline-block;
+                    padding-top: 6px;
+                    vertical-align: top;
+                }
+            }
+            img {
+                -webkit-filter: unset; // For Webkit browsers
+                -webkit-transition: all .6s ease; // Fade to color for Chrome and Safari
+            }
+        }
+        .field-to-pay {
+            margin: 0 @indent__base;
+            &._hidden {
+                &:extend(.abs-visually-hidden all);
+            }
+            .field {
+                padding-left: 0;
+            }
+        }
+        .field {
+            
+            &.number {
+                width: 100%;
+                .input-text {
+                    width: 100%;
+                }
+                .credit-card-types {
+                    line-height: 4;
+                }
+            }
+
+            &.month {
+              width: auto;   
+            }
+            &.year {
+                width: auto;
+                .select {
+                    width: 100px;
+                }
+            }
+        }
+    }
+    .checkout-onepage-success {
+        .field .control._with-tooltip {
+             input {
+                margin-right: 0;
+                padding-right: @indent__xl;
+                width: 100%;
+            }
+            button {
+                margin-top: -1px;
+            }
+        }
+        .field {
+            &.wirecard-input-group {
+                margin: 0 auto;
+                max-width: 500px;
+            }
+        }
+    }
+}
+
+
+//
+//  Mobile
+//  _____________________________________________
+
+.media-width(@extremum, @break) when (@extremum = 'max') and (@break = @screen__m) {
+     #payment_form_moipcc {
+        
+        #payment_form_cc_moipcc {
+          
+            .legend {
+                height: auto;
+                text-align: center;
+                display: block;
+                clear: both;
+                &-title, &-icon {
+                    line-height: 2;
+                    margin-right: 0;
+                }
+                &:before, &:after {
+                    content: '';
+                    display: table;
+                }
+            }
+           
+        }
+        
+        .field-to-pay {
+            clear: both;
+            &:before, &:after {
+                content: '';
+                display: table;
+            }
+            margin: @indent__base;
+           
+            .field {
+                margin: 5px 0;
+                vertical-align: top;
+                display: inline-block;
+                box-sizing: border-box;
+                width: 100%;
+                margin: @indent__xs 0;
+                .field-tooltip {
+                    top: @indent__s;
+                }
+            }
+        }
+        .field {
+            
+            &.number {
+                width: 100%;
+                .input-text {
+                    width: 100%;
+                }
+                .credit-card-types {
+                    line-height: 4;
+                }
+            }
+
+            &.month {
+              width: auto;   
+            }
+            &.year {
+                margin-left: @indent__base;
+                width: auto;
+                .select {
+                    width: 100px;
+                }
+            }
+            &.cvv {
+                    width: 100%;
+                    .control._with-tooltip {
+                        padding-right: 0;
+                        width: 100%;
+                    }
+            }
+            &.date {
+                width: 100%;
+                padding-left: 0;
+                
+            }
+        }
+    }
+}
+
+/*desktop */
+.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
+
+    .fieldset {
+        &.payment {
+            &#payment_form_cc_moipcc {
+            }
+            .field {
+                margin-bottom: 20px;
+                vertical-align: top;
+                display: inline-block;
+                box-sizing: border-box;
+                width: 100%;
+                padding-left: 10px;
+                .field-error {
+                    position: absolute;
+                    top:  calc(@label_floating-padding-y + @label_floating-padding-y +  @label_floating-padding-y + (2 / 3));
+                    background: @color-white;
+                    padding: 5px 10px;
+                    z-index: 100;
+                    font-size: 13px;
+                    font-weight: 500;
+                    letter-spacing: 0.4px;
+                    background: #ffffff;
+                    padding: 10px 20px;
+                    border-radius: 3px;
+                    border: 1px solid @error__color;
+                    &::before {
+                        content: ' ';
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
+                        border-bottom: 8px solid @error__color;
+                        position: absolute;
+                        left: 26px;
+                        width: 0;
+                        height: 0;
+                        top: -8px;
+                    }
+                }
+                &._error {
+                    input {
+                        border-color: @error__color;
+                    }
+                }
+                
+                &.number {
+                    width: 70%;
+                }
+                &.cvv {
+                    width: 30%;
+                    .control._with-tooltip {
+                        padding-right: 0;
+                    }
+                }
+                &.date {
+                    padding-left: 0;
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
