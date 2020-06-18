@@ -158,6 +158,8 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 				$shipping_complemento	=  "";
 			}
 			$customer->addAddress('SHIPPING', $shipping_logradouro, $billing_number, $shipping_district, $city_shipping, $region_shipping, $postcode_shipping, $shipping_complemento);
+		} else {
+			$customer->addAddress('SHIPPING', $billing_logradouro, $billing_number, $billing_district, $city_billing, $region_billing, $postcode_billing, $billing_complemento);
 		}
 		try{
 			if($taxvat != ""){
