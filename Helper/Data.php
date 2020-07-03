@@ -188,7 +188,7 @@ class Data extends \Magento\Framework\App\Helper\AbstractHelper {
 			if ($item->getPrice() == 0) continue;
 				$name = $item->getName();
 				$sku = $item->getSku();
-				$qty = $item->getQty();
+				$qty = $item->getQtyOrdered();
 				$price = $item->getPrice();
 				$price = ($price * self::ROUND_UP);
 				$setprice = (int)$price;

@@ -29,7 +29,6 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
     protected $_countryFactory;
     protected $_supportedCurrencyCodes 		= ['BRL'];
     protected $_canUseInternal          	= false;
-	protected $_cart;
 	protected $_moipHelper;
 	protected $_infoBlockType 				= 'Moip\Magento2\Block\Info\Boleto';
 	protected $_canFetchTransactionInfo 	= true;
@@ -45,7 +44,6 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
         \Magento\Framework\Module\ModuleListInterface $moduleList,
         \Magento\Framework\Stdlib\DateTime\TimezoneInterface $localeDate,
         \Magento\Directory\Model\CountryFactory $countryFactory,
-		\Magento\Checkout\Model\Cart $cart,
 		\Moip\Magento2\Helper\Data $moipHelper,
         array $data = []
     ) {
@@ -65,7 +63,6 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
         );
         $this->_countryFactory = $countryFactory;
         $this->scopeConfig = $scopeConfig;
-		$this->_cart = $cart;
 		$this->_moipHelper = $moipHelper;
     }
 	
@@ -89,7 +86,7 @@ class PaymentMethodBoleto extends \Magento\Payment\Model\Method\Cc
         }
 		$moip 				= $this->_moipHelper->AuthorizationValidate();
 		$customerMoip 		= $this->_moipHelper->generateCustomerMoip($order);
-		$items 				= $this->_cart->getQuote()->getAllItems();
+		$items 				= $order->getAllItems();
 		$moipOrder 			= $this->_moipHelper->initOrderMoip($moip, $order);
 		$itemsMoip 			= $this->_moipHelper->addProductItemsMoip($moipOrder, $items);
 		$shippingPriceMoip 	= $this->_moipHelper->addShippingPriceMoip($moipOrder, $order);
