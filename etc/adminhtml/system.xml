@@ -1,250 +1,321 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
     <system>
         <section id="payment">
-            <group id="moipbase" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Brasil - Configuração Base</label>
-                <field id="environment_mode" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Developer Mode</label>
-                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
-                    <comment>For testing use the sandbox environment.</comment>
-                </field>
-                <field id="oauth" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\Oauth</frontend_model>
-                    <label>Module Authorization</label>
-                    <comment>Warning because the sandbox account is not the same as production</comment>
-                </field>
-                <group id="advanced" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                	<label>Advanced Settings</label>
-                    <comment>List the attributes of your Magento the data expected by our API.</comment>
-                	<field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The CPF will be an attribute obtained from the</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
-	                </field>
-	                <field id="cpf_for_address" translate="label" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The CPF attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_cpf">address</field>
-	                    </depends>
-	                </field>
-	                <field id="cpf_for_customer" translate="label" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The CPF attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_cpf">customer</field>
-	                    </depends>
-	                </field>
-	                <field id="type_cnpj" translate="label select" type="select" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The attribute CNPJ will be obtained from the</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCNPJ</source_model>
-	                </field>
-	                <field id="cnpj_for_address" translate="label" type="select" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The CNPJ attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_cnpj">use_address</field>
-	                    </depends>
-	                </field>
-	                <field id="cnpj_for_customer" translate="label" type="select" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The CNPJ attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_cnpj">use_customer</field>
-	                    </depends>
-	                </field>
-	                <field id="type_name_company" translate="label" type="select" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The attribute Company Name will be obtained from the</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeNameCompany</source_model>
-	                </field>
-	                <field id="company_name_address" translate="label" type="select" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The Company Name attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_name_company">address</field>
-	                    </depends>
-	                </field>
-	                <field id="company_name_customer" translate="label" type="select" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The Company Name attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
-	                    <depends>
-	                        <field id="*/*/*/type_name_company">customer</field>
-	                    </depends>
-	                </field>
-	                <field id="street_logradouro" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The Street attribute is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
-	                </field>
-	                <field id="street_number" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The address number is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
-	                </field>
-	                <field id="street_complemento" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The address complement is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
-	                </field>
-	                <field id="street_district" translate="label" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="0">
-	                    <label>The address district is</label>
-	                    <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
-	                </field>
-               	</group>
-                <group id="split" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Single Split</label>
-                    <comment>Send all sales a commission to another seller?</comment>
-                    <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
+            <group id="moip_base" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <label><![CDATA[<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>]]></label>
+                <fieldset_css>complex moip-payment-section</fieldset_css>
+                <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\PaymentGroup</frontend_model>
+                <group id="attribute_relationship" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Attribute Relationship Definition</label>
+                    <comment>List the attributes of your Magento the data expected by our API</comment>
+                    <field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The CPF will be an attribute obtained from the</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
+                        <config_path>payment/moip_magento2/type_cpf</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="cpf_for_address" translate="label select" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The CPF attribute is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
+                        <depends>
+                            <field id="*/*/*/type_cpf">address</field>
+                        </depends>
+                        <config_path>payment/moip_magento2/cpf_for_address</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="cpf_for_customer" translate="label select" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The CPF attribute is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
+                        <depends>
+                            <field id="*/*/*/type_cpf">customer</field>
+                        </depends>
+                        <config_path>payment/moip_magento2/cpf_for_customer</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="street" translate="label select" type="select" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The Street attribute is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/moip_magento2/street</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field> 
+                    <field id="street_number" translate="label select" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The address number is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/moip_magento2/streetNumber</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="district" translate="label select" type="select" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The address district is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/moip_magento2/district</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                    <field id="complement" translate="label select" type="select" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>The address complement is</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Street</source_model>
+                        <config_path>payment/moip_magento2/complement</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+                </group>
+                <group id="credentials" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Credentials</label>
+                    <field id="environment" translate="label select comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Environment</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Environment</source_model>
+                        <config_path>payment/moip_magento2/environment</config_path>
+                        <validate>required-entry validate-select</validate>
+                    </field>
+
+                    <field id="oauth" translate="label comment" type="button" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\Oauth</frontend_model>
+                        <label>Module Authorization</label>
+                        <comment>Warning because the sandbox account is not the same as production</comment>
+                    </field>
+
+                    <field id="statement_descriptor" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Statement Descriptor</label>
+                        <config_path>payment/moip_magento2/statement_descriptor</config_path>
+                        <validate>required-entry</validate>
+                   </field>
+                    
+                </group>
+                
+                <group id="moip_magento2_cc" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Moip - Cartão de Crédito</label>
+                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2_cc/active</config_path>
                     </field>
-                    <field id="mpa" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>MPA from secondary seller</label>
-                        <depends>
-                            <field id="*/*/*/active">1</field>
-                        </depends>
+                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Title</label>
+                        <config_path>payment/moip_magento2_cc/title</config_path>
                     </field>
-                    <field id="fee" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
-                        <label>Fee</label>
-                        <validate>required-entry validate-number</validate>
-                        <depends>
-                            <field id="*/*/*/active">1</field>
-                        </depends>
-                    </field>
-                </group>
-            </group>
-             <group id="moipboleto" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Brasil - Boleto</label>
-                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-                <field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
-                <field id="expiration" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Days due</label>
-                    <comment>Consecutive days.</comment>
-                    <validate>required-entry validate-number</validate>
-                </field>
-                <field id="instrucao1" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instruction - 1st line</label>
-                    <comment>Information will be printed on the boleto.</comment>
-                </field>
-                <field id="instrucao2" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instruction - 2st line</label>
-                    <comment>Information will be printed on the boleto.</comment>
-                </field>
-                <field id="instrucao3" translate="label" type="text" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Instruction - 3st line</label>
-                    <comment>Information will be printed on the boleto.</comment>
-                </field>
-                <field id="instruction" translate="label" type="textarea" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Customer orientation at checkout</label>
-                    <comment>Information displayed on checkout.</comment>
-                </field>
-                <field id="sort_order" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Sort Order</label>
-                </field>
-                <field id="allowspecific" translate="label" type="allowspecific" sortOrder="130" showInDefault="9"
-                       showInWebsite="1" showInStore="0">
-                    <label>Payment From Applicable Countries</label>
-                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
-                </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="140" showInDefault="1"
-                       showInWebsite="1" showInStore="0">
-                    <label>Payment From Specific Countries</label>
-                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
-                </field>
-            </group>
-            <group id="moipcc" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
-                <label>Wirecard Brasil - Cartão de Crédito</label>
-                <field id="active" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                    <label>Enabled</label>
-                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                </field>
-			 	<field id="title" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Title</label>
-                </field>
-                <group id="document" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Captura do Documento Fiscal - CPF</label>
-                    <field id="getdocument" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="0">
-                        <label>Capturar CPF no formulário de pagamento?</label>
-                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                    </field>
-                </group>
-               
-				<group id="installment" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Installment and interest</label>
-                        <field id="type_interest" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <group id="document" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payer Data Capture</label>
+                        <comment>Define the payment form data capture</comment>
+                        <field id="get_tax_document" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Capture tax document (CPF or CNPJ) in the payment form?</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_cc/get_tax_document</config_path>
+                        </field>
+                        <field id="get_birth_date" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Capture date of birth in the payment form?</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_cc/get_birth_date</config_path>
+                        </field>
+                        <field id="get_phone" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Capture phone in the payment form?</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_cc/get_phone</config_path>
+                        </field>
+                    </group>
+                    <group id="installment" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Installment and interest</label>
+                        <field id="type_interest" translate="label" type="select" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest rate</label>
                             <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeInterest</source_model>
+                            <config_path>payment/moip_magento2_cc/installment_type_interest</config_path>
                         </field>
 
-        				<field id="min_installment" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="min_installment" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Minimum value of installment</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_min_installment</config_path>
                         </field>
-        				<field id="max_installment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="max_installment" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Maximum number of installments</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_max_installment</config_path>
                         </field>
-        				
-        				<field id="installment_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                        
+                        <field id="installment_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 2nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_2</config_path>
                         </field>
-        				<field id="installment_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 3nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_3</config_path>
                         </field>
-        				<field id="installment_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 4nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_4</config_path>
                         </field>
-        				<field id="installment_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 5nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_5</config_path>
                         </field>
-        				<field id="installment_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 6nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_6</config_path>
                         </field>
-        				<field id="installment_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 7nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_7</config_path>
                         </field>
-        				<field id="installment_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 8nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_8</config_path>
                         </field>
-        				<field id="installment_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 9nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_9</config_path>
                         </field>
-        				<field id="installment_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 10nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_10</config_path>
                         </field>
-        				<field id="installment_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 11nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_11</config_path>
                         </field>
-        				<field id="installment_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="installment_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 12nd tranche</label>
                             <validate>required-entry validate-number</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_12</config_path>
                         </field>
-				</group>
-				<field id="sort_order" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Sort Order</label>
-                </field>
-				<field id="allowspecific" translate="label" type="allowspecific" sortOrder="130" showInDefault="9"
-                       showInWebsite="1" showInStore="0">
-                    <label>Payment From Applicable Countries</label>
-                    <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
-                </field>
-                <field id="specificcountry" translate="label" type="multiselect" sortOrder="140" showInDefault="1"
-                       showInWebsite="1" showInStore="0">
-                    <label>Payment From Specific Countries</label>
-                    <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
-                </field>
+                    </group>
+                    <field id="debug" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Debug</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2_cc/debug</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment Action</label>
+                        <source_model>Moip\Magento2\Model\Adminhtml\Source\PaymentAction</source_model>
+                        <config_path>payment/moip_magento2_cc/payment_action</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Minimum Order Total</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>payment/moip_magento2_cc/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Maximum Order Total</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>payment/moip_magento2_cc/max_order_total</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="240" showInDefault="9" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment From Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/moip_magento2_cc/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment From Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/moip_magento2_cc/specificcountry</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/moip_magento2_cc/sort_order</config_path>
+                    </field>
+                </group>
+                <group id="moip_magento2_boleto" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Moip - Boleto</label>
+                    <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Enabled</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2_boleto/active</config_path>
+                    </field>
+                    <field id="title" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Title</label>
+                        <config_path>payment/moip_magento2_boleto/title</config_path>
+                    </field>
+                    <field id="expiration" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Days due</label>
+                        <comment>Consecutive days.</comment>
+                        <validate>required-entry validate-number</validate>
+                        <config_path>payment/moip_magento2_boleto/expiration</config_path>
+                    </field>
+                    <field id="instruction_lines_first" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Instruction - 1st line</label>
+                        <comment>Information will be printed on the boleto.</comment>
+                        <config_path>payment/moip_magento2_boleto/instruction_lines_first</config_path>
+                    </field>
+                    <field id="instruction_lines_second" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Instruction - 2st line</label>
+                        <comment>Information will be printed on the boleto.</comment>
+                        <config_path>payment/moip_magento2_boleto/instruction_lines_second</config_path>
+                    </field>
+                    <field id="instruction_lines_third" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Instruction - 3st line</label>
+                        <comment>Information will be printed on the boleto.</comment>
+                        <config_path>payment/moip_magento2_boleto/instruction_lines_third</config_path>
+                    </field>
+                    <field id="instruction_checkout" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Customer orientation at checkout</label>
+                        <comment>Information displayed on checkout.</comment>
+                        <config_path>payment/moip_magento2_boleto/instruction_checkout</config_path>
+                    </field>
+                    <group id="document" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <label>Payer Data Capture</label>
+                        <comment>Define the payment form data capture</comment>
+                        <field id="get_name" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Capture name in the payment form?</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_boleto/get_name</config_path>
+                        </field>
+                        <field id="get_tax_document" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Capture tax document (CPF or CNPJ) in the payment form?</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_boleto/get_tax_document</config_path>
+                        </field>
+                    </group>
+                    <field id="debug" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Debug</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2_boleto/debug</config_path>
+                    </field>
+                    <field id="payment_action" translate="label" type="select" sortOrder="210" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment Action</label>
+                        <source_model>Moip\Magento2\Model\Adminhtml\Source\PaymentAction</source_model>
+                        <config_path>payment/moip_magento2_boleto/payment_action</config_path>
+                    </field>
+                    <field id="min_order_total" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Minimum Order Total</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>payment/moip_magento2_boleto/min_order_total</config_path>
+                    </field>
+                    <field id="max_order_total" translate="label" type="text" sortOrder="330" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Maximum Order Total</label>
+                        <validate>validate-number validate-zero-or-greater</validate>
+                        <config_path>payment/moip_magento2_boleto/max_order_total</config_path>
+                    </field>
+                    <field id="allowspecific" translate="label" type="allowspecific" sortOrder="340" showInDefault="9" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment From Applicable Countries</label>
+                        <source_model>Magento\Payment\Model\Config\Source\Allspecificcountries</source_model>
+                        <config_path>payment/moip_magento2_boleto/allowspecific</config_path>
+                    </field>
+                    <field id="specificcountry" translate="label" type="multiselect" sortOrder="350" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Payment From Specific Countries</label>
+                        <source_model>Magento\Directory\Model\Config\Source\Country</source_model>
+                        <config_path>payment/moip_magento2_boleto/specificcountry</config_path>
+                    </field>
+                    <field id="sort_order" translate="label" type="text" sortOrder="360" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Sort Order</label>
+                        <frontend_class>validate-number</frontend_class>
+                        <config_path>payment/moip_magento2_boleto/sort_order</config_path>
+                    </field>
+                </group>
             </group>
         </section>
     </system>

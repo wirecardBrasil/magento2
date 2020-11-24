@@ -1,10 +1,13 @@
 <?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
 <body>
     <referenceContainer name="order.success.additional.info">
-        <block class="Moip\Magento2\Block\Success"
-               name="moip.order.success"
-               template="Moip_Magento2::order/success/additional.phtml"
-               after="-">
-        </block>
+        <block class="Moip\Magento2\Block\Success" name="details.order.success" template="Moip_Magento2::success/additional.phtml" after="-" />
     </referenceContainer>
 </body>

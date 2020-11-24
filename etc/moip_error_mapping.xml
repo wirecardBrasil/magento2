@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<mapping xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/error_mapping.xsd">
+    <message_list>
+    	<!-- Customer data -->
+        <message code="CUS-001" translate="true">O identificador próprio não foi informado.</message>
+		<message code="CUS-002" translate="true">O nome não foi informado.</message>
+		<message code="CUS-003" translate="true">O nome informado não é válido.</message>
+		<message code="CUS-004" translate="true">O nome informado não pode conter só números.</message>
+		<message code="CUS-005" translate="true">O e-mail não foi informado.</message>
+		<message code="CUS-006" translate="true">O e-mail informado é inválido.</message>
+		<message code="CUS-007" translate="true">A data de nascimento informada é inválida.</message>
+		<message code="CUS-008" translate="true">O identificador próprio deve ser único, já existe um customer com o identificador informado.</message>
+		<message code="CUS-009" translate="true">É necessário informar os dados do comprador.</message>
+		<message code="CUS-010" translate="true">A data de nascimento não foi informada.</message>
+		<message code="CUS-011" translate="true">A estrutura de informações do documento não foi informada.</message>
+		<message code="CUS-012" translate="true">A estrutura de telefone não foi informado.</message>
+		<message code="CUS-013" translate="true">A estrutura de endereço não foi informado.</message>
+		<message code="CUS-014" translate="true">O CNPJ informado deve ter 14 números.</message>
+		<message code="CUS-015" translate="true">O código de país do telefone informado deve ser numérico.</message>
+		<message code="CUS-016" translate="true">O código de área local do telefone deve ser informado.</message>
+		<message code="CUS-017" translate="true">O código de área local do telefone informado deve ser numérico.</message>
+		<message code="CUS-018" translate="true">O número de telefone não foi informado.</message>
+		<message code="CUS-019" translate="true">O número de telefone deve ser numérico.</message>
+		<message code="CUS-020" translate="true">O tipo do endereço não foi informado.</message>
+		<message code="CUS-021" translate="true">O tipo do endereço não foi informado.</message>
+		<message code="CUS-022" translate="true">A rua do endereço não foi informada.</message>
+		<message code="CUS-023" translate="true">O número do endereço não foi informado.</message>
+		<message code="CUS-024" translate="true">O número do endereço deve ser numérico.</message>
+		<message code="CUS-025" translate="true">O complemento do endereço informado possui quantidade de caracteres inválido.</message>
+		<message code="CUS-026" translate="true">O bairro do endereço não foi informado.</message>
+		<message code="CUS-027" translate="true">O bairro do endereço informado possui quantidade de caracteres inválido.</message>
+		<message code="CUS-028" translate="true">A cidade do endereço não foi informado.</message>
+		<message code="CUS-029" translate="true">A cidade do endereço informado possui quantidade de caracteres inválido.</message>
+		<message code="CUS-030" translate="true">O estado do endereço não foi informado.</message>
+		<message code="CUS-031" translate="true">O estado do endereço informado possui quantidade de caracteres inválido.</message>
+		<message code="CUS-032" translate="true">O país do endereço não foi informado.</message>
+		<message code="CUS-033" translate="true">O país do endereço informado é inválido.</message>
+		<message code="CUS-034" translate="true">O código postal do endereço não foi informado.</message>
+		<message code="CUS-035" translate="true">O código postal do endereço deve ser numérico.</message>
+		<message code="CUS-036" translate="true">O código postal deve conter no 8 dígitos.</message>
+		<message code="CUS-037" translate="true">A rua deve conter no máximo 200 caracteres.</message>
+		<message code="CUS-038" translate="true">O número da rua deve conter no máximo 10 caracteres.</message>
+		<!-- Order data -->
+		<message code="ORD-001" translate="true">É necessário informar seu identificador próprio.</message>
+		<message code="ORD-002" translate="true">O identificador próprio de pedido deve ter no máximo 45 caracteres.</message>
+		<message code="ORD-003" translate="true">O pedido precisa de um recebedor do tipo PRIMARY.</message>
+		<message code="ORD-004" translate="true">Moeda informada é inválida. Atualmente apenas BRL é válido.</message>
+		<message code="ORD-005" translate="true">O valor de frete deve ser maior que zero.</message>
+		<message code="ORD-006" translate="true">O valor adicional deve ser maior que zero.</message>
+		<message code="ORD-007" translate="true">O valor de desconto deve ser maior que zero.</message>
+		<message code="ORD-008" translate="true">O valor dos itens deve ser maior que zero.</message>
+		<message code="ORD-009" translate="true">Todos os valores devem ser maiores que zero.</message>
+		<message code="ORD-010" translate="true">É necessário informar pelo menos um item.</message>
+		<message code="ORD-011" translate="true">Informe o nome do produto.</message>
+		<message code="ORD-012" translate="true">O nome do item deve ter no máximo 250 caracteres.</message>
+		<message code="ORD-013" translate="true">A descrição do produto deve ter no máximo 250 caracteres.</message>
+		<message code="ORD-014" translate="true">O item deve ter um valor.</message>
+		<message code="ORD-015" translate="true">Informe o identificador da conta Wirecard.</message>
+		<message code="ORD-016" translate="true">Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.</message>
+		<message code="ORD-017" translate="true">Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.</message>
+		<message code="ORD-018" translate="true">É necessário informar o valor de recebimento.</message>
+		<message code="ORD-019" translate="true">Não é possível inserir o mesmo receiver duas vezes.</message>
+		<message code="ORD-020" translate="true">Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.</message>
+		<message code="ORD-021" translate="true">Pedido não encontrado.</message>
+		<message code="ORD-022" translate="true">O valor de frete deve ser informado em centavos. Exemplo R$241,00.</message>
+		<message code="ORD-023" translate="true">O valor adicional deve ser informado em centavos. Exemplo R$241,00.</message>
+		<message code="ORD-024" translate="true">O valor de desconto deve ser informado em centavos. Exemplo R$241,00.</message>
+		<message code="ORD-025" translate="true">O valor do item deve ser informado em centavos.</message>
+		<message code="ORD-026" translate="true">Id da conta Wirecard informada esta encerrada.</message>
+		<message code="ORD-027" translate="true">Conta Wirecard não encontrada para o email do comprador.</message>
+		<message code="ORD-028" translate="true">É necessário informar ao menos uma conta Wirecard.</message>
+		<message code="ORD-029" translate="true">O valor percentual deve ser informado em formato numérico.</message>
+		<message code="ORD-030" translate="true">O valor percentual deve ser entre 0 e 100.</message>
+		<message code="ORD-031" translate="true">O valor fixo deve ser informado em centavos.</message>
+		<message code="ORD-032" translate="true">É necessário especificar quem irá pagar a taxa de transação.</message>
+		<message code="ORD-033" translate="true">O tipo de pagador é inválido.</message>
+		<message code="ORD-034" translate="true">O valor dos recebedores excede o valor pago.</message>
+		<message code="ORD-035" translate="true">O pedido precisa ter valor maior que zero.</message>
+		<message code="ORD-036" translate="true">O pedido já foi pago.</message>
+		<!-- Payment data -->
+		<message code="PAY-014" translate="true">Não foi possível descriptografar o hash do cartão.</message>
+		<message code="PAY-033" translate="true">A data de nascimento do portador do cartão é inválido.</message>
+		<message code="PAY-036" translate="true">O CPF informado deve ter 11 números.</message>
+		<message code="PAY-037" translate="true">O valor do pagamento é inválido ou maior do que o valor restante do pedido.</message>
+		<message code="PAY-100" translate="true">O IP possui mais de 15 caracteres.</message>
+		<message code="PAY-101" translate="true">O fingerprint possui mais de 256 caracteres.</message>
+		<message code="PAY-102" translate="true">O userAgent possui mais de 256 caracteres.</message>
+		<message code="PAY-103" translate="true">A latitude possui mais de 3 inteiros ou 7 decimais.</message>
+		<message code="PAY-104" translate="true">A longitude possui mais de 3 inteiros ou 7 decimais.</message>
+		<message code="PAY-531" translate="true">Valor da taxa é maior que o valor da comissão.</message>
+		<message code="PAY-600" translate="true">Quantidade de parcelas deve ser numérico.</message>
+		<message code="PAY-601" translate="true">A estrutura do instrumento de pagamento não foi informada.</message>
+		<message code="PAY-602" translate="true">O statementDescriptor deve ter no máximo 13 caracteres.</message>
+		<message code="PAY-603" translate="true">A estrutura de informações não está correta para o método informado.</message>
+		<message code="PAY-604" translate="true">Pagamento não encontrado.</message>
+		<message code="PAY-605" translate="true">O nó de parcelas não deve ser negativo.</message>
+		<message code="PAY-606" translate="true">Já existe um pagamento realizado com cartão de crédito.</message>
+		<message code="PAY-607" translate="true">Já existe um pagamento realizado com cartão de débito.</message>
+		<message code="PAY-608" translate="true">Ocorreu um erro na criação cartão de crédito.</message>
+		<message code="PAY-609" translate="true">Forma de pagamento não autorizada para a conta.</message>
+		<message code="PAY-610" translate="true">A estrutura de informações de cartão de crédito não foi informada.</message>
+		<message code="PAY-611" translate="true">Já existe um pagamento realizado com boleto bancário.</message>
+		<message code="PAY-612" translate="true">Já existe um pagamento realizado com débito em conta.</message>
+		<message code="PAY-613" translate="true">Somente é possível capturar pagamentos com status PRE_AUTHORIZED.</message>
+		<message code="PAY-614" translate="true">Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.</message>
+		<message code="PAY-615" translate="true">Conta Wirecard não autorizada.</message>
+		<message code="PAY-616" translate="true">Conta Wirecard não encontrada.</message>
+		<message code="PAY-617" translate="true">Já existe um pagamento realizado com wallet para esse pedido.</message>
+		<message code="PAY-618" translate="true">Forma de pagamento não pode ser utilizada nesse pedido.</message>
+		<message code="PAY-619" translate="true">O mês de expiração do cartão de crédito não foi informado.</message>
+		<message code="PAY-620" translate="true">O mês de expiração do cartão de crédito deve ser numérico.</message>
+		<message code="PAY-621" translate="true">O mês de expiração do cartão informado é inválido.</message>
+		<message code="PAY-622" translate="true">O ano de expiração do cartão não foi informado.</message>
+		<message code="PAY-623" translate="true">O ano de expiração do cartão de crédito deve ser numérico.</message>
+		<message code="PAY-624" translate="true">A data de expiração do cartão de crédito deve ser maior ou igual a data.</message>
+		<message code="PAY-625" translate="true">O ano de expiração do cartão informado é inválido.</message>
+		<message code="PAY-626" translate="true">Formato informado para o cartão de crédito é invalido.</message>
+		<message code="PAY-627" translate="true">O código de segurança do cartão deve conter 4 caracteres para Amex e 3.</message>
+		<message code="PAY-628" translate="true">O número do cartão não foi informado.</message>
+		<message code="PAY-629" translate="true">O número do cartão deve ser numérico.</message>
+		<message code="PAY-630" translate="true">O número do cartão informado possui quantidade de caracteres inválido.</message>
+		<message code="PAY-631" translate="true">O código de segurança do cartão não foi informado.</message>
+		<message code="PAY-632" translate="true">O código de segurança do cartão deve ser numérico.</message>
+		<message code="PAY-633" translate="true">A estrutura de informaççes do portador do cartão não foi informado.</message>
+		<message code="PAY-634" translate="true">O nome do portador do cartão não foi informado.</message>
+		<message code="PAY-635" translate="true">O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.</message>
+		<message code="PAY-636" translate="true">O nome do portador do cartão informado é inválido.</message>
+		<message code="PAY-637" translate="true">A data de nascimento do portador do cartão não foi informado.</message>
+		<message code="PAY-638" translate="true">A estrutura de documento do portador do cartão não foi informado.</message>
+		<message code="PAY-639" translate="true">A estrutura de telefone do portador não foi informado.</message>
+		<message code="PAY-640" translate="true">A estrutura de endereço de cobrança do portador não foi informado.</message>
+		<message code="PAY-641" translate="true">O número informado não é um número de cartão válido.</message>
+		<message code="PAY-642" translate="true">Cartão de crédito não foi encontrado.</message>
+		<message code="PAY-643" translate="true">A data de expiração do boleto bancário não foi informada.</message>
+		<message code="PAY-644" translate="true">A data de expiração do boleto bancário é anterior a atual.</message>
+		<message code="PAY-645" translate="true">A data de expiração do boleto bancário informado é inválida.</message>
+		<message code="PAY-646" translate="true">A primeira linha de instruções do boleto possui quantidade de caractere.</message>
+		<message code="PAY-647" translate="true">A segunda linha de instruções do boleto possui quantidade de caracteres.</message>
+		<message code="PAY-648" translate="true">A terceira linha de instruções do boleto possui quantidade de caractere.</message>
+		<message code="PAY-649" translate="true">A uri de logo marca a ser aplicada no boleto é inválido.</message>
+		<message code="PAY-650" translate="true">O número de identificação bancária não foi informado.</message>
+		<message code="PAY-651" translate="true">O número de identificação bancária é inválido.</message>
+		<message code="PAY-652" translate="true">O número de identificação bancária informado é inválido para esta operadora.</message>
+		<message code="PAY-653" translate="true">A data de expiração não foi informada.</message>
+		<message code="PAY-654" translate="true">A data de expiração informado é inválida.</message>
+		<message code="PAY-655" translate="true">A uri de redirecionamento informada é inválido.</message>
+		<message code="PAY-656" translate="true">Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.</message>
+		<message code="PAY-657" translate="true">Dados de pagamento MPOS inválidos.</message>
+		<message code="PAY-681" translate="true">Verifique o CPF/CNPJ, ele não foi informado.</message>
+    </message_list>
+</mapping>

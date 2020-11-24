@@ -1,11 +1,35 @@
 <?xml version="1.0"?>
-<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<payment xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Payment:etc/payment.xsd">
+    <groups>
+        <group id="moip_group">
+            <label>Moip</label>
+        </group>
+    </groups>
     <methods>
-        <method name="moipcc">
+        <method name="moip_magento2_cc">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
-        <method name="moipboleto">
+        <method name="moip_magento2_boleto">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
     </methods>
+    <credit_cards>
+        <type id="HC" order="130">
+            <label>Hipercard</label>
+        </type>
+        <type id="HI" order="140">
+            <label>Hiper</label>
+        </type>
+        <type id="ELO" order="150">
+            <label>Elo</label>
+        </type>
+    </credit_cards>
 </payment>

@@ -1,79 +1,269 @@
-"Developer Mode","Ambiente"
-"ACQUIRER","banco emissor do cartão"
-"Production","Produção"
-"Sandbox - Environment for tests","Sandbox - Ambiente de testes"
-"Disallow in Production","Desconectar da produção"
-"Disallow in Environment for tests","Desconectar de ambiente de testes"
-"Authorize in Production","Conectar a Produção"
-"Authorize in Environment for tests","Conectar em Ambiente de teste"
-"for testing use the sandbox environment","Para vendas reais use o ambiente de produção, para testes o de sandbox."
-"Module Authorization","Autorização do Módulo"
-"Warning because the sandbox account is not the same as production","Atenção pois a conta de sandbox não é mesma de produção"
-"Advanced Settings","Configurações Avançadas"
-"List the attributes of your Magento the data expected by our API.","Relacione os atributos de seu Magento com os dados esperados pela nossa API."
-"The CPF will be an attribute obtained from the", "O CPF será um atributo obtido do"
-"The CPF attribute is","O atributo do CPF é"
-"The attribute CNPJ will be obtained from the","O atributo de CNPJ será obitido do"
-"by address form (checkout)","formulário de checkout (endereço)"
-"by customer form (customer account)","formulário de criação de conta (minha conta)"
-"The CNPJ will be an attribute obtained from the", "O CNPJ será um atributo obtido do"
-"will use the same value as the CPF","mesmo atributo do CPF"
-"The attribute Company Name will be obtained from the","O nome da empresa será obitido do"
-"The Company Name attribute is","O atributo do Nome da Empresa é"
-"The Street attribute is","O logradouro (rua) é"
-"The address number is","O número do endereço é"
-"The address complement is","O complemento do endereço é"
-"The address district is","O bairro é"
-"1st line of the street","1ª linha de endereço"
-"2st line of the street","2ª linha de endereço"
-"3st line of the street","3ª linha de endereço"
-"4st line of the street","4ª linha de endereço"
-"Installment and interest","Parcelamento e taxas de juros"
-"Minimum value of installment","Valor mínimo da parcela"
-"Maximum number of installments","Número máximo de parcelas"
-"Interest on the 2nd tranche","Juros da 2ª parcela"
-"Interest on the 3nd tranche","Juros da 3ª parcela"
-"Interest on the 4nd tranche","Juros da 4ª parcela"
-"Interest on the 5nd tranche","Juros da 5ª parcela"
-"Interest on the 6nd tranche","Juros da 6ª parcela"
-"Interest on the 7nd tranche","Juros da 7ª parcela"
-"Interest on the 8nd tranche","Juros da 8ª parcela"
-"Interest on the 9nd tranche","Juros da 9ª parcela"
-"Interest on the 10nd tranche","Juros da 10ª parcela"
-"Interest on the 11nd tranche","Juros da 11ª parcela"
-"Interest on the 12nd tranche","Juros da 12ª parcela"
-"Days due","Número dias para vencimento"
-"Consecutive days.","Em dias corridos."
-"Instruction - 1st line","1ª Linha de instrução"
-"Instruction - 2st line","2ª Linha de instrução"
-"Instruction - 3st line","3ª Linha de instrução"
-"Information will be printed on the boleto.","Essa informação impressa no boleto."
-"Customer orientation at checkout","Orientação ao cliente no checkout"
-"Information displayed on checkout.","Informação exbida no checkout."
-"Due","Vencimento"
-"Instruction","Informações"
-"Credit Card Number","Número do cartão"
-"Expiration Date","Data de vencimento"
-"Credit Card CVV","Código de segurança (CVV)"
-"Installments", "Parcelamento"
-"Full Name","Nome do titular"
-"Dados inválidos","Dados informados inválidos. Você digitou algo errado durante o preenchimento dos dados do seu Cartão. Certifique-se de que está usando o Cartão correto e faça uma nova tentativa."
-"Falha na comunicação com o Banco Emissor","Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente."
-"Política do Banco Emissor","O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo e refazer o pagamento."
-"Cartão vencido","A validade do seu Cartão expirou. Escolha outra forma de pagamento para concluir o pagamento."
-"Transação não autorizada","O pagamento não foi autorizado. Entre em contato com o Banco Emissor do seu Cartão."
-"Transação duplicada","Esse pagamento já foi realizado. Caso não encontre nenhuma referência ao pagamento anterior, por favor entre em contato com o nosso Atendimento."
-"Política do Moip","O pagamento não foi autorizado. Para mais informações, entre em contato com o nosso atendimento."
-"Transação não processada","O pagamento não pode ser processado. Por favor, tente novamente. Caso o erro persista, entre em contato com o nosso atendimento"
-"Desconhecido","Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente."
-"Política de segurança do Banco Emissor","Pagamento não autorizado para este Cartão. Entre em contato com o Banco Emissor para mais esclarecimentos."
-"Valor inválido","Pagamento não autorizado. Entre em contato com o Atendimento e informe o ocorrido."
-"Política de segurança do Moip","Pagamento não autorizado"
-"Politica do banco emissor","O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo antes de refazer o pagamento."
-"Prazo limite excedido","O prazo limite do pagamento foi excedido"
-"Expiration in %1 days","Vencimento em %1 dias"
-"Expiration in %1 day","Vencimento em %1 dia"
-"The barcode of your ticket bank is:","O código de barras do seu boleto é:"
-"Copy":"Copiar"
-"Print your ticket bank","Imprimir Boleto",
-"Brand","Bandeira"
+method_name,Método
+cc_installments,Número de parcelas
+cc_installment_interest,Valor do juros
+cc_type,Bandeira do cartão
+cc_number,Número do cartão
+cc_holder_fullname,Nome impresso no cartão
+cc_holder_birth_date,Data de nascimento do titular
+cc_holder_tax_document,Documento fiscal do titular
+cc_holder_phone,Telefone do titular
+Credit Card Holder Tax Document,Documento fiscal (CPF/CNPJ) do titular
+Credit Card Holder Phone,Telefone de contato do titular
+Credit Card Holder Birth Date,Data de nascimento do titular
+Credit Card Holder Full Name,Nome impresso no cartão
+Credit Card Number,Número do cartão
+CVV - Card Verification Number,CVV - Código de segurança do cartão
+Expiration Month,Mês de expiração
+Expiration Year,Ano de expiração
+Select Instalmment,Opção de parcelamento
+boleto_payer_fullname,Boleto em nome de
+boleto_payer_tax_document,Documento fiscal
+boleto_line_code,Código de Barra
+boleto_print_href,Link
+Developer Mode,Ambiente
+ACQUIRER,banco emissor do cartão
+Production,Produção
+Sandbox - Environment for tests,Sandbox - Ambiente de testes
+Disallow in Production,Desconectar da produção
+Disallow in Environment for tests,Desconectar de ambiente de testes
+Authorize in Production,Conectar a Produção
+Authorize in Environment for tests,Conectar em Ambiente de teste
+for testing use the sandbox environment,Para vendas reais use o ambiente de produção, para testes o de sandbox.
+Module Authorization,Autorização do Módulo
+Warning because the sandbox account is not the same as production,Atenção pois a conta de sandbox não é mesma de produção
+Advanced Settings,Configurações Avançadas
+List the attributes of your Magento the data expected by our API.,Relacione os atributos de seu Magento com os dados esperados pela nossa API.
+The CPF will be an attribute obtained from the, O CPF será um atributo obtido do
+The CPF attribute is,O atributo do CPF é
+The attribute CNPJ will be obtained from the,O atributo de CNPJ será obitido do
+by address form (checkout),formulário de checkout (endereço)
+by customer form (customer account),formulário de criação de conta (minha conta)
+The CNPJ will be an attribute obtained from the, O CNPJ será um atributo obtido do
+will use the same value as the CPF,mesmo atributo do CPF
+The attribute Company Name will be obtained from the,O nome da empresa será obitido do
+The Company Name attribute is,O atributo do Nome da Empresa é
+The Street attribute is,O logradouro (rua) é
+The address number is,O número do endereço é
+The address complement is,O complemento do endereço é
+The address district is,O bairro é
+1st line of the street,1ª linha de endereço
+2st line of the street,2ª linha de endereço
+3st line of the street,3ª linha de endereço
+4st line of the street,4ª linha de endereço
+Installment and interest,Parcelamento e taxas de juros
+Minimum value of installment,Valor mínimo da parcela
+Maximum number of installments,Número máximo de parcelas
+Interest on the 2nd tranche,Juros da 2ª parcela
+Interest on the 3nd tranche,Juros da 3ª parcela
+Interest on the 4nd tranche,Juros da 4ª parcela
+Interest on the 5nd tranche,Juros da 5ª parcela
+Interest on the 6nd tranche,Juros da 6ª parcela
+Interest on the 7nd tranche,Juros da 7ª parcela
+Interest on the 8nd tranche,Juros da 8ª parcela
+Interest on the 9nd tranche,Juros da 9ª parcela
+Interest on the 10nd tranche,Juros da 10ª parcela
+Interest on the 11nd tranche,Juros da 11ª parcela
+Interest on the 12nd tranche,Juros da 12ª parcela
+Days due,Número dias para vencimento
+Consecutive days.,Em dias corridos.
+Instruction - 1st line,1ª Linha de instrução
+Instruction - 2st line,2ª Linha de instrução
+Instruction - 3st line,3ª Linha de instrução
+Information will be printed on the boleto.,Essa informação será impressa no boleto.
+Customer orientation at checkout,Orientação ao cliente no checkout
+Information displayed on checkout.,Informação exbida no checkout.
+Due,Vencimento
+Instruction,Informações
+Credit Card Number,Número do cartão
+Expiration Date,Data de vencimento
+Credit Card CVV,Código de segurança (CVV)
+Installments, Parcelamento
+Full Name,Nome do titular
+Dados inválidos,Dados informados inválidos. Você digitou algo errado durante o preenchimento dos dados do seu Cartão. Certifique-se de que está usando o Cartão correto e faça uma nova tentativa.
+Falha na comunicação com o Banco Emissor,Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente.
+Política do Banco Emissor,O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo e refazer o pagamento.
+Cartão vencido,A validade do seu Cartão expirou. Escolha outra forma de pagamento para concluir o pagamento.
+Transação não autorizada,O pagamento não foi autorizado. Entre em contato com o Banco Emissor do seu Cartão.
+Transação duplicada,Esse pagamento já foi realizado. Caso não encontre nenhuma referência ao pagamento anterior, por favor entre em contato com o nosso atendimento.
+Política do Moip,O pagamento não foi autorizado. Para mais informações, entre em contato com o nosso atendimento.
+Transação não processada,O pagamento não pode ser processado. Por favor, tente novamente. Caso o erro persista, entre em contato com o nosso atendimento.
+Desconhecido,Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente.
+Política de segurança do Banco Emissor,Pagamento não autorizado para este Cartão. Entre em contato com o Banco Emissor para mais esclarecimentos.
+Valor inválido,Pagamento não autorizado. Entre em contato com o Atendimento e informe o ocorrido.
+Política de segurança do Moip,Pagamento não autorizado
+Politica do banco emissor,O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo antes de refazer o pagamento.
+Prazo limite excedido,O prazo limite do pagamento foi excedido
+Expiration in %1 days,Vencimento em %1 dias
+Expiration in %1 day,Vencimento em %1 dia
+The barcode of your ticket bank is:,O código de barras do seu boleto é:
+Copy,Copiar
+Print your ticket bank,Imprimir Boleto
+Attribute Relationship Definition,Definição do Relacionamento de Atributos
+List the attributes of your Magento the data expected by our API,Informe em quais campos são coletados os atributos esperados por nossa API.
+Environment,Ambiente
+Credentials,Credencial de acesso
+Statement Descriptor,Nome da loja
+<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>,<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (antigo Moip) é uma solução de pagamento exclusiva para o <b>Brasil</b>.</p><p>A solução completa para receber pagamentos e simplificar as finanças do seu negócio. Nossa solução tem tudo que você precisa para aceitar todos meios de pagamento.</p></div>
+Interest rate,Tipo de juros
+Payer Data Capture,Captura dos dados do pagador
+Define the payment form data capture,Definir captura de dados no formulário de pagamento
+Capture tax document (CPF or CNPJ) in the payment form?,Capturar o documento fiscal (CPF ou CNPJ) no formulário de pagamento?
+Capture date of birth in the payment form?,Capturar a data de nascimento no formulário de pagamento?
+Capture phone in the payment form?,Capturar telefone no formulário de pagamento?
+Capture name in the payment form?,Capturar nome do pagador no formulário de pagamento?
+Credit Card Information,Informação do cartão de crédito
+Month,Mês
+Year,Ano
+Payer Full Name,Nome do pagador
+Payer Tax Document,Documento fiscal (CPF/CNPJ) do pagador
+We did not record the payment.,Não registramos o pagamento.
+The payment deadline has been exceeded.,Prazo limite para o pagamento foi excedido.
+Your payment has been successfully received.,Seu pagamento foi recebido com sucesso.
+%1 payments have been updated.,%1 payments have been updated.
+%1 payments have not yet been updated.,%1 payments have not yet been updated.
+Unable to get the code, try again. =(,Não foi possivel obter o código, tente novamente. =(
+Your module is authorized, but you have reached the notification url preference limit.,Seu módulo está autorizado, mas você atingiu o limite de preferências de url de notificação.
+Your module is authorized. =),Seu módulo está autorizado. =)
+O identificador próprio não foi informado.,O identificador próprio não foi informado.
+O nome não foi informado.,O nome não foi informado.
+O nome informado não é válido.,O nome informado não é válido.
+O nome informado não pode conter só números.,O nome informado não pode conter só números.
+O e-mail não foi informado.,O e-mail não foi informado.
+O e-mail informado é inválido.,O e-mail informado é inválido.
+A data de nascimento informada é inválida.,A data de nascimento informada é inválida
+O identificador próprio deve ser único, já existe um customer com o identificador informado.,O identificador próprio deve ser único, já existe um customer com o identificador informado.
+É necessário informar os dados do comprador.,É necessário informar os dados do comprador.
+A data de nascimento não foi informada.,A data de nascimento não foi informada.
+A estrutura de informações do documento não foi informada.,A estrutura de informações do documento não foi informada.
+A estrutura de telefone não foi informado.,A estrutura de telefone não foi informado.
+A estrutura de endereço não foi informado.,A estrutura de endereço não foi informado.
+O CNPJ informado deve ter 14 números.,O CNPJ informado deve ter 14 números.
+O código de país do telefone informado deve ser numérico.,O código de país do telefone informado deve ser numérico.
+O código de área local do telefone deve ser informado.,O código de área local do telefone deve ser informado.
+O código de área local do telefone informado deve ser numérico.,O código de área local do telefone informado deve ser numérico.
+O número de telefone não foi informado.,O número de telefone não foi informado.
+O número de telefone deve ser numérico.,O número de telefone deve ser numérico.
+O tipo do endereço não foi informado.,O tipo do endereço não foi informado.
+O tipo do endereço não foi informado.,O tipo do endereço não foi informado.
+A rua do endereço não foi informada.,A rua do endereço não foi informada.
+O número do endereço não foi informado.,O número do endereço não foi informado.
+O número do endereço deve ser numérico.,O número do endereço deve ser numérico.
+O complemento do endereço informado possui quantidade de caracteres inválido.,O complemento do endereço informado possui quantidade de caracteres inválido.
+O bairro do endereço não foi informado.,O bairro do endereço não foi informado.
+O bairro do endereço informado possui quantidade de caracteres inválido.,O bairro do endereço informado possui quantidade de caracteres inválido.
+A cidade do endereço não foi informado.,A cidade do endereço não foi informado.
+A cidade do endereço informado possui quantidade de caracteres inválido.,A cidade do endereço informado possui quantidade de caracteres inválido.
+O estado do endereço não foi informado.,O estado do endereço não foi informado.
+O estado do endereço informado possui quantidade de caracteres inválido.,O estado do endereço informado possui quantidade de caracteres inválido.
+O país do endereço não foi informado.,O país do endereço não foi informado.
+O país do endereço informado é inválido.,O país do endereço informado é inválido.
+O código postal do endereço não foi informado.,O código postal do endereço não foi informado.
+O código postal do endereço deve ser numérico.,O código postal do endereço deve ser numérico.
+O código postal deve conter no 8 dígitos.,O código postal deve conter no 8 dígitos.
+A rua deve conter no máximo 200 caracteres.,A rua deve conter no máximo 200 caracteres.
+O número da rua deve conter no máximo 10 caracteres.,O número da rua deve conter no máximo 10 caracteres.
+É necessário informar seu identificador próprio.,É necessário informar seu identificador próprio.
+O identificador próprio de pedido deve ter no máximo 45 caracteres.,O identificador próprio de pedido deve ter no máximo 45 caracteres.
+O pedido precisa de um recebedor do tipo PRIMARY.,O pedido precisa de um recebedor do tipo PRIMARY.
+Moeda informada é inválida. Atualmente apenas BRL é válido.,Moeda informada é inválida. Atualmente apenas BRL é válido.
+O valor de frete deve ser maior que zero.,O valor de frete deve ser maior que zero.
+O valor adicional deve ser maior que zero.,O valor adicional deve ser maior que zero.
+O valor de desconto deve ser maior que zero.,O valor de desconto deve ser maior que zero.
+O valor dos itens deve ser maior que zero.,O valor dos itens deve ser maior que zero.
+Todos os valores devem ser maiores que zero.,Todos os valores devem ser maiores que zero.
+É necessário informar pelo menos um item.,É necessário informar pelo menos um item.
+Informe o nome do produto.,Informe o nome do produto.
+O nome do item deve ter no máximo 250 caracteres.,O nome do item deve ter no máximo 250 caracteres.
+A descrição do produto deve ter no máximo 250 caracteres.,A descrição do produto deve ter no máximo 250 caracteres.
+O item deve ter um valor.,O item deve ter um valor.
+Informe o identificador da conta Wirecard.,Informe o identificador da conta Wirecard.
+Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.,Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.
+Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.,Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.
+É necessário informar o valor de recebimento.,É necessário informar o valor de recebimento.
+Não é possível inserir o mesmo receiver duas vezes.,Não é possível inserir o mesmo receiver duas vezes.
+Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.,Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.
+Pedido não encontrado.,Pedido não encontrado.
+O valor de frete deve ser informado em centavos. Exemplo R$241,00.,O valor de frete deve ser informado em centavos. Exemplo R$241,00.
+O valor adicional deve ser informado em centavos. Exemplo R$241,00.,O valor adicional deve ser informado em centavos. Exemplo R$241,00.
+O valor de desconto deve ser informado em centavos. Exemplo R$241,00.,O valor de desconto deve ser informado em centavos. Exemplo R$241,00.
+O valor do item deve ser informado em centavos.,O valor do item deve ser informado em centavos.
+Id da conta Wirecard informada esta encerrada.,Id da conta Wirecard informada esta encerrada.
+Conta Wirecard não encontrada para o email do comprador.,Conta Wirecard não encontrada para o email do comprador.
+É necessário informar ao menos uma conta Wirecard.,É necessário informar ao menos uma conta Wirecard.
+O valor percentual deve ser informado em formato numérico.,O valor percentual deve ser informado em formato numérico.
+O valor percentual deve ser entre 0 e 100.,O valor percentual deve ser entre 0 e 100.
+O valor fixo deve ser informado em centavos.,O valor fixo deve ser informado em centavos.
+É necessário especificar quem irá pagar a taxa de transação.,É necessário especificar quem irá pagar a taxa de transação.
+O tipo de pagador é inválido.,O tipo de pagador é inválido.
+O valor dos recebedores excede o valor pago.,O valor dos recebedores excede o valor pago.
+O pedido precisa ter valor maior que zero.,O pedido precisa ter valor maior que zero.
+O pedido já foi pago.,O pedido já foi pago.
+Não foi possível descriptografar o hash do cartão.,Não foi possível descriptografar o hash do cartão.
+A data de nascimento do portador do cartão é inválido.,A data de nascimento do portador do cartão é inválido.
+O CPF informado deve ter 11 números.,O CPF informado deve ter 11 números.
+O valor do pagamento é inválido ou maior do que o valor restante do pedido.,O valor do pagamento é inválido ou maior do que o valor restante do pedido.
+O IP possui mais de 15 caracteres.,O IP possui mais de 15 caracteres.
+O fingerprint possui mais de 256 caracteres.,O fingerprint possui mais de 256 caracteres.
+O userAgent possui mais de 256 caracteres.,O userAgent possui mais de 256 caracteres.
+A latitude possui mais de 3 inteiros ou 7 decimais.,A latitude possui mais de 3 inteiros ou 7 decimais.
+A longitude possui mais de 3 inteiros ou 7 decimais.,A longitude possui mais de 3 inteiros ou 7 decimais.
+Valor da taxa é maior que o valor da comissão.,Valor da taxa é maior que o valor da comissão.
+Quantidade de parcelas deve ser numérico.,Quantidade de parcelas deve ser numérico.
+A estrutura do instrumento de pagamento não foi informada.,A estrutura do instrumento de pagamento não foi informada.
+O statementDescriptor deve ter no máximo 13 caracteres.,O statementDescriptor deve ter no máximo 13 caracteres.
+A estrutura de informações não está correta para o método informado.,A estrutura de informações não está correta para o método informado.
+Pagamento não encontrado.,Pagamento não encontrado.
+O nó de parcelas não deve ser negativo.,O nó de parcelas não deve ser negativo.
+Já existe um pagamento realizado com cartão de crédito.,Já existe um pagamento realizado com cartão de crédito.
+Já existe um pagamento realizado com cartão de débito.,Já existe um pagamento realizado com cartão de débito.
+Ocorreu um erro na criação cartão de crédito.,Ocorreu um erro na criação cartão de crédito.
+Forma de pagamento não autorizada para a conta.,Forma de pagamento não autorizada para a conta.
+A estrutura de informações de cartão de crédito não foi informada.,A estrutura de informações de cartão de crédito não foi informada.
+Já existe um pagamento realizado com boleto bancário.,Já existe um pagamento realizado com boleto bancário.
+Já existe um pagamento realizado com débito em conta.,Já existe um pagamento realizado com débito em conta.
+Somente é possível capturar pagamentos com status PRE_AUTHORIZED.,Somente é possível capturar pagamentos com status PRE_AUTHORIZED.
+Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.,Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.
+Conta Wirecard não autorizada.,Conta Wirecard não autorizada.
+Conta Wirecard não encontrada.,Conta Wirecard não encontrada.
+Já existe um pagamento realizado com wallet para esse pedido.,Já existe um pagamento realizado com wallet para esse pedido.
+Forma de pagamento não pode ser utilizada nesse pedido.,Forma de pagamento não pode ser utilizada nesse pedido.
+O mês de expiração do cartão de crédito não foi informado.,O mês de expiração do cartão de crédito não foi informado.
+O mês de expiração do cartão de crédito deve ser numérico.,O mês de expiração do cartão de crédito deve ser numérico.
+O mês de expiração do cartão informado é inválido.,O mês de expiração do cartão informado é inválido.
+O ano de expiração do cartão não foi informado.,O ano de expiração do cartão não foi informado.
+O ano de expiração do cartão de crédito deve ser numérico.,O ano de expiração do cartão de crédito deve ser numérico.
+A data de expiração do cartão de crédito deve ser maior ou igual a data.,A data de expiração do cartão de crédito deve ser maior ou igual a data.
+O ano de expiração do cartão informado é inválido.,O ano de expiração do cartão informado é inválido.
+Formato informado para o cartão de crédito é invalido.,Formato informado para o cartão de crédito é invalido.
+O código de segurança do cartão deve conter 4 caracteres para Amex e 3.,O código de segurança do cartão deve conter 4 caracteres para Amex e 3.
+O número do cartão não foi informado.,O número do cartão não foi informado.
+O número do cartão deve ser numérico.,O número do cartão deve ser numérico.
+O número do cartão informado possui quantidade de caracteres inválido.,O número do cartão informado possui quantidade de caracteres inválido.
+O código de segurança do cartão não foi informado.,O código de segurança do cartão não foi informado.
+O código de segurança do cartão deve ser numérico.,O código de segurança do cartão deve ser numérico.
+A estrutura de informaççes do portador do cartão não foi informado.,A estrutura de informaççes do portador do cartão não foi informado.
+O nome do portador do cartão não foi informado.,O nome do portador do cartão não foi informado.
+O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.,O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.
+O nome do portador do cartão informado é inválido.,O nome do portador do cartão informado é inválido.
+A data de nascimento do portador do cartão não foi informado.,A data de nascimento do portador do cartão não foi informado.
+A estrutura de documento do portador do cartão não foi informado.,A estrutura de documento do portador do cartão não foi informado.
+A estrutura de telefone do portador não foi informado.,A estrutura de telefone do portador não foi informado.
+A estrutura de endereço de cobrança do portador não foi informado.,A estrutura de endereço de cobrança do portador não foi informado.
+O número informado não é um número de cartão válido.,O número informado não é um número de cartão válido.
+Cartão de crédito não foi encontrado.,Cartão de crédito não foi encontrado.
+A data de expiração do boleto bancário não foi informada.,A data de expiração do boleto bancário não foi informada.
+A data de expiração do boleto bancário é anterior a atual.,A data de expiração do boleto bancário é anterior a atual.
+A data de expiração do boleto bancário informado é inválida.,A data de expiração do boleto bancário informado é inválida.
+A primeira linha de instruções do boleto possui quantidade de caracteres.,A primeira linha de instruções do boleto possui quantidade de caracteres.
+A segunda linha de instruções do boleto possui quantidade de caracteres.,A segunda linha de instruções do boleto possui quantidade de caracteres.
+A terceira linha de instruções do boleto possui quantidade de caracteres.,A terceira linha de instruções do boleto possui quantidade de caracteres.
+A uri de logo marca a ser aplicada no boleto é inválido.,A uri de logo marca a ser aplicada no boleto é inválido.
+O número de identificação bancária não foi informado.,O número de identificação bancária não foi informado.
+O número de identificação bancária é inválido.,O número de identificação bancária é inválido.
+O número de identificação bancária informado é inválido para esta operadora.,O número de identificação bancária informado é inválido para esta operadora.
+A data de expiração não foi informada.,A data de expiração não foi informada.
+A data de expiração informado é inválida.,A data de expiração informado é inválida.
+A uri de redirecionamento informada é inválido.,A uri de redirecionamento informada é inválido.
+Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.,Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.
+Dados de pagamento MPOS inválidos.,Dados de pagamento MPOS inválidos.
+Verifique o CPF/CNPJ, ele não foi informado.,Verifique o CPF/CNPJ, ele não foi informado.

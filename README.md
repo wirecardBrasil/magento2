@@ -1,29 +1,37 @@
+<img src="view/adminhtml/web/images/logo.svg" align="right" />
+
 # Moip para Magento 2
 
-Integração oficial para lojas em Magento 2 via Moip API V2.
+A solução completa para receber pagamentos e simplificar as finanças do seu negócio. Nossa solução tem tudo que você precisa para aceitar todos meios de pagamento.
 
-## Pre-requisitos
-O módulo é compatível apenas com Magento 2.3+
+## Badges
+Status Atual
 
-## Receba pagamentos transparente
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
 
-  - Cartão de crédito, 7 bandeiras.
-    - Visa, Mastercard, Dinners, American Express, Elo, Hiper e Hipercard 
+Estatísticas
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
+
+Versões
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
+[![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
+
+## Recursos
+
+Receba pagamentos de forma transparente por:
+  - Cartão de Crédito
   - Boleto Bancário
 
-# Recursos
-
-  - Módulo 100% transparente, todo processo de finalização é **feito no seu checkout**, sem redirecionamentos!
-  - Personalização completa das regras das suas parcelamento
-  - Relaciomaneto de atributos da sua loja com a nossa API
-  - Retorno de status automático, com tratamento de informação de cancelamento direto em sua loja
-  - Homologação máxima na PCI, toda a compra em seu site é segura! 
-  
-
-
-# Instalação e Configuração em minutos
+## Instalação e Configuração
 
 Visite nossa [Wiki][wiki] e veja como configurar e instalar nosso módulo.
 
-   [Wiki]: <https://github.com/moip/magento2/wiki>
+## License
 
+[Open Source License](LICENSE.txt)
+
+   [wiki]: <https://github.com/moip/magento2/wiki>

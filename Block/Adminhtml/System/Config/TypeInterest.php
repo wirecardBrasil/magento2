@@ -1,17 +1,27 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\Controller\Result\JsonFactory;
-
+/**
+ * Class TypeInterest - Define Type Interest.
+ */
 class TypeInterest implements \Magento\Framework\Option\ArrayInterface
 {
-
-   public function toOptionArray()
+    /**
+     * Returns Options.
+     *
+     * @return array attributesArrays
+     */
+    public function toOptionArray()
     {
         return [
-            'simple' => 'Juros Simples',
+            'simple'   => 'Juros Simples',
             'compound' => 'Juros Composto',
         ];
     }

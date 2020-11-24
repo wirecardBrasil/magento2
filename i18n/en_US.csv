@@ -1,0 +1,112 @@
+method_name,Method
+cc_installments,Number of installments
+cc_installment_interest,Interest amount
+cc_type,Brand
+cc_number,Number
+cc_holder_fullname,Name printed on card
+cc_holder_birth_date,Holder's date of birth
+cc_holder_tax_document,Holder's tax document
+cc_holder_phone,Holder phone
+Credit Card Holder Tax Document,Tax document (CPF / CNPJ) of the holder
+Credit Card Holder Phone,Holder's contact phone
+Credit Card Holder Birth Date,Holder's date of birth
+Credit Card Holder Full Name,Name printed on card
+Credit Card Number,Card number
+CVV - Card Verification Number,CVV
+Expiration Month,Expiration Mont
+Expiration Year,Expiration Year
+Select Instalmment,Select Instalmment
+boleto_payer_fullname,Payment on behalf of
+boleto_payer_tax_document,Tax document
+boleto_line_code,Barcode
+boleto_print_href,Link
+Developer Mode,Developer Mode
+ACQUIRER,ACQUIRER
+Production,Production
+Sandbox - Environment for tests,Sandbox - Environment for tests
+Disallow in Production,Disallow in Production
+Disallow in Environment for tests,Disallow in Environment for tests
+Authorize in Production,Authorize in Production
+Authorize in Environment for tests,Authorize in Environment for tests
+for testing use the sandbox environment,for testing use the sandbox environment
+Module Authorization,Module Authorization
+Warning because the sandbox account is not the same as production,Warning because the sandbox account is not the same as production
+Advanced Settings,Advanced Settings
+List the attributes of your Magento the data expected by our API.,List the attributes of your Magento the data expected by our API.
+The CPF will be an attribute obtained from the, The CPF will be an attribute obtained from the
+The CPF attribute is,The CPF attribute is
+The attribute CNPJ will be obtained from the,The attribute CNPJ will be obtained from the
+by address form (checkout),by address form (checkout)
+by customer form (customer account),by customer form (customer account)
+The CNPJ will be an attribute obtained from the, The CNPJ will be an attribute obtained from the
+will use the same value as the CPF,will use the same value as the CPF
+The attribute Company Name will be obtained from the,The attribute Company Name will be obtained from the
+The Company Name attribute is,The Company Name attribute is
+The Street attribute is,The Street attribute is
+The address number is,The address number is
+The address complement is,The address complement is
+The address district is,The address district is
+1st line of the street,1st line of the street
+2st line of the street,2st line of the street
+3st line of the street,3st line of the street
+4st line of the street,4st line of the street
+Installment and interest,Installment and interest
+Minimum value of installment,Minimum value of installment
+Maximum number of installments,Maximum number of installments
+Interest on the 2nd tranche,Interest on the 2nd tranche
+Interest on the 3nd tranche,Interest on the 3nd tranche
+Interest on the 4nd tranche,Interest on the 4nd tranche
+Interest on the 5nd tranche,Interest on the 5nd tranche
+Interest on the 6nd tranche,Interest on the 6nd tranche
+Interest on the 7nd tranche,Interest on the 7nd tranche
+Interest on the 8nd tranche,Interest on the 8nd tranche
+Interest on the 9nd tranche,Interest on the 9nd tranche
+Interest on the 10nd tranche,Interest on the 10nd tranche
+Interest on the 11nd tranche,Interest on the 11nd tranche
+Interest on the 12nd tranche,Interest on the 12nd tranche
+Days due,Days due
+Consecutive days.,Consecutive days.
+Instruction - 1st line,Instruction - 1st line
+Instruction - 2st line,Instruction - 2st line
+Instruction - 3st line,Instruction - 3st line
+Information will be printed on the boleto.,Information will be printed on the boleto.
+Customer orientation at checkout,Customer orientation at checkout
+Information displayed on checkout.,Information displayed on checkout.
+Due,Due
+Instruction,Instruction
+Credit Card Number,Credit Card Number
+Expiration Date,Expiration Date
+Credit Card CVV,Credit Card CVV
+Installments, Installments
+Full Name,Full Name
+Expiration in %1 days,Expiration in %1 days
+Expiration in %1 day,Expiration in %1 day
+The barcode of your ticket bank is:,The barcode of your ticket bank is:
+Copy,Copy
+Print your ticket bank,Print your ticket bank
+Attribute Relationship Definition,Attribute Relationship Definition
+List the attributes of your Magento the data expected by our API,List the attributes of your Magento the data expected by our API
+Environment,Environment
+Credentials,Credentials
+Statement Descriptor,Statement Descriptor
+<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>,<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>
+Interest rate,Interest rate
+Payer Data Capture,Payer Data Capture
+Define the payment form data capture,Define the payment form data capture
+Capture tax document (CPF or CNPJ) in the payment form?,Capture tax document (CPF or CNPJ) in the payment form?
+Capture date of birth in the payment form?,Capture date of birth in the payment form?
+Capture phone in the payment form?,Capture phone in the payment form?
+Capture name in the payment form?,Capture name in the payment form?
+Credit Card Information,Credit Card Information
+Month,Month
+Year,Year
+Payer Full Name,Payer Full Name
+Payer Tax Document,Payer Tax Document
+We did not record the payment.,We did not record the payment.
+The payment deadline has been exceeded.,The payment deadline has been exceeded.
+Your payment has been successfully received.,Your payment has been successfully received.
+%1 payments have been updated.,%1 payments have been updated.
+%1 payments have not yet been updated.,%1 payments have not yet been updated.
+Unable to get the code, try again. =(,Unable to get the code, try again. =(
+Your module is authorized, but you have reached the notification url preference limit.,Your module is authorized, but you have reached the notification url preference limit.
+Your module is authorized. =),Your module is authorized. =)

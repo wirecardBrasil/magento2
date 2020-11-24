@@ -1,38 +1,57 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
+declare(strict_types=1);
+
 namespace Moip\Magento2\Controller\Adminhtml\System\Config;
 
-use Moip\Moip;
-use Moip\Auth\Connect;
+use Magento\Backend\App\Action\Context;
+use Magento\Config\Model\ResourceModel\Config;
+use Magento\Framework\App\Cache\Frontend\Pool;
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\ConfigResource\ConfigInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Moip\Magento2\Gateway\Config\Config as ConfigBase;
 
 class Logout extends \Magento\Backend\App\Action
 {
+    protected $cacheTypeList;
+
+    protected $cacheFrontendPool;
 
     protected $resultJsonFactory;
 
-    protected $_configInterface;
-    
-    protected $_storeManager;
-    
-   
+    protected $configInterface;
+
+    protected $resourceConfig;
+
+    protected $storeManager;
+
+    protected $configBase;
+
     public function __construct(
-        \Moip\Magento2\Helper\Data $moipHelper,
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
-        \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,
-        \Magento\Framework\Controller\Result\JsonFactory $resultJsonFactory,
-        \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
-        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
-        \Magento\Store\Model\StoreManagerInterface $storeManager
-        
-        ) 
-    {
-        $this->_moipHelper = $moipHelper;
-        $this->_cacheTypeList = $cacheTypeList;
-        $this->_cacheFrontendPool = $cacheFrontendPool;
+        Context $context,
+        TypeListInterface $cacheTypeList,
+        Pool $cacheFrontendPool,
+        JsonFactory $resultJsonFactory,
+        ConfigInterface $configInterface,
+        Config $resourceConfig,
+        ConfigBase $configBase,
+        StoreManagerInterface $storeManager
+    ) {
+        $this->cacheTypeList = $cacheTypeList;
+        $this->cacheFrontendPool = $cacheFrontendPool;
         $this->resultJsonFactory = $resultJsonFactory;
-        $this->_configInterface = $configInterface;
-        $this->_resourceConfig = $resourceConfig;
-        $this->_storeManager = $storeManager;
+        $this->configInterface = $configInterface;
+        $this->resourceConfig = $resourceConfig;
+        $this->configBase = $configBase;
+        $this->storeManager = $storeManager;
         parent::__construct($context);
     }
 
@@ -45,77 +64,48 @@ class Logout extends \Magento\Backend\App\Action
     {
         $params = $this->getRequest()->getParams();
         $resultJson = $this->resultJsonFactory->create();
-        $this->_cacheTypeList->cleanType("config");
-        
-        $type_url       = ['cancel','capture','refund'];
-            
-        foreach ($type_url as $_type_url) {
-            $id = $this->_moipHelper->getInfoUrlPreferenceInfo($_type_url);
-            if($id){
-               
-                try {
-                    $moip           = $this->_moipHelper->AuthorizationValidate();
-                    $this->urlDeleteNotication($id);
-                }
-                catch(\Exception $e) {
-                   
-                }
-                $this->setClearUrlInfo($_type_url);    
-            }
-            
-        }
+
         $this->setClearOauth();
-        $this->_cacheTypeList->cleanType("config");
+        $this->setClearMpa();
+        $this->cacheTypeList->cleanType('config');
+
         return $resultJson->setData([
             'messages' => 'Successfully.',
-            'error' => false
+            'error'    => false,
         ]);
     }
 
-    
+    private function setClearOauth()
+    {
+        $environment = $this->configBase->getEnvironmentMode();
+        $this->resourceConfig->deleteConfig(
+            'payment/moip_magento2/oauth_'.$environment,
+            'default',
+            0
+        );
+        $this->resourceConfig->deleteConfig(
+            'payment/moip_magento2/publickey_'.$environment,
+            'default',
+            0
+        );
 
-    private function urlDeleteNotication($id){
-            $moip           = $this->_moipHelper->AuthorizationValidate();
-            try {
-                $moip->notifications()->delete($id); 
-            } catch (Exception $e) {
-                 return $this;
-            }
-            
-            
         return $this;
     }
 
-    private function setClearUrlInfo($type_url){
+    private function setClearMpa()
+    {
+        $environment = $this->configBase->getEnvironmentMode();
+        $this->resourceConfig->deleteConfig(
+            'payment/moip_magento2/mpa_'.$environment,
+            'default',
+            0
+        );
+        $this->resourceConfig->deleteConfig(
+            'payment/moip_magento2/mpa_'.$environment,
+            'default',
+            0
+        );
 
-        $_environment   = $this->_moipHelper->getEnvironmentMode();
-        $this->_resourceConfig->deleteConfig(
-                    'payment/moipbase/'.$type_url.'_id_'.$_environment,
-                    'default',
-                    0
-                );
-        $this->_resourceConfig->deleteConfig(
-                    'payment/moipbase/'.$type_url.'_token_'.$_environment,
-                    'default',
-                    0
-                );
         return $this;
     }
-
-    private function setClearOauth(){
-        $_environment   = $this->_moipHelper->getEnvironmentMode();
-
-        $this->_resourceConfig->deleteConfig(
-                    'payment/moipbase/oauth_'.$_environment,
-                    'default',
-                    0
-                );
-        $this->_resourceConfig->deleteConfig(
-                    'payment/moipbase/publickey_'.$_environment,
-                    'default',
-                    0
-                );
-        return $this;
-    }
-
 }

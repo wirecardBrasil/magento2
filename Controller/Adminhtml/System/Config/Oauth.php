@@ -1,35 +1,69 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
+declare(strict_types=1);
+
 namespace Moip\Magento2\Controller\Adminhtml\System\Config;
 
-use Moip\Moip;
+use Magento\Backend\App\Action\Context;
+use Magento\Config\Model\ResourceModel\Config;
+use Magento\Framework\App\Cache\Frontend\Pool;
+use Magento\Framework\App\Cache\TypeListInterface;
+use Magento\Framework\App\Config\ConfigResource\ConfigInterface;
+use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Controller\ResultFactory;
+use Magento\Framework\Encryption\EncryptorInterface;
+use Magento\Framework\HTTP\ZendClient;
+use Magento\Framework\HTTP\ZendClientFactory;
+use Magento\Store\Model\StoreManagerInterface;
+use Moip\Magento2\Gateway\Config\Config as ConfigBase;
 
-use Magento\Framework\Controller\ResultFactory; 
 class Oauth extends \Magento\Backend\App\Action
 {
+    protected $cacheTypeList;
 
-   
-    protected $_configInterface;
-    
-    protected $_storeManager;
-    
-   
+    protected $cacheFrontendPool;
+
+    protected $resultJsonFactory;
+
+    protected $configInterface;
+
+    protected $resourceConfig;
+
+    protected $configBase;
+
+    protected $storeManager;
+
+    private $encryptor;
+
+    private $httpClientFactory;
+
     public function __construct(
-        \Moip\Magento2\Helper\Data $moipHelper,
-        \Magento\Backend\App\Action\Context $context,
-        \Magento\Framework\App\Cache\TypeListInterface $cacheTypeList,
-        \Magento\Framework\App\Cache\Frontend\Pool $cacheFrontendPool,
-        \Magento\Framework\App\Config\ConfigResource\ConfigInterface $configInterface,
-        \Magento\Config\Model\ResourceModel\Config $resourceConfig,
-        \Moip\Auth\Connect $connect
-        
-        ) 
-    {
-        $this->_moipHelper = $moipHelper;
-        $this->_cacheTypeList = $cacheTypeList;
-        $this->_cacheFrontendPool = $cacheFrontendPool;
-        $this->_configInterface = $configInterface;
-        $this->_resourceConfig = $resourceConfig;
-        $this->_connect = $connect;
+        Context $context,
+        TypeListInterface $cacheTypeList,
+        Pool $cacheFrontendPool,
+        JsonFactory $resultJsonFactory,
+        ConfigInterface $configInterface,
+        Config $resourceConfig,
+        ConfigBase $configBase,
+        StoreManagerInterface $storeManager,
+        EncryptorInterface $encryptor,
+        ZendClientFactory $httpClientFactory
+    ) {
+        $this->cacheTypeList = $cacheTypeList;
+        $this->cacheFrontendPool = $cacheFrontendPool;
+        $this->resultJsonFactory = $resultJsonFactory;
+        $this->configInterface = $configInterface;
+        $this->resourceConfig = $resourceConfig;
+        $this->configBase = $configBase;
+        $this->storeManager = $storeManager;
+        $this->encryptor = $encryptor;
+        $this->httpClientFactory = $httpClientFactory;
         parent::__construct($context);
     }
 
@@ -42,115 +76,142 @@ class Oauth extends \Magento\Backend\App\Action
     {
         $params = $this->getRequest()->getParams();
         $resultRedirect = $this->resultFactory->create(ResultFactory::TYPE_REDIRECT);
+        $oauth = null;
+        if (isset($params['code'])) {
+            $oauthResponse = $this->getAuthorize($params['code']);
+            if ($oauthResponse) {
+                $oauthResponse = json_decode($oauthResponse, true);
+                if (isset($oauthResponse['access_token'])) {
+                    $oauth = $oauthResponse['access_token'];
+                    $this->setOauth($oauth);
+                }
+                if ($oauth) {
+                    $keyPublic = $this->getKeyPublic($oauth);
+                    $this->setKeyPublic($keyPublic);
+                    $this->setMpa($oauthResponse['moipAccount']['id']);
+                    $this->cacheTypeList->cleanType('config');
+                    $resultRedirect->setUrl($this->getUrlPreference($oauth));
 
-        
-        if(isset($params['code'])){
-            
-            $authorize = $this->getAuthorize($params['code']);
-
-            $oauth     = $authorize->accessToken;
-            $this->setOauth($oauth);
-
-            $publickey = $this->getKeyPublic($oauth);
-            $this->setKeyPublic($publickey);
-            
-            if($oauth){
-                $this->_cacheTypeList->cleanType("config");
-                $resultRedirect->setUrl($this->getUrlPreference());
+                    return $resultRedirect;
+                }
             }
-           
         }
+
+        $this->messageManager->addError(__('Unable to get the code, try again. =('));
+        $resultRedirect->setUrl($this->getUrlConfig());
 
         return $resultRedirect;
     }
 
-    
-
-    private function getUrlPreference()
+    private function getUrlConfig()
     {
-        return $this->getUrl('moip/system_config/preference');
+        return $this->getUrl('adminhtml/system_config/edit/section/payment/');
     }
 
-
-    private function setKeyPublic($publickey){
-        $_environment   = $this->_moipHelper->getEnvironmentMode();
-        $this->_resourceConfig->saveConfig(
-                    'payment/moipbase/publickey_'.$_environment,
-                    $publickey,
-                    'default',
-                    0
-                );
-       return $this;
+    private function getUrlPreference($oauth)
+    {
+        return $this->getUrl('moip/system_config/preference', ['oauth' => $oauth]);
     }
 
-    private function setOauth($oauth){
-        $_environment   = $this->_moipHelper->getEnvironmentMode();
-        $this->_resourceConfig->saveConfig(
-                    'payment/moipbase/oauth_'.$_environment,
-                    $oauth,
-                    'default',
-                    0
-                );
-       return $this;
+    private function setMpa($mpa)
+    {
+        $environment = $this->configBase->getEnvironmentMode();
+        $this->resourceConfig->saveConfig(
+            'payment/moip_magento2/mpa_'.$environment,
+            $mpa,
+            'default',
+            0
+        );
+
+        return $this;
     }
 
-    
+    private function setKeyPublic($keyPublic)
+    {
+        $environment = $this->configBase->getEnvironmentMode();
+        $keyPublic = $this->encryptor->encrypt($keyPublic);
+        $this->resourceConfig->saveConfig(
+            'payment/moip_magento2/key_public_'.$environment,
+            $keyPublic,
+            'default',
+            0
+        );
 
-    private function getAuthorize($code){
+        return $this;
+    }
 
-        $_environment   = $this->_moipHelper->getEnvironmentMode();
+    private function setOauth($oauth)
+    {
+        $environment = $this->configBase->getEnvironmentMode();
+        $oauth = $this->encryptor->encrypt($oauth);
+        $this->resourceConfig->saveConfig(
+            'payment/moip_magento2/oauth_'.$environment,
+            $oauth,
+            'default',
+            0
+        );
 
-        if($_environment === "production"){
-            $redirect_uri   = $this->_moipHelper::REDIRECT_URI_PRODUCTION;
-            $client_id      = $this->_moipHelper::APP_ID_PRODUCTION;
-            $url            = $this->_connect::ENDPOINT_PRODUCTION;
-            $client_secrect = $this->_moipHelper::CLIENT_SECRECT_PRODUCTION;
+        return $this;
+    }
 
-        } else {
-            $redirect_uri   = $this->_moipHelper::REDIRECT_URI_SANDBOX;
-            $client_id      = $this->_moipHelper::APP_ID_SANDBOX;
-            $url            = $this->_connect::ENDPOINT_SANDBOX;
-            $client_secrect = $this->_moipHelper::CLIENT_SECRECT_SANDBOX;
+    private function getAuthorize($code)
+    {
+        $url = ConfigBase::ENDPOINT_OAUTH_TOKEN_PRODUCTION;
+        $tokenBase = base64_encode(ConfigBase::OAUTH_TOKEN_PPRODUCTION.':'.ConfigBase::OAUTH_KEY_PRODUCTION);
+        $header = 'Authorization: Basic '.$tokenBase;
+        $arrayToQuery = [
+            'client_id'     => ConfigBase::APP_ID_PRODUCTION,
+            'client_secret' => ConfigBase::CLIENT_SECRECT_PRODUCTION,
+            'redirect_uri'  => ConfigBase::OAUTH_URI,
+            'grant_type'    => 'authorization_code',
+            'code'          => $code,
+        ];
+
+        $environment = $this->configBase->getEnvironmentMode();
+        if ($environment === ConfigBase::ENVIRONMENT_SANDBOX) {
+            $url = ConfigBase::ENDPOINT_OAUTH_TOKEN_SANDBOX;
+            $tokenBase = base64_encode(ConfigBase::OAUTH_TOKEN_SANDBOX.':'.ConfigBase::OAUTH_KEY_SANDBOX);
+            $header = 'Authorization: Basic '.$tokenBase;
+            $arrayToQuery = [
+                'client_id'     => ConfigBase::APP_ID_SANDBOX,
+                'client_secret' => ConfigBase::CLIENT_SECRECT_SANDBOX,
+                'redirect_uri'  => ConfigBase::OAUTH_URI,
+                'grant_type'    => 'authorization_code',
+                'code'          => $code,
+            ];
         }
-        
 
+        $client = $this->httpClientFactory->create();
 
-        $connect = new $this->_connect($redirect_uri, $client_id, true, $url);
-        $connect->setClientSecret($client_secrect);
-        $connect->setCode($code);
-        $auth = $connect->authorize();
-        
-        return $auth;
+        $client->setUri($url);
+        $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
+        $client->setHeaders($header);
+        $client->setParameterPost($arrayToQuery);
+        $client->setMethod(ZendClient::POST);
 
+        $result = $client->request()->getBody();
+
+        return $result;
     }
 
-    private function getKeyPublic($oauth) {
-            $documento = 'Content-Type: application/json; charset=utf-8';
+    private function getKeyPublic($oauth)
+    {
+        $url = ConfigBase::URL_KEY_PRODUCTION;
+        $environment = $this->configBase->getEnvironmentMode();
+        if ($environment === ConfigBase::ENVIRONMENT_SANDBOX) {
+            $url = ConfigBase::URL_KEY_SANDBOX;
+        }
+        $header = 'Authorization: OAuth '.$oauth;
 
-            $_environment   = $this->_moipHelper->getEnvironmentMode();
+        $client = $this->httpClientFactory->create();
 
-            if($_environment === "production"){
-                $url   = $this->_moipHelper::URL_KEY_PRODUCTION;
-            } else {
-                $url   = $this->_moipHelper::URL_KEY_SANDBOX;
-            }
+        $client->setUri($url);
+        $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
+        $client->setHeaders($header);
+        $client->setMethod(ZendClient::GET);
+        $result = $client->request()->getBody();
+        $result = json_decode($result, true);
 
-            $header = "Authorization: OAuth " . $oauth;
-
-            
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-            curl_setopt($ch, CURLOPT_URL, $url);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, [$header, $documento]);
-            curl_setopt($ch,CURLOPT_USERAGENT,'MoipMagento2/2.0.0');
-            $responseBody = curl_exec($ch);
-            curl_close($ch);
-            
-            $responseBody = json_decode($responseBody, true);
-            $publickey = $responseBody['keys']['encryption'];
-        return $publickey;
+        return $result['keys']['encryption'];
     }
-
-   
-
 }

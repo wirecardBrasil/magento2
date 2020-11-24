@@ -1,74 +1,160 @@
 <?xml version="1.0"?>
-<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Store/etc/config.xsd">
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
     <default>
         <payment>
-            <moipbase>
-                <title>Config Moip</title>
-                <model>Moip\Magento2\Model\PaymentMethodCc</model>
-                <environment_mode>production</environment_mode>
-                <advanced>
-                    <title>Config Avançada</title>
-                    <type_cpf>address</type_cpf>
-                    <cpf_for_address>vat_id</cpf_for_address>
-                    <cpf_for_customer>taxvat</cpf_for_customer>
-                    <type_cnpj>use_cpf</type_cnpj>
-                    <cnpj_for_address>vat_id</cnpj_for_address>
-                    <cnpj_for_customer>taxvat</cnpj_for_customer>
-                    <type_name_company>address</type_name_company>
-                    <company_name_address>company</company_name_address>
-                    <company_name_customer>firstname</company_name_customer>
-                    <street_logradouro>0</street_logradouro>
-                    <street_number>1</street_number>
-                    <street_complemento>3</street_complemento>
-                    <street_district>2</street_district>
-                </advanced>
-                <split>
-                    <active>0</active>
-                </split>
-            </moipbase>
-            <moipcc>
-                <model>Moip\Magento2\Model\PaymentMethodCc</model>
-				<payment_action>order</payment_action>
-                <order_status>payment_review</order_status>
+            <moip_magento2>
+                <debug>1</debug>
                 <active>1</active>
+                <environment>production</environment>
+                <statement_descriptor>Store Name</statement_descriptor>
+                <oauth_sandbox backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <oauth_production backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <key_public_sandbox backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <key_public_production backend_model="Magento\Config\Model\Config\Backend\Encrypted" />
+                <model>Magento2BaseFacade</model>
+                <order_status>payment_review</order_status>
+                <payment_action>authorize</payment_action>
+                <title>Wirecard</title>
+                <currency>BRL</currency>
+                <is_gateway>1</is_gateway>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <can_capture_partial>0</can_capture_partial>
+                <can_refund_partial_per_invoice>0</can_refund_partial_per_invoice>
+                <can_refund>1</can_refund>
+                <can_void>1</can_void>
+                <can_cancel>1</can_cancel>
+                <can_review_payment>1</can_review_payment>
+                 <!-- Magento Issue 20139 -->
+                <can_fetch_transaction_information>1</can_fetch_transaction_information>
+                <can_fetch_transaction_info>1</can_fetch_transaction_info>
+                <!-- Magento Issue 20139 -->
+                <can_deny_payment>1</can_deny_payment>
+                <can_accept_payment>1</can_accept_payment>
+                <min_order_total>5</min_order_total>
+                <max_order_total>1000000</max_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <group>moip_group</group>
+                <type_cpf>address</type_cpf>
+                <cpf_for_address>vat_id</cpf_for_address>
+                <cpf_for_customer>taxvat</cpf_for_customer>
+                <street>0</street>
+                <streetNumber>1</streetNumber>
+                <district>2</district>
+                <complement>3</complement>
+                <cctypes>ELO,HC,HI,VI,MC,DN,AE</cctypes>
+                <cctypes_moip_magento2_mapper><![CDATA[{"Elo":"ELO","Hipercard":"HC","Hiper":"HI","visa":"VI","mastercard":"MC","diners-club":"DN","american-express":"AE"}]]></cctypes_moip_magento2_mapper>
+            </moip_magento2>
+            <moip_magento2_cc>
+                <debug>1</debug>
+                <active>1</active>
+                <model>Magento2CcFacade</model>
+                <order_status>payment_review</order_status>
+                <payment_action>authorize</payment_action>
                 <title>Cartão de Crédito</title>
-                <installment>
-                    <type_interest>simple</type_interest>
-                    <min_installment>5</min_installment>
-                    <max_installment>12</max_installment>
-                    <installment_1>0</installment_1>
-                    <installment_2>4.50</installment_2>
-                    <installment_3>5.00</installment_3>
-                    <installment_4>5.50</installment_4>
-                    <installment_5>6.50</installment_5>
-                    <installment_6>7.50</installment_6>
-                    <installment_7>8.50</installment_7>
-                    <installment_8>9.50</installment_8>
-                    <installment_9>10.50</installment_9>
-                    <installment_10>11.50</installment_10>
-                    <installment_11>12.00</installment_11>
-                    <installment_12>12.50</installment_12>
-                </installment>
-                <document>
-                    <getdocument>0</getdocument>
-                </document>
-            </moipcc>
-            <moipboleto>
-                <model>Moip\Magento2\Model\PaymentMethodBoleto</model>
-                <payment_action>order</payment_action>
-                <order_status>payment_review</order_status>
+                <currency>BRL</currency>
+                <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
+                <paymentInfoKeys>method_name,cc_installments,cc_installment_interest,cc_type,cc_number,cc_holder_fullname,cc_holder_birth_date,tax_document,cc_holder_tax_document,cc_holder_phone,device</paymentInfoKeys>
+                <privateInfoKeys>device</privateInfoKeys>
+                <is_gateway>1</is_gateway>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <can_capture_partial>0</can_capture_partial>
+                <can_refund_partial_per_invoice>0</can_refund_partial_per_invoice>
+                <can_refund>1</can_refund>
+                <can_void>1</can_void>
+                <can_cancel>1</can_cancel>
+                <can_review_payment>1</can_review_payment>
+                <!-- Magento Issue 20139 -->
+                <can_fetch_transaction_information>1</can_fetch_transaction_information>
+                <can_fetch_transaction_info>1</can_fetch_transaction_info>
+                <!-- Magento Issue 20139 -->
+                <can_deny_payment>1</can_deny_payment>
+                <can_accept_payment>1</can_accept_payment>
+                <min_order_total>5</min_order_total>
+                <max_order_total>200000</max_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <group>moip_group</group>
+                <cctypes>ELO,HC,HI,VI,MC,DN,AE</cctypes>
+                <cctypes_moip_magento2_cc_mapper><![CDATA[{"ELO":"Elo","HC":"Hipercard","HI":"Hiper","VI":"Visa","MC":"Mastercard","DN":"Diners Club","AE":"American Express"}]]></cctypes_moip_magento2_cc_mapper>
+                <cvv_enabled>1</cvv_enabled>
+                <installment_type_interest>simple</installment_type_interest>
+                <installment_min_installment>5</installment_min_installment>
+                <installment_max_installment>12</installment_max_installment>
+                <installment_installment_1>0</installment_installment_1>
+                <installment_installment_2>4.50</installment_installment_2>
+                <installment_installment_3>5.00</installment_installment_3>
+                <installment_installment_4>5.50</installment_installment_4>
+                <installment_installment_5>6.50</installment_installment_5>
+                <installment_installment_6>7.50</installment_installment_6>
+                <installment_installment_7>8.50</installment_installment_7>
+                <installment_installment_8>9.50</installment_installment_8>
+                <installment_installment_9>10.50</installment_installment_9>
+                <installment_installment_10>11.50</installment_installment_10>
+                <installment_installment_11>12.00</installment_installment_11>
+                <installment_installment_12>12.50</installment_installment_12>
+                <get_name>1</get_name>
+                <get_tax_document>1</get_tax_document>
+                <get_birth_date>1</get_birth_date>
+                <get_phone>1</get_phone>
+            </moip_magento2_cc>
+            <moip_magento2_boleto>
+                <debug>1</debug>
                 <active>1</active>
+                <model>Magento2BoletoFacade</model>
+                <active>1</active>
+                <order_status>payment_review</order_status>
+                <payment_action>authorize</payment_action>
                 <title>Boleto Bancário</title>
+                <currency>BRL</currency>
+                <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
+                <paymentInfoKeys>method_name,boleto_line_code,boleto_print_href,boleto_payer_fullname,boleto_payer_tax_document,device</paymentInfoKeys>
+                <privateInfoKeys>device</privateInfoKeys>
+                <is_gateway>1</is_gateway>
+                <can_use_internal>1</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
+                <can_authorize>1</can_authorize>
+                <can_capture>1</can_capture>
+                <can_capture_partial>0</can_capture_partial>
+                <can_refund_partial_per_invoice>0</can_refund_partial_per_invoice>
+                <can_refund>0</can_refund>
+                <can_void>1</can_void>
+                <can_cancel>1</can_cancel>
+                <can_review_payment>1</can_review_payment>
+                <!-- Magento Issue 20139 -->
+                <can_fetch_transaction_information>1</can_fetch_transaction_information>
+                <can_fetch_transaction_info>1</can_fetch_transaction_info>
+                <!-- Magento Issue 20139 -->
+                <can_deny_payment>1</can_deny_payment>
+                <can_accept_payment>1</can_accept_payment>
+                <min_order_total>5</min_order_total>
+                <max_order_total>200000</max_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
+                <group>moip_group</group>
                 <expiration>3</expiration>
-                <instrucao1>Não receber após vencimento</instrucao1>
-                <instrucao2>Não pagar em cheque</instrucao2>
-                <instrucao3>Mais info em nosso site</instrucao3>
-                <instruction><![CDATA[
-                    Pagar o boleto em qualquer casa lotérica.
-                    O boleto não será enviado ao seu endereço.
-                    Não parcelamos no boleto.
-                ]]></instruction>
-            </moipboleto>
+                <instruction_lines_first>Não receber após vencimento</instruction_lines_first>
+                <instruction_lines_second>Não pagar em cheque</instruction_lines_second>
+                <instruction_lines_third>Mais info em nosso site</instruction_lines_third>
+                <instruction_checkout><![CDATA[Pagar o boleto em qualquer casa lotérica ou internet bank.
+O boleto não será enviado ao seu endereço.
+Não parcelamos no boleto.]]></instruction_checkout>
+                <get_name>1</get_name>
+                <get_tax_document>1</get_tax_document>
+            </moip_magento2_boleto>
         </payment>
     </default>
 </config>

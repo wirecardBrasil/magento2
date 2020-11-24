@@ -1,78 +1,97 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
 namespace Moip\Magento2\Controller\Adminhtml\Order;
 
-use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Backend\App\Action\Context;
-use Magento\Ui\Component\MassAction\Filter;
-use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection;
 use Magento\Sales\Api\OrderManagementInterface;
+use Magento\Sales\Model\Order;
+use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
+use Magento\Ui\Component\MassAction\Filter;
 
 /**
- * Class MassDelete
+ * Class MassDelete.
  */
 class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassAction
 {
-    
+    /*
+     * @var Order Management
+     */
     protected $orderManagement;
 
-    protected $_moipHelper;
-
+    /*
+     * @param Context
+     * @param Filter
+     * @param CollectionFactory
+     * @param OrderManagementInterface
+     */
     public function __construct(
         Context $context,
         Filter $filter,
         CollectionFactory $collectionFactory,
         OrderManagementInterface $orderManagement,
-        \Moip\Magento2\Helper\Data $moipHelper
+        Order $order
     ) {
         parent::__construct($context, $filter);
         $this->collectionFactory = $collectionFactory;
         $this->orderManagement = $orderManagement;
-        $this->_moipHelper = $moipHelper;
+        $this->order = $order;
     }
 
-   
+    /*
+     * Mass Action
+     *
+     * @param collection
+     *
+     * @return Url
+     */
     protected function massAction(AbstractCollection $collection)
     {
-        $countUpdateOrder = 0;
-        $countUpdateOrderWaiting = 0;
-        
+        $countUpdate = 0;
+        $countNotUpdate = 0;
+
         foreach ($collection->getItems() as $order) {
             if (!$order->getEntityId()) {
                 continue;
             }
-            $model = $this->_objectManager->create('Magento\Sales\Model\Order');
-            $loadedOrder = $model->load($order->getEntityId());
-          
+
+            $loadedOrder = $this->order->load($order->getEntityId());
+
             if ($loadedOrder->canFetchPaymentReviewUpdate()) {
                 $payment = $loadedOrder->getPayment();
                 $transactionId = $payment->getLastTransId();
                 $method = $payment->getMethodInstance();
+
                 try {
                     $method->fetchTransactionInfo($payment, $transactionId);
                     $payment->getOrder()->save();
-                    $countUpdateOrder++;
-                } catch(\Exception $e) {
-                    $countUpdateOrderWaiting++;
+                    $countUpdate++;
+                } catch (\Exception $exc) {
+                    $countNotUpdate++;
                 }
-             } else {
-                $countUpdateOrderWaiting++;
-             }
-        
+            } elseif (!$loadedOrder->canFetchPaymentReviewUpdate()) {
+                $countNotUpdate++;
+            }
+
             continue;
         }
-        
 
-        if ($countUpdateOrder) {
-            $this->messageManager->addSuccess(__('%1 pagamentos foram atualizados.', $countUpdateOrder));
+        if ($countUpdate) {
+            $this->messageManager->addSuccess(__('%1 payments have been updated.', $countUpdate));
         }
-        if($countUpdateOrderWaiting){
-            $this->messageManager->addWarning(__('%1 pagamentos ainda não tem atualização.', $countUpdateOrderWaiting));
+        if ($countNotUpdate) {
+            $this->messageManager->addWarning(__('%1 payments have not yet been updated.', $countNotUpdate));
         }
 
         $resultRedirect = $this->resultRedirectFactory->create();
         $resultRedirect->setPath($this->getComponentRefererUrl());
+
         return $resultRedirect;
     }
 }
-
-?>

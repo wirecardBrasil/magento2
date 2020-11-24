@@ -1,42 +1,67 @@
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
 <script>
     require([
         'jquery',
         'prototype'
-    ], function(jQuery){
-
+    ], function($){
         var oauthSpan = jQuery('#oauth_span');
-        jQuery('#payment_other_moipbase_environment_mode').change(function(){
-            jQuery('#elements_for_oauth').html('Após mudar o ambiente é necessário salvar a configuração antes de usar a função de autenticação.');
+        
+        $('#payment_us_moip_base_credentials_environment').change(function(){
+            $('#elements_for_oauth').html(
+                'After changing the environment,' + 
+                ' it is necessary to save the configuration' +
+                'before using the authentication function.'
+                );
         });
-        jQuery('#oauth').click(function () {
-            <?php if($block->getTypeJs() === "getautorization"): ?>
-            window.location.href = "<?php echo $block->getUrltoConnect() ?>";
+
+        $('#payment_other_moip_base_credentials_environment').change(function(){
+            $('#elements_for_oauth').html(
+                'Após mudar o ambiente é necessário salvar' +
+                ' a configuração antes de usar a função de autenticação.'
+            );
+        });
+
+        $('#oauth').click(function () {
+            <?php if ($block->getTypeJs() === "getautorization"): ?>
+            window.location.href = "<?= $block->escapeUrl($block->getUrlToConnect()) ?>";
             <?php else: ?>
                 var params = {};
-                new Ajax.Request('<?php echo $block->getAjaxUrl() ?>', {
+                new Ajax.Request('<?= $block->escapeUrl($block->getAjaxUrl()) ?>', {
                     parameters:     params,
                     loaderArea:     false,
                     asynchronous:   true,
                     onCreate: function() {
                         oauthSpan.find('.oauthed').hide();
                         oauthSpan.find('.processing').show();
-                        jQuery('#oauth_message_span').text('');
+                        $('#oauth_message_span').text('');
                     },
                     onSuccess: function(response) {
                         location.reload();
                     }
                 });
             <?php endif; ?>
-
         });
-
     });
 </script>
 <div id="elements_for_oauth">
-    <?php echo $block->getButtonHtml() ?>
+    <?= /* @noEscape */ $block->getButtonHtml() ?>
     <span class="oauth-indicator" id="oauth_span">
-        <img class="processing" hidden="hidden" alt="oauthing" style="margin:0 5px" src="<?php echo $block->getViewFileUrl('images/process_spinner.gif') ?>"/>
-        <img class="oauthed" hidden="hidden" alt="oauthed" style="margin:-3px 5px" src="<?php echo $block->getViewFileUrl('images/rule_component_apply.gif') ?>"/>
+        <img class="processing"
+            hidden="hidden"
+            alt="oauthing"
+            style="margin: 0 5px;"
+            src="<?= $block->escapeUrl($block->getViewFileUrl('images/process_spinner.gif')) ?>"/>
+        <img class="oauthed"
+            hidden="hidden"
+            alt="oauthed"
+            style="margin: -3px 5px;"
+            src="<?= $block->escapeUrl($block->getViewFileUrl('images/rule_component_apply.gif')) ?>"/>
         <span id="oauth_message_span"></span>
     </span>
 </div>

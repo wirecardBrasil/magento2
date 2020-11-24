@@ -1,0 +1,81 @@
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: NameCapture() || TaxDocumentCapture() -->
+<fieldset data-bind="attr: {class: 'fieldset payment items boleto ' + getCode(), id: 'payment_form_payer_persona' + getCode()}">
+      <!-- ko if: NameCapture() -->
+      <div class="field wirecard-input-group payer fullname required">
+          <div class="control">
+              <input type="text" name="payment[boleto_payer_fullname]" class="input-text" value=""
+                     data-bind="attr: {
+                                      autocomplete: 'boleto-name',
+                                      id: getCode() + '_payer_fullname',
+                                      title: $t('Payer Full Name'),
+                                      placeholder: $t('Payer Full Name'),
+                                      'data-container': getCode() + '-boleto-fullname',
+                                      'data-validate': JSON.stringify({'required':true})},
+                                enable: isActive($parents),
+                                value: payerFullName,
+                                valueUpdate: 'keyup' "/>
+               <label data-bind="attr: {for: getCode() + '_payer_fullname'}" class="label">
+                  <span><!-- ko i18n: 'Payer Full Name'--><!-- /ko --></span>
+              </label>
+          </div>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: TaxDocumentCapture() -->
+      <div class="field wirecard-input-group payer tax-document required">
+          <div class="control">
+              <input type="text" name="payment[boleto_payer_document]" class="input-text" value=""
+                     data-bind="attr: {
+                                      autocomplete: 'off',
+                                      id: getCode() + '_payer_tax_document',
+                                      title: $t('Payer Tax Document'),
+                                      placeholder: $t('Payer Tax Document'),
+                                      'data-container': getCode() + '-tax-document',
+                                      'data-validate': JSON.stringify({'required':true})},
+                                enable: isActive($parents),
+                                value: payerTaxDocument,
+                                valueUpdate: 'keyup' "/>
+               <label data-bind="attr: {for: getCode() + '_payer_tax_document'}" class="label">
+                  <span><!-- ko i18n: 'Payer Tax Document'--><!-- /ko --></span>
+              </label>
+          </div>
+      </div>
+      <!-- /ko -->
+    </div>
+</fieldset>
+<!-- /ko -->
+<fieldset data-bind="attr: {class: 'fieldset payment items boletoard ' + getCode(), id: 'payment_form_payer_' + getCode()}">
+    <!-- ko if: (isShowLegend())-->
+    <legend class="legend">
+        <span class="legend-title"><!-- ko i18n: 'Boleto Information'--><!-- /ko --></span>
+    </legend>
+    <!-- /ko -->
+    <div class="field-to-pay"  data-bind="css: { _hidden:isPlaceOrderActionAllowed() }">
+      <p class="not-editable-title"><!-- ko i18n: 'Aguardando dados de endereço'--><!-- /ko --></p>
+    </div>
+    <div class="field-to-pay"  data-bind="css: { _hidden:!isPlaceOrderActionAllowed() }">
+       <!-- ko if: getInstructionCheckout() || getExpiration() -->
+        <dl class="items check payable">
+            <!-- ko if: getExpiration() -->
+            <dt class="title"><!-- ko i18n: 'Due' --><!-- /ko --></dt>
+            <dd class="content">
+                <address class="moipboleto due address" data-bind="html: getExpiration()"></address>
+            </dd>
+            <!-- /ko -->
+            <!-- ko if: getInstructionCheckout() -->
+            <dt class="title"><!-- ko i18n: 'Instruction' --><!-- /ko --></dt>
+            <dd class="content">
+                <address class="moipboleto instruction address" data-bind="html: getInstructionCheckout()"></address>
+            </dd>
+            <!-- /ko -->
+        </dl>
+        <!-- /ko -->
+    </div>
+     
+</fieldset>

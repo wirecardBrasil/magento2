@@ -1,20 +1,31 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
-use Magento\Backend\App\Action;
-use Magento\Backend\App\Action\Context;
-use Magento\Framework\Controller\Result\JsonFactory;
-
+/**
+ * Class Street - Defines address lines.
+ */
 class Street implements \Magento\Framework\Option\ArrayInterface
 {
-
-   public function toOptionArray()
+    /**
+     * Returns Options.
+     *
+     * @return array attributesArrays
+     */
+    public function toOptionArray()
     {
         return [
-            '0' => '1st line of the street',
-            '1' => '2st line of the street',
-            '2' => '3st line of the street',
-            '3' => '4st line of the street'
+            null => __('Please select'),
+            '0'  => __('1st line of the street'),
+            '1'  => __('2st line of the street'),
+            '2'  => __('3st line of the street'),
+            '3'  => __('4st line of the street'),
         ];
     }
 }

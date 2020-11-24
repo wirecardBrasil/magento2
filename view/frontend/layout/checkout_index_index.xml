@@ -1,5 +1,12 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <body>
         <referenceBlock name="checkout.root">
             <arguments>
@@ -17,18 +24,16 @@
                                                         <item name="renders" xsi:type="array">
                                                             <!-- merge payment method renders here -->
                                                             <item name="children" xsi:type="array">
-                                                                <item name="moipcc" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Moip_Magento2/js/view/payment/moipcc</item>
+                                                                <item name="moip_magento2" xsi:type="array">
+                                                                    <item name="component" xsi:type="string">Moip_Magento2/js/view/payment/moip</item>
                                                                     <item name="methods" xsi:type="array">
-                                                                        <item name="moipcc" xsi:type="array">
+                                                                        <item name="moip_magento2" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
-                                                                    </item>
-                                                                </item>
-                                                                <item name="moipboleto" xsi:type="array">
-                                                                    <item name="component" xsi:type="string">Moip_Magento2/js/view/payment/moipboleto</item>
-                                                                    <item name="methods" xsi:type="array">
-                                                                        <item name="moipboleto" xsi:type="array">
+                                                                        <item name="moip_magento2_cc" xsi:type="array">
+                                                                            <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
+                                                                        </item>
+                                                                        <item name="moip_magento2_boleto" xsi:type="array">
                                                                             <item name="isBillingAddressRequired" xsi:type="boolean">true</item>
                                                                         </item>
                                                                     </item>

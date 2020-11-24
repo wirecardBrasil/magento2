@@ -1,56 +1,106 @@
 <?php
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ *
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
 
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
 use Magento\Backend\Block\Template\Context;
 use Magento\Config\Block\System\Config\Form\Field;
 use Magento\Framework\Data\Form\Element\AbstractElement;
-use Moip\Auth\Connect;
+use Moip\Magento2\Gateway\Config\Config;
+
+/**
+ * Class Oauth - Defines oAuth session actions.
+ */
 class Oauth extends Field
 {
-   
+    /**
+     * @var template
+     */
     protected $_template = 'Moip_Magento2::system/config/oauth.phtml';
 
+    /**
+     * @var config
+     */
+    protected $config;
+
+    /**
+     * @param Config
+     * @param Context
+     */
     public function __construct(
-        \Moip\Magento2\Helper\Data $moipHelper,
+        Config $config,
         Context $context
     ) {
-        $this->_moipHelper = $moipHelper;
+        $this->config = $config;
         parent::__construct($context);
     }
 
-    
+    /*
+     * Render
+     *
+     * @param $element
+     *
+     * @return string
+     */
     public function render(AbstractElement $element)
     {
         $element->unsScope()->unsCanUseWebsiteValue()->unsCanUseDefaultValue();
+
         return parent::render($element);
     }
 
-    
+    /*
+     * Elment Html
+     *
+     * @param $element
+     *
+     * @return string
+     */
     protected function _getElementHtml(AbstractElement $element)
     {
         return $this->_toHtml();
     }
 
-   
+    /*
+     * Ajax Url
+     *
+     * @return url
+     */
     public function getAjaxUrl()
     {
         return $this->getUrl('moip/system_config/logout');
     }
 
+    /*
+     * Url Authorize
+     *
+     * @return url
+     */
     public function getUrlAuthorize()
     {
-        return $this->getUrl('moip/system_config/oauth');
+        $baseUri = Config::OAUTH_URI;
+        $storeUri = $this->getUrl('moip/system_config/oauth');
+
+        return $baseUri.'?client_id='.$storeUri;
     }
 
-   
+    /*
+     * Button Html
+     *
+     * @return string
+     */
     public function getButtonHtml()
     {
         $button = $this->getLayout()->createBlock(
-            'Magento\Backend\Block\Widget\Button'
+            \Magento\Backend\Block\Widget\Button::class
         )->setData(
             [
-                'id' => 'oauth',
+                'id'    => 'oauth',
                 'label' => __($this->getInfoTextBtn()),
             ]
         );
@@ -58,59 +108,68 @@ class Oauth extends Field
         return $button->toHtml();
     }
 
-    public function getInfoTextBtn(){
-        
-        $_environment = $this->_moipHelper->getEnvironmentMode();
-        if($_environment === "production"){
-            $label = __('Production');
-        } else {
+    /*
+     * Info Text Button
+     *
+     * @return string
+     */
+    public function getInfoTextBtn()
+    {
+        $environment = $this->config->getEnvironmentMode();
+        $oauth = $this->config->getMerchantGatewayOauth();
+        $label = __('Production');
+
+        if ($environment === Config::ENVIRONMENT_SANDBOX) {
             $label = __('Environment for tests');
         }
 
-        if($this->_moipHelper->getOauth($_environment)){
+        $text = sprintf(__('Authorize in %s'), $label);
+
+        if ($oauth) {
             $text = sprintf(__('Disallow in %s'), $label);
-        } else {
-            $text = sprintf(__('Authorize in %s'), $label);
         }
+
         return $text;
     }
 
-    public function getTypeJs(){
-        $_environment = $this->_moipHelper->getEnvironmentMode();
-        if($this->_moipHelper->getOauth($_environment)){
-            return "clear";
-        } else {
-            return "getautorization";
-        }
-    }
-   
-
-    public function getUrltoConnect(){
-
-        $_url_cliente_id = $this->getUrlAuthorize();
-        $_environment = $this->_moipHelper->getEnvironmentMode();
-        if($_environment == "production") {
-            $redirect_uri   = $this->_moipHelper::REDIRECT_URI_PRODUCTION;
-            $client_id      = $this->_moipHelper::APP_ID_PRODUCTION;
-        } else {
-            $redirect_uri   = $this->_moipHelper::REDIRECT_URI_SANDBOX;
-            $client_id      = $this->_moipHelper::APP_ID_SANDBOX;
-        }
-        $redirect_uri = $redirect_uri.'?cliente_id='.$_url_cliente_id;
-       
-        $scope = true;
-        
-        if($_environment == "production") {
-            $connect = new Connect($redirect_uri, $client_id, $scope, Connect::ENDPOINT_PRODUCTION);
-        } else {
-           $connect = new Connect($redirect_uri, $client_id, $scope, Connect::ENDPOINT_SANDBOX);
+    /*
+     * Type Js
+     *
+     * @return string
+     */
+    public function getTypeJs()
+    {
+        if ($this->config->getMerchantGatewayOauth()) {
+            return 'clear';
         }
 
-        $connect->setScope(Connect::RECEIVE_FUNDS)
-            ->setScope(Connect::REFUND)
-            ->setScope(Connect::MANAGE_ACCOUNT_INFO)
-            ->setScope(Connect::RETRIEVE_FINANCIAL_INFO);
-        return $connect->getAuthUrl();
+        return 'getautorization';
     }
 
+    /*
+     * Url to connect
+     *
+     * @return string
+     */
+    public function getUrlToConnect()
+    {
+        $redirectUri = $this->getUrlAuthorize();
+        $endpointOauth = Config::ENDPOINT_OAUTH_PRODUCTION;
+        $appId = Config::APP_ID_PRODUCTION;
+        $scope = Config::OAUTH_SCOPE;
+        $responseType = 'code';
+
+        if ($this->config->getEnvironmentMode() === Config::ENVIRONMENT_SANDBOX) {
+            $endpointOauth = Config::ENDPOINT_OAUTH_SANDBOX;
+            $appId = Config::APP_ID_SANDBOX;
+        }
+
+        $link = $endpointOauth;
+        $link .= '?response_type='.$responseType;
+        $link .= '&client_id='.$appId;
+        $link .= '&redirect_uri='.$redirectUri;
+        $link .= '&scope='.$scope;
+
+        return $link;
+    }
 }

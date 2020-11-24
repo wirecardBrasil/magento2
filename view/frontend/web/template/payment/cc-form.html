@@ -1,0 +1,270 @@
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<!-- ko if: TaxDocumentCapture() || BirthDateCapture()  || PhoneCapture-->
+<fieldset data-bind="attr: {class: 'fieldset payment items ccard ' + getCode(), id: 'payment_form_cc_persona' + getCode()}">
+      <!-- ko if: TaxDocumentCapture() -->
+      <div class="field wirecard-input-group holder tax-document required">
+        <div class="control">
+          <input type="text" name="payment[cc_holder_tax_document]" class="input-text" value=""
+                 data-bind="attr: {
+                                  autocomplete: 'taxvat',
+                                  id: getCode() + '_cc_tax_document',
+                                  title: $t('Credit Card Holder Tax Document'),
+                                  placeholder: $t('Credit Card Holder Tax Document'),
+                                  'data-container': getCode() + '-cc-tax-document',
+                                  'data-validate': JSON.stringify({'required':true})},
+                            enable: isActive($parents),
+                            value: creditCardHolderTaxDocument,
+                            valueUpdate: 'keyup' "/>
+          <label data-bind="attr: {for: getCode() + '_cc_tax_document'}" class="label">
+              <span><!-- ko i18n: 'Credit Card Holder Tax Document'--><!-- /ko --></span>
+          </label>
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: PhoneCapture() -->
+      <div class="field wirecard-input-group holder phone required">
+        <div class="control">
+          <input type="text" name="payment[cc_holder_phone]" class="input-text" value=""
+                 data-bind="attr: {
+                                  autocomplete: 'tel-national',
+                                  id: getCode() + '_cc_holder_phone',
+                                  title: $t('Credit Card Holder Phone'),
+                                  placeholder: $t('Credit Card Holder Phone'),
+                                  'data-container': getCode() + '-cc-tax-document',
+                                  'data-validate': JSON.stringify({'required':true})},
+                            enable: isActive($parents),
+                            value: creditCardHolderPhone,
+                            valueUpdate: 'keyup' "/>
+          <label data-bind="attr: {for: getCode() + '_cc_holder_phone'}" class="label">
+              <span><!-- ko i18n: 'Credit Card Holder Phone'--><!-- /ko --></span>
+          </label>
+        </div>
+      </div>
+      <!-- /ko -->
+      <!-- ko if: BirthDateCapture() -->
+      <div class="field wirecard-input-group holder birth-date required">
+        <div class="control">
+          <input type="text" name="payment[cc_holder_birth_date]" class="input-text " id="moip_magento2_cc_cc_holder_birth_date" value=""
+                 data-bind="
+                            datepicker: true, 
+                            attr: {
+                              autocomplete: 'bday',
+                              title: $t('Credit Card Holder Birth Date'),
+                              placeholder: $t('Credit Card Holder Birth Date'),
+                              'data-container': getCode() + '-cc-birth-date',
+                              'data-validate': JSON.stringify(
+                                {
+                                  'required':true,
+                                 
+                                })
+                            },
+                            enable: isActive($parents),
+                            value: creditCardHolderBirthDate,
+                            valueUpdate: 'keyup' "/>
+          <label data-bind="attr: {for: getCode() + '_cc_holder_birth_date'}" class="label">
+              <span><!-- ko i18n: 'Credit Card Holder Birth Date'--><!-- /ko --></span>
+          </label>
+          <!--  'validate-date':{'dateFormat':'dd\/MM\/y'},
+                                  'validate-dob':{'dateFormat':'dd\/MM\/y'} -->
+        </div>
+      </div>
+      <!-- /ko -->
+    </div>
+</fieldset>
+<!-- /ko -->
+<fieldset data-bind="attr: {class: 'fieldset payment items ccard field-to-pay' + getCode(), id: 'payment_form_cc_' + getCode()}">
+    <!-- ko if: (isShowLegend())-->
+    <legend class="legend">
+        <span class="legend-title"><!-- ko i18n: 'Credit Card Information'--><!-- /ko --></span>
+        <span class="legend-icon">
+            <ul class="credit-card-types">
+              <!-- ko foreach: {data: getCcAvailableTypesValues(), as: 'item'} -->
+              <li class="item">
+                  <!--ko if: $parent.getIcons(item.value) -->
+                  <img data-bind="attr: {
+                      'src': $parent.getIcons(item.value).url,
+                      'alt': item.type,
+                      'width': $parent.getIcons(item.value).width,
+                      'height': $parent.getIcons(item.value).height
+                      }">
+                  <!--/ko-->
+              </li>
+              <!--/ko-->
+            </ul>
+        </span>
+    </legend>
+    <!-- /ko -->
+    <div class="field-to-pay"  data-bind="css: { _hidden:isPlaceOrderActionAllowed() }">
+      <p class="not-editable-title"><!-- ko i18n: 'Aguardando dados de endereço'--><!-- /ko --></p>
+    </div>
+    <div class="field-to-pay"  data-bind="css: { _hidden:!isPlaceOrderActionAllowed() }">
+      <div class="field wirecard-input-group type">
+          <div class="control">
+              
+              <input type="hidden"
+                     name="payment[cc_type]"
+                     class="input-text"
+                     value=""
+                     data-bind="attr: {id: getCode() + '_cc_type', 'data-container': getCode() + '-cc-type'},
+                     value: creditCardType
+                     ">
+          </div>
+      </div>
+      
+      <div class="field wirecard-input-group holder fullname required">
+          <div class="control">
+              <input type="text" name="payment[cc_holder_fullname]" class="input-text" value=""
+                     data-bind="attr: {
+                                      autocomplete: 'cc-name',
+                                      id: getCode() + '_cc_holder_fullname',
+                                      title: $t('Credit Card Holder Full Name'),
+                                      placeholder: $t('Credit Card Holder Full Name'),
+                                      'data-container': getCode() + '-cc-holder-fullname',
+                                      'data-validate': JSON.stringify({'required':true})},
+                                enable: isActive($parents),
+                                value: creditCardHolderFullName,
+                                valueUpdate: 'keyup' "/>
+               <label data-bind="attr: {for: getCode() + '_cc_holder_fullname'}" class="label">
+                  <span><!-- ko i18n: 'Credit Card Holder Full Name'--><!-- /ko --></span>
+              </label>
+          </div>
+      </div>
+
+      <div class="field wirecard-input-group number required">
+          <div class="control">
+              <input type="tel" name="payment[cc_number]" class="input-text" value=""
+                     data-bind="attr: {
+                                      autocomplete: 'cc-number',
+                                      id: getCode() + '_cc_number',
+                                      title: $t('Credit Card Number'),
+                                      placeholder: $t('Credit Card Number'),
+                                      'data-container': getCode() + '-cc-number',
+                                      'data-validate': JSON.stringify({'required-number':true, 'validate-card-type-moip':getCcAvailableTypesValues(), 'validate-card-number-moip':'#' + getCode() + '_cc_number', 'validate-cc-type-moip':'#' + getCode() + '_cc_type'})},
+                                enable: isActive($parents),
+                                value: creditCardNumber,
+                                valueUpdate: 'keyup' "/>
+               <label data-bind="attr: {for: getCode() + '_cc_number'}" class="label">
+                  <span><!-- ko i18n: 'Credit Card Number'--><!-- /ko --></span>
+              </label>
+              <span class="field-tooltip toggle">
+                    <ul class="credit-card-types">
+                         <!-- ko foreach: {data: getCcAvailableTypesValues(), as: 'item'} -->
+                         <li class="item _hidden" data-bind="css: {
+                                               _active: $parent.selectedCardType() == item.value,
+                                               _hidden: $parent.selectedCardType() != item.value || !$parent.selectedCardType() 
+                                               } ">
+                            <!--ko if: $parent.getIcons(item.value) -->
+                            <img data-bind="attr: {
+                                'src': $parent.getIcons(item.value).url,
+                                'alt': item.type,
+                                'width': $parent.getIcons(item.value).width,
+                                'height': $parent.getIcons(item.value).height
+                                }">
+                            <!--/ko-->
+                        </li>
+                        <!--/ko-->
+                    </ul>
+                </span>
+          </div>
+      </div>
+      <!-- ko if: (hasVerification())-->
+      <div class="field wirecard-input-group cvv required" data-bind="attr: {id: getCode() + '_cc_type_cvv_div'}">
+         
+          <div class="control _with-tooltip">
+              <input type="number"
+                     class="input-text cvv"
+                     name="payment[cc_cid]"
+                     value=""
+                     data-bind="attr: {id: getCode() + '_cc_cid',
+                          autocomplete: 'cc-csc',
+                          title: $t('CVV - Card Verification Number'),
+                          placeholder: $t('CVV - Card Verification Number'),
+                          'data-container': getCode() + '-cc-cvv',
+                          'data-validate': JSON.stringify({'required-number':true, 'validate-card-cvv-moip':'#' + getCode() + '_cc_type'})},
+                          enable: isActive($parents),
+                          value: creditCardVerificationNumber" />
+              <div class="field-tooltip toggle">
+                  <span class="field-tooltip-action action-cvv"
+                        tabindex="0"
+                        data-toggle="dropdown"
+                        data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
+                      <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
+                  </span>
+                  <div class="field-tooltip-content"
+                       data-target="dropdown"
+                       data-bind="html: getCvvImageHtml()"></div>
+              </div>
+              <label data-bind="attr: {for: getCode() + '_cc_cid'}" class="label">
+                <span><!-- ko i18n: 'CVV - Card Verification Number'--><!-- /ko --></span>
+              </label>
+          </div>
+      </div>
+      <!-- /ko -->
+      <div class="field wirecard-input-group date required" data-bind="attr: {id: getCode() + '_cc_type_exp_div'}">
+          <div class="control">
+              <div class="fields group group-2">
+                  <div class="field wirecard-input-group month">
+
+                      <div class="control">
+                          <select  name="payment[cc_exp_month]"
+                                   class="select select-month"
+                                   data-bind="attr: {autocomplete: 'cc-exp-month', id: getCode() + '_expiration', 'data-container': getCode() + '-cc-month', 'data-validate': JSON.stringify({required:true, 'validate-cc-exp':'#' + getCode() + '_expiration_yr'})},
+                                              enable: isActive($parents),
+                                              options: getCcMonthsValues(),
+                                              optionsValue: 'value',
+                                              optionsText: 'month',
+                                              optionsCaption: $t('Month'),
+                                              value: creditCardExpMonth">
+                          </select>
+                          <label data-bind="attr: {for: getCode() + '_expiration'}" class="label">
+                                <span><!-- ko i18n: 'Expiration Month'--><!-- /ko --></span>
+                          </label>
+                      </div>
+                  </div>
+                  <div class="field wirecard-input-group year">
+                      <div class="control">
+                          <select name="payment[cc_exp_year]"
+                                  class="select select-year"
+                                  data-bind="attr: {autocomplete: 'cc-exp-year', id: getCode() + '_expiration_yr', 'data-container': getCode() + '-cc-year', 'data-validate': JSON.stringify({required:true})},
+                                             enable: isActive($parents),
+                                             options: getCcYearsValues(),
+                                             optionsValue: 'value',
+                                             optionsText: 'year',
+                                             optionsCaption: $t('Year'),
+                                             value: creditCardExpYear">
+                          </select>
+                          <label data-bind="attr: {for: getCode() + '_expiration_yr'}" class="label">
+                                <span><!-- ko i18n: 'Expiration Year'--><!-- /ko --></span>
+                          </label>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="field wirecard-input-group installments">
+          <div class="control">
+              <select name="payment[cc_installments]"
+                      class="select select-year"
+                      data-bind="attr: {autocomplete: 'off', id: getCode() + '_installments', 'data-container': getCode() + '-installments', 'data-validate': JSON.stringify({required:true})},
+                                 enable: isActive($parents),
+                                 options: getInstallments(),
+                                 optionsValue: 'value',
+                                 optionsText: 'installments',
+                                 optionsCaption: $t('Select Instalmment'),
+                                 value: creditCardInstallment">
+              </select>
+              <label data-bind="attr: {for: getCode() + '_installments'}" class="label">
+                    <span><!-- ko i18n: 'Select Instalmment' --><!-- /ko --></span>
+              </label>
+          </div>
+      </div>
+
+     
+</fieldset>
