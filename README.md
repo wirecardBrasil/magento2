@@ -19,8 +19,7 @@ Estatísticas
 
 Versões
 
-[![Latest Stable Version](https://poser.pugx.org/moip/moip-sdk-php/v/stable)](https://packagist.org/packages/moip/magento2)
-[![Latest Unstable Version](https://poser.pugx.org/moip/moip-sdk-php/v/unstable)](https://packagist.org/packages/moip/magento2)
+[![Latest Stable Version](https://poser.pugx.org/moip/magento2/v/stable)](https://packagist.org/packages/moip/magento2)
 
 ## Recursos
 
