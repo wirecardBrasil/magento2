@@ -10,7 +10,6 @@ O módulo é compatível apenas com Magento 2.3+
   - Cartão de crédito, 7 bandeiras.
     - Visa, Mastercard, Dinners, American Express, Elo, Hiper e Hipercard 
   - Boleto Bancário
-  - Transferência Bancária (TED) 
 
 # Recursos
 
