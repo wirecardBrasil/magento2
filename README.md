@@ -6,25 +6,26 @@ A solução completa para receber pagamentos e simplificar as finanças do seu n
 
 ## Badges
 Status Atual
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/elisei/dev-moip/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/elisei/dev-moip/?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
 [![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
+
 
 Estatísticas
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
-[![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
+[![Total Downloads](https://poser.pugx.org/moip/magento2/downloads)](https://packagist.org/packages/moip/magento2)
+[![Monthly Downloads](https://poser.pugx.org/moip/magento2/d/monthly)](https://packagist.org/packages/moip/moip/magento2)
 
 Versões
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
-[![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
+[![Latest Stable Version](https://poser.pugx.org/moip/moip-sdk-php/v/stable)](https://packagist.org/packages/moip/magento2)
+[![Latest Unstable Version](https://poser.pugx.org/moip/moip-sdk-php/v/unstable)](https://packagist.org/packages/moip/magento2)
 
 ## Recursos
 
 Receba pagamentos de forma transparente por:
-  - Cartão de Crédito
-  - Boleto Bancário
+*   Cartão de Crédito
+*   Boleto Bancário
 
 ## Instalação e Configuração
 
