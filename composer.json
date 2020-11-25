@@ -3,12 +3,27 @@
   "description": "MOIP Magento2 Extension for Magento 2 By Moip",
   "type": "magento2-module",
   "license": [
-        "proprietary"
+        "OSL"
    ],
   "require": {
     "php": ">=7.0",
-    "magento/product-community-edition": ">=2.3.0",
-    "moip/moip-sdk-php": "v3.1.0"
+    "magento/framework": "*",
+    "magento/module-backend": "*",
+    "magento/module-catalog": "*",
+    "magento/module-checkout": "*",
+    "magento/module-config": "*",
+    "magento/module-customer": "*",
+    "magento/module-directory": "*",
+    "magento/module-eav": "*",
+    "magento/module-instant-purchase": "*",
+    "magento/module-payment": "*",
+    "magento/module-quote": "*",
+    "magento/module-sales": "*",
+    "magento/module-store": "*",
+    "magento/module-tax": "*",
+    "magento/module-theme": "*",
+    "magento/module-ui": "*",
+    "magento/module-vault": "*"
   },
   "autoload": {
     "files": [
