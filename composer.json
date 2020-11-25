@@ -19,8 +19,6 @@
     "magento/module-vault": "101.2.*||101.1.*",
     "magento/module-catalog": "104.0.*||103.0.*",
     "magento/module-quote": "102.0.*||101.1.*",
-    "magento/module-theme": "101.1.*||100.1.*",
-    "magento/module-ui": "101.0.*||101.1.*",
     "ext-json": "*"
   },
   "autoload": {
