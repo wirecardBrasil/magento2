@@ -31,5 +31,11 @@
       "Moip\\Magento2\\": ""
     }
   },
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://repo.magento.com/"
+    }
+  ],
   "minimum-stability": "dev"
 }
