@@ -7,7 +7,7 @@ A solução completa para receber pagamentos e simplificar as finanças do seu n
 ## Badges
 Status Atual
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/elisei/dev-moip/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/elisei/dev-moip/badges/quality-score.png?b=main)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wirecardBrasil/magento2/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/wirecardBrasil/magento2/badges/quality-score.png?b=main)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
 [![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
 
@@ -15,7 +15,7 @@ Status Atual
 Estatísticas
 
 [![Total Downloads](https://poser.pugx.org/moip/magento2/downloads)](https://packagist.org/packages/moip/magento2)
-[![Monthly Downloads](https://poser.pugx.org/moip/magento2/d/monthly)](https://packagist.org/packages/moip/moip/magento2)
+[![Monthly Downloads](https://poser.pugx.org/moip/magento2/d/monthly)](https://packagist.org/packages/moip/magento2)
 
 Versões
 
