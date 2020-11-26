@@ -24,7 +24,7 @@ use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config;
 
 /**
- * Class Refund - Receives communication for refunded payment.
+ * Class Accept - Receives communication for accept payment.
  */
 class Accept extends Action implements CsrfAwareActionInterface
 {
