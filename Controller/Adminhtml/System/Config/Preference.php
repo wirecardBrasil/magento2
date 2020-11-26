@@ -183,7 +183,7 @@ class Preference extends \Magento\Backend\App\Action
     {
         $storeId = $this->storeManager->getDefaultStoreView()->getStoreId();
 
-        return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/capture');
+        return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/accept');
     }
 
     /*
@@ -195,7 +195,7 @@ class Preference extends \Magento\Backend\App\Action
     {
         $storeId = $this->storeManager->getDefaultStoreView()->getStoreId();
 
-        return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/cancel');
+        return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/deny');
     }
 
     /*

@@ -5,6 +5,7 @@
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
+declare(strict_types=1);
 
 namespace Moip\Magento2\Controller\Webhooks;
 
@@ -111,7 +112,14 @@ class Refund extends Action implements CsrfAwareActionInterface
      */
     public function execute()
     {
-        $resultJson = $this->resultJsonFactory->create();
+        if (!$this->getRequest()->isPost()) {
+            $resultPage = $this->resultJsonFactory->create();
+            $resultPage->setHttpResponseCode(404);
+
+            return $resultPage;
+        }
+
+        $resultPage = $this->resultJsonFactory->create();
         $response = $this->getRequest()->getContent();
         $originalNotification = json_decode($response, true);
         $authorization = $this->getRequest()->getHeader('Authorization');
@@ -135,26 +143,36 @@ class Refund extends Action implements CsrfAwareActionInterface
 
                 try {
                     $this->creditmemoService->refund($creditmemo);
-                } catch (\Exception $e) {
-                    return $resultJson->setData([
-                        'success' => 0,
-                        'error'   => $e,
-                    ]);
+                } catch (\Exception $exc) {
+                    $resultPage->setHttpResponseCode(500);
+                    $resultPage->setJsonData(
+                        json_encode([
+                            'error'   => 400,
+                            'message' => $exc->getMessage(),
+                        ])
+                    );
                 }
 
-                return $resultJson->setData([
-                    'success' => 1,
-                    'status'  => $order->getStatus(),
-                    'state'   => $order->getState(),
-                ]);
+                return $resultPage->setJsonData(
+                    json_encode([
+                        'success'   => 1,
+                        'status'    => $order->getStatus(),
+                        'state'     => $order->getState(),
+                    ])
+                );
             }
 
-            return $resultJson->setData([
-                'success' => 0,
-                'error'   => 'The transaction could not be refund',
-            ]);
-        }
+            $resultPage->setHttpResponseCode(201);
 
-        return $resultJson->setData(['success' => 0, 'fdp' => '']);
+            return $resultPage->setJsonData(
+                json_encode([
+                    'error'   => 400,
+                    'message' => 'The transaction could not be refund',
+                ])
+            );
+        }
+        $resultPage->setHttpResponseCode(401);
+
+        return $resultPage;
     }
 }
