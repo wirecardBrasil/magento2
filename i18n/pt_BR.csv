@@ -33,8 +33,8 @@ Module Authorization,Autorização do Módulo
 Warning because the sandbox account is not the same as production,Atenção pois a conta de sandbox não é mesma de produção
 Advanced Settings,Configurações Avançadas
 List the attributes of your Magento the data expected by our API.,Relacione os atributos de seu Magento com os dados esperados pela nossa API.
-The CPF will be an attribute obtained from the, O CPF será um atributo obtido do
-The CPF attribute is,O atributo do CPF é
+The CPF/CNPJ will be an attribute obtained from the, O CPF/CNPJ será um atributo obtido do
+The CPF/CNPJ attribute is,O atributo do CPF/CNPJ é
 The attribute CNPJ will be obtained from the,O atributo de CNPJ será obitido do
 by address form (checkout),formulário de checkout (endereço)
 by customer form (customer account),formulário de criação de conta (minha conta)

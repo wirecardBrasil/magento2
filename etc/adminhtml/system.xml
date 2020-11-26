@@ -17,13 +17,13 @@
                     <label>Attribute Relationship Definition</label>
                     <comment>List the attributes of your Magento the data expected by our API</comment>
                     <field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>The CPF will be an attribute obtained from the</label>
+                        <label>The CPF/CNPJ will be an attribute obtained from the</label>
                         <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
                         <config_path>payment/moip_magento2/type_cpf</config_path>
                         <validate>required-entry validate-select</validate>
                     </field>
                     <field id="cpf_for_address" translate="label select" type="select" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>The CPF attribute is</label>
+                        <label>The CPF/CNPJ attribute is</label>
                         <source_model>Moip\Magento2\Block\Adminhtml\System\Config\AddressMap</source_model>
                         <depends>
                             <field id="*/*/*/type_cpf">address</field>
@@ -32,7 +32,7 @@
                         <validate>required-entry validate-select</validate>
                     </field>
                     <field id="cpf_for_customer" translate="label select" type="select" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>The CPF attribute is</label>
+                        <label>The CPF/CNPJ attribute is</label>
                         <source_model>Moip\Magento2\Block\Adminhtml\System\Config\CustomerMap</source_model>
                         <depends>
                             <field id="*/*/*/type_cpf">customer</field>
