@@ -28,6 +28,8 @@
                 <can_use_checkout>1</can_use_checkout>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
+                <can_authorize_vault>1</can_authorize_vault>
+                <can_capture_vault>1</can_capture_vault>
                 <can_capture_partial>0</can_capture_partial>
                 <can_refund_partial_per_invoice>0</can_refund_partial_per_invoice>
                 <can_refund>1</can_refund>
@@ -69,6 +71,8 @@
                 <is_gateway>1</is_gateway>
                 <can_use_internal>1</can_use_internal>
                 <can_use_checkout>1</can_use_checkout>
+                <can_authorize_vault>1</can_authorize_vault>
+                <can_capture_vault>1</can_capture_vault>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
                 <can_capture_partial>0</can_capture_partial>
@@ -111,11 +115,17 @@
                 <get_birth_date>1</get_birth_date>
                 <get_phone>1</get_phone>
             </moip_magento2_cc>
+            <moip_magento2_cc_vault>
+                <active>1</active>
+                <model>Magento2CcVaultFacade</model>
+                <title>Stored Cards (Wirecard)</title>
+                <cvv_enabled>1</cvv_enabled>
+                <group>moip_group</group>
+            </moip_magento2_cc_vault>
             <moip_magento2_boleto>
                 <debug>1</debug>
                 <active>1</active>
                 <model>Magento2BoletoFacade</model>
-                <active>1</active>
                 <order_status>payment_review</order_status>
                 <payment_action>authorize</payment_action>
                 <title>Boleto Bancário</title>

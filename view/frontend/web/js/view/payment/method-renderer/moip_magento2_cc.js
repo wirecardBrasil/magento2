@@ -7,6 +7,7 @@ define([
     "underscore",
     "jquery",
     "Magento_Payment/js/view/payment/cc-form",
+    "Magento_Vault/js/view/payment/vault-enabler",
     "Magento_Payment/js/model/credit-card-validation/credit-card-data",
     "Moip_Magento2/js/view/payment/gateway/custom-validation",
     "Moip_Magento2/js/view/payment/lib/jquery/jquery.mask",
@@ -17,7 +18,7 @@ define([
     "mage/calendar",
     "Moip_Magento2/js/view/payment/gateway/moip",
     "Magento_Payment/js/model/credit-card-validation/validator"
-], function (_, $, Component, creditCardData, custom, mask, quote, priceUtils, $t, ko, calendar) {
+], function (_, $, Component, VaultEnabler, creditCardData, custom, mask, quote, priceUtils, $t, ko, calendar) {
     "use strict";
 
     return Component.extend({
@@ -44,6 +45,11 @@ define([
 
         initialize() {
             var self = this;
+            
+            this.vaultEnabler = new VaultEnabler();
+            this.vaultEnabler.setPaymentCode(this.getVaultCode());
+            
+
             var vat = $("#moip_magento2_cc_cc_tax_document");
             var tel = $("#moip_magento2_cc_cc_holder_phone");
             var dob = $("#moip_magento2_cc_cc_holder_birth_date");
@@ -160,8 +166,8 @@ define([
         },
 
         getData() {
-            return {
-                method: this.getCode(),
+            var data = {
+                'method': this.getCode(),
                 "additional_data": {
                     "cc_number": this.creditCardNumber().substr(-4),
                     "cc_type": this.creditCardType(),
@@ -172,10 +178,12 @@ define([
                     "cc_holder_fullname": this.creditCardHolderFullName(),
                     "cc_holder_tax_document": this.creditCardHolderTaxDocument(),
                     "cc_holder_phone": this.creditCardHolderPhone(),
-                    "cc_holder_birth_date": this.creditCardHolderBirthDate(),
-                    
+                    "cc_holder_birth_date": this.creditCardHolderBirthDate()
                 }
             };
+            data['additional_data'] = _.extend(data['additional_data'], this.additionalData);
+            this.vaultEnabler.visitAdditionalData(data);
+            return data;
         },
 
         getPublickey() {
@@ -313,6 +321,14 @@ define([
             }
             
             return newArray;
-        }
+        },
+
+        getVaultCode() {
+            return window.checkoutConfig.payment[this.getCode()].ccVaultCode;
+        },
+
+        isVaultEnabled: function () {
+            return this.vaultEnabler.isVaultEnabled();
+        },
     });
 });

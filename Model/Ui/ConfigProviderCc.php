@@ -25,6 +25,11 @@ class ConfigProviderCc implements ConfigProviderInterface
      */
     const CODE = 'moip_magento2_cc';
 
+    /*
+     * @var VAULT CODE
+     */
+    const VAULT_CODE = 'moip_magento2_cc_vault';
+
     /**
      * @var Config Base
      */
@@ -99,6 +104,7 @@ class ConfigProviderCc implements ConfigProviderInterface
                     'info_interest'        => $this->config->getInfoInterest($storeId),
                     'min_installment'      => $this->config->getMinInstallment($storeId),
                     'max_installment'      => $this->config->getMaxInstallment($storeId),
+                    'ccVaultCode'          => self::VAULT_CODE,
                 ],
             ],
         ];
@@ -122,7 +128,7 @@ class ConfigProviderCc implements ConfigProviderInterface
                 $asset = $this->ccConfig->createAsset('Moip_Magento2::images/cc/'.strtolower($label).'.svg');
                 $placeholder = $this->assetSource->findSource($asset);
                 if ($placeholder) {
-                    list($width, $height) = getimagesize($asset->getSourceFile());
+                    list($width, $height) = getimagesizefromstring($asset->getSourceFile());
                     $this->icons[$label] = [
                         'url'    => $asset->getUrl(),
                         'width'  => $width,
@@ -164,7 +170,7 @@ class ConfigProviderCc implements ConfigProviderInterface
         $asset = $this->ccConfig->createAsset('Moip_Magento2::images/cc/credit-card.svg');
         $placeholder = $this->assetSource->findSource($asset);
         if ($placeholder) {
-            list($width, $height) = getimagesize($asset->getSourceFile());
+            list($width, $height) = getimagesizefromstring($asset->getSourceFile());
             $logo = [
                 'url'    => $asset->getUrl(),
                 'width'  => $width,

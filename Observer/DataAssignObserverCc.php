@@ -44,6 +44,16 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
     const PAYER_CC_TYPE = 'cc_type';
 
     /**
+     * @const Credit Card Exp Month
+     */
+    const PAYER_CC_EXP_M = 'cc_exp_month';
+
+    /**
+     * @const Credit Card Type
+     */
+    const PAYER_CC_EXP_Y = 'cc_exp_year';
+
+    /**
      * @const Installment
      */
     const PAYER_CC_INSTALLMENTS = 'cc_installments';
@@ -69,17 +79,31 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
     const PAYER_HOLDER_PHONE = 'cc_holder_phone';
 
     /**
+     * @const Use save card
+     */
+    const PAYER_CC_SAVE = 'is_active_payment_token_enabler';
+
+    /**
+     * @const Credit Card - CVV
+     */
+    const PAYER_CC_CID = 'cc_cid';
+
+    /**
      * @var array
      */
     protected $addInformationList = [
         self::PAYER_HASH,
         self::PAYER_CC_TYPE,
+        self::PAYER_CC_EXP_M,
+        self::PAYER_CC_EXP_Y,
         self::PAYER_CC_NUMBER,
         self::PAYER_CC_INSTALLMENTS,
         self::PAYER_HOLDER_FULLNAME,
         self::PAYER_HOLDER_TAX_DOCUMENT,
         self::PAYER_HOLDER_BIRTH_DATE,
         self::PAYER_HOLDER_PHONE,
+        self::PAYER_CC_SAVE,
+        self::PAYER_CC_CID
     ];
 
     /**

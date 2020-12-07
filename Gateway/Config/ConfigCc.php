@@ -339,4 +339,18 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
             $storeId
         );
     }
+
+    /**
+     * Get is enable instant purchase.
+     *
+     * @return int
+     */
+    public function getEnableInstantPurchase($storeId = null)
+    {
+        return $this->scopeConfig->getValue(
+            'payment/moip_magento2_cc/instant_purchase_enable',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 }

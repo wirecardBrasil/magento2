@@ -10,8 +10,9 @@
     <type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                 <item name="moip_magento2_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBase</item>
+                <item name="moip_magento2_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBase</item>
                 <item name="moip_magento2_cc_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderCc</item>
+                <item name="moip_magento2_cc_vault_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\Vault\ConfigProvider</item>
                 <item name="moip_magento2_boleto_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBoleto</item>
             </argument>
         </arguments>
@@ -35,6 +36,14 @@
             <argument name="methodCodes" xsi:type="array">
                 <item name="moip_magento2_cc" xsi:type="const">Moip\Magento2\Gateway\Config\ConfigCc::METHOD</item>
                 <item name="moip_magento2_boleto" xsi:type="const">Moip\Magento2\Gateway\Config\ConfigBoleto::METHOD</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Vault\Model\Ui\TokensConfigProvider">
+        <arguments>
+            <argument name="tokenUiComponentProviders" xsi:type="array">
+                <item name="moip_magento2_cc" xsi:type="object">Moip\Magento2\Model\Ui\TokenUiComponentProvider</item>
             </argument>
         </arguments>
     </type>

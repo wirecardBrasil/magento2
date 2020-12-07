@@ -175,7 +175,6 @@
       </div>
       <!-- ko if: (hasVerification())-->
       <div class="field wirecard-input-group cvv required" data-bind="attr: {id: getCode() + '_cc_type_cvv_div'}">
-         
           <div class="control _with-tooltip">
               <input type="number"
                      class="input-text cvv"
@@ -197,8 +196,9 @@
                       <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
                   </span>
                   <div class="field-tooltip-content"
-                       data-target="dropdown"
-                       data-bind="html: getCvvImageHtml()"></div>
+                       data-target="dropdown">
+                         <span translate="'For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number'"></span>
+                       </div>
               </div>
               <label data-bind="attr: {for: getCode() + '_cc_cid'}" class="label">
                 <span><!-- ko i18n: 'CVV - Card Verification Number'--><!-- /ko --></span>
@@ -265,6 +265,17 @@
               </label>
           </div>
       </div>
-
      
+      <!-- ko if: (isVaultEnabled())-->
+        <div class="field choice">
+            <input type="checkbox"
+                name="vault[is_enabled]"
+                class="checkbox"
+                data-bind="attr: {'id': getCode() + '_enable_vault'}, checked: vaultEnabler.isActivePaymentTokenEnabler"/>
+            <label class="label" data-bind="attr: {'for': getCode() + '_enable_vault'}">
+                <span><!-- ko i18n: 'Save for later use.'--><!-- /ko --></span>
+            </label>
+        </div>
+      <!-- /ko -->
+
 </fieldset>

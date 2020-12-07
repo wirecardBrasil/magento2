@@ -128,7 +128,7 @@ class DetailTotalsDataRequest implements BuilderInterface
         $addition = $orderAdapter->getTaxAmount();
         $total = $order->getGrandTotalAmount();
 
-        if ($payment->getMethod() === 'moip_magento2_cc') {
+        if ($payment->getMethod() === 'moip_magento2_cc' || $payment->getMethod() === 'moip_magento2_cc_vault') {
             if ($installment = $payment->getAdditionalInformation('cc_installments')) {
                 if ($installment > 1) {
                     $typeInstallment = $this->configCc->getTypeInstallment($storeId);

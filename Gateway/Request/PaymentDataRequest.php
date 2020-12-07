@@ -62,6 +62,16 @@ class PaymentDataRequest implements BuilderInterface
     const CREDIT_CARD_HASH = 'hash';
 
     /**
+     * Credit card id - Card Id.
+     */
+    const CREDIT_CARD_ID = 'id';
+
+    /**
+     * Credit card CVV - Card CVV data.
+     */
+    const CREDIT_CARD_CVV = 'cvv';
+
+    /**
      * Credit card holder - Block name.
      */
     const CREDIT_HOLDER = 'holder';
@@ -213,6 +223,9 @@ class PaymentDataRequest implements BuilderInterface
         if ($payment->getMethod() === 'moip_magento2_cc') {
             $result = $this->getDataPaymetCC($payment, $orderAdapter, $storeId);
         }
+        if ($payment->getMethod() === 'moip_magento2_cc_vault') {
+            $result = $this->getDataPaymetCCVault($payment, $storeId);
+        }
 
         if ($payment->getMethod() === 'moip_magento2_boleto') {
             $result = $this->getDataPaymetBoleto($storeId);
@@ -253,6 +266,37 @@ class PaymentDataRequest implements BuilderInterface
     }
 
     /**
+     * Data for CC Vault.
+     *
+     * @param $payment
+     * @param $orderAdapter
+     * @param $storeId
+     *
+     * @return array
+     */
+    public function getDataPaymetCCVault($payment, $storeId)
+    {
+        $extensionAttributes = $payment->getExtensionAttributes();
+        $paymentToken = $extensionAttributes->getVaultPaymentToken();
+
+        $instruction[self::PAYMENT_INSTRUMENT] = [
+            self::INSTALLMENT_COUNT    => $payment->getAdditionalInformation('cc_installments') ?: 1,
+            self::STATEMENT_DESCRIPTOR => substr($this->config->getStatementDescriptor($storeId), 0, 13),
+            self::FUNDING_INSTRUMENT   => [
+                self::METHOD           => 'CREDIT_CARD',
+                self::TYPE_CREDIT_CARD => [
+                    self::CREDIT_CARD_ID   => $paymentToken->getGatewayToken(),
+                    self::CREDIT_CARD_CVV  => $payment->getAdditionalInformation('cc_cid'),
+                ],
+            ],
+        ];
+
+        $payment->unsAdditionalInformation('cc_cid');
+
+        return $instruction;
+    }
+
+    /**
      * Data for CC.
      *
      * @param $payment
@@ -271,14 +315,15 @@ class PaymentDataRequest implements BuilderInterface
         if (!$dob) {
             $dob = $orderAdapter->getCustomerDob() ? $orderAdapter->getCustomerDob() : '1985-10-10';
         }
+        $stored = $payment->getAdditionalInformation('is_active_payment_token_enabler');
         $instruction[self::PAYMENT_INSTRUMENT] = [
-            self::INSTALLMENT_COUNT    => $payment->getAdditionalInformation('cc_installments'),
+            self::INSTALLMENT_COUNT    => $payment->getAdditionalInformation('cc_installments') ?: 1,
             self::STATEMENT_DESCRIPTOR => substr($this->config->getStatementDescriptor($storeId), 0, 13),
             self::FUNDING_INSTRUMENT   => [
                 self::METHOD           => 'CREDIT_CARD',
                 self::TYPE_CREDIT_CARD => [
                     self::CREDIT_CARD_HASH   => $payment->getAdditionalInformation('cc_hash'),
-                    self::CREDIT_CARD_STORE  => true,
+                    self::CREDIT_CARD_STORE  => (bool) $stored,
                     self::CREDIT_HOLDER      => [
                         self::CREDIT_HOLDER_FULLNAME   => $payment->getAdditionalInformation('cc_holder_fullname'),
                         self::CREDIT_HOLDER_BIRTH_DATA => date('Y-m-d', strtotime($dob)),

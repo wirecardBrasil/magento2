@@ -38,6 +38,51 @@
         </arguments>
     </virtualType>
 
+    <virtualType name="Magento2CcVaultFacade" type="Magento\Vault\Model\Method\Vault">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2VaultPaymentConfig</argument>
+            <argument name="valueHandlerPool" xsi:type="object">Magento2VaultPaymentValueHandlerPool</argument>
+            <argument name="vaultProvider" xsi:type="object">Magento2CcFacade</argument>
+            <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderCc::VAULT_CODE</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2VaultPaymentValueHandlerPool" type="VaultPaymentValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento2VaultPaymentValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    
+    <virtualType name="Magento2VaultPaymentValueHandler" type="VaultPaymentDefaultValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">Magento2VaultPaymentConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Magento\Payment\Gateway\Command\CommandManagerPool">
+        <arguments>
+            <argument name="executors" xsi:type="array">
+                <item name="moip_magento2_cc" xsi:type="string">Magento2CcCommandManager</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Magento2CcVaultCommandManagerPool" type="Magento\Payment\Gateway\Command\CommandManagerPool">
+        <arguments>
+            <argument name="executors" xsi:type="array">
+                <item name="moip_magento2_cc" xsi:type="string">Magento2CcCommandManager</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2CcCommandManager" type="Magento\Payment\Gateway\Command\CommandManager">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
+        </arguments>
+    </virtualType>
+
     <!-- Configuration reader -->
     <virtualType name="Magento2BaseConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
@@ -48,6 +93,12 @@
     <virtualType name="Magento2CcConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
             <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBase::METHOD_CODE_CC</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2VaultPaymentConfig" type="Magento\Payment\Gateway\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBase::METHOD_CODE_CC_VAULT</argument>
         </arguments>
     </virtualType>
 
@@ -81,6 +132,8 @@
                 <item name="refund" xsi:type="string">Magento2RefundCommand</item>
                 <item name="accept_payment" xsi:type="string">Magento2AcceptPaymentCommand</item>
                 <item name="deny_payment" xsi:type="string">Magento2DenyPaymentCommand</item>
+                <item name="vault_authorize" xsi:type="string">Magento2CcVaultAuthorizeCommand</item>
+                <item name="vault_capture" xsi:type="string">Magento2AcceptPaymentCommand</item>
             </argument>
         </arguments>
     </virtualType>
@@ -140,10 +193,19 @@
         </arguments>
     </virtualType>
 
-
+    <virtualType name="Magento2CcVaultAuthorizeCommand" type="Moip\Magento2\Gateway\Command\AuthorizePaymentCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
+            <argument name="requestBuilder" xsi:type="object">Magento2AuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">Magento2ResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Moip\Magento2\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Moip\Magento2\Gateway\Http\Client\AuthorizeClient</argument>
+            <argument name="validator" xsi:type="object">Magento2TransactionValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">Magento2VirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
     <!-- Authorize command -->
-    <virtualType name="Magento2AuthorizeCommand" 
-        type="Moip\Magento2\Gateway\Command\AuthorizePaymentCommand">
+    <virtualType name="Magento2AuthorizeCommand" type="Moip\Magento2\Gateway\Command\AuthorizePaymentCommand">
         <arguments>
             <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
             <argument name="requestBuilder" xsi:type="object">Magento2AuthorizationRequest</argument>
@@ -162,6 +224,7 @@
                 <item name="paymentDetails" xsi:type="string">Moip\Magento2\Gateway\Request\PaymentDataRequest</item>
                 <item name="billingAddress" xsi:type="string">Moip\Magento2\Gateway\Request\BillingAddressDataRequest</item>
                 <item name="device" xsi:type="string">Moip\Magento2\Gateway\Request\DeviceDataRequest</item>
+                <item name="vault" xsi:type="string">Moip\Magento2\Gateway\Request\VaultDataBuilder</item>
             </argument>
         </arguments>
     </virtualType>
@@ -176,6 +239,7 @@
         <arguments>
             <argument name="handlers" xsi:type="array">
                 <item name="txnid" xsi:type="string">Moip\Magento2\Gateway\Response\TxnIdHandler</item>
+                <item name="vault_details" xsi:type="string">Moip\Magento2\Gateway\Response\VaultDetailsHandler</item>
             </argument>
         </arguments>
     </virtualType>

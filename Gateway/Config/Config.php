@@ -221,8 +221,10 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      * @param ScopeConfigInterface $scopeConfig
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        $methodCode = null
     ) {
+        \Magento\Payment\Gateway\Config\Config::__construct($scopeConfig, $methodCode);
         $this->scopeConfig = $scopeConfig;
     }
 

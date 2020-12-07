@@ -2,6 +2,7 @@
 @label_floating-padding-y: 1rem;
 & when (@media-common = true) {
   #payment_form_cc_moip_magento2_cc,
+  #payment_form_cc_moip_magento2_cc_vault,
   #payment_form_cc_moip_magento2_boleto {
     border: 1px solid;
     border-color: @color-gray-light2;
@@ -35,6 +36,7 @@
   }
 
   #payment_form_moip_magento2_cc,
+  #payment_form_moip_magento2_cc_vault,
   #payment_form_moip_magento2_boleto {
     .payment-method-label {
       display: inline-flex;
@@ -86,7 +88,9 @@
       .field {
         display: inline-block;
         width: 100%;
-
+        &.choice {
+          margin-bottom: @indent__base;
+        }
         &.wirecard-input-group {
           position: relative;
           margin-bottom: @indent__base;
@@ -218,7 +222,7 @@
     }
 
   }
-
+  
   .checkout-onepage-success {
     .field .control._with-tooltip {
       input {
@@ -246,7 +250,8 @@
 //  _____________________________________________
 
 .media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-  #payment_form_moip_magento2_cc {
+  #payment_form_moip_magento2_cc,
+  #payment_form_moip_magento2_cc_vault {
     .legend {
       .credit-card-types {
         .item {

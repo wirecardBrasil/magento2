@@ -29,6 +29,11 @@ class ConfigProviderBase implements ConfigProviderInterface
     const METHOD_CODE_CC = 'moip_magento2_cc';
 
     /*
+     * @var METHOD CODE CC VAULT
+     */
+    const METHOD_CODE_CC_VAULT = 'moip_magento2_cc_vault';
+
+    /*
      * @var METHOD CODE BOLETO
      */
     const METHOD_CODE_BOLETO = 'moip_magento2_boleto';

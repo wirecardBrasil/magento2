@@ -32,6 +32,41 @@ class TxnIdHandler implements HandlerInterface
     const BOLETO_PRINT_HREF = 'boleto_print_href';
 
     /**
+     * @const Credit Card Number
+     */
+    const PAYER_CC_NUMBER = 'cc_number';
+
+    /**
+     * @const Credit Card Type
+     */
+    const PAYER_CC_TYPE = 'cc_type';
+
+    /**
+     * @const Installment
+     */
+    const PAYER_CC_INSTALLMENTS = 'cc_installments';
+
+    /**
+     * @const Holder Full Nane
+     */
+    const PAYER_HOLDER_FULLNAME = 'cc_holder_fullname';
+
+    /**
+     * @const Holder Birth Date
+     */
+    const PAYER_HOLDER_BIRTH_DATE = 'cc_holder_birth_date';
+
+    /**
+     * @const Holder Tax Document
+     */
+    const PAYER_HOLDER_TAX_DOCUMENT = 'cc_holder_tax_document';
+
+    /**
+     * @const Holder Phone
+     */
+    const PAYER_HOLDER_PHONE = 'cc_holder_phone';
+
+    /**
      * Handles.
      *
      * @param array $handlingSubject
@@ -51,16 +86,45 @@ class TxnIdHandler implements HandlerInterface
 
         if ($payment->getMethod() === 'moip_magento2_cc') {
             $paymentAddtional = $response['fundingInstrument'];
+
             if (isset($paymentAddtional['creditCard'])) {
-                $ccId = $paymentAddtional['creditCard']['id'];
                 $ccType = $this->mapperCcType($paymentAddtional['creditCard']['brand']);
                 $ccLast4 = $paymentAddtional['creditCard']['last4'];
                 $ccHolderName = $paymentAddtional['creditCard']['holder']['fullname'];
             }
-            $payment->setCcNumberEnc($ccId);
             $payment->setCcType($ccType);
             $payment->setCcLast4($ccLast4);
             $payment->setCcOwner($ccHolderName);
+        }
+
+        if ($payment->getMethod() === 'moip_magento2_cc_vault') {
+            $paymentAddtional = $response['fundingInstrument'];
+
+            if (isset($paymentAddtional['creditCard'])) {
+                $ccType = $this->mapperCcType($paymentAddtional['creditCard']['brand']);
+                $ccLast4 = $paymentAddtional['creditCard']['last4'];
+                $ccHolderName = $paymentAddtional['creditCard']['holder']['fullname'];
+            }
+            $payment->setCcType($ccType);
+            $payment->setCcLast4($ccLast4);
+            $payment->setCcOwner($ccHolderName);
+
+            $payment->setAdditionalInformation(
+                self::PAYER_CC_TYPE,
+                $ccType
+            );
+            $payment->setAdditionalInformation(
+                self::PAYER_CC_NUMBER,
+                'xxxx xxxx xxxx '.$ccLast4
+            );
+            $payment->setAdditionalInformation(
+                self::PAYER_HOLDER_FULLNAME,
+                $ccHolderName
+            );
+            $payment->setAdditionalInformation(
+                self::PAYER_CC_INSTALLMENTS,
+                $response['installmentCount']
+            );
         }
 
         if ($payment->getMethod() === 'moip_magento2_boleto') {

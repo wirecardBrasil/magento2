@@ -71,8 +71,12 @@ class DeviceDataRequest implements BuilderInterface
         $paymentDO = $this->subjectReader->readPayment($buildSubject);
 
         $result = [];
+        $ipCustomer = $this->remoteAddress->getRemoteAddress();
+        if (empty($ipCustomer)) {
+            $ipCustomer = $order->getXForwardedFor();
+        }
         $result[self::DEVICE_DATA] = [
-            self::REMOTE_IP         => $this->remoteAddress->getRemoteAddress(),
+            self::REMOTE_IP         => $ipCustomer,
             self::REMOTE_USER_AGENT => $this->headerClient->getHttpUserAgent(),
         ];
 
