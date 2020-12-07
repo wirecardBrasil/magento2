@@ -129,7 +129,7 @@ class Accept extends Action implements CsrfAwareActionInterface
             $order = $this->orderFactory->create()->load($originalNotification['id'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'accept',
-                'ext_order_id'       => $originalNotification['id'],
+                'ext_order_id'       => $originalNotification['resource']['order']['id'],
                 'increment_order_id' => $order->getIncrementId(),
             ]);
             $payment = $order->getPayment();

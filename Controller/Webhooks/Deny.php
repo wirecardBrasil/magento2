@@ -126,10 +126,10 @@ class Deny extends Action implements CsrfAwareActionInterface
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayCancelToken($storeId);
         if ($storeCaptureToken === $authorization) {
-            $order = $this->orderFactory->create()->load($originalNotification['id'], 'ext_order_id');
+            $order = $this->orderFactory->create()->load($originalNotification['resource']['order']['id'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'deny',
-                'ext_order_id'       => $originalNotification['id'],
+                'ext_order_id'       => $originalNotification['resource']['order']['id'],
                 'increment_order_id' => $order->getIncrementId(),
             ]);
             $payment = $order->getPayment();
