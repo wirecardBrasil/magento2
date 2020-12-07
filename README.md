@@ -10,7 +10,7 @@ Status Atual
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/wirecardBrasil/magento2/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/wirecardBrasil/magento2/)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b7e3de5c39e546ce82f94d53be2f1277)](https://app.codacy.com/gh/elisei/dev-moip?utm_source=github.com&utm_medium=referral&utm_content=elisei/dev-moip&utm_campaign=Badge_Grade)
 [![StyleCI](https://github.styleci.io/repos/314324670/shield?branch=main)](https://github.styleci.io/repos/314324670?branch=main)
-
+[![Build Status](https://travis-ci.org/elisei/dev-moip.svg?branch=main)](https://travis-ci.org/elisei/dev-moip)
 
 Estatísticas
 
@@ -25,6 +25,7 @@ Versões
 
 Receba pagamentos de forma transparente por:
 *   Cartão de Crédito
+*	Vault (Cartão de Crédito Salvo)
 *   Boleto Bancário
 
 ## Instalação e Configuração
