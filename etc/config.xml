@@ -10,7 +10,7 @@
     <default>
         <payment>
             <moip_magento2>
-                <debug>1</debug>
+                <debug>0</debug>
                 <active>1</active>
                 <environment>production</environment>
                 <statement_descriptor>Store Name</statement_descriptor>
@@ -54,11 +54,14 @@
                 <streetNumber>1</streetNumber>
                 <district>2</district>
                 <complement>3</complement>
+                <min_order_total>5</min_order_total>
+                <max_order_total>200000</max_order_total>
+                <allowspecific>1</allowspecific>
+                <specificcountry>BR</specificcountry>
                 <cctypes>ELO,HC,HI,VI,MC,DN,AE</cctypes>
                 <cctypes_moip_magento2_mapper><![CDATA[{"Elo":"ELO","Hipercard":"HC","Hiper":"HI","visa":"VI","mastercard":"MC","diners-club":"DN","american-express":"AE"}]]></cctypes_moip_magento2_mapper>
             </moip_magento2>
             <moip_magento2_cc>
-                <debug>1</debug>
                 <active>1</active>
                 <model>Magento2CcFacade</model>
                 <order_status>payment_review</order_status>
@@ -87,10 +90,6 @@
                 <!-- Magento Issue 20139 -->
                 <can_deny_payment>1</can_deny_payment>
                 <can_accept_payment>1</can_accept_payment>
-                <min_order_total>5</min_order_total>
-                <max_order_total>200000</max_order_total>
-                <allowspecific>1</allowspecific>
-                <specificcountry>BR</specificcountry>
                 <group>moip_group</group>
                 <cctypes>ELO,HC,HI,VI,MC,DN,AE</cctypes>
                 <cctypes_moip_magento2_cc_mapper><![CDATA[{"ELO":"Elo","HC":"Hipercard","HI":"Hiper","VI":"Visa","MC":"Mastercard","DN":"Diners Club","AE":"American Express"}]]></cctypes_moip_magento2_cc_mapper>
@@ -123,13 +122,11 @@
                 <group>moip_group</group>
             </moip_magento2_cc_vault>
             <moip_magento2_boleto>
-                <debug>1</debug>
                 <active>1</active>
                 <model>Magento2BoletoFacade</model>
                 <order_status>payment_review</order_status>
                 <payment_action>authorize</payment_action>
                 <title>Boleto Bancário</title>
-                <currency>BRL</currency>
                 <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
                 <paymentInfoKeys>method_name,boleto_line_code,boleto_print_href,boleto_payer_fullname,boleto_payer_tax_document,device</paymentInfoKeys>
                 <privateInfoKeys>device</privateInfoKeys>
@@ -150,10 +147,6 @@
                 <!-- Magento Issue 20139 -->
                 <can_deny_payment>1</can_deny_payment>
                 <can_accept_payment>1</can_accept_payment>
-                <min_order_total>5</min_order_total>
-                <max_order_total>200000</max_order_total>
-                <allowspecific>1</allowspecific>
-                <specificcountry>BR</specificcountry>
                 <group>moip_group</group>
                 <expiration>3</expiration>
                 <instruction_lines_first>Não receber após vencimento</instruction_lines_first>

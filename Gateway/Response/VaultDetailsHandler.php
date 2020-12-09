@@ -89,6 +89,9 @@ class VaultDetailsHandler implements HandlerInterface
                 $extensionAttributes = $this->getExtensionAttributes($payment);
                 $extensionAttributes->setVaultPaymentToken($paymentToken);
             }
+            $payment->unsAdditionalInformation('cc_hash');
+            $payment->unsAdditionalInformation('cc_exp_month');
+            $payment->unsAdditionalInformation('cc_exp_year');
         }
     }
 

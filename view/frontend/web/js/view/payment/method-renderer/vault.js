@@ -37,7 +37,6 @@ define([
         },
 
         getData() {
-            console.log($("#"+ this.getId() + '_cc_cid').val());
             var data = {
                 'method': this.getCode(),
                 "additional_data": {
