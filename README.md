@@ -25,7 +25,7 @@ Versões
 
 Receba pagamentos de forma transparente por:
 *   Cartão de Crédito
-*	Vault (Cartão de Crédito Salvo)
+*	Cartão de Crédito Salvo (Vault)
 *   Boleto Bancário
 
 ## Instalação e Configuração
