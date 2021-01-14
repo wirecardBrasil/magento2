@@ -101,13 +101,10 @@ class PaymentGroup extends \Magento\Config\Block\System\Config\Form\Fieldset
 
         $groupConfig = $element->getGroup();
 
-        $disabledAttributeString = $this->_isPaymentEnabled($element) ? '' : ' disabled="disabled"';
-        $disabledClassString = $this->_isPaymentEnabled($element) ? '' : ' disabled';
+        
         $htmlId = $element->getHtmlId();
         $html .= '<div class="button-container"><button type="button"'.
-            $disabledAttributeString.
             ' class="button action-configure'.
-            $disabledClassString.
             '" id="'.$htmlId.'-head" >'.
             '<span class="state-closed">'.__(
                 'Configure'

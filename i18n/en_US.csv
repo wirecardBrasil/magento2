@@ -108,7 +108,5 @@ Your payment has been successfully received.,Your payment has been successfully 
 %1 payments have been updated.,%1 payments have been updated.
 %1 payments have not yet been updated.,%1 payments have not yet been updated.
 Unable to get the code, try again. =(,Unable to get the code, try again. =(
-"Your module is authorized, but you have reached the notification url preference limit.","Seu módulo está autorizado, mas você atingiu o limite de preferências de url de notificação."
+Your module is authorized, but you have reached the notification url preference limit.,Your module is authorized, but you have reached the notification url preference limit.
 Your module is authorized. =),Your module is authorized. =)
-"For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number","For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number"
-Payment Config,Payment Config

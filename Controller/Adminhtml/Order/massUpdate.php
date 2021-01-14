@@ -71,7 +71,11 @@ class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassA
                 try {
                     $method->fetchTransactionInfo($payment, $transactionId);
                     $payment->getOrder()->save();
-                    $countUpdate++;
+                    $state = $payment->getOrder()->getState();
+                    if($state === "processing") {
+                        $countUpdate++;
+                    }
+                    $countNotUpdate++;
                 } catch (\Exception $exc) {
                     $countNotUpdate++;
                 }

@@ -80,7 +80,7 @@ class StatusUpdateOrderBoleto
             $loadedOrder = $this->order->load($order->getEntityId());
 
             if ($loadedOrder->canFetchPaymentReviewUpdate()) {
-                $payment = $loadedOrder->getPayment();
+                $payment = $loadedOrder->getPayment()->save();
 
                 try {
                     $payment->update(true);

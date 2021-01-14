@@ -67,9 +67,9 @@ class PaymentDataRequest implements BuilderInterface
     const CREDIT_CARD_ID = 'id';
 
     /**
-     * Credit card CVC - Card CVC data.
+     * Credit card CVV - Card CVV data.
      */
-    const CREDIT_CARD_CVC = 'cvc';
+    const CREDIT_CARD_CVV = 'cvc';
 
     /**
      * Credit card holder - Block name.
@@ -286,7 +286,7 @@ class PaymentDataRequest implements BuilderInterface
                 self::METHOD           => 'CREDIT_CARD',
                 self::TYPE_CREDIT_CARD => [
                     self::CREDIT_CARD_ID   => $paymentToken->getGatewayToken(),
-                    self::CREDIT_CARD_CVC  => $payment->getAdditionalInformation('cc_cid'),
+                    self::CREDIT_CARD_CVV  => $payment->getAdditionalInformation('cc_cid'),
                 ],
             ],
         ];
