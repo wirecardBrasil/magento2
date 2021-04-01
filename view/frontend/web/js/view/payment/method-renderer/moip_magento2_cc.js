@@ -125,8 +125,11 @@ define([
                 if(value === "VI" || value === "MC" || value === "ELO" || value === "HC" || value === "HI") {
                     $("#moip_magento2_cc_cc_number").mask("0000 0000 0000 0000");
                 } 
-                if(value === "DN" || value === "AE") {
+                if(value === "DN") {
                     $("#moip_magento2_cc_cc_number").mask("0000 000000 0000");
+                }
+                if(value === "AE"){
+                    $("#moip_magento2_cc_cc_number").mask("0000 000000 00000");
                 }
                 creditCardData.selectedCardType = value;
             });
