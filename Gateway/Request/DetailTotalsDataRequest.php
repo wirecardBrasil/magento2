@@ -137,7 +137,7 @@ class DetailTotalsDataRequest implements BuilderInterface
                     if ($typeInstallment === 'simple') {
                         $installmentInterest = $this->getInterestSimple($total, $interest[$installment], $installment);
                     }
-                    if($installmentInterest) {
+                    if ($installmentInterest) {
                         $total_parcelado = $installmentInterest * $installment;
                         $additionalPrice = $total_parcelado - $total;
                         $additionalPrice = number_format((float) $additionalPrice, 2, '.', '');

@@ -98,7 +98,7 @@ class TaxDocumentDataRequest implements BuilderInterface
 
             $obtainTaxDocFrom = $this->config->getAddtionalValue('type_cpf');
 
-            if(!$taxDocument) {
+            if (!$taxDocument) {
                 $taxDocument = $orderAdapter->getCustomerTaxvat();
             }
         }

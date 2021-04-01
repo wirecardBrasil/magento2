@@ -126,7 +126,8 @@ class Refund extends Action implements CsrfAwareActionInterface
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayRefundToken($storeId);
         if ($storeCaptureToken === $authorization) {
-            $order = $this->orderFactory->create()->load($originalNotification['resource']['order']['id'], 'ext_order_id');
+            $orderMoip = $originalNotification['resource']['order']['id'];
+            $order = $this->orderFactory->create()->load($orderMoip, 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'refund',
                 'ext_order_id'       => $originalNotification['resource']['order']['id'],
