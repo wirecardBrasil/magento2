@@ -7,6 +7,12 @@
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <!-- Fixed Issue  #84-->
+    <type name="Magento\Vault\Api\PaymentTokenManagementInterface">
+        <plugin name="moip_vault"
+                type="Moip\Magento2\Plugin\PaymentToken"
+                sortOrder="1"/>
+    </type>
     <!-- Payment Method Facade configuration -->
     <virtualType name="Magento2BaseFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
