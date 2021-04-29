@@ -285,6 +285,47 @@
                         <config_path>payment/moip_magento2/sort_order</config_path>
                     </field>
                 </group>
+                <group id="payment_config" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                    <label>Payment Split</label>
+                    <comment>The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.</comment>
+                    <field id="use_split" translate="label" type="select" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Use Split</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2/use_split</config_path>
+                    </field>
+                    <field id="secondary_mpa" translate="label" type="text" sortOrder="610" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>MPA - Secondary</label>
+                        <config_path>payment/moip_magento2/secondary_mpa</config_path>
+                        <validate>required-entry</validate>
+                        <depends>
+                            <field id="*/*/*/use_split">1</field>
+                        </depends>
+                    </field>
+                    <field id="secondary_percent_include_shipping" translate="label" type="select" sortOrder="620" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Include Freight on Commission</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2/secondary_percent_include_shipping</config_path>
+                        <depends>
+                            <field id="*/*/*/use_split">1</field>
+                        </depends>
+                    </field>
+                    <field id="secondary_percent_include_interest" translate="label" type="select" sortOrder="630" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <label>Include credit card interest in the commission</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <config_path>payment/moip_magento2/secondary_percent_include_interest</config_path>
+                        <depends>
+                            <field id="*/*/*/use_split">1</field>
+                        </depends>
+                    </field>
+                    <field id="secondary_percent" translate="label" type="text" sortOrder="640" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Percentage sent to the commissioner</label>
+                        <config_path>payment/moip_magento2/secondary_percent</config_path>
+                        <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-1-100</validate>
+                        <depends>
+                            <field id="*/*/*/use_split">1</field>
+                        </depends>
+                    </field>
+                </group>
             </group>
         </section>
     </system>

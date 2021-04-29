@@ -60,6 +60,7 @@
                 <specificcountry>BR</specificcountry>
                 <cctypes>ELO,HC,HI,VI,MC,DN,AE</cctypes>
                 <cctypes_moip_magento2_mapper><![CDATA[{"Elo":"ELO","Hipercard":"HC","Hiper":"HI","visa":"VI","mastercard":"MC","diners-club":"DN","american-express":"AE"}]]></cctypes_moip_magento2_mapper>
+                <use_split>0</use_split>
             </moip_magento2>
             <moip_magento2_cc>
                 <active>1</active>

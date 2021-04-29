@@ -111,3 +111,10 @@ Unable to get the code, try again. =(,Unable to get the code, try again. =(
 Your module is authorized, but you have reached the notification url preference limit.,Your module is authorized, but you have reached the notification url preference limit.
 Your module is authorized. =),Your module is authorized. =)
 Waiting...,Waiting...
+Payment Split,Payment Split
+"The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.","The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of."
+Use Split,Use Split
+MPA - Secondary,MPA - Secondary
+Include Freight on Commission,Include Freight on Commission
+Include credit card interest in the commission,Include credit card interest in the commission
+Percentage sent to the commissioner,Percentage sent to the commissioner

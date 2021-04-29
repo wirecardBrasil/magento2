@@ -486,4 +486,24 @@ class Config extends \Magento\Payment\Gateway\Config\Config
             $storeId
         );
     }
+
+    /**
+     * Gets the SlipValue.
+     *
+     * @param string   $typePattern
+     * @param string   $field
+     * @param int|null $storeId
+     *
+     * @return string
+     */
+    public function getSplitValue($field, $storeId = null): string
+    {
+        $pathPattern = 'payment/%s/%s';
+
+        return $this->scopeConfig->getValue(
+            sprintf($pathPattern, self::METHOD, $field),
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 }

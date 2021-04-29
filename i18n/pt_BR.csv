@@ -270,3 +270,10 @@ Verifique o CPF/CNPJ, ele não foi informado.,Verifique o CPF/CNPJ, ele não foi
 Save for later use.,Salvar para uso futuro.
 "For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number","Para Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard são 3 números localizados na parte de trás do cartão. Para American Express os 4 números localizados na frente do cartão logo após o numero do cartão"
 Waiting...,Aguardando...
+Payment Split,Split de Pagamento
+"The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.","No Split de pagamento parte do valor do pedido é envido a outra conta Moip. Isso é apenas uma pequena fração do que a API do Marketplace Moip é capaz."
+Use Split,Usar um Split
+MPA - Secondary,MPA - Secundário
+Include Freight on Commission,Incluir o valor do frete no cálculo da comissão
+Include credit card interest in the commission,Incluir o valor de juros de parcelamento no cálculo da comissão
+Percentage sent to the commissioner,Percentagem de comissão enviada
