@@ -285,7 +285,7 @@
                         <config_path>payment/moip_magento2/sort_order</config_path>
                     </field>
                 </group>
-                <group id="payment_config" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <group id="payment_split" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Payment Split</label>
                     <comment>The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.</comment>
                     <field id="use_split" translate="label" type="select" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
