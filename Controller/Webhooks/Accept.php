@@ -126,8 +126,7 @@ class Accept extends Action implements CsrfAwareActionInterface
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayCaptureToken($storeId);
         if ($storeCaptureToken === $authorization) {
-            $orderMoip = $originalNotification['resource']['order']['id'];
-            $order = $this->orderFactory->create()->load($orderMoip, 'ext_order_id');
+            $order = $this->orderFactory->create()->load($originalNotification['resource']['order']['id'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'accept',
                 'ext_order_id'       => $originalNotification['resource']['order']['id'],

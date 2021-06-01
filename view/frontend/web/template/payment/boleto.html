@@ -33,11 +33,6 @@
     </div>
     <div class="payment-method-content">
         <each args="getRegion('messages')" render="" />
-        <div class="payment-method-billing-address">
-            <!-- ko foreach: $parent.getRegion(getBillingAddressFormName()) -->
-            <!-- ko template: getTemplate() --><!-- /ko -->
-            <!--/ko-->
-        </div>
         <form class="form" id="co-payment-form" method="post" afterRender="initFormElement">
             <render args="boletoForm" />
         </form>

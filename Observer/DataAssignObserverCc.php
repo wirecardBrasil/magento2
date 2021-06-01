@@ -103,7 +103,7 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
         self::PAYER_HOLDER_BIRTH_DATE,
         self::PAYER_HOLDER_PHONE,
         self::PAYER_CC_SAVE,
-        self::PAYER_CC_CID,
+        self::PAYER_CC_CID
     ];
 
     /**

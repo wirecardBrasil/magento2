@@ -1,0 +1,14 @@
+.admin__field-option > label[for=p_method_moip_magento2_cc]:after
+{
+	content: " - Cartão de crédito";
+}
+.admin__field-option > label[for=p_method_moip_magento2_boleto]:after
+{
+	content: " - Boleto Bancário"
+}
+.admin__field-option > label[for=p_method_moip_magento2]
+{
+	font-size: 0px;
+	display: none;
+	visibility: hidden;
+}

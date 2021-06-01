@@ -30,3 +30,13 @@ fieldset#payment_other_moip_base,
 fieldset#payment_us_moip_base {
   margin-left: 2%;
 }
+
+
+#payment_us_moip_base-head,
+#payment_other_moip_base-head {
+  display: flex;
+}
+.moip-payment-byline {
+  font-weight: normal;
+  font-size: 14px;
+}
