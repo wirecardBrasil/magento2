@@ -19,7 +19,7 @@
     "magento/module-vault": "101.1.*",
     "magento/module-catalog": "103.0.*",
     "magento/module-quote": "101.1.*",
-    "magento/module-theme": "101.1.*",
+    "magento/module-theme": "101.0.*",
     "magento/module-ui": ">=101.0.3",
     "ext-json": "*"
   },
