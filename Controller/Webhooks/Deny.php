@@ -15,10 +15,12 @@ use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Payment\Model\Method\Logger;
 use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Sales\Model\Order\CreditmemoFactory;
 use Magento\Sales\Model\Order\Invoice;
+use Magento\Sales\Model\Order\Email\Sender\OrderCommentSender;
 use Magento\Sales\Model\Service\CreditmemoService;
 use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config;
@@ -77,11 +79,22 @@ class Deny extends Action implements CsrfAwareActionInterface
     protected $storeManager;
 
     /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
+     * @var orderCommentSender
+     */
+    protected $orderCommentSender;
+
+    /**
      * @param Context               $context
      * @param logger                $logger
      * @param Config                $config
      * @param OrderInterfaceFactory $orderFactory
      * @param JsonFactory           $resultJsonFactory
+     * @param Json                  $json
      */
     public function __construct(
         Context $context,
@@ -92,7 +105,9 @@ class Deny extends Action implements CsrfAwareActionInterface
         CreditmemoService $creditmemoService,
         Invoice $invoice,
         StoreManagerInterface $storeManager,
-        JsonFactory $resultJsonFactory
+        JsonFactory $resultJsonFactory,
+        Json $json,
+        OrderCommentSender $orderCommentSender
     ) {
         parent::__construct($context);
         $this->config = $config;
@@ -103,6 +118,8 @@ class Deny extends Action implements CsrfAwareActionInterface
         $this->invoice = $invoice;
         $this->storeManager = $storeManager;
         $this->resultJsonFactory = $resultJsonFactory;
+        $this->json = $json;
+        $this->orderCommentSender = $orderCommentSender;
     }
 
     /**
@@ -112,37 +129,65 @@ class Deny extends Action implements CsrfAwareActionInterface
      */
     public function execute()
     {
-        if (!$this->getRequest()->isPost()) {
-            $resultPage = $this->resultJsonFactory->create();
-            $resultPage->setHttpResponseCode(404);
+        // if (!$this->getRequest()->isPost()) {
+        //     $resultPage = $this->resultJsonFactory->create();
+        //     $resultPage->setHttpResponseCode(404);
 
-            return $resultPage;
-        }
+        //     return $resultPage;
+        // }
 
         $resultPage = $this->resultJsonFactory->create();
         $response = $this->getRequest()->getContent();
-        $originalNotification = json_decode($response, true);
+        $originalNotification = $this->json->unserialize($response);
         $authorization = $this->getRequest()->getHeader('Authorization');
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayCancelToken($storeId);
         if ($storeCaptureToken === $authorization) {
-            $orderMoip = $originalNotification['resource']['order']['id'];
-            $order = $this->orderFactory->create()->load($orderMoip, 'ext_order_id');
+            $data = $originalNotification['resource']['order'];
+            $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'deny',
-                'ext_order_id'       => $originalNotification['resource']['order']['id'],
+                'ext_order_id'       => $data['id'],
                 'increment_order_id' => $order->getIncrementId(),
+                'webhook_data'       => $response
             ]);
             $payment = $order->getPayment();
             if (!$order->canCancel()) {
                 try {
-                    $payment->deny();
+                    $isOnline = true;
+                    $payment->deny($isOnline);
                     $payment->save();
+                    $cancelDetailsAdmin = __('We did not record the payment.');
+                    $cancelDetailsCus = __('The payment deadline has been exceeded.');
+                    if (isset($data['payments'])) {
+                        foreach ($data['payments'] as $payment) {
+                            if (isset($payment['cancellationDetails'])) {
+                                $cancelCode = $payment['cancellationDetails']['code'];
+                                $cancelDescription = $payment['cancellationDetails']['description'];
+                                $cancelBy = $payment['cancellationDetails']['cancelledBy'];
+                                $cancelDetailsAdmin = __('%1, code %2, by %3', $cancelDescription, $cancelCode, $cancelBy);
+                                $cancelDetailsCus = __('%1', $cancelDescription);
+                            }
+                        }
+                    }
+                    /** customer information for cancel **/
+                    $history = $order->addStatusHistoryComment($cancelDetailsCus);
+                    $history->setIsVisibleOnFront(1);
+                    $history->setIsCustomerNotified(1);
+                    // $order->sendOrderUpdateEmail(1, $cancelDetailsCus);
+
+                    /** admin information for cancel **/
+                    $history = $order->addStatusHistoryComment($cancelDetailsAdmin);
+                    $history->setIsVisibleOnFront(0);
+                    $history->setIsCustomerNotified(0);
                     $order->save();
+
+                    $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
+
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
                     $resultPage->setJsonData(
-                        json_encode([
+                        $this->json->serialize([
                             'error'   => 400,
                             'message' => $exc->getMessage(),
                         ])
@@ -150,7 +195,7 @@ class Deny extends Action implements CsrfAwareActionInterface
                 }
 
                 return $resultPage->setJsonData(
-                    json_encode([
+                    $this->json->serialize([
                         'success'   => 1,
                         'status'    => $order->getStatus(),
                         'state'     => $order->getState(),
@@ -161,12 +206,13 @@ class Deny extends Action implements CsrfAwareActionInterface
             $resultPage->setHttpResponseCode(201);
 
             return $resultPage->setJsonData(
-                json_encode([
+                $this->json->serialize([
                     'error'   => 400,
                     'message' => 'The transaction could not be refund',
                 ])
             );
         }
+
         $resultPage->setHttpResponseCode(401);
 
         return $resultPage;

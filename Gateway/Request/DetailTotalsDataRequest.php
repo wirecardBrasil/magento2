@@ -151,17 +151,16 @@ class DetailTotalsDataRequest implements BuilderInterface
             }
         }
         $total = $total - $orderAdapter->getShippingAmount();
+        $discount = -1 * $orderAdapter->getDiscountAmount();
         $result[self::TOTALS_AMOUNT] = [
             self::TOTALS_AMOUNT_CURRENCY    => $order->getCurrencyCode(),
-            self::TOTALS_AMOUNT_GRAND_TOTAL => $this->config->formatPrice($total),
+            self::TOTALS_AMOUNT_GRAND_TOTAL => ceil($this->config->formatPrice($total)),
             self::TOTALS_AMOUNT_SUBTOTALS   => [
-                self::TOTALS_AMOUNT_SUBTOTALS_SHIPPING => $this->config->formatPrice(
+                self::TOTALS_AMOUNT_SUBTOTALS_SHIPPING => ceil($this->config->formatPrice(
                     $orderAdapter->getShippingAmount()
-                ),
-                self::TOTALS_AMOUNT_SUBTOTALS_DISCOUNT => -1 * $this->config->formatPrice(
-                    $orderAdapter->getDiscountAmount()
-                ),
-                self::TOTALS_AMOUNT_SUBTOTALS_ADDITION => $this->config->formatPrice($addition),
+                )),
+                self::TOTALS_AMOUNT_SUBTOTALS_DISCOUNT => ceil($this->config->formatPrice($discount)),
+                self::TOTALS_AMOUNT_SUBTOTALS_ADDITION => ceil($this->config->formatPrice($addition)),
             ],
         ];
 

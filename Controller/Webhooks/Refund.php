@@ -15,6 +15,7 @@ use Magento\Framework\App\CsrfAwareActionInterface;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Payment\Model\Method\Logger;
 use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Sales\Model\Order\CreditmemoFactory;
@@ -75,6 +76,11 @@ class Refund extends Action implements CsrfAwareActionInterface
      * @var storeManager
      */
     protected $storeManager;
+    
+    /**
+     * @var Json
+     */
+    protected $json;
 
     /**
      * @param Context               $context
@@ -82,6 +88,7 @@ class Refund extends Action implements CsrfAwareActionInterface
      * @param Config                $config
      * @param OrderInterfaceFactory $orderFactory
      * @param JsonFactory           $resultJsonFactory
+     * @param Json                  $json
      */
     public function __construct(
         Context $context,
@@ -92,7 +99,8 @@ class Refund extends Action implements CsrfAwareActionInterface
         CreditmemoService $creditmemoService,
         Invoice $invoice,
         StoreManagerInterface $storeManager,
-        JsonFactory $resultJsonFactory
+        JsonFactory $resultJsonFactory,
+        Json $json
     ) {
         parent::__construct($context);
         $this->config = $config;
@@ -103,6 +111,7 @@ class Refund extends Action implements CsrfAwareActionInterface
         $this->invoice = $invoice;
         $this->storeManager = $storeManager;
         $this->resultJsonFactory = $resultJsonFactory;
+        $this->json = $json;
     }
 
     /**
@@ -121,17 +130,18 @@ class Refund extends Action implements CsrfAwareActionInterface
 
         $resultPage = $this->resultJsonFactory->create();
         $response = $this->getRequest()->getContent();
-        $originalNotification = json_decode($response, true);
+        $originalNotification = $this->json->unserialize($response);
         $authorization = $this->getRequest()->getHeader('Authorization');
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayRefundToken($storeId);
         if ($storeCaptureToken === $authorization) {
-            $orderMoip = $originalNotification['resource']['order']['id'];
-            $order = $this->orderFactory->create()->load($orderMoip, 'ext_order_id');
+            $data = $originalNotification['resource']['order'];
+            $order = $this->orderFactory->create()->load($data['ownId'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'refund',
-                'ext_order_id'       => $originalNotification['resource']['order']['id'],
+                'ext_order_id'       => $data['ownId'],
                 'increment_order_id' => $order->getIncrementId(),
+                'webhook_data'       => $response
             ]);
             $invoices = $order->getInvoiceCollection();
             if ($invoices) {
@@ -147,7 +157,7 @@ class Refund extends Action implements CsrfAwareActionInterface
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
                     $resultPage->setJsonData(
-                        json_encode([
+                        $this->json->serialize([
                             'error'   => 400,
                             'message' => $exc->getMessage(),
                         ])
@@ -155,7 +165,7 @@ class Refund extends Action implements CsrfAwareActionInterface
                 }
 
                 return $resultPage->setJsonData(
-                    json_encode([
+                    $this->json->serialize([
                         'success'   => 1,
                         'status'    => $order->getStatus(),
                         'state'     => $order->getState(),
@@ -166,7 +176,7 @@ class Refund extends Action implements CsrfAwareActionInterface
             $resultPage->setHttpResponseCode(201);
 
             return $resultPage->setJsonData(
-                json_encode([
+                $this->json->serialize([
                     'error'   => 400,
                     'message' => 'The transaction could not be refund',
                 ])
