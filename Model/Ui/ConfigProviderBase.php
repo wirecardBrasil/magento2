@@ -82,7 +82,7 @@ class ConfigProviderBase implements ConfigProviderInterface
         return [
             'payment' => [
                 Config::METHOD => [
-                    'isActive' => false
+                    'isActive' => false,
                 ],
             ],
         ];

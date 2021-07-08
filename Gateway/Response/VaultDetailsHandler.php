@@ -31,7 +31,7 @@ class VaultDetailsHandler implements HandlerInterface
     /**
      * @var OrderPaymentExtensionInterfaceFactory
      */
-    protected $paymentExtensionFactory;
+    protected $payExtensionFactory;
 
     /**
      * @var SubjectReader
@@ -56,7 +56,7 @@ class VaultDetailsHandler implements HandlerInterface
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
-        OrderPaymentExtensionInterfaceFactory $paymentExtensionFactory,
+        OrderPaymentExtensionInterfaceFactory $payExtensionFactory,
         PaymentTokenFactoryInterface $paymentTokenFactory = null
     ) {
         if ($paymentTokenFactory === null) {
@@ -64,7 +64,7 @@ class VaultDetailsHandler implements HandlerInterface
         }
 
         $this->objectManager = $objectManager;
-        $this->paymentExtensionFactory = $paymentExtensionFactory;
+        $this->payExtensionFactory = $payExtensionFactory;
         $this->paymentTokenFactory = $paymentTokenFactory;
     }
 
@@ -146,7 +146,7 @@ class VaultDetailsHandler implements HandlerInterface
     {
         $extensionAttributes = $payment->getExtensionAttributes();
         if (null === $extensionAttributes) {
-            $extensionAttributes = $this->paymentExtensionFactory->create();
+            $extensionAttributes = $this->payExtensionFactory->create();
             $payment->setExtensionAttributes($extensionAttributes);
         }
 

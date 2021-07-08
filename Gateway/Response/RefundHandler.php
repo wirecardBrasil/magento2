@@ -10,6 +10,7 @@ namespace Moip\Magento2\Gateway\Response;
 
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
+use Magento\Sales\Model\Order\Creditmemo;
 
 /**
  * Class AcceptPaymentHandler - Deals reading responses for refunded payment authorization.
@@ -36,6 +37,14 @@ class RefundHandler implements HandlerInterface
         }
 
         $paymentDO = $handlingSubject['payment'];
+        $payment = $paymentDO->getPayment();
+
+        $payment->setTransactionId($response['REFUND_ID']);
+
+        if ($response['STATUS'] === 'REQUESTED') {
+            $creditmemo = $payment->getCreditmemo();
+            $creditmemo->setState(Creditmemo::STATE_OPEN);
+        }
 
         if ($response['RESULT_CODE']) {
             $paymentDO->getPayment();

@@ -8,7 +8,6 @@
 
 namespace Moip\Magento2\Model\Ui\Vault\Adminhtml;
 
-
 use Magento\Framework\View\Element\Template;
 use Magento\Vault\Api\Data\PaymentTokenInterface;
 use Magento\Vault\Model\Ui\TokenUiComponentInterfaceFactory;
@@ -21,7 +20,6 @@ class TokenUiComponentProvider implements TokenUiComponentProviderInterface
      * @var TokenUiComponentInterfaceFactory
      */
     private $componentFactory;
-    
 
     /**
      * TokenUiComponentProvider constructor.
@@ -43,14 +41,15 @@ class TokenUiComponentProvider implements TokenUiComponentProviderInterface
         $component = $this->componentFactory->create(
             [
                 'config' => [
-                    'code' => ConfigProviderCc::VAULT_CODE,
-                    TokenUiComponentProviderInterface::COMPONENT_DETAILS => $details,
+                    'code'                                                   => ConfigProviderCc::VAULT_CODE,
+                    TokenUiComponentProviderInterface::COMPONENT_DETAILS     => $details,
                     TokenUiComponentProviderInterface::COMPONENT_PUBLIC_HASH => $paymentToken->getPublicHash(),
-                    'template' => 'Moip_Magento2::form/vault.phtml'
+                    'template'                                               => 'Moip_Magento2::form/vault.phtml',
                 ],
-                'name' => Template::class
+                'name' => Template::class,
             ]
         );
+
         return $component;
     }
 }

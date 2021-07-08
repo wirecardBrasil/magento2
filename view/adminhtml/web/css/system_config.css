@@ -1,0 +1,32 @@
+/**
+ * Copyright Moip. All rights reserved.
+ * See COPYING.txt for license details.
+*/
+.complex.moip-payment-section .heading strong {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-weight: normal;
+}
+
+.complex.moip-payment-section .moip-payment-logo {
+  flex-basis: 15%;
+  height: 70px;
+  background: url('images/logo.svg') no-repeat center center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
+
+.complex.moip-payment-section .moip-payment-byline {
+  flex-basis: 85%;
+  padding-left: 2%;
+}
+
+.complex.moip-payment-section .button-container { float: right; }
+
+fieldset#payment_other_moip_base,
+fieldset#payment_us_moip_base {
+  margin-left: 2%;
+}

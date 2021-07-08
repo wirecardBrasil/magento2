@@ -78,7 +78,7 @@ class CreateOrderAuthorizeClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders');
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setRawData($this->json->serialize($request), 'application/json');
             $client->setMethod(ZendClient::POST);
@@ -111,9 +111,10 @@ class CreateOrderAuthorizeClient implements ClientInterface
         } catch (InvalidArgumentException $e) {
             $this->logger->debug(
                 [
-                    'url'      => $url.'orders',
-                    'request'  => $this->json->serialize($transferObject->getBody()),
-                    'response' => $responseBody,
+                    'exception' => $e->getMessage(),
+                    'url'       => $url.'orders',
+                    'request'   => $this->json->serialize($transferObject->getBody()),
+                    'response'  => $responseBody,
                 ]
             );
             // phpcs:ignore Magento2.Exceptions.DirectThrow

@@ -154,5 +154,41 @@
 		<message code="PAY-656" translate="true">Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.</message>
 		<message code="PAY-657" translate="true">Dados de pagamento MPOS inválidos.</message>
 		<message code="PAY-681" translate="true">Verifique o CPF/CNPJ, ele não foi informado.</message>
+		<!-- Refund Data -->
+		<message code="REF-001" translate="true">O valor deve ser informado em centavos.</message>
+		<message code="REF-002" translate="true">O valor solicitado para reembolso é maior que o valor do pagamento ou inválido.</message>
+		<message code="REF-003" translate="true">O valor solicitado somado aos reembolsos parciais é maior que o valor disponível para reembolso.</message>
+		<message code="REF-004" translate="true">Reembolso já realizado.</message>
+		<message code="REF-005" translate="true">O reembolso não pode ser realizado pois o pagamento não foi autorizado.</message>
+		<message code="REF-006" translate="true">O reembolso não foi autorizado pois o pedido ainda não foi pago.</message>
+		<message code="REF-007" translate="true">Informe um instrumento financeiro válido.</message>
+		<message code="REF-008" translate="true">Tipo de conta bancária inválido.</message>
+		<message code="REF-009" translate="true">Esse pedido possui mais de um pagamento autorizado. É necessário fazer os reembolsos parciais individualmente nos pagamentos.</message>
+		<message code="REF-010" translate="true">O identificador do banco deve ser numérico.</message>
+		<message code="REF-011" translate="true">O identificador de banco informado é inválido, consulte lista de bancos disponíveis para reembolso.</message>
+		<message code="REF-012" translate="true">A agência bancária deve ser numérica.</message>
+		<message code="REF-013" translate="true">O digito verificador da agência bancária deve ser numérico ou caracter X.</message>
+		<message code="REF-014" translate="true">O número da conta bancária possui caracteres inválidos. Apenas caracteres numéricos são aceitos.</message>
+		<message code="REF-015" translate="true">O digito verificador da conta bancária deve ser numérico.</message>
+		<message code="REF-016" translate="true">É necessario informar os dados do portador da conta bancária.</message>
+		<message code="REF-017" translate="true">Informe o nome completo do titular da conta bancária.</message>
+		<message code="REF-018" translate="true">É necessario informar o documento do portador da conta bancária.</message>
+		<message code="REF-019" translate="true">Informe o tipo do documento.</message>
+		<message code="REF-020" translate="true">O tipo de documento informado é inválido.</message>
+		<message code="REF-021" translate="true">O número do documento deve ser informado.</message>
+		<message code="REF-022" translate="true">O número do documento possui caracteres inválidos. Apenas caracteres numéricos são aceitos.</message>
+		<message code="REF-023" translate="true">Prazo limite de reembolso em cartão de crédito excedido, tente realizar o reembolso em uma conta bancária.</message>
+		<message code="REF-024" translate="true">Cliente não possui conta Moip, tente realizar o reembolso em uma conta bancária.</message>
+		<message code="REF-025" translate="true">Reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento.</message>
+		<message code="REF-026" translate="true">Pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento.</message>
+		<message code="REF-027" translate="true">Um dos recebedores do pagamento não possui saldo suficiente para o reembolso.</message>
+		<message code="REF-028" t7anslate="true">Uma das contas informadas não é recebedora do pagamento.</message>
+		<message code="REF-029" translate="true">O recebedor primário não pode assumir o reembolso do recebedor secundário.</message>
+		<message code="REF-030" translate="true">O recebedor secundário não pode reembolsar um valor maior do que o recebido no pagamento.</message>
+		<message code="REF-031" translate="true">A conta a ser creditada é um dos recebedores do pagamento. Por favor escolha outra forma de reembolso.</message>
+		<message code="REF-032" translate="true">O reembolso mPOS pode ser usado se e somente se o pagamento for feito via mPOS.</message>
+		<message code="REF-033" translate="true">Para reembolso mPOS só é possível reembolso completo.</message>
+		<message code="REF-034" translate="true">Conta Moip não encontrada.</message>
+		<message code="REF-035" translate="true">Esse pedido contém transações com formas de pagamento distintas. É necessário fazer os reembolsos individualmente nos pagamentos.</message>
     </message_list>
 </mapping>

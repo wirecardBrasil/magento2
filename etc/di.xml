@@ -463,6 +463,12 @@
         </arguments>
     </type>
 
+    <type name="Moip\Magento2\Gateway\Http\Client\RefundClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
     <type name="Moip\Magento2\Cron\StatusUpdateOrderCc">
         <arguments>
             <argument name="logger" xsi:type="object">Magento2Logger</argument>

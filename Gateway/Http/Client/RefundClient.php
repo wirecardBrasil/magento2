@@ -10,6 +10,8 @@ declare(strict_types=1);
 
 namespace Moip\Magento2\Gateway\Http\Client;
 
+use InvalidArgumentException;
+use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Payment\Gateway\Http\ClientInterface;
@@ -22,6 +24,8 @@ use Moip\Magento2\Gateway\Config\Config;
  */
 class RefundClient implements ClientInterface
 {
+    const MOIP_ORDER_ID = 'moip_order_id';
+
     /**
      * @var LoggerInterface
      */
@@ -69,11 +73,60 @@ class RefundClient implements ClientInterface
      */
     public function placeRequest(TransferInterface $transferObject)
     {
+        $client = $this->httpClientFactory->create();
         $request = $transferObject->getBody();
-        if ($request) {
-            return  [
-                'RESULT_CODE' => 1,
-            ];
+
+        $url = $this->config->getApiUrl();
+        $apiBearer = $this->config->getMerchantGatewayOauth();
+        $orderMoip = $request[self::MOIP_ORDER_ID];
+
+        try {
+            $client->setUri($url.'orders/'.$orderMoip.'/refunds');
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
+            $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
+            $client->setRawData($this->json->serialize($request['send']), 'application/json');
+            $client->setMethod(ZendClient::POST);
+
+            $responseBody = $client->request()->getBody();
+
+            $data = $this->json->unserialize($responseBody);
+
+            if (isset($data['id'])) {
+                $response = array_merge(
+                    [
+                        'RESULT_CODE'   => 1,
+                        'STATUS'        => $data['status'],
+                        'REFUND_ID'     => $data['id'],
+                    ],
+                    $data
+                );
+            } else {
+                $response = array_merge(
+                    [
+                        'RESULT_CODE' => 0,
+                    ],
+                    $data
+                );
+            }
+            $this->logger->debug(
+                [
+                    'url'      => $url.'orders/'.$orderMoip.'/refunds',
+                    'request'  => $this->json->serialize($request['send']),
+                    'response' => $responseBody,
+                ]
+            );
+        } catch (InvalidArgumentException $e) {
+            $this->logger->debug(
+                [
+                    'url'      => $url.'orders/'.$orderMoip.'/refunds',
+                    'request'  => $this->json->serialize($request['send']),
+                    'response' => $responseBody,
+                ]
+            );
+            // phpcs:ignore Magento2.Exceptions.DirectThrow
+            throw new \Exception('Invalid JSON was returned by the gateway');
         }
+
+        return $response;
     }
 }

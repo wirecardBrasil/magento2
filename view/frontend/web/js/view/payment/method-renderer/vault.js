@@ -58,7 +58,7 @@ define([
         },
 
         isActive() {
-            var active = this.getId() === this.isChecked();
+            var active = false;
             this.active(active);
             return active;
         },

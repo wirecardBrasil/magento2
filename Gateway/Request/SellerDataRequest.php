@@ -134,8 +134,8 @@ class SellerDataRequest implements BuilderInterface
 
         $secondaryMPA = $this->config->getSplitValue('secondary_mpa', $storeId);
         $secondaryPercent = $this->config->getSplitValue('secondary_percent', $storeId);
-        $commissionUseShipping = $this->config->getSplitValue('secondary_percent_include_shipping', $storeId);
-        $commissionUseInterest = $this->config->getSplitValue('secondary_percent_include_interest', $storeId);
+        $commiUseShipping = $this->config->getSplitValue('secondary_percent_include_shipping', $storeId);
+        $commiUseInterest = $this->config->getSplitValue('secondary_percent_include_interest', $storeId);
 
         if ($commissionUseInterest) {
             if ($payment->getMethod() === 'moip_magento2_cc' || $payment->getMethod() === 'moip_magento2_cc_vault') {
@@ -170,11 +170,11 @@ class SellerDataRequest implements BuilderInterface
             }
         }
 
-        if (!$commissionUseShipping) {
+        if (!$commiUseShipping) {
             $total = $total - $orderAdapter->getShippingAmount();
         }
 
-        if ($commissionUseShipping) {
+        if ($commiUseInterest) {
             $total = $total + $addition;
         }
 
