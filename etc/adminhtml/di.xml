@@ -22,4 +22,12 @@
         </arguments>
     </type>
     <preference for="Magento\Framework\UrlInterface" type="Magento\Backend\Model\UrlInterface" />
+    <type name="Magento\Vault\Model\Ui\Adminhtml\TokensConfigProvider">
+        <arguments>
+            <argument name="tokenUiComponentProviders" xsi:type="array">
+                <!-- moip_magento2_cc or moip_magento2_cc_vault -->
+                <item name="moip_magento2_cc" xsi:type="object">Moip\Magento2\Model\Ui\Vault\Adminhtml\TokenUiComponentProvider</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

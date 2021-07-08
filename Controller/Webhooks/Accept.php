@@ -11,7 +11,7 @@ namespace Moip\Magento2\Controller\Webhooks;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\CsrfAwareActionInterface as Csrf;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
@@ -27,7 +27,7 @@ use Moip\Magento2\Gateway\Config\Config;
 /**
  * Class Accept - Receives communication for accept payment.
  */
-class Accept extends Action implements CsrfAwareActionInterface
+class Accept extends Action implements Csrf
 {
     /**
      * createCsrfValidationException.
@@ -136,12 +136,12 @@ class Accept extends Action implements CsrfAwareActionInterface
         $storeCaptureToken = $this->config->getMerchantGatewayCaptureToken($storeId);
         if ($storeCaptureToken === $authorization) {
             $data = $originalNotification['resource']['order'];
-            $order = $this->orderFactory->create()->load($data['ownId'], 'ext_order_id');
+            $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
             $this->logger->debug([
                 'webhook'            => 'accept',
-                'ext_order_id'       => $data['ownId'],
+                'ext_order_id'       => $data['id'],
                 'increment_order_id' => $order->getIncrementId(),
-                'webhook_data'       => $response
+                'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
             if (!$order->getInvoiceCollection()->count()) {

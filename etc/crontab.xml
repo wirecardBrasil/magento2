@@ -9,7 +9,7 @@
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
     <group id="default">
         <job name="status_update_order_cc" instance="Moip\Magento2\Cron\StatusUpdateOrderCc" method="execute">
-            <schedule>* * * * *</schedule>
+            <schedule>0 8 * * *</schedule>
         </job>
         <job name="status_update_order_boleto" instance="Moip\Magento2\Cron\StatusUpdateOrderBoleto" method="execute">
             <schedule>0 11 * * 1-5</schedule>

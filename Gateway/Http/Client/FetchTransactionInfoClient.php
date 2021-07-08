@@ -81,7 +81,7 @@ class FetchTransactionInfoClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders/'.$orderMoip);
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setMethod(ZendClient::GET);
 

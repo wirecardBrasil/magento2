@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Moip_Magento2::css/creditmemo.css"/>
+    </head>
+    <body>
+        <referenceBlock name="form">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Moip_Magento2::order/creditmemo/create/form.phtml</argument>
+            </action>
+            <block class="Moip\Magento2\Block\Adminhtml\Sales\Creditmemo"  name="moip_magento2_boleto_refund" template="Moip_Magento2::sales/creditmemo.phtml" after="-"/>
+        </referenceBlock>
+    </body>
+</page>

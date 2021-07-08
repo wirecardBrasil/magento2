@@ -7,7 +7,12 @@
  */
 -->
 <page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
-    <head>
-        <css src="Moip_Magento2::css/system_config.css"/>
-    </head>
+	<body>
+		<referenceBlock name="order.create.billing.method.form">
+			<action method="setMethodFormTemplate">
+				<argument name="method" xsi:type="string">moip_magento2_cc_vault</argument>
+				<argument name="template" xsi:type="string">Moip_Magento2::form/vault.phtml</argument>
+			</action>
+		</referenceBlock>
+	</body>
 </page>

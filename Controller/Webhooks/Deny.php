@@ -11,7 +11,7 @@ namespace Moip\Magento2\Controller\Webhooks;
 
 use Magento\Framework\App\Action\Action;
 use Magento\Framework\App\Action\Context;
-use Magento\Framework\App\CsrfAwareActionInterface;
+use Magento\Framework\App\CsrfAwareActionInterface as Csrf;
 use Magento\Framework\App\Request\InvalidRequestException;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Controller\Result\JsonFactory;
@@ -19,8 +19,8 @@ use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Payment\Model\Method\Logger;
 use Magento\Sales\Api\Data\OrderInterfaceFactory;
 use Magento\Sales\Model\Order\CreditmemoFactory;
-use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Order\Email\Sender\OrderCommentSender;
+use Magento\Sales\Model\Order\Invoice;
 use Magento\Sales\Model\Service\CreditmemoService;
 use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config;
@@ -28,7 +28,7 @@ use Moip\Magento2\Gateway\Config\Config;
 /**
  * Class Deny - Receives communication for deny payment.
  */
-class Deny extends Action implements CsrfAwareActionInterface
+class Deny extends Action implements Csrf
 {
     /**
      * createCsrfValidationException.
@@ -149,7 +149,7 @@ class Deny extends Action implements CsrfAwareActionInterface
                 'webhook'            => 'deny',
                 'ext_order_id'       => $data['id'],
                 'increment_order_id' => $order->getIncrementId(),
-                'webhook_data'       => $response
+                'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
             if (!$order->canCancel()) {
@@ -183,7 +183,6 @@ class Deny extends Action implements CsrfAwareActionInterface
                     $order->save();
 
                     $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
-
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
                     $resultPage->setJsonData(
