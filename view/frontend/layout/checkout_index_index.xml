@@ -49,6 +49,26 @@
                                         </item>
                                     </item>
                                 </item>
+                                <item name="sidebar" xsi:type="array">
+                                    <item name="children" xsi:type="array">
+                                        <item name="summary" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                                <item name="totals" xsi:type="array">
+                                                    <item name="children" xsi:type="array">
+                                                        <item name="moip_interest_amount" xsi:type="array">
+                                                            <item name="component"  xsi:type="string">Moip_Magento2/js/view/checkout/cart/totals/moip_interest</item>
+                                                            <item name="sortOrder" xsi:type="string">20</item>
+                                                            <item name="config" xsi:type="array">
+                                                                <item name="template" xsi:type="string">Moip_Magento2/checkout/cart/totals/moip_interest</item>
+                                                                <item name="title" xsi:type="string" translate="true">Payment Moip Interest</item>
+                                                            </item>
+                                                        </item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                    </item>
+                                </item>
                             </item>
                         </item>
                     </item>

@@ -118,26 +118,36 @@ class AddressDataRequest implements BuilderInterface
     {
         $value = (int) $this->config->getAddtionalValue($field);
 
+        if ($field === self::STREET) {
+            $limitSend = 57;
+        } elseif ($field === self::STREET_NUMBER) {
+            $limitSend = 6;
+        } elseif ($field === self::STREET_DISTRICT) {
+            $limitSend = 60;
+        } elseif ($field === self::STREET_COMPLEMENT) {
+            $limitSend = 30;
+        }
+
         if ($value === 0) {
-            return $adress->getStreetLine1();
+            return substr($adress->getStreetLine1(), 0, $limitSend);
         } elseif ($value === 1) {
-            return $adress->getStreetLine2();
+            return substr($adress->getStreetLine2(), 0, $limitSend);
         } elseif ($value === 2) {
-            return $adress->getStreetLine3();
+            return substr($adress->getStreetLine3(), 0, $limitSend);
         } elseif ($value === 3) {
             /** contigência para sempre haver o bairro */
-            if ($adress->getStreetLine3()) {
-                return $adress->getStreetLine3();
-            }
             if ($adress->getStreetLine4()) {
-                return $adress->getStreetLine4();
+                return substr($adress->getStreetLine4(), 0, $limitSend);
+            }
+            if ($adress->getStreetLine3()) {
+                return substr($adress->getStreetLine3(), 0, $limitSend);
             }
             if ($adress->getStreetLine1()) {
-                return $adress->getStreetLine1();
+                return substr($adress->getStreetLine1(), 0, $limitSend);
             }
         }
 
-        return $adress->getStreetLine1();
+        return substr($adress->getStreetLine1(), 0, $limitSend);
     }
 
     /**

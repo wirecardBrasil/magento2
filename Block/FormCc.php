@@ -122,27 +122,23 @@ class FormCc extends Cc
     /**
      * Installments - Cc.
      *
+     * @param float $amount
+     *
      * @var string
      */
-    public function getInstallments($ammount)
+    public function getInstallments($amount)
     {
         $typeInstallment = $this->configCc->getTypeInstallment();
         $limitByInstallment = $this->configCc->getMaxInstallment();
         $limitInstallmentValue = $this->configCc->getMinInstallment();
         $interestByInstallment = $this->configCc->getInfoInterest();
-
+        $plotlist = [];
         foreach ($interestByInstallment as $key => $_interest) {
-            if ($key > 1 && $key <= $limitByInstallment) {
-                $plotValue = $this->getInterestCompound($ammount, $_interest, $key);
-
+            if ($key > 0) {
+                $plotValue = $this->getInterestCompound($amount, $_interest, $key);
                 if ($typeInstallment === 'simple') {
-                    $plotValue = $this->getInterestSimple($ammount, $_interest, $key);
+                    $plotValue = $this->getInterestSimple($amount, $_interest, $key);
                 }
-
-                if ($plotValue < $limitInstallmentValue) {
-                    break;
-                }
-
                 $plotValue = number_format((float) $plotValue, 2, '.', '');
                 $installmentPrice = $this->priceHelper->currency($plotValue, true, false);
                 $plotlist[$key] = $key.__('x of ').$installmentPrice;
@@ -166,7 +162,7 @@ class FormCc extends Cc
             return ($total + $valinterest) / $portion;
         }
 
-        return 0;
+        return $total / $portion;
     }
 
     /**

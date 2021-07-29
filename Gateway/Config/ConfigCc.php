@@ -238,7 +238,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     {
         $juros = [];
         $juros['0'] = 0;
-        $juros['1'] = 0;
+        $juros['1'] = -$this->scopeConfig->getValue(
+            'payment/moip_magento2_cc/installment_installment_1',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
         $juros['2'] = $this->scopeConfig->getValue(
             'payment/moip_magento2_cc/installment_installment_2',
             ScopeInterface::SCOPE_STORE,

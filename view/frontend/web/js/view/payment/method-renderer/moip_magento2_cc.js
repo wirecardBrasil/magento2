@@ -16,9 +16,10 @@ define([
     "mage/translate",
     "ko",
     "mage/calendar",
+    "Moip_Magento2/js/action/checkout/cart/totals",
     "Moip_Magento2/js/view/payment/gateway/moip",
-    "Magento_Payment/js/model/credit-card-validation/validator"
-], function (_, $, Component, VaultEnabler, creditCardData, custom, mask, quote, priceUtils, $t, ko, calendar) {
+    "Magento_Payment/js/model/credit-card-validation/validator",
+], function (_, $, Component, VaultEnabler, creditCardData, custom, mask, quote, priceUtils, $t, ko, calendar, TotalsMoipInterest) {
     "use strict";
 
     return Component.extend({
@@ -33,6 +34,7 @@ define([
             creditCardHolderPhone: "",
             creditCardHolderBirthDate: ""
         },
+        totals: quote.getTotals(),
 
         initObservable() {
             this._super().observe(["active","creditCardInstallment","creditCardHash","creditCardHolderFullName","creditCardHolderTaxDocument","creditCardHolderPhone","creditCardHolderBirthDate"]);
@@ -90,11 +92,15 @@ define([
                     }
                 }
             };
-
+            
             dob.mask("00/00/0000", { clearIfNotMatch: true });
             tel.mask("(00)00000-0000", { clearIfNotMatch: true });
+            
+           
+
             this.creditCardInstallment.subscribe(function (value) {
                 creditCardData.creditCardInstallment = value;
+                self.genetateInterest();
             });
 
             this.creditCardHash.subscribe(function (value) {
@@ -116,7 +122,6 @@ define([
             });
 
             this.creditCardHolderBirthDate.subscribe(function (value) {
-                
                 creditCardData.creditCardHolderBirthDate = value;
             });
 
@@ -146,7 +151,15 @@ define([
             $(this.formElement).validation();
         },
 
+        genetateInterest() {
+            var value = this.creditCardInstallment();
+            if(value){
+                TotalsMoipInterest.save(value);
+            }
+        },
+
         beforePlaceOrder() {
+            this.genetateInterest();
             this.getHash();
             if (!$(this.formElement).valid()) {
                 return;
@@ -227,102 +240,120 @@ define([
             return window.checkoutConfig.payment[this.getCode()].phone_capture;
         },
 
-        getInstall() {
-            var valor = quote.totals().base_grand_total;
+        getInterestApply(){
+            var valueInterest = 0;
+            _.map(this.totals()['total_segments'], function (segment) {
+                if(segment['code'] === 'moip_interest_amount') {
+                    valueInterest = segment['value'];
+                }
+            });
+            return valueInterest;
+        },
+
+        getInstalmentsValues() {
+            var grandTotal = quote.totals().base_grand_total;
+            var moipIterest = this.getInterestApply();
+            var calcTotal = grandTotal - moipIterest;
             var type_interest   = window.checkoutConfig.payment[this.getCode()].type_interest
             var info_interest   = window.checkoutConfig.payment[this.getCode()].info_interest;
             var min_installment = window.checkoutConfig.payment[this.getCode()].min_installment;
             var max_installment = window.checkoutConfig.payment[this.getCode()].max_installment;
             
-            var json_parcelas = {};
+            var installmentsCalcValues = {};
             var count = 0;
-            json_parcelas[1] = 
-                        {"parcela" : priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                         "total_parcelado" : priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                         "total_juros" :  0,
-                         "juros" : 0
-                        };
-                
-            var max_div = (valor/min_installment);
+            
+            var max_div = (calcTotal/min_installment);
                 max_div = parseInt(max_div);
 
             if(max_div > max_installment) {
                 max_div = max_installment;
-            }else{
+            } else {
                 if(max_div > 12) {
                     max_div = 12;
                 }
             }
-            var limite = max_div;
+            var limit = max_div;
 
-            _.each( info_interest, function( key, value ) {
-                if(count <= max_div){
-                    value = info_interest[value];
-                    if(value > 0){
-                    
-                        var taxa = value/100;
-                        if(type_interest === "compound"){
-                            var pw = Math.pow((1 / (1 + taxa)), count);
-                            var parcela = (((valor * taxa) * 1) / (1 - pw));
-                        } else {
-                            var parcela = ((valor*taxa)+valor) / count;
-                        }
-                        
-                        var total_parcelado = parcela*count;
-                        
-                        var juros = value;
-                        if(parcela > 5 && parcela > min_installment){
-                            json_parcelas[count] = {
-                                "parcela" : priceUtils.formatPrice(parcela, quote.getPriceFormat()),
-                                "total_parcelado": priceUtils.formatPrice(total_parcelado, quote.getPriceFormat()),
-                                "total_juros" : priceUtils.formatPrice(total_parcelado - valor, quote.getPriceFormat()),
-                                "juros" : juros,
-                            };
-                        }
+            _.each(info_interest, function( key, value ) {
+                value = info_interest[value];
+
+                if(value > 0){
+                    var taxa = value/100;
+                    if(type_interest === "compound"){
+                        var pw = Math.pow((1 / (1 + taxa)), count);
+                        var installment = (((calcTotal * taxa) * 1) / (1 - pw));
                     } else {
-                        if(valor > 0 && count > 0){
-                            json_parcelas[count] = {
-                                    "parcela" : priceUtils.formatPrice((valor/count), quote.getPriceFormat()),
-                                    "total_parcelado": priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                                    "total_juros" :  0,
-                                    "juros" : 0,
-                                };
-                        }
+                        var installment = ((calcTotal*taxa)+calcTotal) / count;
+                    }
+
+                    var totalInstallment = installment*count;
+                    var interest = value;
+                    if(installment > 5 && installment > min_installment){
+                        installmentsCalcValues[count] = {
+                            "installment" : priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(totalInstallment, quote.getPriceFormat()),
+                            "totalInterest" : priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
+                            "interest" : interest,
+                        };
+                    }
+                } else if(value == 0) {
+                    if(calcTotal > 0 && count > 0){
+                        installmentsCalcValues[count] = {
+                            "installment" : priceUtils.formatPrice((calcTotal/count), quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
+                            "totalInterest" :  0,
+                            "interest" : 0,
+                        };
+                    }
+                } else if(value < 0) {
+                    var taxa = value/100;
+                    if(calcTotal > 0 && count > 0){
+                        var installment = ((calcTotal*taxa)+calcTotal) / count;
+                        installmentsCalcValues[count] = {
+                                "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                                "discount" : value,
+                                "interest": value
+                        };
                     }
                 }
                 count++;    
             });
 
-            _.each( json_parcelas, function( key, value ) {
-                if(key > limite){
-                    delete json_parcelas[key];
-                }
-            });
-            return json_parcelas;
+            if(limit) {
+                _.each( installmentsCalcValues, function( key, value ) {
+                    if(key > limit){
+                        delete installmentsCalcValues[key];
+                    }
+                });
+            }
+            return installmentsCalcValues;
         },
         
         getInstallments() {
-            var temp = _.map(this.getInstall(), function (value, key) {
-                if(value["juros"] === 0){
-                    var info_interest = "sem juros";
+            var temp = _.map(this.getInstalmentsValues(), function (value, key) {
+                var inst;
+
+                if(value["interest"] === 0){
+                    inst = $t("%1x of %2 not interest").replace("%1",key).replace("%2",value["installment"]);
+                } else if(value["interest"] < 0){
+                    inst = $t("%1% of discount cash with total of %2").replace("%1", value["discount"]).replace("%2", value["totalWithTheDiscount"]);
                 } else {
-                    var info_interest = "com juros total de " + value["total_juros"];
+                    inst = $t("%1x of %2 in the total value of %3").replace("%1",key).replace("%2",value["installment"]).replace("%3",value["totalInstallment"]);
                 }
-                var inst = key+" x "+ value["parcela"]+" no valor total de " + value["total_parcelado"] + " " + info_interest;
-                    return {
-                        "value": key,
-                        "installments": inst
-                    };
-            
-                });
+
+                return {
+                    "value": key,
+                    "installments": inst
+                };
+            });
+
             var newArray = [];
             for (var i = 0; i < temp.length; i++) {
-                
                 if (temp[i].installments!="undefined" && temp[i].installments!=undefined) {
                     newArray.push(temp[i]);
                 }
             }
-            
+
             return newArray;
         },
 

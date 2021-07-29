@@ -15,6 +15,7 @@
             <module name="Magento_Vault"/>
             <module name="Magento_Catalog"/>
             <module name="Magento_Quote"/>
+            <module name="Magento_Sales"/>
         </sequence>
     </module>
 </config>

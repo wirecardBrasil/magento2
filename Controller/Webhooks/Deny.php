@@ -129,12 +129,12 @@ class Deny extends Action implements Csrf
      */
     public function execute()
     {
-        // if (!$this->getRequest()->isPost()) {
-        //     $resultPage = $this->resultJsonFactory->create();
-        //     $resultPage->setHttpResponseCode(404);
+        if (!$this->getRequest()->isPost()) {
+            $resultPage = $this->resultJsonFactory->create();
+            $resultPage->setHttpResponseCode(404);
 
-        //     return $resultPage;
-        // }
+            return $resultPage;
+        }
 
         $resultPage = $this->resultJsonFactory->create();
         $response = $this->getRequest()->getContent();

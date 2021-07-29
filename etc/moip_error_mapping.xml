@@ -182,7 +182,7 @@
 		<message code="REF-025" translate="true">Reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento.</message>
 		<message code="REF-026" translate="true">Pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento.</message>
 		<message code="REF-027" translate="true">Um dos recebedores do pagamento não possui saldo suficiente para o reembolso.</message>
-		<message code="REF-028" t7anslate="true">Uma das contas informadas não é recebedora do pagamento.</message>
+		<message code="REF-028" translate="true">Uma das contas informadas não é recebedora do pagamento.</message>
 		<message code="REF-029" translate="true">O recebedor primário não pode assumir o reembolso do recebedor secundário.</message>
 		<message code="REF-030" translate="true">O recebedor secundário não pode reembolsar um valor maior do que o recebido no pagamento.</message>
 		<message code="REF-031" translate="true">A conta a ser creditada é um dos recebedores do pagamento. Por favor escolha outra forma de reembolso.</message>

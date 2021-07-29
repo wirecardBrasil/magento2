@@ -77,7 +77,7 @@ class DeviceDataRequest implements BuilderInterface
             $order = $payment->getOrder();
             $ipCustomer = $order->getXForwardedFor();
         }
-        $result[self::DEVICE_DATA] = [
+        $result[PaymentDataRequest::PAYMENT_INSTRUMENT][self::DEVICE_DATA] = [
             self::REMOTE_IP         => $ipCustomer,
             self::REMOTE_USER_AGENT => $this->headerClient->getHttpUserAgent(),
         ];
@@ -86,7 +86,7 @@ class DeviceDataRequest implements BuilderInterface
 
         $paymentInfo->setAdditionalInformation(
             self::DEVICE_DATA,
-            $result[self::DEVICE_DATA]
+            $result[PaymentDataRequest::PAYMENT_INSTRUMENT][self::DEVICE_DATA]
         );
 
         return $result;

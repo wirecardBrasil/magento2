@@ -83,6 +83,13 @@
                         <config_path>payment/moip_magento2/statement_descriptor</config_path>
                         <validate>required-entry</validate>
                     </field>
+                    <field id="category" translate="label select" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="0">
+                        <label>Store segment</label>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\Category</source_model>
+                        <config_path>payment/moip_magento2/category</config_path>
+                        <validate>required-entry validate-select</validate>
+                        <comment>Select the category that best defines your store's products.</comment>
+                    </field>
                 </group>
                 <group id="moip_magento2_cc" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Moip - Cartão de Crédito</label>
@@ -132,58 +139,64 @@
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_max_installment</config_path>
                         </field>
-                        
-                        <field id="installment_2" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_1" translate="label" type="text" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Discount Cash</label>
+                            <validate>required-entry validate-digits validate-not-negative-number validate-digits-range digits-range-0-100</validate>
+                            <config_path>payment/moip_magento2_cc/installment_installment_1</config_path>
+                            <comment>Discount percentage applied to the total order value.</comment>
+                        </field>
+
+                        <field id="installment_2" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 2nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_2</config_path>
                         </field>
-                        <field id="installment_3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_3" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 3nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_3</config_path>
                         </field>
-                        <field id="installment_4" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_4" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 4nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_4</config_path>
                         </field>
-                        <field id="installment_5" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_5" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 5nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_5</config_path>
                         </field>
-                        <field id="installment_6" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_6" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 6nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_6</config_path>
                         </field>
-                        <field id="installment_7" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_7" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 7nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_7</config_path>
                         </field>
-                        <field id="installment_8" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_8" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 8nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_8</config_path>
                         </field>
-                        <field id="installment_9" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_9" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 9nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_9</config_path>
                         </field>
-                        <field id="installment_10" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_10" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 10nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_10</config_path>
                         </field>
-                        <field id="installment_11" translate="label" type="text" sortOrder="18" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_11" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 11nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_11</config_path>
                         </field>
-                        <field id="installment_12" translate="label" type="text" sortOrder="19" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                        <field id="installment_12" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                             <label>Interest on the 12nd tranche</label>
                             <validate>required-entry validate-number</validate>
                             <config_path>payment/moip_magento2_cc/installment_installment_12</config_path>

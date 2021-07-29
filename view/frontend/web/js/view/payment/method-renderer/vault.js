@@ -7,28 +7,36 @@ define([
     "underscore",
     "jquery",
     "Magento_Vault/js/view/payment/method-renderer/vault",
+    "Magento_Payment/js/model/credit-card-validation/credit-card-data",
     "Magento_Checkout/js/model/quote",
     "Magento_Catalog/js/price-utils",
     "mage/translate",
-    "ko"
-], function (_, $, VaultComponent, quote, priceUtils, $t, ko) {
+    "ko",
+    "Moip_Magento2/js/action/checkout/cart/totals"
+], function (_, $, VaultComponent, creditCardData, quote, priceUtils, $t, ko, TotalsMoipInterest) {
     "use strict";
 
     return VaultComponent.extend({
         defaults: {
             active: false,
             template: "Moip_Magento2/payment/vault",
-            vaultForm: "Moip_Magento2/payment/vault-form"
+            vaultForm: "Moip_Magento2/payment/vault-form",
+            creditCardInstallment: ""
         },
+        totals: quote.getTotals(),
 
         initialize() {
             var self = this;
-            
             this._super();
+
+            this.creditCardInstallment.subscribe(function (value) {
+                creditCardData.creditCardInstallment = value;
+                self.genetateInterest();
+            });
         },
 
         initObservable() {
-            this._super().observe(["active"]);
+            this._super().observe(["active","creditCardInstallment"]);
             return this;
         },
 
@@ -49,7 +57,15 @@ define([
             return data;
         },
 
+        genetateInterest() {
+            var value = this.creditCardInstallment();
+            if(value){
+                TotalsMoipInterest.save(value);
+            }
+        },
+
         beforePlaceOrder() {
+            this.genetateInterest();
             if (!$(this.formElement).valid()) {
                 return;
             } else {
@@ -101,104 +117,122 @@ define([
                 window.checkoutConfig.payment[this.getCode()].icons[type]
                 : false;
         },
+        
+        getInterestApply(){
+            var valueInterest = 0;
+            _.map(this.totals()['total_segments'], function (segment) {
+                if(segment['code'] === 'moip_interest_amount') {
+                    valueInterest = segment['value'];
+                }
+            });
+            return valueInterest;
+        },
 
-        getInstall() {
-            var valor = quote.totals().base_grand_total;
+        getInstalmentsValues() {
+            var grandTotal = quote.totals().base_grand_total;
+            var moipIterest = this.getInterestApply();
+            var calcTotal = grandTotal - moipIterest;
             var type_interest   = window.checkoutConfig.payment[this.getAuxiliaryCode()].type_interest
             var info_interest   = window.checkoutConfig.payment[this.getAuxiliaryCode()].info_interest;
             var min_installment = window.checkoutConfig.payment[this.getAuxiliaryCode()].min_installment;
             var max_installment = window.checkoutConfig.payment[this.getAuxiliaryCode()].max_installment;
             
-            var json_parcelas = {};
+            var installmentsCalcValues = {};
             var count = 0;
-            json_parcelas[1] = 
-                        {"parcela" : priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                         "total_parcelado" : priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                         "total_juros" :  0,
-                         "juros" : 0
-                        };
-                
-            var max_div = (valor/min_installment);
+            
+            var max_div = (calcTotal/min_installment);
                 max_div = parseInt(max_div);
 
             if(max_div > max_installment) {
                 max_div = max_installment;
-            }else{
+            } else {
                 if(max_div > 12) {
                     max_div = 12;
                 }
             }
-            var limite = max_div;
+            var limit = max_div;
 
-            _.each( info_interest, function( key, value ) {
-                if(count <= max_div){
-                    value = info_interest[value];
-                    if(value > 0){
-                    
-                        var taxa = value/100;
-                        if(type_interest === "compound"){
-                            var pw = Math.pow((1 / (1 + taxa)), count);
-                            var parcela = (((valor * taxa) * 1) / (1 - pw));
-                        } else {
-                            var parcela = ((valor*taxa)+valor) / count;
-                        }
-                        
-                        var total_parcelado = parcela*count;
-                        
-                        var juros = value;
-                        if(parcela > 5 && parcela > min_installment){
-                            json_parcelas[count] = {
-                                "parcela" : priceUtils.formatPrice(parcela, quote.getPriceFormat()),
-                                "total_parcelado": priceUtils.formatPrice(total_parcelado, quote.getPriceFormat()),
-                                "total_juros" : priceUtils.formatPrice(total_parcelado - valor, quote.getPriceFormat()),
-                                "juros" : juros,
-                            };
-                        }
+            _.each(info_interest, function( key, value ) {
+                value = info_interest[value];
+
+                if(value > 0){
+                    var taxa = value/100;
+                    if(type_interest === "compound"){
+                        var pw = Math.pow((1 / (1 + taxa)), count);
+                        var installment = (((calcTotal * taxa) * 1) / (1 - pw));
                     } else {
-                        if(valor > 0 && count > 0){
-                            json_parcelas[count] = {
-                                    "parcela" : priceUtils.formatPrice((valor/count), quote.getPriceFormat()),
-                                    "total_parcelado": priceUtils.formatPrice(valor, quote.getPriceFormat()),
-                                    "total_juros" :  0,
-                                    "juros" : 0,
-                                };
-                        }
+                        var installment = ((calcTotal*taxa)+calcTotal) / count;
+                    }
+
+                    var totalInstallment = installment*count;
+                    var interest = value;
+                    if(installment > 5 && installment > min_installment){
+                        installmentsCalcValues[count] = {
+                            "installment" : priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(totalInstallment, quote.getPriceFormat()),
+                            "totalInterest" : priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
+                            "interest" : interest,
+                        };
+                    }
+                } else if(value == 0) {
+                    if(calcTotal > 0 && count > 0){
+                        installmentsCalcValues[count] = {
+                            "installment" : priceUtils.formatPrice((calcTotal/count), quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
+                            "totalInterest" :  0,
+                            "interest" : 0,
+                        };
+                    }
+                } else if(value < 0) {
+                    var taxa = value/100;
+                    if(calcTotal > 0 && count > 0){
+                        var installment = ((calcTotal*taxa)+calcTotal) / count;
+                        installmentsCalcValues[count] = {
+                                "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                                "discount" : value,
+                                "interest": value
+                        };
                     }
                 }
                 count++;    
             });
 
-            _.each( json_parcelas, function( key, value ) {
-                if(key > limite){
-                    delete json_parcelas[key];
-                }
-            });
-            return json_parcelas;
+            if(limit) {
+                _.each( installmentsCalcValues, function( key, value ) {
+                    if(key > limit){
+                        delete installmentsCalcValues[key];
+                    }
+                });
+            }
+            return installmentsCalcValues;
         },
         
         getInstallments() {
-            var temp = _.map(this.getInstall(), function (value, key) {
-                if(value["juros"] === 0){
-                    var info_interest = "sem juros";
+            var temp = _.map(this.getInstalmentsValues(), function (value, key) {
+                var inst;
+
+                if(value["interest"] === 0){
+                    inst = $t("%1x of %2 not interest").replace("%1",key).replace("%2",value["installment"]);
+                } else if(value["interest"] < 0){
+                    inst = $t("%1% of discount cash with total of %2").replace("%1", value["discount"]).replace("%2", value["totalWithTheDiscount"]);
                 } else {
-                    var info_interest = "com juros total de " + value["total_juros"];
+                    inst = $t("%1x of %2 in the total value of %3").replace("%1",key).replace("%2",value["installment"]).replace("%3",value["totalInstallment"]);
                 }
-                var inst = key+" x "+ value["parcela"]+" no valor total de " + value["total_parcelado"] + " " + info_interest;
-                    return {
-                        "value": key,
-                        "installments": inst
-                    };
-            
-                });
+
+                return {
+                    "value": key,
+                    "installments": inst
+                };
+            });
+
             var newArray = [];
             for (var i = 0; i < temp.length; i++) {
-                
                 if (temp[i].installments!="undefined" && temp[i].installments!=undefined) {
                     newArray.push(temp[i]);
                 }
             }
-            
+
             return newArray;
-        }
+        },
     });
 });

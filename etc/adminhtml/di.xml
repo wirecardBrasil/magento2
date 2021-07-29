@@ -21,6 +21,20 @@
             </argument>
         </arguments>
     </type>
+    <type name="Moip\Magento2\Block\InfoCc">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item xsi:type="string" name="is_secure_mode">0</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Moip\Magento2\Block\InfoBoleto">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item xsi:type="string" name="is_secure_mode">0</item>
+            </argument>
+        </arguments>
+    </type>
     <preference for="Magento\Framework\UrlInterface" type="Magento\Backend\Model\UrlInterface" />
     <type name="Magento\Vault\Model\Ui\Adminhtml\TokensConfigProvider">
         <arguments>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/pdf_file.xsd">
+    <totals>
+        <total name="moip_paymentmoip_interest">
+            <title translate="true">Interest Amount</title>
+            <source_field>moip_interest</source_field>
+            <font_size>7</font_size>
+            <display_zero>false</display_zero>
+            <sort_order>500</sort_order>
+        </total>
+    </totals>
+</config>

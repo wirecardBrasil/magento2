@@ -160,15 +160,12 @@ $ccInstallment = $block->getInfoData('cc_installment');
         <div class="admin__field-control">
             <select id="<?= /* @noEscape */ $code ?>_cc_installments" name="payment[cc_installments]"
                         class="admin__control-select required-entry">
-                        <option value="1">
-                            à vista
-                        </option>
-                        <?php foreach ($block->getSelectInstallments() as $k => $v): ?>
-                            <option value="<?= $block->escapeHtml($k) ?>"
-                                    <?php if ($k == $ccInstallment): ?>selected="selected"<?php endif ?>>
-                                <?= $block->escapeHtml($v) ?>
-                            </option>
-                        <?php endforeach; ?>
+                <?php foreach ($block->getSelectInstallments() as $k => $v): ?>
+                    <option value="<?= $block->escapeHtml($k) ?>"
+                            <?php if ($k == $ccInstallment): ?>selected="selected"<?php endif ?>>
+                        <?= $block->escapeHtml($v) ?>
+                    </option>
+                <?php endforeach; ?>
             </select>
         </div>
     </div>

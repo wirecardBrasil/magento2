@@ -202,4 +202,44 @@ class OrderAdapter implements OrderAdapterInterface
     {
         return $this->order->getTaxAmount();
     }
+
+    /**
+     * Returns order base moip interest amount.
+     *
+     * @return float|null
+     */
+    public function getBaseMoipInterestAmount()
+    {
+        return $this->order->getBaseMoipInterestAmount();
+    }
+
+    /**
+     * Returns order quote id.
+     *
+     * @return float|null
+     */
+    public function getQuoteId()
+    {
+        return $this->order->getQuoteId();
+    }
+
+    /**
+     * Set order moip interest amount.
+     *
+     * @return float|null
+     */
+    public function setMoipInterestAmount($interest)
+    {
+        return $this->order->setMoipInterestAmount($interest);
+    }
+
+    /**
+     * Set order base moip interest amount.
+     *
+     * @return float|null
+     */
+    public function setBaseMoipInterestAmount($interest)
+    {
+        return $this->order->setBaseMoipInterestAmount($interest);
+    }
 }
