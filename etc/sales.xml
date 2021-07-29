@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Sales:etc/sales.xsd">
+    <section name="quote">
+        <group name="totals">
+            <item name="moip_interest_amount" instance="Moip\Magento2\Model\Quote\Address\Total\MoipInterest" sort_order="150"/>
+        </group>
+    </section>
+    <section name="order_invoice">
+        <group name="totals">
+            <item name="moip_interest_amount" instance="Moip\Magento2\Model\Order\Total\Invoice\MoipInterest" sort_order="150"/>
+        </group>
+    </section>
+    <section name="order_creditmemo">
+        <group name="totals">
+            <item name="moip_interest_amount" instance="Moip\Magento2\Model\Order\Total\Creditmemo\MoipInterest" sort_order="150"/>
+        </group>
+    </section>
+</config>

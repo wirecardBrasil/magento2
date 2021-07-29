@@ -13,6 +13,9 @@
                 type="Moip\Magento2\Plugin\PaymentToken"
                 sortOrder="1"/>
     </type>
+    <preference for="Moip\Magento2\Api\Data\MoipInterestInterface" type="Moip\Magento2\Model\Data\MoipInterest" />
+    <preference for="Moip\Magento2\Api\MoipInterestManagementInterface" type="Moip\Magento2\Model\MoipInterestManagement" />
+    <preference for="Moip\Magento2\Api\GuestMoipInterestManagementInterface" type="Moip\Magento2\Model\GuestMoipInterestManagement" />
     <!-- Payment Method Facade configuration -->
     <virtualType name="Magento2BaseFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
@@ -185,7 +188,6 @@
                 <item name="taxDocument" xsi:type="string">Moip\Magento2\Gateway\Request\TaxDocumentDataRequest</item>
                 <item name="customer" xsi:type="string">Moip\Magento2\Gateway\Request\CustomerDataRequest</item>
                 <item name="address" xsi:type="string">Moip\Magento2\Gateway\Request\AddressDataRequest</item>
-                <item name="device" xsi:type="string">Moip\Magento2\Gateway\Request\DeviceDataRequest</item>
                 <item name="seller" xsi:type="string">Moip\Magento2\Gateway\Request\SellerDataRequest</item>
             </argument>
         </arguments>

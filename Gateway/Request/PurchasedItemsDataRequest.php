@@ -47,6 +47,12 @@ class PurchasedItemsDataRequest implements BuilderInterface
     const PURCHASED_ITEM_PRICE = 'price';
 
     /**
+     * The Category Moip
+     * Optional.
+     */
+    const PURCHASED_ITEM_CATEGORY = 'category';
+
+    /**
      * @var SubjectReader
      */
     private $subjectReader;
@@ -77,6 +83,7 @@ class PurchasedItemsDataRequest implements BuilderInterface
 
         $result = [];
         $order = $paymentDO->getOrder();
+        $storeId = $order->getStoreId();
         $items = $order->getItems();
         $itemcount = count($items);
         if ($itemcount) {
@@ -93,6 +100,7 @@ class PurchasedItemsDataRequest implements BuilderInterface
                         self::PURCHASED_ITEM_QUANTITY => $item->getQtyOrdered(),
                         self::PURCHASED_ITEM_DETAIL   => $item->getSku(),
                         self::PURCHASED_ITEM_PRICE    => $this->config->formatPrice($item->getPrice()),
+                        self::PURCHASED_ITEM_CATEGORY => $this->config->getMoipCategory($storeId),
                     ];
                 }
             }

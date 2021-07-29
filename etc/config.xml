@@ -71,7 +71,7 @@
                 <currency>BRL</currency>
                 <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
                 <paymentInfoKeys>method_name,cc_installments,cc_installment_interest,cc_type,cc_number,cc_holder_fullname,cc_holder_birth_date,tax_document,cc_holder_tax_document,cc_holder_phone,device</paymentInfoKeys>
-                <privateInfoKeys>device</privateInfoKeys>
+                <privateInfoKeys>device,cc_installment_interest</privateInfoKeys>
                 <is_gateway>1</is_gateway>
                 <can_use_internal>1</can_use_internal>
                 <can_use_checkout>1</can_use_checkout>

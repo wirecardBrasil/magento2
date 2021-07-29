@@ -123,38 +123,68 @@ class DetailTotalsDataRequest implements BuilderInterface
         );
 
         $order = $paymentDO->getOrder();
-
+        // $quoteId = $orderAdapter->getQuoteId();
         $storeId = $order->getStoreId();
         $addition = $orderAdapter->getTaxAmount();
-        $total = $order->getGrandTotalAmount();
+        $interest = $orderAdapter->getBaseMoipInterestAmount();
+        $grandTotal = $order->getGrandTotalAmount();
+        $total = $grandTotal + $interest;
+        if ($interest > 0) {
+            $total = $grandTotal - $interest;
+        }
+
+        $discount = $orderAdapter->getDiscountAmount();
 
         if ($payment->getMethod() === 'moip_magento2_cc' || $payment->getMethod() === 'moip_magento2_cc_vault') {
             if ($installment = $payment->getAdditionalInformation('cc_installments')) {
+                // $this->moipInterest->saveMoipInterest($quoteId, (int)$installment);
+                $interestInfo = $this->configCc->getInfoInterest($storeId);
                 if ($installment > 1) {
                     $typeInstallment = $this->configCc->getTypeInstallment($storeId);
-                    $interest = $this->configCc->getInfoInterest($storeId);
-                    $installmentInterest = $this->getInterestCompound($total, $interest[$installment], $installment);
-                    if ($typeInstallment === 'simple') {
-                        $installmentInterest = $this->getInterestSimple($total, $interest[$installment], $installment);
+                    if ($interestInfo[$installment] > 0) {
+                        $installmentInterest = $this->getInterestCompound($total, $interestInfo[$installment], $installment);
+                        if ($typeInstallment === 'simple') {
+                            $installmentInterest = $this->getInterestSimple($total, $interestInfo[$installment], $installment);
+                        }
+
+                        if ($installmentInterest) {
+                            $installmentInterest = number_format((float) $installmentInterest, 2, '.', '');
+                            $payment->setAdditionalInformation(
+                                self::INSTALLMENT_INTEREST,
+                                $this->priceHelper->currency($installmentInterest, true, false)
+                            );
+                            if (!$interest) {
+                                $orderAdapter->setMoipInterestAmount($installmentInterest)->setBaseMoipInterestAmount($installmentInterest);
+                            }
+                            $addition = $addition + $installmentInterest;
+                        }
                     }
-                    if ($installmentInterest) {
-                        $total_parcelado = $installmentInterest * $installment;
-                        $additionalPrice = $total_parcelado - $total;
-                        $additionalPrice = number_format((float) $additionalPrice, 2, '.', '');
+                } elseif ((int) $installment === 1) {
+                    if ($interestInfo[$installment] < 0) {
+                        $totalWithDiscount = $grandTotal + ($interest * -1);
+                        $discountInterest = $this->getInterestDiscount($totalWithDiscount, $interestInfo[$installment]);
+                        $discountInterest = number_format((float) $discountInterest, 2, '.', '');
+
                         $payment->setAdditionalInformation(
                             self::INSTALLMENT_INTEREST,
-                            $this->priceHelper->currency($additionalPrice, true, false)
+                            $this->priceHelper->currency($discountInterest, true, false)
                         );
-                        $addition = $addition + $additionalPrice;
+                        if (!$interest) {
+                            $orderAdapter->setMoipInterestAmount($discountInterest)->setBaseMoipInterestAmount($discountInterest);
+                        }
+                        $interest = $discountInterest;
                     }
                 }
             }
         }
-        $total = $total - $orderAdapter->getShippingAmount();
-        $discount = -1 * $orderAdapter->getDiscountAmount();
+
+        if ($interest < 0) {
+            $discount = $discount + $interest;
+        }
+        $discount = $discount * -1;
         $result[self::TOTALS_AMOUNT] = [
             self::TOTALS_AMOUNT_CURRENCY    => $order->getCurrencyCode(),
-            self::TOTALS_AMOUNT_GRAND_TOTAL => ceil($this->config->formatPrice($total)),
+            self::TOTALS_AMOUNT_GRAND_TOTAL => ceil($this->config->formatPrice($grandTotal)),
             self::TOTALS_AMOUNT_SUBTOTALS   => [
                 self::TOTALS_AMOUNT_SUBTOTALS_SHIPPING => ceil($this->config->formatPrice(
                     $orderAdapter->getShippingAmount()
@@ -168,21 +198,39 @@ class DetailTotalsDataRequest implements BuilderInterface
     }
 
     /**
-     * Get Intereset for Simple.
+     * Get Intereset Discount.
      *
      * @param $total
      * @param $interest
-     * @param $portion
      *
      * @return string
      */
-    public function getInterestSimple($total, $interest, $portion)
+    public function getInterestDiscount($total, $interest)
     {
         if ($interest) {
             $taxa = $interest / 100;
             $valinterest = $total * $taxa;
 
-            return ($total + $valinterest) / $portion;
+            return $valinterest;
+        }
+
+        return 0;
+    }
+
+    /**
+     * Get Intereset for Simple.
+     *
+     * @param $total
+     * @param $interest
+     *
+     * @return float
+     */
+    public function getInterestSimple($total, $interest)
+    {
+        if ($interest) {
+            $taxa = $interest / 100;
+
+            return $total * $taxa;
         }
 
         return 0;
@@ -195,14 +243,15 @@ class DetailTotalsDataRequest implements BuilderInterface
      * @param $interest
      * @param $portion
      *
-     * @return string
+     * @return float
      */
     public function getInterestCompound($total, $interest, $portion)
     {
         if ($interest) {
             $taxa = $interest / 100;
+            $calc = (($total * $taxa) * 1) / (1 - (pow(1 / (1 + $taxa), $portion)));
 
-            return (($total * $taxa) * 1) / (1 - (pow(1 / (1 + $taxa), $portion)));
+            return $total - $calc;
         }
 
         return 0;

@@ -10,4 +10,7 @@
     <referenceContainer name="order.success.additional.info">
         <block class="Moip\Magento2\Block\Success" name="details.order.success" template="Moip_Magento2::success/additional.phtml" after="-" />
     </referenceContainer>
+    <referenceBlock name="order_totals">
+        <block class="Moip\Magento2\Block\Sales\Totals" name="moip_interest_amount" as="moip_interest_amount"/>
+    </referenceBlock>
 </body>

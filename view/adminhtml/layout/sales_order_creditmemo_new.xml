@@ -17,5 +17,9 @@
             </action>
             <block class="Moip\Magento2\Block\Adminhtml\Sales\Creditmemo"  name="moip_magento2_boleto_refund" template="Moip_Magento2::sales/creditmemo.phtml" after="-"/>
         </referenceBlock>
+        <referenceBlock name="creditmemo_totals">
+            <block class="Moip\Magento2\Block\Adminhtml\Sales\Order\Creditmemo\Totals"
+                   name="moip_interest_amount" as="moip_interest_amount"/>
+        </referenceBlock>
     </body>
 </page>

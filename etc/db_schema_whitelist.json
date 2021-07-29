@@ -1,0 +1,36 @@
+{
+    "quote": {
+        "column": {
+            "moip_interest_amount": true,
+            "base_moip_interest_amount": true
+        }
+    },
+    "quote_address": {
+        "column": {
+            "moip_interest_amount": true,
+            "base_moip_interest_amount": true
+        }
+    },
+    "sales_order": {
+        "column": {
+            "moip_interest_amount": true,
+            "base_moip_interest_amount": true,
+            "moip_interest_amount_invoiced": true,
+            "base_moip_interest_amount_invoiced": true,
+            "moip_interest_amount_refunded": true,
+            "base_moip_interest_amount_refunded": true
+        }
+    },
+    "sales_invoice": {
+        "column": {
+            "moip_interest_amount": true,
+            "base_moip_interest_amount": true
+        }
+    },
+    "sales_creditmemo": {
+        "column": {
+            "moip_interest_amount": true,
+            "base_moip_interest_amount": true
+        }
+    }
+}

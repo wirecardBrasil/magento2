@@ -506,4 +506,20 @@ class Config extends \Magento\Payment\Gateway\Config\Config
             $storeId
         );
     }
+
+    /**
+     * Gets the Moip Category.
+     *
+     * @param int|null $storeId
+     *
+     * @return string
+     */
+    public function getMoipCategory($storeId = null): ?string
+    {
+        return $this->scopeConfig->getValue(
+            'payment/moip_magento2/category',
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 }

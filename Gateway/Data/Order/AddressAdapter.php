@@ -94,7 +94,7 @@ class AddressAdapter implements AddressAdapterInterface
     {
         $street = $this->address->getStreet();
 
-        return isset($street[4]) ? $street[4] : '';
+        return isset($street[3]) ? $street[3] : '';
     }
 
     /**

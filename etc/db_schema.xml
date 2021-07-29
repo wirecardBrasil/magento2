@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Wirecard Brasil. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote" resource="checkout" engine="innodb">
+        <column xsi:type="decimal" name="moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount"/>
+    </table>
+    <table name="quote_address" resource="checkout" engine="innodb">
+        <column xsi:type="decimal" name="moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount"/>
+    </table>
+    <table name="sales_order" resource="default" engine="innodb">
+        <column xsi:type="decimal" name="moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount"/>
+        <column xsi:type="decimal" name="moip_interest_amount_invoiced"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount Invoiced"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount_invoiced"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount Invoiced"/>
+        <column xsi:type="decimal" name="moip_interest_amount_refunded"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount Refunded"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount_refunded"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount Refunded"/>
+    </table>
+    <table name="sales_invoice" resource="default" engine="innodb">
+        <column xsi:type="decimal" name="moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount"/>
+    </table>
+    <table name="sales_creditmemo" resource="default" engine="innodb">
+        <column xsi:type="decimal" name="moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Interest Amount"/>
+        <column xsi:type="decimal" name="base_moip_interest_amount"  scale="4" precision="20" unsigned="false" nullable="false" comment="Moip Base Interest Amount"/>
+    </table>
+</schema>
