@@ -132,7 +132,6 @@ class SellerDataRequest implements BuilderInterface
         $addition = $orderAdapter->getTaxAmount();
         $interest = $orderAdapter->getBaseMoipInterestAmount();
         $grandTotal = $order->getGrandTotalAmount();
-        $discount = $orderAdapter->getDiscountAmount();
         $total = $grandTotal;
 
         $secondaryMPA = $this->config->getSplitValue('secondary_mpa', $storeId);

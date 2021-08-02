@@ -28,19 +28,19 @@ class GuestMoipInterestManagement implements GuestMoipInterestManagementInterfac
     /**
      * @var \Magento\Checkout\Api\ShippingInformationManagementInterface
      */
-    protected $shippingInformationManagement;
+    protected $moipInterestInterface;
 
     /**
-     * @param \Magento\Quote\Model\QuoteIdMaskFactory                      $quoteIdMaskFactory
-     * @param \Magento\Checkout\Api\ShippingInformationManagementInterface $shippingInformationManagement
+     * @param \Magento\Quote\Model\QuoteIdMaskFactory            $quoteIdMaskFactory
+     * @param \Moip\Magento2\Api\MoipInterestManagementInterface $moipInterestInterface
      * @codeCoverageIgnore
      */
     public function __construct(
         QuoteIdMaskFactory $quoteIdMaskFactory,
-        MoipInterestManagementInterface $moipInterestManagement
+        MoipInterestManagementInterface $moipInterestInterface
     ) {
         $this->quoteIdMaskFactory = $quoteIdMaskFactory;
-        $this->moipInterestManagement = $moipInterestManagement;
+        $this->moipInterestInterface = $moipInterestInterface;
     }
 
     /**
@@ -53,7 +53,7 @@ class GuestMoipInterestManagement implements GuestMoipInterestManagementInterfac
         /** @var $quoteIdMask \Magento\Quote\Model\QuoteIdMask */
         $quoteIdMask = $this->quoteIdMaskFactory->create()->load($cartId, 'masked_id');
 
-        return $this->moipInterestManagement->saveMoipInterest(
+        return $this->moipInterestInterface->saveMoipInterest(
             $quoteIdMask->getQuoteId(),
             $moipInterest
         );
