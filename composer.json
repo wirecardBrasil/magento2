@@ -8,7 +8,7 @@
    ],
   "require": {
     "php": ">=7.2",
-    "magento/framework": "102.0.3",
+    "magento/framework": "102.0.*",
     "magento/module-customer": ">=102.0.3",
     "magento/module-config": "101.1.*",
     "magento/module-sales": "102.0.*",
