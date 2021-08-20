@@ -288,7 +288,7 @@ class Preference extends \Magento\Backend\App\Action
     private function setUrlWebhookRefund($url)
     {
         $webhook = [
-            'events' => ['REFUND.REQUESTED'],
+            'events' => ['REFUND.COMPLETED', 'REFUND.FAILED'],
             'target' => $url,
             'media'  => 'WEBHOOK',
         ];

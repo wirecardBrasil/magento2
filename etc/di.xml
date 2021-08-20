@@ -13,6 +13,17 @@
                 type="Moip\Magento2\Plugin\PaymentToken"
                 sortOrder="1"/>
     </type>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="createWebhooks" xsi:type="object">Moip\Magento2\Console\Command\Preference\CreateWebhook</item>
+                <item name="listWebhooks" xsi:type="object">Moip\Magento2\Console\Command\Preference\ListWebhook</item>
+                <item name="deleteWebhooks" xsi:type="object">Moip\Magento2\Console\Command\Preference\DeleteWebhook</item>
+            </argument>
+        </arguments>
+    </type>
+
     <preference for="Moip\Magento2\Api\Data\MoipInterestInterface" type="Moip\Magento2\Model\Data\MoipInterest" />
     <preference for="Moip\Magento2\Api\MoipInterestManagementInterface" type="Moip\Magento2\Model\MoipInterestManagement" />
     <preference for="Moip\Magento2\Api\GuestMoipInterestManagementInterface" type="Moip\Magento2\Model\GuestMoipInterestManagement" />
@@ -27,7 +38,7 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="Magento2CcFacade" type="Magento2BaseFacade">
+    <virtualType name="Magento2CcFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
             <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderCc::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\FormCc</argument>
@@ -37,7 +48,7 @@
         </arguments>
     </virtualType>
 
-    <virtualType name="Magento2BoletoFacade" type="Magento2CcFacade">
+    <virtualType name="Magento2BoletoFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
             <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderBoleto::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\FormBoleto</argument>
