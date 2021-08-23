@@ -103,6 +103,11 @@
                         <config_path>payment/moip_magento2_cc/title</config_path>
                     </field>
                     <group id="document" translate="label" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                        <field id="moip_vault_status" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                            <label>Enable Vault</label>
+                            <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                            <config_path>payment/moip_magento2_cc_vault/active</config_path>
+                        </field>
                         <label>Payer Data Capture</label>
                         <comment>Define the payment form data capture</comment>
                         <field id="get_tax_document" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -271,11 +276,6 @@
                         <label>Debug</label>
                         <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                         <config_path>payment/moip_magento2/debug</config_path>
-                    </field>
-                    <field id="moip_vault_status" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                        <label>Vault Active</label>
-                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
-                        <config_path>payment/moip_magento2_cc_vault/active</config_path>
                     </field>
                     <field id="min_order_total" translate="label" type="text" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Minimum Order Total</label>
