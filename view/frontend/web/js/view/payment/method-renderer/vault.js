@@ -136,13 +136,9 @@ define([
             var info_interest   = window.checkoutConfig.payment[this.getAuxiliaryCode()].info_interest;
             var min_installment = window.checkoutConfig.payment[this.getAuxiliaryCode()].min_installment;
             var max_installment = window.checkoutConfig.payment[this.getAuxiliaryCode()].max_installment;
-            
             var installmentsCalcValues = {};
-            var count = 0;
-            
             var max_div = (calcTotal/min_installment);
                 max_div = parseInt(max_div);
-
             if(max_div > max_installment) {
                 max_div = max_installment;
             } else {
@@ -151,60 +147,54 @@ define([
                 }
             }
             var limit = max_div;
-
-            _.each(info_interest, function( key, value ) {
-                value = info_interest[value];
-                if(limit !== count) {
-                    if(value > 0){
-                        var taxa = value/100;
-                        if(type_interest === "compound"){
-                            var pw = Math.pow((1 / (1 + taxa)), count);
-                            var installment = (((calcTotal * taxa) * 1) / (1 - pw));
-                        } else {
-                            var installment = ((calcTotal*taxa)+calcTotal) / count;
-                        }
-
-                        var totalInstallment = installment*count;
-                        var interest = value;
-                        if(installment > 5 && installment > min_installment){
-                            installmentsCalcValues[count] = {
-                                "installment" : priceUtils.formatPrice(installment, quote.getPriceFormat()),
-                                "totalInstallment": priceUtils.formatPrice(totalInstallment, quote.getPriceFormat()),
-                                "totalInterest" : priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
-                                "interest" : interest,
-                            };
-                        }
-                    } else if(value == 0) {
-                        if(calcTotal > 0 && count > 0){
-                            installmentsCalcValues[count] = {
-                                "installment" : priceUtils.formatPrice((calcTotal/count), quote.getPriceFormat()),
-                                "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
-                                "totalInterest" :  0,
-                                "interest" : 0,
-                            };
-                        }
-                    } else if(value < 0) {
-                        var taxa = value/100;
-                        if(calcTotal > 0 && count > 0){
-                            var installment = ((calcTotal*taxa)+calcTotal) / count;
-                            installmentsCalcValues[count] = {
-                                    "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
-                                    "discount" : value,
-                                    "interest": value
-                            };
-                        }
+            
+            if(limit === 0){
+                limit = 1;
+            }
+            
+            for (var i = 1; i < info_interest.length; i++) {
+                if (i > limit) {
+                    break;
+                }
+                var interest = info_interest[i];
+                if(interest > 0){
+                    var taxa = interest/100;
+                    if(type_interest === "compound"){
+                        var pw = Math.pow((1 / (1 + taxa)), i);
+                        var installment = (((calcTotal * taxa) * 1) / (1 - pw));
+                    } else {
+                        var installment = ((calcTotal*taxa)+calcTotal) / i;
                     }
-                    count++; 
-                } else {
-                    count++;
-                    installmentsCalcValues[1] = {
-                        "installment" : priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
-                        "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
-                        "totalInterest" :  0,
-                        "interest" : 0,
-                    };
-                }   
-            });
+                    var totalInstallment = installment*i;
+                    if(installment > 5 && installment > min_installment){
+                        installmentsCalcValues[i] = {
+                            "installment" : priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(totalInstallment, quote.getPriceFormat()),
+                            "totalInterest" : priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
+                            "interest" : interest
+                        };
+                    }
+                } else if(interest == 0) {
+                    if(calcTotal > 0){
+                        installmentsCalcValues[i] = {
+                            "installment" : priceUtils.formatPrice((calcTotal/i), quote.getPriceFormat()),
+                            "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
+                            "totalInterest" :  0,
+                            "interest" : 0
+                        };
+                    }
+                } else if(interest < 0) {
+                    var taxa = interest/100;
+                    if(calcTotal > 0){
+                        var installment = ((calcTotal*taxa)+calcTotal) / i;
+                        installmentsCalcValues[i] = {
+                                "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                                "discount" : interest,
+                                "interest": interest
+                        };
+                    }
+                }
+            }
             return installmentsCalcValues;
         },
         
