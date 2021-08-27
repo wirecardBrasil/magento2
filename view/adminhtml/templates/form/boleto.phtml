@@ -19,8 +19,8 @@
         </div>
     </div>
 </fieldset>
-
-<?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
-    "display:none",
-    'fieldset#payment_form_' . $block->escapeJs($block->getMethodCode())
-) ?>
+<style>
+fieldset#payment_form_<?= /* @noEscape */ $block->getMethodCode() ?> {
+   width: 380px;
+}
+</style>

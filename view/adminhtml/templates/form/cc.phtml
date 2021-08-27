@@ -169,19 +169,14 @@ $ccInstallment = $block->getInfoData('cc_installment');
             </select>
         </div>
     </div>
-    
 </fieldset>
-<?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
-    "display:none",
-    'fieldset#payment_form_' . /* @noEscape */ $code
-) ?>
-<?php $scriptString = <<<script
-    
-    require(["Magento_Sales/order/create/form"], function () {
-        order.addExcludedPaymentMethod('{$code}');
-    });
+<style>
+fieldset#payment_form_<?= /* @noEscape */ $code ?> {
+   width: 380px;
+}
+</style>
+<script>
+    // cde
     require(["Moip_Magento2/js/hash"], function () {
     });
-script;
-?>
-<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+</script>
