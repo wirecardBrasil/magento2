@@ -15,7 +15,7 @@ $ccExpMonth = $block->getInfoData('cc_exp_month');
 $ccExpYear = $block->getInfoData('cc_exp_year');
 $ccInstallment = $block->getInfoData('cc_installment');
 ?>
-<fieldset class="admin__fieldset payment-method" id="payment_form_<?= /* @noEscape */ $code ?>">
+<fieldset class="admin__fieldset payment-method" id="payment_form_<?= /* @noEscape */ $code ?>" style="display: none;">
     <input type="hidden"
         id="<?= /* @noEscape */ $code ?>_key_public"
         value="<?= /* @noEscape */ $block->getKeyPublic() ?>"/>
