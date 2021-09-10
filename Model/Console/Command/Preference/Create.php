@@ -116,14 +116,7 @@ class Create extends AbstractModel
 
         $valid = $this->validator->isValid($baseUrl);
         if (!$valid) {
-            $this->writeln(__('<error>The URL entered is invalid %1, it must contain https://...</error>', $baseUrl));
-
-            return $this;
-        }
-
-        $formatValid = str_ends_with($baseUrl, '/');
-        if (!$formatValid) {
-            $this->writeln(__("<error>Your url %1 is valid, but must end with '/'</error>", $baseUrl));
+            $this->writeln(__('<error>The URL entered is invalid %1, it must contain https://.../</error>', $baseUrl));
 
             return $this;
         }
