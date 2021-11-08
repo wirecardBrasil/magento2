@@ -186,7 +186,7 @@ class Deny extends Action implements Csrf
                 'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
-            if ($order->canCancel()) {
+            if (!$order->canCancel()) {
                 try {
                     $isOnline = true;
                     $payment->deny($isOnline);
