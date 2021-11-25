@@ -137,6 +137,17 @@ class Accept extends Action implements Csrf
         if ($storeCaptureToken === $authorization) {
             $data = $originalNotification['resource']['order'];
             $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
+
+            if(!$order->getId()) {
+                $resultPage->setHttpResponseCode(406);
+                return $resultPage->setJsonData(
+                    $this->json->serialize([
+                        'error' => 400,
+                        'message' => __('Can not find this order'),
+                    ])
+                );
+            }
+
             $this->logger->debug([
                 'webhook'            => 'accept',
                 'ext_order_id'       => $data['id'],
@@ -152,7 +163,7 @@ class Accept extends Action implements Csrf
                     $order->save();
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
-                    $resultPage->setJsonData(
+                    return $resultPage->setJsonData(
                         $this->json->serialize([
                             'error'   => 400,
                             'message' => $exc->getMessage(),

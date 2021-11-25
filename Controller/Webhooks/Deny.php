@@ -59,24 +59,44 @@ class Deny extends Action implements Csrf
     }
 
     /**
-     * @var logger
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * @var Logger
      */
     protected $logger;
 
     /**
-     * @var orderFactory
+     * @var OrderInterfaceFactory
      */
     protected $orderFactory;
 
     /**
-     * @var resultJsonFactory
+     * @var CreditmemoFactory
      */
-    protected $resultJsonFactory;
+    protected $creditmemoFactory;
 
     /**
-     * @var storeManager
+     * @var CreditmemoService
+     */
+    protected $creditmemoService;
+
+    /**
+     * @var Invoice
+     */
+    protected $invoice;
+
+    /**
+     * @var StoreManagerInterface
      */
     protected $storeManager;
+
+    /**
+     * @var JsonFactory
+     */
+    protected $resultJsonFactory;
 
     /**
      * @var Json
@@ -84,17 +104,21 @@ class Deny extends Action implements Csrf
     protected $json;
 
     /**
-     * @var orderCommentSender
+     * @var OrderCommentSender
      */
     protected $orderCommentSender;
 
     /**
      * @param Context               $context
-     * @param logger                $logger
+     * @param Logger                $logger
      * @param Config                $config
      * @param OrderInterfaceFactory $orderFactory
+     * @param CreditmemoFactory     $creditmemoFactory
+     * @param Invoice               $invoice
+     * @param StoreManagerInterface $storeManager
      * @param JsonFactory           $resultJsonFactory
      * @param Json                  $json
+     * @param OrderCommentSender    $orderCommentSender
      */
     public function __construct(
         Context $context,
@@ -145,6 +169,17 @@ class Deny extends Action implements Csrf
         if ($storeCaptureToken === $authorization) {
             $data = $originalNotification['resource']['order'];
             $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
+
+            if(!$order->getId()) {
+                $resultPage->setHttpResponseCode(406);
+                return $resultPage->setJsonData(
+                    $this->json->serialize([
+                        'error' => 400,
+                        'message' => __('Can not find this order'),
+                    ])
+                );
+            }
+
             $this->logger->debug([
                 'webhook'            => 'deny',
                 'ext_order_id'       => $data['id'],
@@ -152,10 +187,10 @@ class Deny extends Action implements Csrf
                 'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
-            if ($order->canCancel()) {
+            if ($order->canVoidPayment()) {
                 try {
                     $isOnline = true;
-                    $payment->deny($isOnline);
+                    $payment->void($isOnline);
                     $payment->save();
                     $cancelDetailsAdmin = __('We did not record the payment.');
                     $cancelDetailsCus = __('The payment deadline has been exceeded.');
@@ -185,9 +220,9 @@ class Deny extends Action implements Csrf
                     $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
-                    $resultPage->setJsonData(
+                    return $resultPage->setJsonData(
                         $this->json->serialize([
-                            'error'   => 400,
+                            'error' => 400,
                             'message' => $exc->getMessage(),
                         ])
                     );
