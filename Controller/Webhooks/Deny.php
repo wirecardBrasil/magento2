@@ -153,6 +153,7 @@ class Deny extends Action implements Csrf
      */
     public function execute()
     {
+
         if (!$this->getRequest()->isPost()) {
             $resultPage = $this->resultJsonFactory->create();
             $resultPage->setHttpResponseCode(404);
@@ -167,18 +168,20 @@ class Deny extends Action implements Csrf
         $storeId = $this->storeManager->getStore()->getId();
         $storeCaptureToken = $this->config->getMerchantGatewayCancelToken($storeId);
         if ($storeCaptureToken === $authorization) {
+
             $data = $originalNotification['resource']['order'];
-            try {
-                $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
-            } catch (\Exception $exc) {
+            $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
+
+            if(!$order->getId()) {
                 $resultPage->setHttpResponseCode(500);
-                $resultPage->setJsonData(
+                return $resultPage->setJsonData(
                     $this->json->serialize([
-                        'error'   => 400,
-                        'message' => $exc->getMessage(),
+                        'error' => 400,
+                        'message' => __('Can not find this order'),
                     ])
                 );
             }
+
             $this->logger->debug([
                 'webhook'            => 'deny',
                 'ext_order_id'       => $data['id'],
@@ -186,10 +189,10 @@ class Deny extends Action implements Csrf
                 'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
-            if (!$order->canCancel()) {
+            if ($order->canVoidPayment()) {
                 try {
                     $isOnline = true;
-                    $payment->deny($isOnline);
+                    $payment->void($isOnline);
                     $payment->save();
                     $cancelDetailsAdmin = __('We did not record the payment.');
                     $cancelDetailsCus = __('The payment deadline has been exceeded.');
@@ -219,10 +222,10 @@ class Deny extends Action implements Csrf
                     $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
-                    $resultPage->setJsonData(
+                    return $resultPage->setJsonData(
                         $this->json->serialize([
-                            'error'   => 400,
-                            'message' => $exc->getMessage(),
+                            'error' => 400,
+                            'message' => __('Can not find this order'),
                         ])
                     );
                 }

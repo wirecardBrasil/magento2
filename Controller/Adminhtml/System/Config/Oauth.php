@@ -157,7 +157,7 @@ class Oauth extends \Magento\Backend\App\Action
     private function getAuthorize($code)
     {
         $url = ConfigBase::ENDPOINT_OAUTH_TOKEN_PRODUCTION;
-        
+
         $arrayToQuery = [
             'client_id'     => ConfigBase::APP_ID_PRODUCTION,
             'client_secret' => ConfigBase::CLIENT_SECRECT_PRODUCTION,
@@ -169,7 +169,7 @@ class Oauth extends \Magento\Backend\App\Action
         $environment = $this->configBase->getEnvironmentMode();
         if ($environment === ConfigBase::ENVIRONMENT_SANDBOX) {
             $url = ConfigBase::ENDPOINT_OAUTH_TOKEN_SANDBOX;
-            
+
             $arrayToQuery = [
                 'client_id'     => ConfigBase::APP_ID_SANDBOX,
                 'client_secret' => ConfigBase::CLIENT_SECRECT_SANDBOX,
