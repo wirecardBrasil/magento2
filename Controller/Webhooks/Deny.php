@@ -173,11 +173,11 @@ class Deny extends Action implements Csrf
             $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
 
             if(!$order->getId()) {
-                $resultPage->setHttpResponseCode(500);
+                $resultPage->setHttpResponseCode(406);
                 return $resultPage->setJsonData(
                     $this->json->serialize([
                         'error' => 400,
-                        'message' => __('Can not find this order'),
+                        'message' => $exc->getMessage(),
                     ])
                 );
             }
