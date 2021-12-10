@@ -78,7 +78,7 @@ class CreateOrderAuthorizeClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders');
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 45000]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setRawData($this->json->serialize($request), 'application/json');
             $client->setMethod(ZendClient::POST);

@@ -81,7 +81,7 @@ class AuthorizeClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders/'.$orderMoip.'/payments');
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 45000]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setRawData($this->json->serialize($request['paymentInstrument']), 'application/json');
             $client->setMethod(ZendClient::POST);

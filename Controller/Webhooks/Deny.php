@@ -177,7 +177,7 @@ class Deny extends Action implements Csrf
                 return $resultPage->setJsonData(
                     $this->json->serialize([
                         'error' => 400,
-                        'message' => $exc->getMessage(),
+                        'message' => __('Can not find this order'),
                     ])
                 );
             }
@@ -225,7 +225,7 @@ class Deny extends Action implements Csrf
                     return $resultPage->setJsonData(
                         $this->json->serialize([
                             'error' => 400,
-                            'message' => __('Can not find this order'),
+                            'message' => $exc->getMessage(),
                         ])
                     );
                 }
