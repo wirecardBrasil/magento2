@@ -1,461 +1,463 @@
-method_name,Método
-cc_installments,Número de parcelas
-cc_installment_interest,Valor do juros
-cc_type,Bandeira do cartão
-cc_number,Número do cartão
-cc_holder_fullname,Nome impresso no cartão
-cc_holder_birth_date,Data de nascimento do titular
-cc_holder_tax_document,Documento fiscal do titular
-cc_holder_phone,Telefone do titular
-Credit Card Holder Tax Document,Documento fiscal (CPF/CNPJ) do titular
-Credit Card Holder Phone,Telefone de contato do titular
-Credit Card Holder Birth Date,Data de nascimento do titular
-Credit Card Holder Full Name,Nome impresso no cartão
-Credit Card Number,Número do cartão
-CVV - Card Verification Number,CVV - Código de segurança do cartão
-Expiration Month,Mês de expiração
-Expiration Year,Ano de expiração
-Select Instalmment,Opção de parcelamento
-boleto_payer_fullname,Boleto em nome de
-boleto_payer_tax_document,Documento fiscal
-boleto_line_code,Código de Barra
-boleto_print_href,Link
-Developer Mode,Ambiente
-ACQUIRER,banco emissor do cartão
+"Moip Interest Amount","Juros de Pacelamento (Moip)"
+"Please select","Por favor selecione"
+"Select the store segment.","Selecione o segmento de sua loja."
+"Animals and Pet Supplies","Animais e suprimentos para animais de estimação"
+"Apparel and Accessories","Vestuário e acessórios"
+"Apparel and Accessories > Clothing","Vestuário e acessórios > Roupas"
+"Apparel and Accessories > Clothing Accessories","Vestuário e acessórios > Acessórios para roupas"
+"Apparel and Accessories > Costumes and Accessories","Vestuário e acessórios > Trajes e acessórios"
+"Apparel and Accessories > Handbags and Wallet Accessories","Vestuário e acessórios > Bolsas e acessórios de carteira"
+"Apparel and Accessories > Jewelry","Vestuário e acessórios > Joias"
+"Apparel and Accessories > Shoe Accessories","Vestuário e acessórios > Acessórios para sapatos"
+"Apparel and Accessories > Shoes","Vestuário e acessórios > Sapatos"
+"Apparel and Accessories > Other","Vestuário e acessórios > Outros"
+"Arts and Entertainment","Artes e Entretenimento"
+"Baby and Toddler","Bebê e criança"
+"Business and Industrial","Negócios e industrial"
+"Business and Industrial > Advertising and Marketing","Negócios e industrial > Publicidade e marketing"
+"Business and Industrial > Agriculture","Negócios e industrial > Agricultura"
+"Business and Industrial > Construction","Negócios e Industrial > Construção"
+"Business and Industrial > Film and Television","Negócios e Indústria > Cinema e Televisão"
+"Business and Industrial > Finance and Insurance","Negócios e industrial > Finanças e seguros"
+"Business and Industrial > Food Service","Negócios e industrial > Food Service"
+"Business and Industrial > Forestry and Logging","Negócios e industrial > Silvicultura e exploração madeireira"
+"Business and Industrial > Heavy Machinery","Negócios e industrial > Maquinaria pesada"
+"Business and Industrial > Hotel and Hospitality","Negócios e industrial > Hotelaria e hospitalidade"
+"Business and Industrial > Industrial Storage","Negócios e industrial > Armazenamento industrial"
+"Business and Industrial > Law Enforcement","Negócios e industrial > Polícia"
+"Business and Industrial > Manufacturing","Negócios e industrial > Manufatura"
+"Business and Industrial > Material Handling","Negócios e industrial > Manuseio de materiais"
+"Business and Industrial > Medical","Negócios e industrial > Medicina"
+"Business and Industrial > Mining and Quarrying","Negócios e Industrial > Mineração e Pedreira"
+"Business and Industrial > Piercing and Tattooing","Negócios e Industrial > Piercing e tatuagem"
+"Business and Industrial > Retail","Negócios e Industrial > Varejo"
+"Business and Industrial > Science and Laboratory","Negócios e Indústria > Ciência e Laboratório"
+"Business and Industrial > Signage","Negócios e Industrial > Sinalização"
+"Business and Industrial > Work Safety Protective Gear","Negócios e Industrial> Equipamento de proteção para segurança do trabalho"
+"Business and Industrial > Other Businesses","Negócios e Industrial > Outros negócios"
+"Camera and Optic Accessories","Câmera e acessórios ópticos"
+"Camera and Optic Accessories > Cameras","Câmera e acessórios ópticos > Câmeras"
+"Camera and Optic Accessories > Camera Acessories","Câmera e acessórios ópticos > Acessórios para câmeras"
+"Camera and Optic Accessories > Photography","Câmera e acessórios ópticos > Fotografia"
+"Camera and Optic Accessories > Others Cameras Accessories","Câmera e acessórios ópticos > Outros acessórios para câmeras"
+Electronics,Eletrônicos
+"Electronics > 3d Printers","Eletrônicos > Impressoras 3D"
+"Electronics > Audio","Eletrônicos > Áudio"
+"Electronics > Circuit Boards and Components","Eletrônicos > Placas de circuito e componentes"
+"Electronics > Communications","Eletrônicos > Comunicações"
+"Electronics > Components","Eletrônicos > Componentes"
+"Electronics > Computers","Eletrônicos > Computadores"
+"Electronics > Electronics Accessories","Eletrônicos > Acessórios eletrônicos"
+"Electronics > Gps Navigation Systems","Eletrônicos > Sistemas de navegação GPS"
+"Electronics > Gps Accessories","Eletrônicos > Acessórios GPS"
+"Electronics > Networking","Eletrônicos > Rede"
+"Electronics > Print Copy Scan and Fax","Eletrônicos > Imprimir cópia, digitalização e fax"
+"Electronics > Printer Copier and Fax Machine Accessories","Eletrônicos > Acessórios para copiadora de impressora e fax"
+"Electronics > Video","Eletrônicos > Vídeo"
+"Electronics > Video Game Consoles","Eletrônicos > Consoles de videogame"
+"Electronics > Video Game Console Accessories","Eletrônicos > Acessórios para console de videogame"
+"Electronics > Other Electronics","Eletrônicos > Outros eletrônicos"
+"Food Beverages and Tobacco","Alimentos Bebidas e Tabaco"
+Furniture,Mobiliário
+"Tool Accessories","Acessórios para ferramentas"
+"Health and Beauty","Saúde e beleza"
+"Health and Beauty > Perfume and Cologne","Saúde e Beleza > Perfume e Colônia"
+"Health and Beauty > Makeup","Saúde e Beleza > Maquiagem"
+"Health and Beauty > Bath and Body","Saúde e beleza > Banho e corpo"
+"Health and Beauty > Cosmetic Tools","Saúde e beleza > Ferramentas cosméticas"
+"Luggage and Bags","Bagagem e bolsas"
+Adult,Adulto (maiores de 18 anos)
+"Weapons and Ammunition","Armas e munições"
+"Office Supplies","Material de escritório"
+"Religious and Ceremonial","Religioso e cerimonial"
+Software,Software
+"Software > Computer Software","Software > Software de computador"
+"Software > Digital Goods and Currency","Software > Bens digitais e moeda"
+"Software > Digital Services","Software > Serviços Digitais"
+"Software > Video Game Software","Software > Software de videogame"
+"Software > Other Softwares","Software > Outros Softwares"
+"Sporting Goods","Artigos esportivos"
+"Toys and Games","Brinquedos e jogos"
+"Vehicles and Parts","Veículos e peças"
+Books,Livros
+"Dvds and Videos","DVDs e vídeos"
+"Magazines and Newspapers","Revistas e Jornais"
+Music,Música
+"Music > Cds and Lps","Música > Cds e Lps"
+"Music > Musical Instruments","Música > Instrumentos Musicais"
+"Music > Digital Music","Música > Música Digital"
+"Music > Other Music Items","Música > Outros itens musicais"
+"Music > Other Categories","Música > Outras categorias"
 Production,Produção
-Sandbox - Environment for tests,Sandbox - Ambiente de testes
-Disallow in Production,Desconectar da produção
-Disallow in Environment for tests,Desconectar de ambiente de testes
-Authorize in Production,Conectar a Produção
-Authorize in Environment for tests,Conectar em Ambiente de teste
-for testing use the sandbox environment,Para vendas reais use o ambiente de produção, para testes o de sandbox.
-Module Authorization,Autorização do Módulo
-Warning because the sandbox account is not the same as production,Atenção pois a conta de sandbox não é mesma de produção
-Advanced Settings,Configurações Avançadas
-List the attributes of your Magento the data expected by our API.,Relacione os atributos de seu Magento com os dados esperados pela nossa API.
-The CPF/CNPJ will be an attribute obtained from the, O CPF/CNPJ será um atributo obtido do
-The CPF/CNPJ attribute is,O atributo do CPF/CNPJ é
-The attribute CNPJ will be obtained from the,O atributo de CNPJ será obitido do
-by address form (checkout),formulário de checkout (endereço)
-by customer form (customer account),formulário de criação de conta (minha conta)
-The CNPJ will be an attribute obtained from the, O CNPJ será um atributo obtido do
-will use the same value as the CPF,mesmo atributo do CPF
-The attribute Company Name will be obtained from the,O nome da empresa será obitido do
-The Company Name attribute is,O atributo do Nome da Empresa é
-The Street attribute is,O logradouro (rua) é
-The address number is,O número do endereço é
-The address complement is,O complemento do endereço é
-The address district is,O bairro é
-1st line of the street,1ª linha de endereço
-2st line of the street,2ª linha de endereço
-3st line of the street,3ª linha de endereço
-4st line of the street,4ª linha de endereço
-Installment and interest,Parcelamento e taxas de juros
-Minimum value of installment,Valor mínimo da parcela
-Maximum number of installments,Número máximo de parcelas
-Interest on the 2nd tranche,Juros da 2ª parcela
-Interest on the 3nd tranche,Juros da 3ª parcela
-Interest on the 4nd tranche,Juros da 4ª parcela
-Interest on the 5nd tranche,Juros da 5ª parcela
-Interest on the 6nd tranche,Juros da 6ª parcela
-Interest on the 7nd tranche,Juros da 7ª parcela
-Interest on the 8nd tranche,Juros da 8ª parcela
-Interest on the 9nd tranche,Juros da 9ª parcela
-Interest on the 10nd tranche,Juros da 10ª parcela
-Interest on the 11nd tranche,Juros da 11ª parcela
-Interest on the 12nd tranche,Juros da 12ª parcela
-Days due,Número dias para vencimento
-Consecutive days.,Em dias corridos.
-Instruction - 1st line,1ª Linha de instrução
-Instruction - 2st line,2ª Linha de instrução
-Instruction - 3st line,3ª Linha de instrução
-Information will be printed on the boleto.,Essa informação será impressa no boleto.
-Customer orientation at checkout,Orientação ao cliente no checkout
-Information displayed on checkout.,Informação exbida no checkout.
+"Sandbox - Environment for tests","Sandbox - Ambiente de testes"
+"Environment for tests","Ambiente de teste"
+"Authorize in %s","Autorizar APP em %s"
+"Disallow in %s","Desautorizar APP em %s"
+Configure,Configuração
+Close,Fechar
+"1st line of the street","1ª linha do endereço"
+"2st line of the street","2ª linha do endereço"
+"3st line of the street","3ª linha do endereço"
+"4st line of the street","4ª linha do endereço"
+"by customer form (customer account)","pelo formulário de cliente (conta do cliente)"
+"by address form (checkout)","pelo formulário de checkout (formulário de pedido)"
+"x of ","x de "
+"To make payment click here","Para efetuar o pagamento clique aqui"
+"Installment Interest","Juros de parcelamento"
+"Discount Cash","desconto à vista"
+"%1 payments have been updated.","%1 pagamentos foram atualizados."
+"%1 payments have not yet been updated.","%1 pagamentos ainda não foram atualizados."
+"Unable to get the code, try again. =(","Não foi possível obter o código, tente novamente. =("
+"Your module is authorized, but you have reached the notification url preference limit.","Seu módulo está autorizado, mas você atingiu o limite de preferência de url de notificação."
+"Your module is authorized. =)","Seu módulo está autorizado. =)"
+"We did not record the payment.","Não registramos o pagamento."
+"The payment deadline has been exceeded.","O prazo de pagamento foi ultrapassado."
+"%1, code %2, by %3","%1, código de cancelamento %2, por %3"
+%1,%1
+"Transaction has been declined. Please try again later.","A transação foi recusada. Por favor, tente novamente mais tarde."
+"Your payment has been successfully received.","Seu pagamento foi recebido com sucesso."
+"Gateway rejected the transaction.","Gateway rejeitou a transação."
+Authorize,Autorizar
+"<error>Error %1</error>","<error>Erro %1</error>"
+"<info>Preference ID: %1 Target Uri: %2</info>","<info>Preferência ID: %1 Target Uri: %2</info>"
+Finished,Concluída
+"<info>Setting preferences for the domain: %1</info>","<info>Definir preferências para o domínio: %1</info>"
+"<error>The URL entered is invalid %1, it must contain https://...</error>","<error>A URL inserida %1 é inválido, deve conter https://...</error>"
+"<error>Your url %1 is valid, but must end with '/'</error>","<error>Sua url %1 é válida, mas deve terminar com '/'</error>"
+"<info>Your preference for method %1 has been successfully created: %2</info>","<info>Sua preferência para o método %1 foi criada com sucesso: %2</info>"
+"<error>Error saving information in database: %1</error>","<error>Erro ao salvar informações no banco de dados: %1</error>"
+"<error>Error creating preference %1: %2</error>","<error>Erro ao criar preferência %1: %2</error>"
+"<error>error deleting %1: %2</error>","<error>erro de exclusão %1: %2</error>"
+"<info>Deleted preference %1</info>","<info>Preferência excluída %1</info>"
+"Cart %1 doesn't contain products","O carrinho %1 não contém produtos"
+"The moip interest # number could not be saved","Não foi possível salvar o número de juros"
+Moip,Moip
+"Refund Request to Bank %1, Agency Number %2, Agency Check Number %3, Account Number %4, Account Check Number %5, Holder Name %6, Holder Tax Document %7","Solicitação de reembolso para o banco %1, número da agência %2, número do cheque da agência %3, número da conta %4, número do cheque da conta %5, nome do titular %6, documento fiscal do titular %7"
 Due,Vencimento
 Instruction,Informações
-Credit Card Number,Número do cartão
-Expiration Date,Data de vencimento
-Credit Card CVV,Código de segurança (CVV)
-Installments, Parcelamento
-Full Name,Nome do titular
-Dados inválidos,Dados informados inválidos. Você digitou algo errado durante o preenchimento dos dados do seu Cartão. Certifique-se de que está usando o Cartão correto e faça uma nova tentativa.
-Falha na comunicação com o Banco Emissor,Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente.
-Política do Banco Emissor,O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo e refazer o pagamento.
-Cartão vencido,A validade do seu Cartão expirou. Escolha outra forma de pagamento para concluir o pagamento.
-Transação não autorizada,O pagamento não foi autorizado. Entre em contato com o Banco Emissor do seu Cartão.
-Transação duplicada,Esse pagamento já foi realizado. Caso não encontre nenhuma referência ao pagamento anterior, por favor entre em contato com o nosso atendimento.
-Política do Moip,O pagamento não foi autorizado. Para mais informações, entre em contato com o nosso atendimento.
-Transação não processada,O pagamento não pode ser processado. Por favor, tente novamente. Caso o erro persista, entre em contato com o nosso atendimento.
-Desconhecido,Houve uma falha de comunicação com o Banco Emissor do seu Cartão, tente novamente.
-Política de segurança do Banco Emissor,Pagamento não autorizado para este Cartão. Entre em contato com o Banco Emissor para mais esclarecimentos.
-Valor inválido,Pagamento não autorizado. Entre em contato com o Atendimento e informe o ocorrido.
-Política de segurança do Moip,Pagamento não autorizado
-Politica do banco emissor,O pagamento não foi autorizado pelo Banco Emissor do seu Cartão. Entre em contato com o Banco para entender o motivo antes de refazer o pagamento.
-Prazo limite excedido,O prazo limite do pagamento foi excedido
-Expiration in %1 days,Vencimento em %1 dias
-Expiration in %1 day,Vencimento em %1 dia
-The barcode of your ticket bank is:,O código de barras do seu boleto é:
+"Credit Card Holder Tax Document","CPF/CNPJ do titular do cartão de crédito"
+"Credit Card Holder Phone","Telefone do titular do cartão de crédito"
+"Format: (99)99999-9999","Formato: (99)99999-9999"
+"Credit Card Holder Birth Date","Data de nascimento do titular do cartão de crédito"
+"Format: 31/12/1985","Formato: 31/12/1985"
+"Credit Card Holder Full Name","Nome impresso no cartão"
+"Credit Card Type","Bandeira do cartão de crédito"
+"Credit Card Number","Número do cartão de crédito"
+"Expiration Date","Data de vencimento"
+"Card Verification Number","CVV - Código de segurança"
+"Select Instalmment","Selecione o número de parcelas"
+"Holder Tax Document","CPF/CNPJ do pagador"
+"Holder Name","Nome completo do pagador"
+"Holder Fullname","Nome completo do pagador"
+"Allows Installment","Permite parcelar"
+No,Não
+Yes,Sim
+ending,final
+expires,vencimento
+"Payment &amp; Shipping Method","Pagamento &amp; Meio de Envio"
+"Payment Information","Informações de Pagamento"
+"The order was placed using %1.","O pedido foi feito usando %1."
+"Shipping Information","Meio de Envio"
+"Total Shipping Charges","Total de despesas de envio"
+"Incl. Tax","Incl. Taxas"
+"Bank details for refund","Dados bancários para reembolso"
+"Owner of the account","Dono da conta"
+"Name of the account holder.","Nome do titular da conta."
+"Owner tax document","Documento fiscal do proprietário"
+"Tax document of the holder.","Documento fiscal (CPF/CNPJ) do titular."
+"Bank Number","Número do banco"
+"See bank number <a href=""%1"" target=""_blank"">here</a>","Veja o número do banco <a href=""%1"" target=""_blank"">aqui</a>"
+"Agency Number","Número da Agência"
+"Agency Check Number","Dígito da Agência"
+"Account Number","Número da conta"
+"Account Check Number","Dígito da conta"
+"The barcode of your ticket bank is:","Linha digitável:"
 Copy,Copiar
-Print your ticket bank,Imprimir Boleto
-Attribute Relationship Definition,Definição do Relacionamento de Atributos
-List the attributes of your Magento the data expected by our API,Informe em quais campos são coletados os atributos esperados por nossa API.
-Environment,Ambiente
-Credentials,Credencial de acesso
-Statement Descriptor,Nome da loja
-<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>,<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (antigo Moip) é uma solução de pagamento exclusiva para o <b>Brasil</b>.</p><p>A solução completa para receber pagamentos e simplificar as finanças do seu negócio. Nossa solução tem tudo que você precisa para aceitar todos meios de pagamento.</p></div>
-Interest rate,Tipo de juros
-Payer Data Capture,Captura dos dados do pagador
-Define the payment form data capture,Definir captura de dados no formulário de pagamento
-Capture tax document (CPF or CNPJ) in the payment form?,Capturar o documento fiscal (CPF ou CNPJ) no formulário de pagamento?
-Capture date of birth in the payment form?,Capturar a data de nascimento no formulário de pagamento?
-Capture phone in the payment form?,Capturar telefone no formulário de pagamento?
-Capture name in the payment form?,Capturar nome do pagador no formulário de pagamento?
-Credit Card Information,Informação do cartão de crédito
-Month,Mês
-Year,Ano
-Payer Full Name,Nome do pagador
-Payer Tax Document,Documento fiscal (CPF/CNPJ) do pagador
-We did not record the payment.,Não registramos o pagamento.
-The payment deadline has been exceeded.,Prazo limite para o pagamento foi excedido.
-Your payment has been successfully received.,Seu pagamento foi recebido com sucesso.
-%1 payments have been updated.,%1 payments have been updated.
-%1 payments have not yet been updated.,%1 payments have not yet been updated.
-Unable to get the code, try again. =(,Não foi possivel obter o código, tente novamente. =(
-Your module is authorized, but you have reached the notification url preference limit.,Seu módulo está autorizado, mas você atingiu o limite de preferências de url de notificação.
-Your module is authorized. =),Seu módulo está autorizado. =)
-O identificador próprio não foi informado.,O identificador próprio não foi informado.
-O nome não foi informado.,O nome não foi informado.
-O nome informado não é válido.,O nome informado não é válido.
-O nome informado não pode conter só números.,O nome informado não pode conter só números.
-O e-mail não foi informado.,O e-mail não foi informado.
-O e-mail informado é inválido.,O e-mail informado é inválido.
-A data de nascimento informada é inválida.,A data de nascimento informada é inválida
-O identificador próprio deve ser único, já existe um customer com o identificador informado.,O identificador próprio deve ser único, já existe um customer com o identificador informado.
-É necessário informar os dados do comprador.,É necessário informar os dados do comprador.
-A data de nascimento não foi informada.,A data de nascimento não foi informada.
-A estrutura de informações do documento não foi informada.,A estrutura de informações do documento não foi informada.
-A estrutura de telefone não foi informado.,A estrutura de telefone não foi informado.
-A estrutura de endereço não foi informado.,A estrutura de endereço não foi informado.
-O CNPJ informado deve ter 14 números.,O CNPJ informado deve ter 14 números.
-O código de país do telefone informado deve ser numérico.,O código de país do telefone informado deve ser numérico.
-O código de área local do telefone deve ser informado.,O código de área local do telefone deve ser informado.
-O código de área local do telefone informado deve ser numérico.,O código de área local do telefone informado deve ser numérico.
-O número de telefone não foi informado.,O número de telefone não foi informado.
-O número de telefone deve ser numérico.,O número de telefone deve ser numérico.
-O tipo do endereço não foi informado.,O tipo do endereço não foi informado.
-O tipo do endereço não foi informado.,O tipo do endereço não foi informado.
-A rua do endereço não foi informada.,A rua do endereço não foi informada.
-O número do endereço não foi informado.,O número do endereço não foi informado.
-O número do endereço deve ser numérico.,O número do endereço deve ser numérico.
-O complemento do endereço informado possui quantidade de caracteres inválido.,O complemento do endereço informado possui quantidade de caracteres inválido.
-O bairro do endereço não foi informado.,O bairro do endereço não foi informado.
-O bairro do endereço informado possui quantidade de caracteres inválido.,O bairro do endereço informado possui quantidade de caracteres inválido.
-A cidade do endereço não foi informado.,A cidade do endereço não foi informado.
-A cidade do endereço informado possui quantidade de caracteres inválido.,A cidade do endereço informado possui quantidade de caracteres inválido.
-O estado do endereço não foi informado.,O estado do endereço não foi informado.
-O estado do endereço informado possui quantidade de caracteres inválido.,O estado do endereço informado possui quantidade de caracteres inválido.
-O país do endereço não foi informado.,O país do endereço não foi informado.
-O país do endereço informado é inválido.,O país do endereço informado é inválido.
-O código postal do endereço não foi informado.,O código postal do endereço não foi informado.
-O código postal do endereço deve ser numérico.,O código postal do endereço deve ser numérico.
-O código postal deve conter no 8 dígitos.,O código postal deve conter no 8 dígitos.
-A rua deve conter no máximo 200 caracteres.,A rua deve conter no máximo 200 caracteres.
-O número da rua deve conter no máximo 10 caracteres.,O número da rua deve conter no máximo 10 caracteres.
-É necessário informar seu identificador próprio.,É necessário informar seu identificador próprio.
-O identificador próprio de pedido deve ter no máximo 45 caracteres.,O identificador próprio de pedido deve ter no máximo 45 caracteres.
-O pedido precisa de um recebedor do tipo PRIMARY.,O pedido precisa de um recebedor do tipo PRIMARY.
-Moeda informada é inválida. Atualmente apenas BRL é válido.,Moeda informada é inválida. Atualmente apenas BRL é válido.
-O valor de frete deve ser maior que zero.,O valor de frete deve ser maior que zero.
-O valor adicional deve ser maior que zero.,O valor adicional deve ser maior que zero.
-O valor de desconto deve ser maior que zero.,O valor de desconto deve ser maior que zero.
-O valor dos itens deve ser maior que zero.,O valor dos itens deve ser maior que zero.
-Todos os valores devem ser maiores que zero.,Todos os valores devem ser maiores que zero.
-É necessário informar pelo menos um item.,É necessário informar pelo menos um item.
-Informe o nome do produto.,Informe o nome do produto.
-O nome do item deve ter no máximo 250 caracteres.,O nome do item deve ter no máximo 250 caracteres.
-A descrição do produto deve ter no máximo 250 caracteres.,A descrição do produto deve ter no máximo 250 caracteres.
-O item deve ter um valor.,O item deve ter um valor.
-Informe o identificador da conta Wirecard.,Informe o identificador da conta Wirecard.
-Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.,Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.
-Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.,Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.
-É necessário informar o valor de recebimento.,É necessário informar o valor de recebimento.
-Não é possível inserir o mesmo receiver duas vezes.,Não é possível inserir o mesmo receiver duas vezes.
-Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.,Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.
-Pedido não encontrado.,Pedido não encontrado.
-O valor de frete deve ser informado em centavos. Exemplo R$241,00.,O valor de frete deve ser informado em centavos. Exemplo R$241,00.
-O valor adicional deve ser informado em centavos. Exemplo R$241,00.,O valor adicional deve ser informado em centavos. Exemplo R$241,00.
-O valor de desconto deve ser informado em centavos. Exemplo R$241,00.,O valor de desconto deve ser informado em centavos. Exemplo R$241,00.
-O valor do item deve ser informado em centavos.,O valor do item deve ser informado em centavos.
-Id da conta Wirecard informada esta encerrada.,Id da conta Wirecard informada esta encerrada.
-Conta Wirecard não encontrada para o email do comprador.,Conta Wirecard não encontrada para o email do comprador.
-É necessário informar ao menos uma conta Wirecard.,É necessário informar ao menos uma conta Wirecard.
-O valor percentual deve ser informado em formato numérico.,O valor percentual deve ser informado em formato numérico.
-O valor percentual deve ser entre 0 e 100.,O valor percentual deve ser entre 0 e 100.
-O valor fixo deve ser informado em centavos.,O valor fixo deve ser informado em centavos.
-É necessário especificar quem irá pagar a taxa de transação.,É necessário especificar quem irá pagar a taxa de transação.
-O tipo de pagador é inválido.,O tipo de pagador é inválido.
-O valor dos recebedores excede o valor pago.,O valor dos recebedores excede o valor pago.
-O pedido precisa ter valor maior que zero.,O pedido precisa ter valor maior que zero.
-O pedido já foi pago.,O pedido já foi pago.
-Não foi possível descriptografar o hash do cartão.,Não foi possível descriptografar o hash do cartão.
-A data de nascimento do portador do cartão é inválido.,A data de nascimento do portador do cartão é inválido.
-O CPF informado deve ter 11 números.,O CPF informado deve ter 11 números.
-O valor do pagamento é inválido ou maior do que o valor restante do pedido.,O valor do pagamento é inválido ou maior do que o valor restante do pedido.
-O IP possui mais de 15 caracteres.,O IP possui mais de 15 caracteres.
-O fingerprint possui mais de 256 caracteres.,O fingerprint possui mais de 256 caracteres.
-O userAgent possui mais de 256 caracteres.,O userAgent possui mais de 256 caracteres.
-A latitude possui mais de 3 inteiros ou 7 decimais.,A latitude possui mais de 3 inteiros ou 7 decimais.
-A longitude possui mais de 3 inteiros ou 7 decimais.,A longitude possui mais de 3 inteiros ou 7 decimais.
-Valor da taxa é maior que o valor da comissão.,Valor da taxa é maior que o valor da comissão.
-Quantidade de parcelas deve ser numérico.,Quantidade de parcelas deve ser numérico.
-A estrutura do instrumento de pagamento não foi informada.,A estrutura do instrumento de pagamento não foi informada.
-O statementDescriptor deve ter no máximo 13 caracteres.,O statementDescriptor deve ter no máximo 13 caracteres.
-A estrutura de informações não está correta para o método informado.,A estrutura de informações não está correta para o método informado.
-Pagamento não encontrado.,Pagamento não encontrado.
-O nó de parcelas não deve ser negativo.,O nó de parcelas não deve ser negativo.
-Já existe um pagamento realizado com cartão de crédito.,Já existe um pagamento realizado com cartão de crédito.
-Já existe um pagamento realizado com cartão de débito.,Já existe um pagamento realizado com cartão de débito.
-Ocorreu um erro na criação cartão de crédito.,Ocorreu um erro na criação cartão de crédito.
-Forma de pagamento não autorizada para a conta.,Forma de pagamento não autorizada para a conta.
-A estrutura de informações de cartão de crédito não foi informada.,A estrutura de informações de cartão de crédito não foi informada.
-Já existe um pagamento realizado com boleto bancário.,Já existe um pagamento realizado com boleto bancário.
-Já existe um pagamento realizado com débito em conta.,Já existe um pagamento realizado com débito em conta.
-Somente é possível capturar pagamentos com status PRE_AUTHORIZED.,Somente é possível capturar pagamentos com status PRE_AUTHORIZED.
-Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.,Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.
-Conta Wirecard não autorizada.,Conta Wirecard não autorizada.
-Conta Wirecard não encontrada.,Conta Wirecard não encontrada.
-Já existe um pagamento realizado com wallet para esse pedido.,Já existe um pagamento realizado com wallet para esse pedido.
-Forma de pagamento não pode ser utilizada nesse pedido.,Forma de pagamento não pode ser utilizada nesse pedido.
-O mês de expiração do cartão de crédito não foi informado.,O mês de expiração do cartão de crédito não foi informado.
-O mês de expiração do cartão de crédito deve ser numérico.,O mês de expiração do cartão de crédito deve ser numérico.
-O mês de expiração do cartão informado é inválido.,O mês de expiração do cartão informado é inválido.
-O ano de expiração do cartão não foi informado.,O ano de expiração do cartão não foi informado.
-O ano de expiração do cartão de crédito deve ser numérico.,O ano de expiração do cartão de crédito deve ser numérico.
-A data de expiração do cartão de crédito deve ser maior ou igual a data.,A data de expiração do cartão de crédito deve ser maior ou igual a data.
-O ano de expiração do cartão informado é inválido.,O ano de expiração do cartão informado é inválido.
-Formato informado para o cartão de crédito é invalido.,Formato informado para o cartão de crédito é invalido.
-O código de segurança do cartão deve conter 4 caracteres para Amex e 3.,O código de segurança do cartão deve conter 4 caracteres para Amex e 3.
-O número do cartão não foi informado.,O número do cartão não foi informado.
-O número do cartão deve ser numérico.,O número do cartão deve ser numérico.
-O número do cartão informado possui quantidade de caracteres inválido.,O número do cartão informado possui quantidade de caracteres inválido.
-O código de segurança do cartão não foi informado.,O código de segurança do cartão não foi informado.
-O código de segurança do cartão deve ser numérico.,O código de segurança do cartão deve ser numérico.
-A estrutura de informaççes do portador do cartão não foi informado.,A estrutura de informaççes do portador do cartão não foi informado.
-O nome do portador do cartão não foi informado.,O nome do portador do cartão não foi informado.
-O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.,O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.
-O nome do portador do cartão informado é inválido.,O nome do portador do cartão informado é inválido.
-A data de nascimento do portador do cartão não foi informado.,A data de nascimento do portador do cartão não foi informado.
-A estrutura de documento do portador do cartão não foi informado.,A estrutura de documento do portador do cartão não foi informado.
-A estrutura de telefone do portador não foi informado.,A estrutura de telefone do portador não foi informado.
-A estrutura de endereço de cobrança do portador não foi informado.,A estrutura de endereço de cobrança do portador não foi informado.
-O número informado não é um número de cartão válido.,O número informado não é um número de cartão válido.
-Cartão de crédito não foi encontrado.,Cartão de crédito não foi encontrado.
-A data de expiração do boleto bancário não foi informada.,A data de expiração do boleto bancário não foi informada.
-A data de expiração do boleto bancário é anterior a atual.,A data de expiração do boleto bancário é anterior a atual.
-A data de expiração do boleto bancário informado é inválida.,A data de expiração do boleto bancário informado é inválida.
-A primeira linha de instruções do boleto possui quantidade de caracteres.,A primeira linha de instruções do boleto possui quantidade de caracteres.
-A segunda linha de instruções do boleto possui quantidade de caracteres.,A segunda linha de instruções do boleto possui quantidade de caracteres.
-A terceira linha de instruções do boleto possui quantidade de caracteres.,A terceira linha de instruções do boleto possui quantidade de caracteres.
-A uri de logo marca a ser aplicada no boleto é inválido.,A uri de logo marca a ser aplicada no boleto é inválido.
-O número de identificação bancária não foi informado.,O número de identificação bancária não foi informado.
-O número de identificação bancária é inválido.,O número de identificação bancária é inválido.
-O número de identificação bancária informado é inválido para esta operadora.,O número de identificação bancária informado é inválido para esta operadora.
-A data de expiração não foi informada.,A data de expiração não foi informada.
-A data de expiração informado é inválida.,A data de expiração informado é inválida.
-A uri de redirecionamento informada é inválido.,A uri de redirecionamento informada é inválido.
-Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.,Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.
-Dados de pagamento MPOS inválidos.,Dados de pagamento MPOS inválidos.
-Verifique o CPF/CNPJ, ele não foi informado.,Verifique o CPF/CNPJ, ele não foi informado.
-Save for later use.,Salvar para uso futuro.
-"For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number","Para Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard são 3 números localizados na parte de trás do cartão. Para American Express os 4 números localizados na frente do cartão logo após o numero do cartão"
+"Print your ticket bank","Imprimir Boleto"
+"Payer Full Name","Nome completo do pagador"
+"Payer Tax Document","CPF/CNPJ do pagador"
+"Boleto Information","Boleto"
 Waiting...,Aguardando...
-Payment Split,Split de Pagamento
-"The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.","No Split de pagamento parte do valor do pedido é envido a outra conta Moip. Isso é apenas uma pequena fração do que a API do Marketplace Moip é capaz."
-Use Split,Usar um Split
-MPA - Secondary,MPA - Secundário
-Include Freight on Commission,Incluir o valor do frete no cálculo da comissão
-Include credit card interest in the commission,Incluir o valor de juros de parcelamento no cálculo da comissão
-Percentage sent to the commissioner,Percentagem de comissão enviada
-%1x of %2 not interest,%1x de %2 sem juros
-%1% of discount cash with total of %2, %2 à vista com %1% de desconto
-%1x of %2 in the total value of %3,%1x de %2 no valor total de %3
-Installment Interest,Juros de Parcelamento
-Discount Cash,Desconto à vista
-"Moip Interest Amount","MOIP - Taxa de Juros"
-"Animals and Pet Supplies","Animals and Pet Supplies"
-"Apparel and Accessories","Apparel and Accessories"
-"Apparel and Accessories > Clothing","Apparel and Accessories > Clothing"
-"Apparel and Accessories > Clothing Accessories","Apparel and Accessories > Clothing Accessories"
-"Apparel and Accessories > Costumes and Accessories","Apparel and Accessories > Costumes and Accessories"
-"Apparel and Accessories > Handbags and Wallet Accessories","Apparel and Accessories > Handbags and Wallet Accessories"
-"Apparel and Accessories > Jewelry","Apparel and Accessories > Jewelry"
-"Apparel and Accessories > Shoe Accessories","Apparel and Accessories > Shoe Accessories"
-"Apparel and Accessories > Shoes","Apparel and Accessories > Shoes"
-"Apparel and Accessories > Other","Apparel and Accessories > Other"
-"Arts and Entertainment","Arts and Entertainment"
-"Baby and Toddler","Baby and Toddler"
-"Business and Industrial","Business and Industrial"
-"Business and Industrial > Advertising and Marketing","Business and Industrial > Advertising and Marketing"
-"Business and Industrial > Agriculture","Business and Industrial > Agriculture"
-"Business and Industrial > Construction","Business and Industrial > Construction"
-"Business and Industrial > Film and Television","Business and Industrial > Film and Television"
-"Business and Industrial > Finance and Insurance","Business and Industrial > Finance and Insurance"
-"Business and Industrial > Food Service","Business and Industrial > Food Service"
-"Business and Industrial > Forestry and Logging","Business and Industrial > Forestry and Logging"
-"Business and Industrial > Heavy Machinery","Business and Industrial > Heavy Machinery"
-"Business and Industrial > Hotel and Hospitality","Business and Industrial > Hotel and Hospitality"
-"Business and Industrial > Industrial Storage","Business and Industrial > Industrial Storage"
-"Business and Industrial > Law Enforcement","Business and Industrial > Law Enforcement"
-"Business and Industrial > Manufacturing","Business and Industrial > Manufacturing"
-"Business and Industrial > Material Handling","Business and Industrial > Material Handling"
-"Business and Industrial > Medical","Business and Industrial > Medical"
-"Business and Industrial > Mining and Quarrying","Business and Industrial > Mining and Quarrying"
-"Business and Industrial > Piercing and Tattooing","Business and Industrial > Piercing and Tattooing"
-"Business and Industrial > Retail","Business and Industrial > Retail"
-"Business and Industrial > Science and Laboratory","Business and Industrial > Science and Laboratory"
-"Business and Industrial > Signage","Business and Industrial > Signage"
-"Business and Industrial > Work Safety Protective Gear","Business and Industrial > Work Safety Protective Gear"
-"Business and Industrial > Other Businesses","Business and Industrial > Other Businesses"
-"Camera and Optic Accessories","Camera and Optic Accessories"
-"Camera and Optic Accessories > Cameras","Camera and Optic Accessories > Cameras"
-"Camera and Optic Accessories > Camera Acessories","Camera and Optic Accessories > Camera Acessories"
-"Camera and Optic Accessories > Photography","Camera and Optic Accessories > Photography"
-"Camera and Optic Accessories > Others Cameras Accessories","Camera and Optic Accessories > Others Cameras Accessories"
-Electronics,Electronics
-"Electronics > 3d Printers","Electronics > 3d Printers"
-"Electronics > Audio","Electronics > Audio"
-"Electronics > Circuit Boards and Components","Electronics > Circuit Boards and Components"
-"Electronics > Communications","Electronics > Communications"
-"Electronics > Components","Electronics > Components"
-"Electronics > Computers","Electronics > Computers"
-"Electronics > Electronics Accessories","Electronics > Electronics Accessories"
-"Electronics > Gps Navigation Systems","Electronics > Gps Navigation Systems"
-"Electronics > Gps Accessories","Electronics > Gps Accessories"
-"Electronics > Networking","Electronics > Networking"
-"Electronics > Print Copy Scan and Fax","Electronics > Print Copy Scan and Fax"
-"Electronics > Printer Copier and Fax Machine Accessories","Electronics > Printer Copier and Fax Machine Accessories"
-"Electronics > Video","Electronics > Video"
-"Electronics > Video Game Consoles","Electronics > Video Game Consoles"
-"Electronics > Video Game Console Accessories","Electronics > Video Game Console Accessories"
-"Electronics > Other Electronics","Electronics > Other Electronics"
-"Food Beverages and Tobacco","Food Beverages and Tobacco"
-Furniture,Furniture
-"Tool Accessories","Tool Accessories"
-"Health and Beauty","Health and Beauty"
-"Health and Beauty > Perfume and Cologne","Health and Beauty > Perfume and Cologne"
-"Health and Beauty > Makeup","Health and Beauty > Makeup"
-"Health and Beauty > Bath and Body","Health and Beauty > Bath and Body"
-"Health and Beauty > Cosmetic Tools","Health and Beauty > Cosmetic Tools"
-"Luggage and Bags","Luggage and Bags"
-Adult,Adult
-"Weapons and Ammunition","Weapons and Ammunition"
-"Office Supplies","Office Supplies"
-"Religious and Ceremonial","Religious and Ceremonial"
-Software,Software
-"Software > Computer Software","Software > Computer Software"
-"Software > Digital Goods and Currency","Software > Digital Goods and Currency"
-"Software > Digital Services","Software > Digital Services"
-"Software > Video Game Software","Software > Video Game Software"
-"Software > Other Softwares","Software > Other Softwares"
-"Sporting Goods","Sporting Goods"
-"Toys and Games","Toys and Games"
-"Vehicles and Parts","Vehicles and Parts"
-Books,Books
-"Dvds and Videos","Dvds and Videos"
-"Magazines and Newspapers","Magazines and Newspapers"
-Music,Music
-"Music > Cds and Lps","Music > Cds and Lps"
-"Music > Musical Instruments","Music > Musical Instruments"
-"Music > Digital Music","Music > Digital Music"
-"Music > Other Music Items","Music > Other Music Items"
-"Music > Other Categories","Music > Other Categories"
-"Please select the store category.","Please select the store category."
-"Select the category that best defines your store's products.","Selecione a categoria que melhor define os produtos da sua loja."
-Animals and Pet Supplies","Animals and Pet Supplies"
-"Apparel and Accessories","Apparel and Accessories"
-"Apparel and Accessories > Clothing","Apparel and Accessories > Clothing"
-"Apparel and Accessories > Clothing Accessories","Apparel and Accessories > Clothing Accessories"
-"Apparel and Accessories > Costumes and Accessories","Apparel and Accessories > Costumes and Accessories"
-"Apparel and Accessories > Handbags and Wallet Accessories","Apparel and Accessories > Handbags and Wallet Accessories"
-"Apparel and Accessories > Jewelry","Apparel and Accessories > Jewelry"
-"Apparel and Accessories > Shoe Accessories","Apparel and Accessories > Shoe Accessories"
-"Apparel and Accessories > Shoes","Apparel and Accessories > Shoes"
-"Apparel and Accessories > Other","Apparel and Accessories > Other"
-"Arts and Entertainment","Arts and Entertainment"
-"Baby and Toddler","Baby and Toddler"
-"Business and Industrial","Business and Industrial"
-"Business and Industrial > Advertising and Marketing","Business and Industrial > Advertising and Marketing"
-"Business and Industrial > Agriculture","Business and Industrial > Agriculture"
-"Business and Industrial > Construction","Business and Industrial > Construction"
-"Business and Industrial > Film and Television","Business and Industrial > Film and Television"
-"Business and Industrial > Finance and Insurance","Business and Industrial > Finance and Insurance"
-"Business and Industrial > Food Service","Business and Industrial > Food Service"
-"Business and Industrial > Forestry and Logging","Business and Industrial > Forestry and Logging"
-"Business and Industrial > Heavy Machinery","Business and Industrial > Heavy Machinery"
-"Business and Industrial > Hotel and Hospitality","Business and Industrial > Hotel and Hospitality"
-"Business and Industrial > Industrial Storage","Business and Industrial > Industrial Storage"
-"Business and Industrial > Law Enforcement","Business and Industrial > Law Enforcement"
-"Business and Industrial > Manufacturing","Business and Industrial > Manufacturing"
-"Business and Industrial > Material Handling","Business and Industrial > Material Handling"
-"Business and Industrial > Medical","Business and Industrial > Medical"
-"Business and Industrial > Mining and Quarrying","Business and Industrial > Mining and Quarrying"
-"Business and Industrial > Piercing and Tattooing","Business and Industrial > Piercing and Tattooing"
-"Business and Industrial > Retail","Business and Industrial > Retail"
-"Business and Industrial > Science and Laboratory","Business and Industrial > Science and Laboratory"
-"Business and Industrial > Signage","Business and Industrial > Signage"
-"Business and Industrial > Work Safety Protective Gear","Business and Industrial > Work Safety Protective Gear"
-"Business and Industrial > Other Businesses","Business and Industrial > Other Businesses"
-"Camera and Optic Accessories","Camera and Optic Accessories"
-"Camera and Optic Accessories > Cameras","Camera and Optic Accessories > Cameras"
-"Camera and Optic Accessories > Camera Acessories","Camera and Optic Accessories > Camera Acessories"
-"Camera and Optic Accessories > Photography","Camera and Optic Accessories > Photography"
-"Camera and Optic Accessories > Others Cameras Accessories","Camera and Optic Accessories > Others Cameras Accessories"
-Electronics,Electronics
-"Electronics > 3d Printers","Electronics > 3d Printers"
-"Electronics > Audio","Electronics > Audio"
-"Electronics > Circuit Boards and Components","Electronics > Circuit Boards and Components"
-"Electronics > Communications","Electronics > Communications"
-"Electronics > Components","Electronics > Components"
-"Electronics > Computers","Electronics > Computers"
-"Electronics > Electronics Accessories","Electronics > Electronics Accessories"
-"Electronics > Gps Navigation Systems","Electronics > Gps Navigation Systems"
-"Electronics > Gps Accessories","Electronics > Gps Accessories"
-"Electronics > Networking","Electronics > Networking"
-"Electronics > Print Copy Scan and Fax","Electronics > Print Copy Scan and Fax"
-"Electronics > Printer Copier and Fax Machine Accessories","Electronics > Printer Copier and Fax Machine Accessories"
-"Electronics > Video","Electronics > Video"
-"Electronics > Video Game Consoles","Electronics > Video Game Consoles"
-"Electronics > Video Game Console Accessories","Electronics > Video Game Console Accessories"
-"Electronics > Other Electronics","Electronics > Other Electronics"
-"Food Beverages and Tobacco","Food Beverages and Tobacco"
-Furniture,Furniture
-"Tool Accessories","Tool Accessories"
-"Health and Beauty","Health and Beauty"
-"Health and Beauty > Perfume and Cologne","Health and Beauty > Perfume and Cologne"
-"Health and Beauty > Makeup","Health and Beauty > Makeup"
-"Health and Beauty > Bath and Body","Health and Beauty > Bath and Body"
-"Health and Beauty > Cosmetic Tools","Health and Beauty > Cosmetic Tools"
-"Luggage and Bags","Luggage and Bags"
-Adult,Adult
-"Weapons and Ammunition","Weapons and Ammunition"
-"Office Supplies","Office Supplies"
-"Religious and Ceremonial","Religious and Ceremonial"
-Software,Software
-"Software > Computer Software","Software > Computer Software"
-"Software > Digital Goods and Currency","Software > Digital Goods and Currency"
-"Software > Digital Services","Software > Digital Services"
-"Software > Video Game Software","Software > Video Game Software"
-"Software > Other Softwares","Software > Other Softwares"
-"Sporting Goods","Sporting Goods"
-"Toys and Games","Toys and Games"
-"Vehicles and Parts","Vehicles and Parts"
-Books,Books
-"Dvds and Videos","Dvds and Videos"
-"Magazines and Newspapers","Magazines and Newspapers"
-Music,Music
-"Music > Cds and Lps","Music > Cds and Lps"
-"Music > Musical Instruments","Music > Musical Instruments"
-"Music > Digital Music","Music > Digital Music"
-"Music > Other Music Items","Music > Other Music Items"
-"Music > Other Categories","Music > Other Categories"
+"Place Order","Concluir Pedido"
+"Credit Card Information","Cartão de Crédito"
+"What is this?","O que é isso?"
+"CVV - Card Verification Number","CVV - Código de segurança do cartão"
+"Expiration Month","Mês de vencimento"
+"Expiration Year","Ano de vencimento"
+"Save for later use.","Salvar para uso futuro."
+"For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number","Para Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard, é o número de 3 dígitos em itálico no verso do cartão de crédito. Para American Express, é o número de 4 dígitos na frente, logo acima do número do cartão de crédito"
+"Credit card number does not match credit card type.","O número do cartão de crédito não corresponde ao tipo de cartão de crédito."
+"Please enter a valid credit card type number.","Insira um número de tipo de cartão de crédito válido."
+"Please enter a valid credit card number.","Por favor digite um número de cartão de crédito válido."
+"Incorrect credit card expiration month.","Mês de vencimento incorreto."
+"Please enter a valid credit card verification number.","Insira um número de CVV (código de segurança) válido."
+"Incorrect credit card expiration year.","Ano de vencimento incorreto."
+"%1x of %2 not interest","%1x de %2 sem juros"
+"%1% of discount cash with total of %2","%1% de desconto no total de %2"
+"%1x of %2 in the total value of %3","%1x de %2 no valor total de %3"
+"Payment Services","Serviços de Pagamento"
+"Permission for config Moip","Permissão de configuração para o módulo Moip"
+"Permission for set preference account Moip","Permissão de definição de preferência para módulo Moip"
+"<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Moip by PagSeguro is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>","<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Moip by PagSeguro é uma solução de pagamento exclusiva para o <b>Brasil</b>.</p><p>A solução completa para receber pagamentos e simplificar as finanças do seu negócio. Nossa solução tem tudo que você precisa para aceitar todos meios de pagamento.</p></div>"
+"Attribute Relationship Definition","Relacionamento de atributo"
+"List the attributes of your Magento the data expected by our API","Informe em quais campos são coletados os atributos esperados por nossa API."
+"The CPF/CNPJ will be an attribute obtained from the","O CPF/CNPJ será um atributo obtido do"
+"The CPF/CNPJ attribute is","O atributo do CPF/CNPJ é"
+"The Street attribute is","O logradouro (rua) é"
+"The address number is","O número do endereço é"
+"The address district is","O bairro é"
+"The address complement is","O complemento do endereço é"
+Credentials,Credencial de acesso
+Environment,Ambiente
+"Module Authorization","Autorização do módulo"
+"Warning because the sandbox account is not the same as production","Atenção pois a conta de sandbox não é mesma de produção"
+"Statement Descriptor","Nome da Loja"
+"Store segment","Segmento da Loja"
+"Moip - Cartão de Crédito","Moip - Cartão de Crédito"
+Enabled,Habilitado
+Title,Título
+"Enable Vault","Habilitar Cartão de Crédito salvo (Vault)"
+"Payer Data Capture","Captura dos dados do pagador"
+"Capture tax document (CPF or CNPJ) in the payment form?","Captura documento fiscal (CPF ou CNPJ) no formulário de pagamento?"
+"Capture date of birth in the payment form?","Captura a data de nascimento no formulário de pagamento?"
+"Capture phone in the payment form?","Capturar telefone no formulário de pagamento?"
+"Installment and interest","Parcelamento e taxas de juros"
+"Interest rate","Tipo de juros"
+"Minimum value of installment","Valor mínimo da parcela"
+"Maximum number of installments","Número máximo de parcelas"
+"Interest on the 2nd tranche","Juros da 2ª parcela"
+"Interest on the 3nd tranche","Juros da 3ª parcela"
+"Interest on the 4nd tranche","Juros da 4ª parcela"
+"Interest on the 5nd tranche","Juros da 5ª parcela"
+"Interest on the 6nd tranche","Juros da 6ª parcela"
+"Interest on the 7nd tranche","Juros da 7ª parcela"
+"Interest on the 8nd tranche","Juros da 8ª parcela"
+"Interest on the 9nd tranche","Juros da 9ª parcela"
+"Interest on the 10nd tranche","Juros da 10ª parcela"
+"Interest on the 11nd tranche","Juros da 11ª parcela"
+"Interest on the 12nd tranche","Juros da 12ª parcela"
+"Payment Action","Ação de Pagamento"
+"Moip - Boleto","Moip - Boleto"
+"Days due","Dias de vencimento"
+"Instruction - 1st line","1ª Linha de instrução"
+"Instruction - 2st line","2ª Linha de instrução"
+"Instruction - 3st line","3ª Linha de instrução"
+"Customer orientation at checkout","Orientação ao cliente no checkout"
+"Capture name in the payment form?","Capturar nome do pagador no formulário de pagamento?"
+"Moip - Checkout diretamente no Moip","Moip - Checkout diretamente no Moip"
+"Allows payment in installments per order","Permite parcelamento definido a cada pedido"
+"Maximum installments allowed","Parcelas máximas permitidas"
+"Payment Config","Configuração de Pagamento"
+Debug,Debug - Úsar apenas em ambiente de teste (Sandbox)
+"Minimum Order Total","Total mínimo do pedido"
+"Maximum Order Total","Total máximo do pedido"
+"Payment From Applicable Countries","Pagamento de países aplicáveis"
+"Payment From Specific Countries","Pagamento de países específicos"
+"Sort Order","Ordem de exibição"
+"Payment Split","Payment Split"
+"Use Split","Usar Split"
+"MPA - Secondary","MPA - Secundário"
+"Include Freight on Commission","Incluir o valor do frete no cálculo da comissão"
+"Include credit card interest in the commission","Incluir o valor do juros de parcelamento no cálculo da comissão"
+"Percentage sent to the commissioner","Percentual de comissão enviada"
+"O identificador próprio não foi informado.","O identificador próprio não foi informado."
+"O nome não foi informado.","O nome não foi informado."
+"O nome informado não é válido.","O nome informado não é válido."
+"O nome informado não pode conter só números.","O nome informado não pode conter só números."
+"O e-mail não foi informado.","O e-mail não foi informado."
+"O e-mail informado é inválido.","O e-mail informado é inválido."
+"A data de nascimento informada é inválida.","A data de nascimento informada é inválida."
+"O identificador próprio deve ser único, já existe um customer com o identificador informado.","O identificador próprio deve ser único, já existe um customer com o identificador informado."
+"É necessário informar os dados do comprador.","É necessário informar os dados do comprador."
+"A data de nascimento não foi informada.","A data de nascimento não foi informada."
+"A estrutura de informações do documento não foi informada.","A estrutura de informações do documento não foi informada."
+"A estrutura de telefone não foi informado.","A estrutura de telefone não foi informado."
+"A estrutura de endereço não foi informado.","A estrutura de endereço não foi informado."
+"O CNPJ informado deve ter 14 números.","O CNPJ informado deve ter 14 números."
+"O código de país do telefone informado deve ser numérico.","O código de país do telefone informado deve ser numérico."
+"O código de área local do telefone deve ser informado.","O código de área local do telefone deve ser informado."
+"O código de área local do telefone informado deve ser numérico.","O código de área local do telefone informado deve ser numérico."
+"O número de telefone não foi informado.","O número de telefone não foi informado."
+"O número de telefone deve ser numérico.","O número de telefone deve ser numérico."
+"O tipo do endereço não foi informado.","O tipo do endereço não foi informado."
+"A rua do endereço não foi informada.","A rua do endereço não foi informada."
+"O número do endereço não foi informado.","O número do endereço não foi informado."
+"O número do endereço deve ser numérico.","O número do endereço deve ser numérico."
+"O complemento do endereço informado possui quantidade de caracteres inválido.","O complemento do endereço informado possui quantidade de caracteres inválido."
+"O bairro do endereço não foi informado.","O bairro do endereço não foi informado."
+"O bairro do endereço informado possui quantidade de caracteres inválido.","O bairro do endereço informado possui quantidade de caracteres inválido."
+"A cidade do endereço não foi informado.","A cidade do endereço não foi informado."
+"A cidade do endereço informado possui quantidade de caracteres inválido.","A cidade do endereço informado possui quantidade de caracteres inválido."
+"O estado do endereço não foi informado.","O estado do endereço não foi informado."
+"O estado do endereço informado possui quantidade de caracteres inválido.","O estado do endereço informado possui quantidade de caracteres inválido."
+"O país do endereço não foi informado.","O país do endereço não foi informado."
+"O país do endereço informado é inválido.","O país do endereço informado é inválido."
+"O código postal do endereço não foi informado.","O código postal do endereço não foi informado."
+"O código postal do endereço deve ser numérico.","O código postal do endereço deve ser numérico."
+"O código postal deve conter no 8 dígitos.","O código postal deve conter no 8 dígitos."
+"A rua deve conter no máximo 200 caracteres.","A rua deve conter no máximo 200 caracteres."
+"O número da rua deve conter no máximo 10 caracteres.","O número da rua deve conter no máximo 10 caracteres."
+"É necessário informar seu identificador próprio.","É necessário informar seu identificador próprio."
+"O identificador próprio de pedido deve ter no máximo 45 caracteres.","O identificador próprio de pedido deve ter no máximo 45 caracteres."
+"O pedido precisa de um recebedor do tipo PRIMARY.","O pedido precisa de um recebedor do tipo PRIMARY."
+"Moeda informada é inválida. Atualmente apenas BRL é válido.","Moeda informada é inválida. Atualmente apenas BRL é válido."
+"O valor de frete deve ser maior que zero.","O valor de frete deve ser maior que zero."
+"O valor adicional deve ser maior que zero.","O valor adicional deve ser maior que zero."
+"O valor de desconto deve ser maior que zero.","O valor de desconto deve ser maior que zero."
+"O valor dos itens deve ser maior que zero.","O valor dos itens deve ser maior que zero."
+"Todos os valores devem ser maiores que zero.","Todos os valores devem ser maiores que zero."
+"É necessário informar pelo menos um item.","É necessário informar pelo menos um item."
+"Informe o nome do produto.","Informe o nome do produto."
+"O nome do item deve ter no máximo 250 caracteres.","O nome do item deve ter no máximo 250 caracteres."
+"A descrição do produto deve ter no máximo 250 caracteres.","A descrição do produto deve ter no máximo 250 caracteres."
+"O item deve ter um valor.","O item deve ter um valor."
+"Informe o identificador da conta Moip.","Informe o identificador da conta Moip."
+"Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.","Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY."
+"Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.","Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY."
+"É necessário informar o valor de recebimento.","É necessário informar o valor de recebimento."
+"Não é possível inserir o mesmo receiver duas vezes.","Não é possível inserir o mesmo receiver duas vezes."
+"Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa.","Split de tarifas não suportado. Apenas um dos recebedores pode pagar a tarifa."
+"Pedido não encontrado.","Pedido não encontrado."
+"O valor de frete deve ser informado em centavos. Exemplo R$241,00.","O valor de frete deve ser informado em centavos. Exemplo R$241,00."
+"O valor adicional deve ser informado em centavos. Exemplo R$241,00.","O valor adicional deve ser informado em centavos. Exemplo R$241,00."
+"O valor de desconto deve ser informado em centavos. Exemplo R$241,00.","O valor de desconto deve ser informado em centavos. Exemplo R$241,00."
+"O valor do item deve ser informado em centavos.","O valor do item deve ser informado em centavos."
+"Id da conta Moip informada esta encerrada.","Id da conta Moip informada esta encerrada."
+"Conta Moip não encontrada para o email do comprador.","Conta Moip não encontrada para o email do comprador."
+"É necessário informar ao menos uma conta Moip.","É necessário informar ao menos uma conta Moip."
+"O valor percentual deve ser informado em formato numérico.","O valor percentual deve ser informado em formato numérico."
+"O valor percentual deve ser entre 0 e 100.","O valor percentual deve ser entre 0 e 100."
+"O valor fixo deve ser informado em centavos.","O valor fixo deve ser informado em centavos."
+"É necessário especificar quem irá pagar a taxa de transação.","É necessário especificar quem irá pagar a taxa de transação."
+"O tipo de pagador é inválido.","O tipo de pagador é inválido."
+"O valor dos recebedores excede o valor pago.","O valor dos recebedores excede o valor pago."
+"O pedido precisa ter valor maior que zero.","O pedido precisa ter valor maior que zero."
+"O pedido já foi pago.","O pedido já foi pago."
+"Não foi possível descriptografar o hash do cartão.","Não foi possível descriptografar o hash do cartão."
+"A data de nascimento do portador do cartão é inválido.","A data de nascimento do portador do cartão é inválido."
+"O CPF informado deve ter 11 números.","O CPF informado deve ter 11 números."
+"O valor do pagamento é inválido ou maior do que o valor restante do pedido.","O valor do pagamento é inválido ou maior do que o valor restante do pedido."
+"O IP possui mais de 15 caracteres.","O IP possui mais de 15 caracteres."
+"O fingerprint possui mais de 256 caracteres.","O fingerprint possui mais de 256 caracteres."
+"O userAgent possui mais de 256 caracteres.","O userAgent possui mais de 256 caracteres."
+"A latitude possui mais de 3 inteiros ou 7 decimais.","A latitude possui mais de 3 inteiros ou 7 decimais."
+"A longitude possui mais de 3 inteiros ou 7 decimais.","A longitude possui mais de 3 inteiros ou 7 decimais."
+"Valor da taxa é maior que o valor da comissão.","Valor da taxa é maior que o valor da comissão."
+"Quantidade de parcelas deve ser numérico.","Quantidade de parcelas deve ser numérico."
+"A estrutura do instrumento de pagamento não foi informada.","A estrutura do instrumento de pagamento não foi informada."
+"O statementDescriptor deve ter no máximo 13 caracteres.","O statementDescriptor deve ter no máximo 13 caracteres."
+"A estrutura de informações não está correta para o método informado.","A estrutura de informações não está correta para o método informado."
+"Pagamento não encontrado.","Pagamento não encontrado."
+"O nó de parcelas não deve ser negativo.","O nó de parcelas não deve ser negativo."
+"Já existe um pagamento realizado com cartão de crédito.","Já existe um pagamento realizado com cartão de crédito."
+"Já existe um pagamento realizado com cartão de débito.","Já existe um pagamento realizado com cartão de débito."
+"Ocorreu um erro na criação cartão de crédito.","Ocorreu um erro na criação cartão de crédito."
+"Forma de pagamento não autorizada para a conta.","Forma de pagamento não autorizada para a conta."
+"A estrutura de informações de cartão de crédito não foi informada.","A estrutura de informações de cartão de crédito não foi informada."
+"Já existe um pagamento realizado com boleto bancário.","Já existe um pagamento realizado com boleto bancário."
+"Já existe um pagamento realizado com débito em conta.","Já existe um pagamento realizado com débito em conta."
+"Somente é possível capturar pagamentos com status PRE_AUTHORIZED.","Somente é possível capturar pagamentos com status PRE_AUTHORIZED."
+"Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.","Somente é possível desfazer pagamentos com status PRE_AUTHORIZED."
+"Conta Moip não autorizada.","Conta Moip não autorizada."
+"Conta Moip não encontrada.","Conta Moip não encontrada."
+"Já existe um pagamento realizado com wallet para esse pedido.","Já existe um pagamento realizado com wallet para esse pedido."
+"Forma de pagamento não pode ser utilizada nesse pedido.","Forma de pagamento não pode ser utilizada nesse pedido."
+"O mês de expiração do cartão de crédito não foi informado.","O mês de expiração do cartão de crédito não foi informado."
+"O mês de expiração do cartão de crédito deve ser numérico.","O mês de expiração do cartão de crédito deve ser numérico."
+"O mês de expiração do cartão informado é inválido.","O mês de expiração do cartão informado é inválido."
+"O ano de expiração do cartão não foi informado.","O ano de expiração do cartão não foi informado."
+"O ano de expiração do cartão de crédito deve ser numérico.","O ano de expiração do cartão de crédito deve ser numérico."
+"A data de expiração do cartão de crédito deve ser maior ou igual a data.","A data de expiração do cartão de crédito deve ser maior ou igual a data."
+"O ano de expiração do cartão informado é inválido.","O ano de expiração do cartão informado é inválido."
+"Formato informado para o cartão de crédito é invalido.","Formato informado para o cartão de crédito é invalido."
+"O código de segurança do cartão deve conter 4 caracteres para Amex e 3.","O código de segurança do cartão deve conter 4 caracteres para Amex e 3."
+"O número do cartão não foi informado.","O número do cartão não foi informado."
+"O número do cartão deve ser numérico.","O número do cartão deve ser numérico."
+"O número do cartão informado possui quantidade de caracteres inválido.","O número do cartão informado possui quantidade de caracteres inválido."
+"O código de segurança do cartão não foi informado.","O código de segurança do cartão não foi informado."
+"O código de segurança do cartão deve ser numérico.","O código de segurança do cartão deve ser numérico."
+"A estrutura de informaççes do portador do cartão não foi informado.","A estrutura de informaççes do portador do cartão não foi informado."
+"O nome do portador do cartão não foi informado.","O nome do portador do cartão não foi informado."
+"O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo.","O nome do portador do cartão Deve ter no mínimo 3 caracteres e no máximo."
+"O nome do portador do cartão informado é inválido.","O nome do portador do cartão informado é inválido."
+"A data de nascimento do portador do cartão não foi informado.","A data de nascimento do portador do cartão não foi informado."
+"A estrutura de documento do portador do cartão não foi informado.","A estrutura de documento do portador do cartão não foi informado."
+"A estrutura de telefone do portador não foi informado.","A estrutura de telefone do portador não foi informado."
+"A estrutura de endereço de cobrança do portador não foi informado.","A estrutura de endereço de cobrança do portador não foi informado."
+"O número informado não é um número de cartão válido.","O número informado não é um número de cartão válido."
+"Cartão de crédito não foi encontrado.","Cartão de crédito não foi encontrado."
+"A data de expiração do boleto bancário não foi informada.","A data de expiração do boleto bancário não foi informada."
+"A data de expiração do boleto bancário é anterior a atual.","A data de expiração do boleto bancário é anterior a atual."
+"A data de expiração do boleto bancário informado é inválida.","A data de expiração do boleto bancário informado é inválida."
+"A primeira linha de instruções do boleto possui quantidade de caractere.","A primeira linha de instruções do boleto possui quantidade de caractere."
+"A segunda linha de instruções do boleto possui quantidade de caracteres.","A segunda linha de instruções do boleto possui quantidade de caracteres."
+"A terceira linha de instruções do boleto possui quantidade de caractere.","A terceira linha de instruções do boleto possui quantidade de caractere."
+"A uri de logo marca a ser aplicada no boleto é inválido.","A uri de logo marca a ser aplicada no boleto é inválido."
+"O número de identificação bancária não foi informado.","O número de identificação bancária não foi informado."
+"O número de identificação bancária é inválido.","O número de identificação bancária é inválido."
+"O número de identificação bancária informado é inválido para esta operadora.","O número de identificação bancária informado é inválido para esta operadora."
+"A data de expiração não foi informada.","A data de expiração não foi informada."
+"A data de expiração informado é inválida.","A data de expiração informado é inválida."
+"A uri de redirecionamento informada é inválido.","A uri de redirecionamento informada é inválido."
+"Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente.","Não foi possível desfazer o pagamento, pois ele já está capturado na adquirente."
+"Dados de pagamento MPOS inválidos.","Dados de pagamento MPOS inválidos."
+"Verifique o CPF/CNPJ, ele não foi informado.","Verifique o CPF/CNPJ, ele não foi informado."
+"O valor deve ser informado em centavos.","O valor deve ser informado em centavos."
+"O valor solicitado para reembolso é maior que o valor do pagamento ou inválido.","O valor solicitado para reembolso é maior que o valor do pagamento ou inválido."
+"O valor solicitado somado aos reembolsos parciais é maior que o valor disponível para reembolso.","O valor solicitado somado aos reembolsos parciais é maior que o valor disponível para reembolso."
+"Reembolso já realizado.","Reembolso já realizado."
+"O reembolso não pode ser realizado pois o pagamento não foi autorizado.","O reembolso não pode ser realizado pois o pagamento não foi autorizado."
+"O reembolso não foi autorizado pois o pedido ainda não foi pago.","O reembolso não foi autorizado pois o pedido ainda não foi pago."
+"Informe um instrumento financeiro válido.","Informe um instrumento financeiro válido."
+"Tipo de conta bancária inválido.","Tipo de conta bancária inválido."
+"Esse pedido possui mais de um pagamento autorizado. É necessário fazer os reembolsos parciais individualmente nos pagamentos.","Esse pedido possui mais de um pagamento autorizado. É necessário fazer os reembolsos parciais individualmente nos pagamentos."
+"O identificador do banco deve ser numérico.","O identificador do banco deve ser numérico."
+"O identificador de banco informado é inválido, consulte lista de bancos disponíveis para reembolso.","O identificador de banco informado é inválido, consulte lista de bancos disponíveis para reembolso."
+"A agência bancária deve ser numérica.","A agência bancária deve ser numérica."
+"O digito verificador da agência bancária deve ser numérico ou caracter X.","O digito verificador da agência bancária deve ser numérico ou caracter X."
+"O número da conta bancária possui caracteres inválidos. Apenas caracteres numéricos são aceitos.","O número da conta bancária possui caracteres inválidos. Apenas caracteres numéricos são aceitos."
+"O digito verificador da conta bancária deve ser numérico.","O digito verificador da conta bancária deve ser numérico."
+"É necessario informar os dados do portador da conta bancária.","É necessario informar os dados do portador da conta bancária."
+"Informe o nome completo do titular da conta bancária.","Informe o nome completo do titular da conta bancária."
+"É necessario informar o documento do portador da conta bancária.","É necessario informar o documento do portador da conta bancária."
+"Informe o tipo do documento.","Informe o tipo do documento."
+"O tipo de documento informado é inválido.","O tipo de documento informado é inválido."
+"O número do documento deve ser informado.","O número do documento deve ser informado."
+"O número do documento possui caracteres inválidos. Apenas caracteres numéricos são aceitos.","O número do documento possui caracteres inválidos. Apenas caracteres numéricos são aceitos."
+"Prazo limite de reembolso em cartão de crédito excedido, tente realizar o reembolso em uma conta bancária.","Prazo limite de reembolso em cartão de crédito excedido, tente realizar o reembolso em uma conta bancária."
+"Cliente não possui conta Moip, tente realizar o reembolso em uma conta bancária.","Cliente não possui conta Moip, tente realizar o reembolso em uma conta bancária."
+"Reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento.","Reembolso só pode ser realizado para conta bancária do mesmo titular do pagamento."
+"Pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento.","Pagamento só pode ser reembolsado no cartão de crédito no período inferior a 180 dias após autorização pagamento."
+"Um dos recebedores do pagamento não possui saldo suficiente para o reembolso.","Um dos recebedores do pagamento não possui saldo suficiente para o reembolso."
+"Uma das contas informadas não é recebedora do pagamento.","Uma das contas informadas não é recebedora do pagamento."
+"O recebedor primário não pode assumir o reembolso do recebedor secundário.","O recebedor primário não pode assumir o reembolso do recebedor secundário."
+"O recebedor secundário não pode reembolsar um valor maior do que o recebido no pagamento.","O recebedor secundário não pode reembolsar um valor maior do que o recebido no pagamento."
+"A conta a ser creditada é um dos recebedores do pagamento. Por favor escolha outra forma de reembolso.","A conta a ser creditada é um dos recebedores do pagamento. Por favor escolha outra forma de reembolso."
+"O reembolso mPOS pode ser usado se e somente se o pagamento for feito via mPOS.","O reembolso mPOS pode ser usado se e somente se o pagamento for feito via mPOS."
+"Para reembolso mPOS só é possível reembolso completo.","Para reembolso mPOS só é possível reembolso completo."
+"Conta Moip não encontrada.","Conta Moip não encontrada."
+"Esse pedido contém transações com formas de pagamento distintas. É necessário fazer os reembolsos individualmente nos pagamentos.","Esse pedido contém transações com formas de pagamento distintas. É necessário fazer os reembolsos individualmente nos pagamentos."
+"Interest Amount","Valor do juros de parcelamento"
+"Get Payment Update - Moip","Consultar atualização de pagamento - Moip"
+"Get Payment Update","Consultar atualização de pagamento"
+"Consultar status dos pedidos no Moip?","Consultar status dos pedidos no Moip?"
+"Payment Moip Interest","Juros de parcelamento (Moip)"
+"method_name","Método"
+"device","Device"
+"boleto_line_code","Linha digitável"
+"boleto_print_href","Link do Boleto"
+"cc_installments","Parcelamento"
+"cc_installment_interest","Juros de Parcelamento"
+"cc_type","Bandeira"
+"cc_number","Número"
+"cc_holder_fullname","Nome impresso"
+"checkout_url","Link para Finalização"
+"checkout_cc","Link para Finalização por Cartão de Crédito"
+"checkout_boleto","Link para Finalização por Boleto"
+"cc_holder_birth_date","Data de nascimento do Titular do Cartão de Crédito"
+"cc_holder_tax_document","CPF/CNPJ do Titular do Cartão de Crédito"
+"cc_holder_phone","Telefone do Titular do Cartão de Crédito"
+"boleto_payer_fullname","Nome do pagador"
+"boleto_payer_tax_document","CPF/CNPJ do pagador"
+"checkout_payer_fullname","Nome do pagador"
+"checkout_payer_tax_document","CPF/CNPJ do pagador"

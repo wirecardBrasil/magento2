@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -17,15 +17,17 @@ use Magento\Payment\Gateway\Response\HandlerInterface;
 class ExtOrdIdHandler implements HandlerInterface
 {
     /**
-     * @const EXT ORD ID
+     * @const string
      */
-    const EXTERNAL_ORDER_ID = 'EXT_ORD_ID';
+    public const EXTERNAL_ORDER_ID = 'EXT_ORD_ID';
 
     /**
      * Handles.
      *
      * @param array $handlingSubject
      * @param array $response
+     *
+     * @return void
      */
     public function handle(array $handlingSubject, array $response)
     {

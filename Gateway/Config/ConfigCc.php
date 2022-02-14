@@ -1,83 +1,68 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
+declare(strict_types=1);
 
 namespace Moip\Magento2\Gateway\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Payment\Gateway\Config\Config as PaymentConfig;
 use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class ConfigCc - Returns form of payment configuration properties.
  */
-class ConfigCc extends \Magento\Payment\Gateway\Config\Config
+class ConfigCc extends PaymentConfig
 {
     /**
-     * Method Code - Cc.
-     *
      * @const string
      */
-    const METHOD = 'moip_magento2_cc';
+    public const METHOD = 'moip_magento2_cc';
 
     /**
-     * Cc Tyoes - Cc.
-     *
-     * @const array
-     */
-    const CC_TYPES = 'payment/moip_magento2_cc/cctypes';
-
-    /**
-     * CVV Enabled - Cc.
-     *
-     * @const boolean
-     */
-    const CVV_ENABLED = 'cvv_enabled';
-
-    /**
-     * Active - Cc.
-     *
-     * @const boolean
-     */
-    const ACTIVE = 'active';
-
-    /**
-     * Title - Cc.
-     *
      * @const string
      */
-    const TITLE = 'title';
+    public const CC_TYPES = 'payment/moip_magento2_cc/cctypes';
 
     /**
-     * Mapper CC.
-     *
      * @const string
      */
-    const CC_MAPPER = 'cctypes_moip_magento2_cc_mapper';
+    public const CVV_ENABLED = 'cvv_enabled';
 
     /**
-     * Use tax document capture - Cc.
-     *
-     * @const boolean
+     * @const string
      */
-    const USE_GET_TAX_DOCUMENT = 'get_tax_document';
+    public const ACTIVE = 'active';
 
     /**
-     * Use birth date capture - Cc.
-     *
-     * @const boolean
+     * @const string
      */
-    const USE_GET_BIRTH_DATE = 'get_birth_date';
+    public const TITLE = 'title';
 
     /**
-     * Use phone capture - Cc.
-     *
-     * @const boolean
+     * @const string
      */
-    const USE_GET_PHONE = 'get_phone';
+    public const CC_MAPPER = 'cctypes_moip_magento2_cc_mapper';
+
+    /**
+     * @const string
+     */
+    public const USE_GET_TAX_DOCUMENT = 'get_tax_document';
+
+    /**
+     * @const string
+     */
+    public const USE_GET_BIRTH_DATE = 'get_birth_date';
+
+    /**
+     * @const string
+     */
+    public const USE_GET_PHONE = 'get_phone';
 
     /**
      * @var ScopeConfigInterface
@@ -86,11 +71,17 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
 
     /**
      * @param ScopeConfigInterface $scopeConfig
+     * @param Json                 $json
+     * @param string               $methodCode
      */
     public function __construct(
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
+        Json $json,
+        $methodCode = self::METHOD
     ) {
+        PaymentConfig::__construct($scopeConfig, $methodCode);
         $this->scopeConfig = $scopeConfig;
+        $this->json = $json;
     }
 
     /**
@@ -100,7 +91,7 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
      *
      * @return bool
      */
-    public function isCvvEnabled($storeId = null)
+    public function isCvvEnabled($storeId = null): bool
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -113,6 +104,8 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
 
     /**
      * Get Payment configuration status.
+     *
+     * @param int|null $storeId
      *
      * @return bool
      */
@@ -130,9 +123,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get title of payment.
      *
+     * @param int|null $storeId
+     *
      * @return string|null
      */
-    public function getTitle($storeId = null)
+    public function getTitle($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -146,9 +141,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get if you use document capture on the form.
      *
-     * @return string|null
+     * @param int|null $storeId
+     *
+     * @return bool
      */
-    public function getUseTaxDocumentCapture($storeId = null)
+    public function getUseTaxDocumentCapture($storeId = null): bool
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -162,9 +159,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get if you use birth date capture on the form.
      *
-     * @return string|null
+     * @param int|null $storeId
+     *
+     * @return bool
      */
-    public function getUseBirthDateCapture($storeId = null)
+    public function getUseBirthDateCapture($storeId = null): bool
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -178,9 +177,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get if you use phone capture on the form.
      *
-     * @return string|null
+     * @param int|null $storeId
+     *
+     * @return bool
      */
-    public function getUsePhoneCapture($storeId = null)
+    public function getUsePhoneCapture($storeId = null): bool
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -198,7 +199,7 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
      *
      * @return bool
      */
-    public function getCcAvailableTypes($storeId = null)
+    public function getCcAvailableTypes($storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
             self::CC_TYPES,
@@ -224,7 +225,7 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
             $storeId
         );
 
-        $result = json_decode($ccTypesMapper, true);
+        $result = $this->json->unserialize($ccTypesMapper);
 
         return is_array($result) ? $result : [];
     }
@@ -232,9 +233,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get info interest.
      *
+     * @param int|null $storeId
+     *
      * @return array
      */
-    public function getInfoInterest($storeId = null)
+    public function getInfoInterest($storeId = null): array
     {
         $juros = [];
         $juros['0'] = 0;
@@ -305,9 +308,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get type Interest.
      *
+     * @param int|null $storeId
+     *
      * @return string
      */
-    public function getTypeInstallment($storeId = null)
+    public function getTypeInstallment($storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
             'payment/moip_magento2_cc/installment_type_interest',
@@ -319,9 +324,11 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get min installment.
      *
-     * @return int
+     * @param int|null $storeId
+     *
+     * @return string
      */
-    public function getMinInstallment($storeId = null)
+    public function getMinInstallment($storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
             'payment/moip_magento2_cc/installment_min_installment',
@@ -333,11 +340,13 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get max installment.
      *
-     * @return int
+     * @param int|null $storeId
+     *
+     * @return int|null
      */
-    public function getMaxInstallment($storeId = null)
+    public function getMaxInstallment($storeId = null): ?int
     {
-        return $this->scopeConfig->getValue(
+        return (int) $this->scopeConfig->getValue(
             'payment/moip_magento2_cc/installment_max_installment',
             ScopeInterface::SCOPE_STORE,
             $storeId
@@ -347,11 +356,13 @@ class ConfigCc extends \Magento\Payment\Gateway\Config\Config
     /**
      * Get is enable instant purchase.
      *
-     * @return int
+     * @param int|null $storeId
+     *
+     * @return bool
      */
-    public function getEnableInstantPurchase($storeId = null)
+    public function getEnableInstantPurchase($storeId = null): ?bool
     {
-        return $this->scopeConfig->getValue(
+        return (bool) $this->scopeConfig->getValue(
             'payment/moip_magento2_cc/instant_purchase_enable',
             ScopeInterface::SCOPE_STORE,
             $storeId

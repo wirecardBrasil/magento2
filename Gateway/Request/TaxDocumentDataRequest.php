@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,19 +21,19 @@ class TaxDocumentDataRequest implements BuilderInterface
     /**
      * BillingAddress block name.
      */
-    const TAX_DOCUMENT = 'taxDocument';
+    public const TAX_DOCUMENT = 'taxDocument';
 
     /**
      * The street address. Maximum 255 characters
      * Required.
      */
-    const TAX_DOCUMENT_TYPE = 'type';
+    public const TAX_DOCUMENT_TYPE = 'type';
 
     /**
      * The street number. 1 or 10 alphanumeric digits
      * Required.
      */
-    const TAX_DOCUMENT_NUMBER = 'number';
+    public const TAX_DOCUMENT_NUMBER = 'number';
 
     /**
      * @var SubjectReader
@@ -66,11 +66,11 @@ class TaxDocumentDataRequest implements BuilderInterface
     }
 
     /**
-     * get Value For Tax Document.
+     * Get Value For Tax Document.
      *
-     * @param $orderAdapter
+     * @param OrderAdapterFactory $orderAdapter
      *
-     * @return value
+     * @return string
      */
     public function getValueForTaxDocument($orderAdapter)
     {
@@ -107,7 +107,9 @@ class TaxDocumentDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {
@@ -126,6 +128,10 @@ class TaxDocumentDataRequest implements BuilderInterface
 
         if ($payment->getAdditionalInformation('boleto_payer_tax_document')) {
             $taxDocument = $payment->getAdditionalInformation('boleto_payer_tax_document');
+        }
+
+        if ($payment->getAdditionalInformation('checkout_payer_tax_document')) {
+            $taxDocument = $payment->getAdditionalInformation('checkout_payer_tax_document');
         }
 
         if (!$taxDocument) {

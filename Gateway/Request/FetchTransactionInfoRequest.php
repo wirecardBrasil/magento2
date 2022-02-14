@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -18,9 +18,9 @@ use Magento\Payment\Gateway\Request\BuilderInterface;
 class FetchTransactionInfoRequest implements BuilderInterface
 {
     /**
-     * @var Moip Order Id
+     * @var string
      */
-    const MOIP_ORDER_ID = 'moip_order_id';
+    public const MOIP_ORDER_ID = 'moip_order_id';
 
     /**
      * @var ConfigInterface
@@ -37,7 +37,9 @@ class FetchTransactionInfoRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -10,14 +10,10 @@
 	<type name="Magento\Checkout\Model\CompositeConfigProvider">
         <arguments>
             <argument name="configProviders" xsi:type="array">
-                <item name="moip_magento2_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProvider</item>
-            </argument>
-        </arguments>
-    </type>
-    <type name="Moip\Magento2\Block\Info">
-        <arguments>
-            <argument name="data" xsi:type="array">
-                <item xsi:type="string" name="is_secure_mode">0</item>
+                <item name="moip_magento2_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBase</item>
+                <item name="moip_magento2_cc_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderCc</item>
+                <item name="moip_magento2_cc_vault_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\Vault\ConfigProvider</item>
+                <item name="moip_magento2_boleto_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBoleto</item>
             </argument>
         </arguments>
     </type>
@@ -32,15 +28,6 @@
         <arguments>
             <argument name="data" xsi:type="array">
                 <item xsi:type="string" name="is_secure_mode">0</item>
-            </argument>
-        </arguments>
-    </type>
-    <preference for="Magento\Framework\UrlInterface" type="Magento\Backend\Model\UrlInterface" />
-    <type name="Magento\Vault\Model\Ui\Adminhtml\TokensConfigProvider">
-        <arguments>
-            <argument name="tokenUiComponentProviders" xsi:type="array">
-                <!-- moip_magento2_cc or moip_magento2_cc_vault -->
-                <item name="moip_magento2_cc" xsi:type="object">Moip\Magento2\Model\Ui\Vault\Adminhtml\TokenUiComponentProvider</item>
             </argument>
         </arguments>
     </type>

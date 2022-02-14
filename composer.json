@@ -1,41 +1,48 @@
 {
-  "name": "moip/magento2",
-  "description": "MOIP Magento2 Extension for Magento 2 By Moip",
-  "type": "magento2-module",
-  "license": [
-        "OSL-3.0",
-        "AFL-3.0"
-   ],
-  "require": {
-    "php": ">=7.2",
-    "magento/framework": "103.0.*",
-    "magento/module-customer": ">=103.0.0",
-    "magento/module-config": "101.2.*",
-    "magento/module-sales": "103.0.*",
-    "magento/module-directory": "100.4.*",
-    "magento/module-payment": "100.4.*",
-    "magento/module-checkout": "100.4.*",
-    "magento/module-backend": "102.0.*",
-    "magento/module-vault": "101.2.*",
-    "magento/module-catalog": "104.0.*",
-    "magento/module-quote": "101.2.*",
-    "magento/module-theme": "101.1.*",
-    "magento/module-ui": "101.2.*",
-    "ext-json": "*"
-  },
-  "autoload": {
-    "files": [
-      "registration.php"
+	"name": "moip/magento2",
+	"description": "Moip By PagSeguro - Exclusive Payment Module for Brazil",
+	"require": {
+		"php": "~7.3.0||~7.4.0",
+		"magento/framework": "103.0.*",
+		"magento/module-customer": ">=103.0.0",
+		"magento/module-config": "101.2.*",
+		"magento/module-eav": "102.1.*",
+		"magento/module-sales": "103.0.*",
+		"magento/module-directory": "100.4.*",
+		"magento/module-checkout": "100.4.*",
+		"magento/module-backend": "102.0.*",
+		"magento/module-theme": "101.1.*",
+		"magento/module-ui": "101.2.*",
+		"magento/module-payment": "^100.3",
+		"magento/zendframework1": "~1.14.2",
+		"ext-json": "*"
+	},
+	"type": "magento2-module",
+	"license": [
+		"OSL-3.0",
+		"AFL-3.0"
+	],
+	"autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Moip\\Magento2\\": ""
+        }
+    },
+    "require-dev": {
+        "magento/magento-coding-standard": "*"
+    },
+    "scripts": {
+        "post-install-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..,../../phpcompatibility/php-compatibility/PHPCompatibility",
+        "post-update-cmd": "vendor/bin/phpcs --config-set installed_paths ../../..,../../phpcompatibility/php-compatibility/PHPCompatibility"
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://repo.magento.com/"
+        }
     ],
-    "psr-4": {
-      "Moip\\Magento2\\": ""
-    }
-  },
-  "repositories": [
-    {
-      "type": "composer",
-      "url": "https://repo.magento.com/"
-    }
-  ],
-  "minimum-stability": "dev"
+    "prefer-stable": true,
+    "minimum-stability": "dev"
 }

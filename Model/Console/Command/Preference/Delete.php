@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -26,37 +26,27 @@ use Psr\Log\LoggerInterface;
 class Delete extends AbstractModel
 {
     /**
-     * State.
-     *
-     * @var \Magento\Framework\App\State
+     * @var State
      */
     private $state;
 
     /**
-     * ScopeConfigInterface.
-     *
-     * @var \Magento\Framework\App\Config\ScopeConfigInterface
+     * @var ScopeConfigInterface
      */
     protected $scopeConfig;
 
     /**
-     * moipConfig.
-     *
-     * @var Moip\Magento2\Gateway\Config\Config
+     * @var MoipConfig
      */
     private $moipConfig;
 
     /**
-     * ZendClientFactory.
-     *
-     * @var \Magento\Framework\HTTP\ZendClientFactory
+     * @var ZendClientFactory
      */
     private $httpClientFactory;
 
     /**
-     * Json.
-     *
-     * @var \Magento\Framework\Serialize\Serializer\Json
+     * @var Json
      */
     private $json;
 
@@ -89,7 +79,11 @@ class Delete extends AbstractModel
     }
 
     /**
-     * {@inheritdoc}
+     * Command Delete.
+     *
+     * @param array $ids
+     *
+     * @return void
      */
     public function delete($ids = [])
     {
@@ -108,8 +102,10 @@ class Delete extends AbstractModel
         return $this;
     }
 
-    /*
-     * Delete Preference Webhooks
+    /**
+     * Delete Preference Webhooks.
+     *
+     * @param string $id
      *
      * @return array
      */

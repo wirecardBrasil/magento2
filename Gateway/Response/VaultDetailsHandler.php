@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -9,6 +9,7 @@
 namespace Moip\Magento2\Gateway\Response;
 
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Payment\Gateway\Data\PaymentDataObjectInterface;
 use Magento\Payment\Gateway\Response\HandlerInterface;
 use Magento\Payment\Model\InfoInterface;
@@ -34,11 +35,6 @@ class VaultDetailsHandler implements HandlerInterface
     protected $payExtensionFactory;
 
     /**
-     * @var SubjectReader
-     */
-    protected $subjectReader;
-
-    /**
      * @var ObjectManagerInterface
      */
     private $objectManager;
@@ -46,15 +42,16 @@ class VaultDetailsHandler implements HandlerInterface
     /**
      * @var Json
      */
-    private $serializer;
+    private $json;
 
     /**
-     * AccountPaymentTokenFactory constructor.
-     *
-     * @param ObjectManagerInterface       $objectManager
-     * @param PaymentTokenFactoryInterface $paymentTokenFactory
+     * @param Json                                  $json
+     * @param ObjectManagerInterface                $objectManager
+     * @param OrderPaymentExtensionInterfaceFactory $payExtensionFactory
+     * @param PaymentTokenFactoryInterface          $paymentTokenFactory
      */
     public function __construct(
+        Json $json,
         ObjectManagerInterface $objectManager,
         OrderPaymentExtensionInterfaceFactory $payExtensionFactory,
         PaymentTokenFactoryInterface $paymentTokenFactory = null
@@ -66,10 +63,16 @@ class VaultDetailsHandler implements HandlerInterface
         $this->objectManager = $objectManager;
         $this->payExtensionFactory = $payExtensionFactory;
         $this->paymentTokenFactory = $paymentTokenFactory;
+        $this->json = $json;
     }
 
     /**
-     * @inheritdoc
+     * Handle.
+     *
+     * @param array $handlingSubject
+     * @param array $response
+     *
+     * @return void
      */
     public function handle(array $handlingSubject, array $response)
     {
@@ -98,7 +101,8 @@ class VaultDetailsHandler implements HandlerInterface
     /**
      * Get vault payment token entity.
      *
-     * @param $response
+     * @param array         $response
+     * @param InfoInterface $payment
      *
      * @return PaymentTokenInterface|null
      */
@@ -109,6 +113,9 @@ class VaultDetailsHandler implements HandlerInterface
         $ccExpMonth = $payment->getAdditionalInformation('cc_exp_month');
         $payment->unsAdditionalInformation('cc_exp_year');
         $payment->unsAdditionalInformation('cc_exp_month');
+        $ccId = null;
+        $ccType = null;
+        $ccLast4 = null;
 
         if (isset($paymentAddtional['creditCard'])) {
             if (isset($paymentAddtional['creditCard']['id'])) {
@@ -130,7 +137,7 @@ class VaultDetailsHandler implements HandlerInterface
         $paymentToken->setType(PaymentTokenFactoryInterface::TOKEN_TYPE_CREDIT_CARD);
         // phpcs:ignore Generic.Files.LineLength
         $details = ['cc_last4' => $ccLast4, 'cc_exp_year' => $ccExpYear, 'cc_exp_month' => $ccExpMonth, 'cc_type' => $ccType];
-        $paymentToken->setTokenDetails(json_encode($details));
+        $paymentToken->setTokenDetails($this->json->serialize($details));
 
         return $paymentToken;
     }
@@ -157,6 +164,8 @@ class VaultDetailsHandler implements HandlerInterface
      * Get Type Cc by response payment.
      *
      * @param string $type
+     *
+     * @return string
      */
     public function mapperCcType($type)
     {

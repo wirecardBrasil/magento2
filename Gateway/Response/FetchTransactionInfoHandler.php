@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -17,30 +17,32 @@ use Magento\Payment\Gateway\Response\HandlerInterface;
 class FetchTransactionInfoHandler implements HandlerInterface
 {
     /**
-     * @const ACCEPT PAID
+     * @const string
      */
-    const ACCEPT_PAID = 'PAID';
+    public const ACCEPT_PAID = 'PAID';
 
     /**
-     * @const ACCEPT PAID ALTERNATIVE
+     * @const string
      */
-    const ACCEPT_PAID_ALTERNATIVE = 'AUTHORIZED';
+    public const ACCEPT_PAID_ALTERNATIVE = 'AUTHORIZED';
 
     /**
-     * @const ACCEPT PAID
+     * @const string
      */
-    const DENNY_PAID = 'NOT_PAID';
+    public const DENNY_PAID = 'NOT_PAID';
 
     /**
-     * @const DENNY PAID ALTERNATIVE
+     * @const string
      */
-    const DENNY_PAID_ALTERNATIVE = 'CANCELLED';
+    public const DENNY_PAID_ALTERNATIVE = 'CANCELLED';
 
     /**
      * Handles.
      *
      * @param array $handlingSubject
      * @param array $response
+     *
+     * @return void
      */
     public function handle(array $handlingSubject, array $response)
     {

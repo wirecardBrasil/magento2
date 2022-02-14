@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -14,6 +14,7 @@
                 <item name="moip_magento2_cc_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderCc</item>
                 <item name="moip_magento2_cc_vault_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\Vault\ConfigProvider</item>
                 <item name="moip_magento2_boleto_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderBoleto</item>
+                <item name="moip_magento2_checkout_config_provider" xsi:type="object">Moip\Magento2\Model\Ui\ConfigProviderCheckout</item>
             </argument>
         </arguments>
     </type>
@@ -31,6 +32,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Moip\Magento2\Block\InfoCheckout">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item xsi:type="string" name="is_secure_mode">1</item>
+            </argument>
+        </arguments>
+    </type>
     <type name="Magento\Payment\Model\CcGenericConfigProvider">
         <arguments>
             <argument name="methodCodes" xsi:type="array">
@@ -39,7 +47,6 @@
             </argument>
         </arguments>
     </type>
-
     <type name="Magento\Vault\Model\Ui\TokensConfigProvider">
         <arguments>
             <argument name="tokenUiComponentProviders" xsi:type="array">

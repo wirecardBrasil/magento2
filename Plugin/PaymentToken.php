@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,6 +19,16 @@ use Magento\Vault\Api\PaymentTokenManagementInterface;
  */
 class PaymentToken
 {
+    /**
+     * Around Save Token With Payment Link.
+     *
+     * @param PaymentTokenManagementInterface $paymentTokenManagement
+     * @param callable                        $proceed
+     * @param PaymentTokenInterface           $token
+     * @param OrderPaymentInterface           $payment
+     *
+     * @return $proceed
+     */
     public function aroundSaveTokenWithPaymentLink(
         PaymentTokenManagementInterface $paymentTokenManagement,
         callable $proceed,

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -18,24 +18,24 @@ use Magento\Quote\Api\Data\PaymentInterface;
 class DataAssignBoletoObserver extends AbstractDataAssignObserver
 {
     /**
-     * @const Method Name Block
+     * @const string
      */
-    const METHOD_NAME = 'method_name';
+    public const METHOD_NAME = 'method_name';
 
     /**
-     * @const Method Name
+     * @const string
      */
-    const METHOD_NAME_TYPE = 'Boleto Bancário';
+    public const METHOD_NAME_TYPE = 'Boleto Bancário';
 
     /**
-     * @const Holder Full Nane
+     * @const string
      */
-    const PAYER_FULLNAME = 'boleto_payer_fullname';
+    public const PAYER_FULLNAME = 'boleto_payer_fullname';
 
     /**
-     * @const Holder Tax Document
+     * @const string
      */
-    const PAYER_TAX_DOCUMENT = 'boleto_payer_tax_document';
+    public const PAYER_TAX_DOCUMENT = 'boleto_payer_tax_document';
 
     /**
      * @var array
@@ -46,6 +46,8 @@ class DataAssignBoletoObserver extends AbstractDataAssignObserver
     ];
 
     /**
+     * Execute.
+     *
      * @param Observer $observer
      *
      * @return void

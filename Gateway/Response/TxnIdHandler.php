@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -17,60 +17,62 @@ use Magento\Payment\Gateway\Response\HandlerInterface;
 class TxnIdHandler implements HandlerInterface
 {
     /**
-     * @const TXN ID
+     * @const string
      */
-    const TXN_ID = 'TXN_ID';
+    public const TXN_ID = 'TXN_ID';
 
     /**
-     * @const BOLETO LINE CODE
+     * @const string
      */
-    const BOLETO_LINE_CODE = 'boleto_line_code';
+    public const BOLETO_LINE_CODE = 'boleto_line_code';
 
     /**
-     * @const BOLETO PRINT HREF
+     * @const string
      */
-    const BOLETO_PRINT_HREF = 'boleto_print_href';
+    public const BOLETO_PRINT_HREF = 'boleto_print_href';
 
     /**
-     * @const Credit Card Number
+     * @const string
      */
-    const PAYER_CC_NUMBER = 'cc_number';
+    public const PAYER_CC_NUMBER = 'cc_number';
 
     /**
-     * @const Credit Card Type
+     * @const string
      */
-    const PAYER_CC_TYPE = 'cc_type';
+    public const PAYER_CC_TYPE = 'cc_type';
 
     /**
-     * @const Installment
+     * @const string
      */
-    const PAYER_CC_INSTALLMENTS = 'cc_installments';
+    public const PAYER_CC_INSTALLMENTS = 'cc_installments';
 
     /**
-     * @const Holder Full Nane
+     * @const string
      */
-    const PAYER_HOLDER_FULLNAME = 'cc_holder_fullname';
+    public const PAYER_HOLDER_FULLNAME = 'cc_holder_fullname';
 
     /**
-     * @const Holder Birth Date
+     * @const string
      */
-    const PAYER_HOLDER_BIRTH_DATE = 'cc_holder_birth_date';
+    public const PAYER_HOLDER_BIRTH_DATE = 'cc_holder_birth_date';
 
     /**
-     * @const Holder Tax Document
+     * @const string
      */
-    const PAYER_HOLDER_TAX_DOCUMENT = 'cc_holder_tax_document';
+    public const PAYER_HOLDER_TAX_DOCUMENT = 'cc_holder_tax_document';
 
     /**
-     * @const Holder Phone
+     * @const string
      */
-    const PAYER_HOLDER_PHONE = 'cc_holder_phone';
+    public const PAYER_HOLDER_PHONE = 'cc_holder_phone';
 
     /**
      * Handles.
      *
      * @param array $handlingSubject
      * @param array $response
+     *
+     * @return void
      */
     public function handle(array $handlingSubject, array $response)
     {

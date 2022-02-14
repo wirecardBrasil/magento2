@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -62,7 +62,7 @@
 		<message code="ORD-012" translate="true">O nome do item deve ter no máximo 250 caracteres.</message>
 		<message code="ORD-013" translate="true">A descrição do produto deve ter no máximo 250 caracteres.</message>
 		<message code="ORD-014" translate="true">O item deve ter um valor.</message>
-		<message code="ORD-015" translate="true">Informe o identificador da conta Wirecard.</message>
+		<message code="ORD-015" translate="true">Informe o identificador da conta Moip.</message>
 		<message code="ORD-016" translate="true">Informe o tipo do recebedor. Deve ser PRIMARY ou SECONDARY.</message>
 		<message code="ORD-017" translate="true">Tipo de recebedor inválido. Deve ser PRIMARY ou SECONDARY.</message>
 		<message code="ORD-018" translate="true">É necessário informar o valor de recebimento.</message>
@@ -73,9 +73,9 @@
 		<message code="ORD-023" translate="true">O valor adicional deve ser informado em centavos. Exemplo R$241,00.</message>
 		<message code="ORD-024" translate="true">O valor de desconto deve ser informado em centavos. Exemplo R$241,00.</message>
 		<message code="ORD-025" translate="true">O valor do item deve ser informado em centavos.</message>
-		<message code="ORD-026" translate="true">Id da conta Wirecard informada esta encerrada.</message>
-		<message code="ORD-027" translate="true">Conta Wirecard não encontrada para o email do comprador.</message>
-		<message code="ORD-028" translate="true">É necessário informar ao menos uma conta Wirecard.</message>
+		<message code="ORD-026" translate="true">Id da conta Moip informada esta encerrada.</message>
+		<message code="ORD-027" translate="true">Conta Moip não encontrada para o email do comprador.</message>
+		<message code="ORD-028" translate="true">É necessário informar ao menos uma conta Moip.</message>
 		<message code="ORD-029" translate="true">O valor percentual deve ser informado em formato numérico.</message>
 		<message code="ORD-030" translate="true">O valor percentual deve ser entre 0 e 100.</message>
 		<message code="ORD-031" translate="true">O valor fixo deve ser informado em centavos.</message>
@@ -110,8 +110,8 @@
 		<message code="PAY-612" translate="true">Já existe um pagamento realizado com débito em conta.</message>
 		<message code="PAY-613" translate="true">Somente é possível capturar pagamentos com status PRE_AUTHORIZED.</message>
 		<message code="PAY-614" translate="true">Somente é possível desfazer pagamentos com status PRE_AUTHORIZED.</message>
-		<message code="PAY-615" translate="true">Conta Wirecard não autorizada.</message>
-		<message code="PAY-616" translate="true">Conta Wirecard não encontrada.</message>
+		<message code="PAY-615" translate="true">Conta Moip não autorizada.</message>
+		<message code="PAY-616" translate="true">Conta Moip não encontrada.</message>
 		<message code="PAY-617" translate="true">Já existe um pagamento realizado com wallet para esse pedido.</message>
 		<message code="PAY-618" translate="true">Forma de pagamento não pode ser utilizada nesse pedido.</message>
 		<message code="PAY-619" translate="true">O mês de expiração do cartão de crédito não foi informado.</message>

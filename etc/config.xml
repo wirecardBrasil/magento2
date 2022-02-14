@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -21,10 +21,10 @@
                 <model>Magento2BaseFacade</model>
                 <order_status>payment_review</order_status>
                 <payment_action>authorize</payment_action>
-                <title>Wirecard</title>
+                <title>Moip by PagSeguro</title>
                 <currency>BRL</currency>
                 <is_gateway>1</is_gateway>
-                <can_use_internal>1</can_use_internal>
+                <can_use_internal>0</can_use_internal>
                 <can_use_checkout>1</can_use_checkout>
                 <can_authorize>1</can_authorize>
                 <can_capture>1</can_capture>
@@ -70,7 +70,7 @@
                 <title>Cartão de Crédito</title>
                 <currency>BRL</currency>
                 <debugReplaceKeys>MERCHANT_KEY</debugReplaceKeys>
-                <paymentInfoKeys>method_name,cc_installments,cc_installment_interest,cc_type,cc_number,cc_holder_fullname,cc_holder_birth_date,tax_document,cc_holder_tax_document,cc_holder_phone,device</paymentInfoKeys>
+                <paymentInfoKeys>method_name,cc_installments,cc_installment_interest,cc_type,cc_number,cc_holder_fullname,cc_holder_birth_date,cc_holder_tax_document,cc_holder_phone,device</paymentInfoKeys>
                 <privateInfoKeys>device,cc_installment_interest</privateInfoKeys>
                 <is_gateway>1</is_gateway>
                 <can_use_internal>1</can_use_internal>
@@ -117,8 +117,10 @@
             </moip_magento2_cc>
             <moip_magento2_cc_vault>
                 <active>1</active>
+                <can_use_internal>0</can_use_internal>
+                <can_use_checkout>1</can_use_checkout>
                 <model>Magento2CcVaultFacade</model>
-                <title>Stored Cards (Wirecard)</title>
+                <title>Stored Cards (Moip by PagSeguro)</title>
                 <cvv_enabled>1</cvv_enabled>
                 <group>moip_group</group>
             </moip_magento2_cc_vault>

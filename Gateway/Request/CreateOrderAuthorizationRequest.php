@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -18,9 +18,9 @@ use Magento\Payment\Gateway\Request\BuilderInterface;
 class CreateOrderAuthorizationRequest implements BuilderInterface
 {
     /**
-     * @var Owner Id
+     * @var string
      */
-    const OWNER_ID = 'ownId';
+    public const OWNER_ID = 'ownId';
 
     /**
      * @var ConfigInterface
@@ -37,7 +37,9 @@ class CreateOrderAuthorizationRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,9 +21,9 @@ use Moip\Magento2\Gateway\Config\ConfigBoleto;
 class ConfigProviderBoleto implements ConfigProviderInterface
 {
     /*
-     * @var CODE - Boleto
+     * @const string
      */
-    const CODE = 'moip_magento2_boleto';
+    public const CODE = 'moip_magento2_boleto';
 
     /**
      * @var Config
@@ -46,13 +46,16 @@ class ConfigProviderBoleto implements ConfigProviderInterface
     protected $ccConfig;
 
     /**
-     * @var \Magento\Framework\View\Asset\Source
+     * @var Source
      */
     protected $assetSource;
 
     /**
-     * @param Config        $config
+     * @param ConfigBoleto  $config
      * @param CartInterface $cart
+     * @param CcConfig      $ccConfig
+     * @param Escaper       $escaper
+     * @param Source        $assetSource
      */
     public function __construct(
         ConfigBoleto $config,

@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -37,7 +37,7 @@ define([
         totals: quote.getTotals(),
 
         initObservable() {
-            this._super().observe(["active","creditCardInstallment","creditCardHash","creditCardHolderFullName","creditCardHolderTaxDocument","creditCardHolderPhone","creditCardHolderBirthDate"]);
+            this._super().observe(["active", "creditCardInstallment", "creditCardHash", "creditCardHolderFullName", "creditCardHolderTaxDocument", "creditCardHolderPhone", "creditCardHolderBirthDate"]);
             return this;
         },
 
@@ -47,10 +47,10 @@ define([
 
         initialize() {
             var self = this;
-            
+
             this.vaultEnabler = new VaultEnabler();
             this.vaultEnabler.setPaymentCode(this.getVaultCode());
-            
+
 
             var vat = $("#moip_magento2_cc_cc_tax_document");
             var tel = $("#moip_magento2_cc_cc_holder_phone");
@@ -58,20 +58,20 @@ define([
             this._super();
 
             ko.bindingHandlers.datepicker = {
-                init: function(element, valueAccessor, allBindingsAccessor) {
+                init: function (element, valueAccessor, allBindingsAccessor) {
                     var $el = $(element);
                     var options = {
-                            dateFormat:"dd/mm/yy",
-                            showButtonPanel: false,
-                            hideIfNoPrevNext: true,
-                            endDate: "-18Y",
-                            setStartDate: "-18Y",
-                            minDate: "-99Y",
-                            maxDate: "-18Y",
-                            yearRange: "-99:-18",
-                            changeMonth: true,
-                            changeYear: true,
-                        };
+                        dateFormat: "dd/mm/yy",
+                        showButtonPanel: false,
+                        hideIfNoPrevNext: true,
+                        endDate: "-18Y",
+                        setStartDate: "-18Y",
+                        minDate: "-99Y",
+                        maxDate: "-18Y",
+                        yearRange: "-99:-18",
+                        changeMonth: true,
+                        changeYear: true,
+                    };
                     $el.datepicker(options);
                     var writable = valueAccessor();
                     if (!ko.isObservable(writable)) {
@@ -84,7 +84,7 @@ define([
                     }
                     writable($(element).datepicker("getDate"));
                 },
-                update: function(element, valueAccessor)   {
+                update: function (element, valueAccessor) {
                     var widget = $(element).data("DateTimePicker");
                     if (widget) {
                         var date = ko.utils.unwrapObservable(valueAccessor());
@@ -92,11 +92,11 @@ define([
                     }
                 }
             };
-            
+
             dob.mask("00/00/0000", { clearIfNotMatch: true });
             tel.mask("(00)00000-0000", { clearIfNotMatch: true });
-            
-           
+
+
 
             this.creditCardInstallment.subscribe(function (value) {
                 creditCardData.creditCardInstallment = value;
@@ -112,7 +112,7 @@ define([
             });
 
             this.creditCardHolderTaxDocument.subscribe(function (value) {
-                var typeMaskVat =  value.replace(/\D/g, "").length <= 11 ? "000.000.000-009" : "00.000.000/0000-00";
+                var typeMaskVat = value.replace(/\D/g, "").length <= 11 ? "000.000.000-009" : "00.000.000/0000-00";
                 vat.mask(typeMaskVat, { clearIfNotMatch: true });
                 creditCardData.creditCardHolderTaxDocument = value;
             });
@@ -127,13 +127,13 @@ define([
 
             this.selectedCardType.subscribe(function (value) {
                 $("#moip_magento2_cc_number").unmask();
-                if(value === "VI" || value === "MC" || value === "ELO" || value === "HC" || value === "HI") {
+                if (value === "VI" || value === "MC" || value === "ELO" || value === "HC" || value === "HI") {
                     $("#moip_magento2_cc_cc_number").mask("0000 0000 0000 0000");
-                } 
-                if(value === "DN") {
+                }
+                if (value === "DN") {
                     $("#moip_magento2_cc_cc_number").mask("0000 000000 0000");
                 }
-                if(value === "AE"){
+                if (value === "AE") {
                     $("#moip_magento2_cc_cc_number").mask("0000 000000 00000");
                 }
                 creditCardData.selectedCardType = value;
@@ -153,7 +153,7 @@ define([
 
         genetateInterest() {
             var value = this.creditCardInstallment();
-            if(value){
+            if (value) {
                 TotalsMoipInterest.save(value);
             }
         },
@@ -164,19 +164,19 @@ define([
             if (!$(this.formElement).valid()) {
                 return;
             } else {
-                 this.placeOrder();
+                this.placeOrder();
             }
         },
 
         getHash() {
             var cc = new Moip.CreditCard({
-                number  : this.creditCardNumber(),
-                cvc     : this.creditCardVerificationNumber(),
+                number: this.creditCardNumber(),
+                cvc: this.creditCardVerificationNumber(),
                 expMonth: this.creditCardExpMonth(),
-                expYear : this.creditCardExpYear(),
-                pubKey  : this.getPublickey()
+                expYear: this.creditCardExpYear(),
+                pubKey: this.getPublickey()
             });
-            if(cc.isValid()){
+            if (cc.isValid()) {
                 this.creditCardHash(cc.hash());
             }
         },
@@ -203,7 +203,7 @@ define([
         },
 
         getPublickey() {
-             return window.checkoutConfig.payment[this.getCode()].public_key;
+            return window.checkoutConfig.payment[this.getCode()].public_key;
         },
 
         hasVerification() {
@@ -213,7 +213,7 @@ define([
         getTitle() {
             return window.checkoutConfig.payment[this.getCode()].title;
         },
-        
+
         getLogo() {
             return window.checkoutConfig.payment[this.getCode()].logo;
         },
@@ -240,10 +240,10 @@ define([
             return window.checkoutConfig.payment[this.getCode()].phone_capture;
         },
 
-        getInterestApply(){
+        getInterestApply() {
             var valueInterest = 0;
             _.map(this.totals()['total_segments'], function (segment) {
-                if(segment['code'] === 'moip_interest_amount') {
+                if (segment['code'] === 'moip_interest_amount') {
                     valueInterest = segment['value'];
                 }
             });
@@ -254,84 +254,82 @@ define([
             var grandTotal = quote.totals().base_grand_total;
             var moipIterest = this.getInterestApply();
             var calcTotal = grandTotal - moipIterest;
-            var type_interest   = window.checkoutConfig.payment[this.getCode()].type_interest
-            var info_interest   = window.checkoutConfig.payment[this.getCode()].info_interest;
+            var type_interest = window.checkoutConfig.payment[this.getCode()].type_interest
+            var info_interest = window.checkoutConfig.payment[this.getCode()].info_interest;
             var min_installment = window.checkoutConfig.payment[this.getCode()].min_installment;
             var max_installment = window.checkoutConfig.payment[this.getCode()].max_installment;
             var installmentsCalcValues = {};
-            var count = 0;
-            
-            var max_div = (calcTotal/min_installment);
-                max_div = parseInt(max_div);
-            if(max_div > max_installment) {
+            var max_div = (calcTotal / min_installment);
+            max_div = parseInt(max_div);
+            if (max_div > max_installment) {
                 max_div = max_installment;
             } else {
-                if(max_div > 12) {
+                if (max_div > 12) {
                     max_div = 12;
                 }
             }
             var limit = max_div;
-            
-            if(limit === 0){
+
+            if (limit === 0) {
                 limit = 1;
             }
-            
+
             for (var i = 1; i < info_interest.length; i++) {
                 if (i > limit) {
                     break;
                 }
                 var interest = info_interest[i];
-                if(interest > 0){
-                    var taxa = interest/100;
-                    if(type_interest === "compound"){
+                if (interest > 0) {
+                    var taxa = interest / 100;
+                    if (type_interest === "compound") {
                         var pw = Math.pow((1 / (1 + taxa)), i);
                         var installment = (((calcTotal * taxa) * 1) / (1 - pw));
                     } else {
-                        var installment = ((calcTotal*taxa)+calcTotal) / i;
+                        var installment = ((calcTotal * taxa) + calcTotal) / i;
                     }
-                    var totalInstallment = installment*i;
-                    if(installment > 5 && installment > min_installment){
+                    var totalInstallment = installment * i;
+                    if (installment > 5 && installment > min_installment) {
                         installmentsCalcValues[i] = {
-                            "installment" : priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                            "installment": priceUtils.formatPrice(installment, quote.getPriceFormat()),
                             "totalInstallment": priceUtils.formatPrice(totalInstallment, quote.getPriceFormat()),
-                            "totalInterest" : priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
-                            "interest" : interest
+                            "totalInterest": priceUtils.formatPrice(totalInstallment - calcTotal, quote.getPriceFormat()),
+                            "interest": interest
                         };
                     }
-                } else if(interest == 0) {
-                    if(calcTotal > 0){
+                } else if (interest == 0) {
+                    if (calcTotal > 0) {
                         installmentsCalcValues[i] = {
-                            "installment" : priceUtils.formatPrice((calcTotal/i), quote.getPriceFormat()),
+                            "installment": priceUtils.formatPrice((calcTotal / i), quote.getPriceFormat()),
                             "totalInstallment": priceUtils.formatPrice(calcTotal, quote.getPriceFormat()),
-                            "totalInterest" :  0,
-                            "interest" : 0
+                            "totalInterest": 0,
+                            "interest": 0
                         };
                     }
-                } else if(interest < 0) {
-                    var taxa = interest/100;
-                    if(calcTotal > 0){
-                        var installment = ((calcTotal*taxa)+calcTotal) / i;
+                } else if (interest < 0) {
+                    var taxa = interest / 100;
+                    if (calcTotal > 0) {
+                        var installment = ((calcTotal * taxa) + calcTotal) / i;
                         installmentsCalcValues[i] = {
-                                "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
-                                "discount" : interest,
-                                "interest": interest
+                            "totalWithTheDiscount": priceUtils.formatPrice(installment, quote.getPriceFormat()),
+                            "discount": interest,
+                            "interest": interest
                         };
                     }
                 }
             }
             return installmentsCalcValues;
         },
-        
+
         getInstallments() {
             var temp = _.map(this.getInstalmentsValues(), function (value, key) {
                 var inst;
 
-                if(value["interest"] === 0){
-                    inst = $t("%1x of %2 not interest").replace("%1",key).replace("%2",value["installment"]);
-                } else if(value["interest"] < 0){
+                if (value["interest"] === 0) {
+                    inst = $t("%1x of %2 not interest").replace("%1", key).replace("%2", value["installment"]);
+                } else if (value["interest"] < 0) {
                     inst = $t("%1% of discount cash with total of %2").replace("%1", value["discount"]).replace("%2", value["totalWithTheDiscount"]);
                 } else {
-                    inst = $t("%1x of %2 in the total value of %3").replace("%1",key).replace("%2",value["installment"]).replace("%3",value["totalInstallment"]);
+                    inst = $t("%1x of %2 in the total value of %3").replace("%1", key).replace("%2", value["installment"]).replace("%3", value["totalInstallment"]);
                 }
 
                 return {
@@ -342,7 +340,7 @@ define([
 
             var newArray = [];
             for (var i = 0; i < temp.length; i++) {
-                if (temp[i].installments!="undefined" && temp[i].installments!=undefined) {
+                if (temp[i].installments != "undefined" && temp[i].installments != undefined) {
                     newArray.push(temp[i]);
                 }
             }

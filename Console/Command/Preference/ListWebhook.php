@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,7 +19,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ListWebhook extends Command
 {
     /**
-     * @var all
+     * @var All
      */
     protected $all;
 
@@ -29,8 +29,6 @@ class ListWebhook extends Command
     protected $state;
 
     /**
-     * CreateWebhook constructor.
-     *
      * @param State $state
      * @param All   $all
      */
@@ -44,7 +42,10 @@ class ListWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Execute.
+     *
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      */
     protected function execute(
         InputInterface $input,
@@ -56,7 +57,9 @@ class ListWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Configure.
+     *
+     * @return void
      */
     protected function configure()
     {

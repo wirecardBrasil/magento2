@@ -13,20 +13,12 @@ class AbstractModel
     protected $logger;
 
     /**
-     * @var Filesystem
-     */
-    protected $_filesystem;
-
-    /**
      * @var OutputInterface
      */
     protected $_output;
 
     /**
-     * AbstractModel constructor.
-     *
      * @param LoggerInterface $logger
-     * @param Filesystem      $filesystem
      */
     public function __construct(
         LoggerInterface $logger
@@ -35,7 +27,11 @@ class AbstractModel
     }
 
     /**
+     * Output.
+     *
      * @param OutputInterface $output
+     *
+     * @return voind
      */
     public function setOutput(OutputInterface $output)
     {
@@ -43,9 +39,13 @@ class AbstractModel
     }
 
     /**
-     * @param $text
+     * Console Write.
+     *
+     * @param string $text
+     *
+     * @return void
      */
-    protected function write($text)
+    protected function write(string $text)
     {
         if ($this->_output instanceof OutputInterface) {
             $this->_output->write($text);
@@ -53,7 +53,11 @@ class AbstractModel
     }
 
     /**
-     * @param $text
+     * Console WriteLn.
+     *
+     * @param string $text
+     *
+     * @return void
      */
     protected function writeln($text)
     {

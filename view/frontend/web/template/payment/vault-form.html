@@ -1,6 +1,6 @@
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -17,7 +17,6 @@
                     'alt': getIcons(getCardType()).title
                     }" class="payment-icon">
               </li>
-              <!--/ko-->
             </ul>
         </span>
     </legend>
@@ -26,9 +25,9 @@
       <p class="not-editable-title"><!-- ko i18n: 'Waiting...'--><!-- /ko --></p>
     </div>
     <div class="field-to-pay"  data-bind="css: { _hidden:!isPlaceOrderActionAllowed() }">
-        <div class="field wirecard-input-group empty"></div>
+        <div class="field moip-input-group empty"></div>
         <!-- ko if: (hasVerification())-->
-          <div class="field wirecard-input-group required" data-bind="attr: {id: getId() + '_cc_type_cvv_div'}">
+          <div class="field moip-input-group required" data-bind="attr: {id: getId() + '_cc_type_cvv_div'}">
               <div class="control _with-tooltip">
                   <input type="number"
                          class="input-text cvv"
@@ -56,7 +55,7 @@
               </div>
           </div>
         <!-- /ko -->
-        <div class="field wirecard-input-group installments">
+        <div class="field moip-input-group installments">
           <div class="control">
               <select name="payment[cc_installments]"
                       class="select select-year"

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,19 +21,18 @@ use Moip\Magento2\Api\MoipInterestManagementInterface;
 class GuestMoipInterestManagement implements GuestMoipInterestManagementInterface
 {
     /**
-     * @var \Magento\Quote\Model\QuoteIdMaskFactory
+     * @var QuoteIdMaskFactory
      */
     protected $quoteIdMaskFactory;
 
     /**
-     * @var \Magento\Checkout\Api\ShippingInformationManagementInterface
+     * @var MoipInterestManagementInterface
      */
     protected $moipInterestInterface;
 
     /**
      * @param \Magento\Quote\Model\QuoteIdMaskFactory            $quoteIdMaskFactory
      * @param \Moip\Magento2\Api\MoipInterestManagementInterface $moipInterestInterface
-     * @codeCoverageIgnore
      */
     public function __construct(
         QuoteIdMaskFactory $quoteIdMaskFactory,
@@ -44,7 +43,12 @@ class GuestMoipInterestManagement implements GuestMoipInterestManagementInterfac
     }
 
     /**
-     * {@inheritDoc}
+     * Save Moip Interest.
+     *
+     * @param int                   $cartId
+     * @param MoipInterestInterface $moipInterest
+     *
+     * @return void
      */
     public function saveMoipInterest(
         $cartId,

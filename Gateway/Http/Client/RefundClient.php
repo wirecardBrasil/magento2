@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -24,10 +24,13 @@ use Moip\Magento2\Gateway\Config\Config;
  */
 class RefundClient implements ClientInterface
 {
-    const MOIP_ORDER_ID = 'moip_order_id';
+    /**
+     * @var string
+     */
+    public const MOIP_ORDER_ID = 'moip_order_id';
 
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 
@@ -82,7 +85,7 @@ class RefundClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders/'.$orderMoip.'/refunds');
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 45000]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setRawData($this->json->serialize($request['send']), 'application/json');
             $client->setMethod(ZendClient::POST);

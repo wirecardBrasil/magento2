@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -18,6 +18,9 @@
             <allow_multiple_address>1</allow_multiple_address>
         </method>
         <method name="moip_magento2_boleto">
+            <allow_multiple_address>1</allow_multiple_address>
+        </method>
+        <method name="moip_magento2_checkout">
             <allow_multiple_address>1</allow_multiple_address>
         </method>
     </methods>

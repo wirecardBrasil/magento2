@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -30,7 +30,7 @@ use Moip\Magento2\Gateway\Config\Config;
 class Accept extends Action implements Csrf
 {
     /**
-     * createCsrfValidationException.
+     * Create Csrf Validation Exception.
      *
      * @param RequestInterface $request
      *
@@ -44,7 +44,7 @@ class Accept extends Action implements Csrf
     }
 
     /**
-     * validateForCsrf.
+     * Validate For Csrf.
      *
      * @param RequestInterface $request
      *
@@ -58,24 +58,44 @@ class Accept extends Action implements Csrf
     }
 
     /**
-     * @var logger
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * @var Logger
      */
     protected $logger;
 
     /**
-     * @var orderFactory
+     * @var OrderInterfaceFactory
      */
     protected $orderFactory;
 
     /**
-     * @var resultJsonFactory
+     * @var CreditmemoFactory
      */
-    protected $resultJsonFactory;
+    protected $creditmemoFactory;
 
     /**
-     * @var storeManager
+     * @var CreditmemoService
+     */
+    protected $creditmemoService;
+
+    /**
+     * @var Invoice
+     */
+    protected $invoice;
+
+    /**
+     * @var StoreManagerInterface
      */
     protected $storeManager;
+
+    /**
+     * @var JsonFactory
+     */
+    protected $resultJsonFactory;
 
     /**
      * @var Json
@@ -83,17 +103,26 @@ class Accept extends Action implements Csrf
     protected $json;
 
     /**
+     * @var OrderCommentSender
+     */
+    protected $orderCommentSender;
+
+    /**
      * @param Context               $context
-     * @param logger                $logger
+     * @param Logger                $logger
      * @param Config                $config
      * @param OrderInterfaceFactory $orderFactory
+     * @param CreditmemoFactory     $creditmemoFactory
+     * @param CreditmemoService     $creditmemoService
+     * @param Invoice               $invoice
+     * @param StoreManagerInterface $storeManager
      * @param JsonFactory           $resultJsonFactory
      * @param Json                  $json
      */
     public function __construct(
         Context $context,
-        Config $config,
         Logger $logger,
+        Config $config,
         OrderInterfaceFactory $orderFactory,
         CreditmemoFactory $creditmemoFactory,
         CreditmemoService $creditmemoService,
@@ -138,11 +167,12 @@ class Accept extends Action implements Csrf
             $data = $originalNotification['resource']['order'];
             $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
 
-            if(!$order->getId()) {
+            if (!$order->getId()) {
                 $resultPage->setHttpResponseCode(406);
+
                 return $resultPage->setJsonData(
                     $this->json->serialize([
-                        'error' => 400,
+                        'error'   => 400,
                         'message' => __('Can not find this order'),
                     ])
                 );
@@ -155,7 +185,7 @@ class Accept extends Action implements Csrf
                 'webhook_data'       => $response,
             ]);
             $payment = $order->getPayment();
-            if (!$order->getInvoiceCollection()->count()) {
+            if (!$order->getInvoiceCollection()->count() && $order->isPaymentReview()) {
                 try {
                     $isOnline = true;
                     $payment->accept($isOnline);
@@ -163,7 +193,7 @@ class Accept extends Action implements Csrf
                     $order->save();
                 } catch (\Exception $exc) {
                     $resultPage->setHttpResponseCode(500);
-                    return $resultPage->setJsonData(
+                    $resultPage->setJsonData(
                         $this->json->serialize([
                             'error'   => 400,
                             'message' => $exc->getMessage(),

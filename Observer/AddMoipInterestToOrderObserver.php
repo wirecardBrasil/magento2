@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Moip\Magento2\Observer;
 
+use Magento\Framework\Event\Observer;
 use Magento\Framework\Event\ObserverInterface;
 use Moip\Magento2\Api\Data\MoipInterestInterface;
 
@@ -19,9 +20,13 @@ use Moip\Magento2\Api\Data\MoipInterestInterface;
 class AddMoipInterestToOrderObserver implements ObserverInterface
 {
     /**
-     * @param \Magento\Framework\Event\Observer $observer
+     * Execute.
+     *
+     * @param Observer $observer
+     *
+     * @return void
      */
-    public function execute(\Magento\Framework\Event\Observer $observer)
+    public function execute(Observer $observer)
     {
         /* @var \Magento\Sales\Model\Order $order */
         $order = $observer->getEvent()->getData('order');

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -31,7 +31,7 @@ use Moip\Magento2\Gateway\Config\Config;
 class Deny extends Action implements Csrf
 {
     /**
-     * createCsrfValidationException.
+     * Create Csrf Validation Exception.
      *
      * @param RequestInterface $request
      *
@@ -45,7 +45,7 @@ class Deny extends Action implements Csrf
     }
 
     /**
-     * validateForCsrf.
+     * Validate For Csrf.
      *
      * @param RequestInterface $request
      *
@@ -110,10 +110,11 @@ class Deny extends Action implements Csrf
 
     /**
      * @param Context               $context
-     * @param Logger                $logger
      * @param Config                $config
+     * @param Logger                $logger
      * @param OrderInterfaceFactory $orderFactory
      * @param CreditmemoFactory     $creditmemoFactory
+     * @param CreditmemoService     $creditmemoService
      * @param Invoice               $invoice
      * @param StoreManagerInterface $storeManager
      * @param JsonFactory           $resultJsonFactory
@@ -170,11 +171,12 @@ class Deny extends Action implements Csrf
             $data = $originalNotification['resource']['order'];
             $order = $this->orderFactory->create()->load($data['id'], 'ext_order_id');
 
-            if(!$order->getId()) {
+            if (!$order->getId()) {
                 $resultPage->setHttpResponseCode(406);
+
                 return $resultPage->setJsonData(
                     $this->json->serialize([
-                        'error' => 400,
+                        'error'   => 400,
                         'message' => __('Can not find this order'),
                     ])
                 );
@@ -186,47 +188,21 @@ class Deny extends Action implements Csrf
                 'increment_order_id' => $order->getIncrementId(),
                 'webhook_data'       => $response,
             ]);
-            $payment = $order->getPayment();
-            if ($order->canVoidPayment()) {
-                try {
-                    $isOnline = true;
-                    $payment->void($isOnline);
-                    $payment->save();
-                    $cancelDetailsAdmin = __('We did not record the payment.');
-                    $cancelDetailsCus = __('The payment deadline has been exceeded.');
-                    if (isset($data['payments'])) {
-                        foreach ($data['payments'] as $payment) {
-                            if (isset($payment['cancellationDetails'])) {
-                                $cancelCode = $payment['cancellationDetails']['code'];
-                                $cancelDescription = $payment['cancellationDetails']['description'];
-                                $cancelBy = $payment['cancellationDetails']['cancelledBy'];
-                                $cancelDetailsAdmin = __('%1, code %2, by %3', $cancelDescription, $cancelCode, $cancelBy);
-                                $cancelDetailsCus = __('%1', $cancelDescription);
-                            }
-                        }
-                    }
-                    /** customer information for cancel **/
-                    $history = $order->addStatusHistoryComment($cancelDetailsCus);
-                    $history->setIsVisibleOnFront(1);
-                    $history->setIsCustomerNotified(1);
-                    // $order->sendOrderUpdateEmail(1, $cancelDetailsCus);
 
-                    /** admin information for cancel **/
-                    $history = $order->addStatusHistoryComment($cancelDetailsAdmin);
-                    $history->setIsVisibleOnFront(0);
-                    $history->setIsCustomerNotified(0);
-                    $order->save();
-
-                    $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
-                } catch (\Exception $exc) {
+            if ($order->isPaymentReview()) {
+                $processed = $this->processUpdate($order, $data);
+                if (!$processed['success']) {
                     $resultPage->setHttpResponseCode(500);
+
                     return $resultPage->setJsonData(
                         $this->json->serialize([
-                            'error' => 400,
-                            'message' => $exc->getMessage(),
+                            'error'   => 500,
+                            'message' => $processed['message'],
                         ])
                     );
                 }
+
+                $resultPage->setHttpResponseCode(200);
 
                 return $resultPage->setJsonData(
                     $this->json->serialize([
@@ -242,7 +218,7 @@ class Deny extends Action implements Csrf
             return $resultPage->setJsonData(
                 $this->json->serialize([
                     'error'   => 400,
-                    'message' => 'The transaction could not be refund',
+                    'message' => 'The transaction could not be canceled',
                 ])
             );
         }
@@ -250,5 +226,60 @@ class Deny extends Action implements Csrf
         $resultPage->setHttpResponseCode(401);
 
         return $resultPage;
+    }
+
+    /**
+     * Process Update.
+     *
+     * @param OrderInterfaceFactory $order
+     * @param array                 $data
+     *
+     * @return array
+     */
+    public function processUpdate($order, $data)
+    {
+        $processed = [];
+        $payment = $order->getPayment();
+
+        try {
+            $isOnline = true;
+            $payment->deny($isOnline);
+            $payment->save();
+            $cancelDetailsAdmin = __('We did not record the payment.');
+            $cancelDetailsCus = __('The payment deadline has been exceeded.');
+            if (isset($data['payments'])) {
+                foreach ($data['payments'] as $moipPayment) {
+                    if (isset($moipPayment['cancellationDetails'])) {
+                        $cancelCode = $moipPayment['cancellationDetails']['code'];
+                        $cancelDescription = $moipPayment['cancellationDetails']['description'];
+                        $cancelBy = $moipPayment['cancellationDetails']['cancelledBy'];
+                        // phpcs:ignore Generic.Files.LineLength
+                        $cancelDetailsAdmin = __('%1, code %2, by %3', $cancelDescription, $cancelCode, $cancelBy);
+                        $cancelDetailsCus = __('%1', $cancelDescription);
+                    }
+                }
+            }
+            /** customer information for cancel **/
+            $history = $order->addStatusHistoryComment($cancelDetailsCus);
+            $history->setIsVisibleOnFront(1);
+            $history->setIsCustomerNotified(1);
+            /** admin information for cancel **/
+            $history = $order->addStatusHistoryComment($cancelDetailsAdmin);
+            $history->setIsVisibleOnFront(0);
+            $history->setIsCustomerNotified(0);
+            $order->save();
+
+            $this->orderCommentSender->send($order, 1, $cancelDetailsCus);
+            $processed = [
+                'success' => true,
+            ];
+        } catch (\Exception $exc) {
+            $processed = [
+                'success' => false,
+                'message' => $exc->getMessage(),
+            ];
+        }
+
+        return $processed;
     }
 }

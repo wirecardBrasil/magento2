@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -8,17 +8,19 @@
 
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
+use Magento\Framework\Option\ArrayInterface;
+
 /**
  * Class Category - Defines Category types.
  */
-class Category implements \Magento\Framework\Option\ArrayInterface
+class Category implements ArrayInterface
 {
     /**
      * Returns Options.
      *
-     * @return array attributesArrays
+     * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [
             null                                         => __('Select the store segment.'),
@@ -27,7 +29,9 @@ class Category implements \Magento\Framework\Option\ArrayInterface
             'CLOTHING'                                   => __('Apparel and Accessories > Clothing'),
             'CLOTHING_ACCESSORIES'                       => __('Apparel and Accessories > Clothing Accessories'),
             'COSTUMES_AND_ACCESSORIES'                   => __('Apparel and Accessories > Costumes and Accessories'),
+            // phpcs:ignore Generic.Files.LineLength
             'HANDBAGS_AND_WALLET_ACCESSORIES'            => __('Apparel and Accessories > Handbags and Wallet Accessories'),
+            // phpcs:ignore Generic.Files.LineLength
             'HANDBAGS_WALLETS_AND_CASES'                 => __('Apparel and Accessories > Handbags and Wallet Accessories'),
             'JEWELRY'                                    => __('Apparel and Accessories > Jewelry'),
             'SHOE_ACCESSORIES'                           => __('Apparel and Accessories > Shoe Accessories'),
@@ -61,6 +65,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
             'CAMERAS'                                    => __('Camera and Optic Accessories > Cameras'),
             'CAMERA_ACESSORIES'                          => __('Camera and Optic Accessories > Camera Acessories'),
             'PHOTOGRAPHY'                                => __('Camera and Optic Accessories > Photography'),
+            // phpcs:ignore Generic.Files.LineLength
             'OTHERS_CAMERAS_ACCESSORIES'                 => __('Camera and Optic Accessories > Others Cameras Accessories'),
             'ELECTRONICS'                                => __('Electronics'),
             '3D_PRINTERS'                                => __('Electronics > 3d Printers'),
@@ -74,6 +79,7 @@ class Category implements \Magento\Framework\Option\ArrayInterface
             'GPS_ACCESSORIES'                            => __('Electronics > Gps Accessories'),
             'NETWORKING'                                 => __('Electronics > Networking'),
             'PRINT_COPY_SCAN_AND_FAX'                    => __('Electronics > Print Copy Scan and Fax'),
+            // phpcs:ignore Generic.Files.LineLength
             'PRINTER_COPIER_AND_FAX_MACHINE_ACCESSORIES' => __('Electronics > Printer Copier and Fax Machine Accessories'),
             'VIDEO'                                      => __('Electronics > Video'),
             'VIDEO_GAME_CONSOLES'                        => __('Electronics > Video Game Consoles'),

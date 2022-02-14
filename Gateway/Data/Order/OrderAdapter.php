@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -28,10 +28,8 @@ class OrderAdapter implements OrderAdapterInterface
     private $addAdapterFactory;
 
     /**
-     * OrderAdapter constructor.
-     *
-     * @param Order
-     * @param AddressAdapterFactory
+     * @param Order          $order
+     * @param AddressAdapter $addAdapterFactory
      */
     public function __construct(
         Order $order,
@@ -156,7 +154,7 @@ class OrderAdapter implements OrderAdapterInterface
     /**
      * Gets the Dob for the customer.
      *
-     * @return date|null Dob.
+     * @return string.
      */
     public function getCustomerDob()
     {
@@ -226,6 +224,8 @@ class OrderAdapter implements OrderAdapterInterface
     /**
      * Set order moip interest amount.
      *
+     * @param int $interest
+     *
      * @return float|null
      */
     public function setMoipInterestAmount($interest)
@@ -235,6 +235,8 @@ class OrderAdapter implements OrderAdapterInterface
 
     /**
      * Set order base moip interest amount.
+     *
+     * @param float $interest
      *
      * @return float|null
      */

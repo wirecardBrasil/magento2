@@ -1,14 +1,14 @@
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
 -->
 <!-- ko if: NameCapture() || TaxDocumentCapture() -->
-<fieldset data-bind="attr: {class: 'fieldset payment items boleto ' + getCode(), id: 'payment_form_payer_persona' + getCode()}">
+<fieldset data-bind="attr: {class: 'fieldset payment items', id: 'payment_form_payer_persona' + getCode()}">
       <!-- ko if: NameCapture() -->
-      <div class="field wirecard-input-group payer fullname required">
+      <div class="field moip-input-group payer fullname required">
           <div class="control">
               <input type="text" name="payment[boleto_payer_fullname]" class="input-text" value=""
                      data-bind="attr: {
@@ -28,7 +28,7 @@
       </div>
       <!-- /ko -->
       <!-- ko if: TaxDocumentCapture() -->
-      <div class="field wirecard-input-group payer tax-document required">
+      <div class="field moip-input-group payer tax-document required">
           <div class="control">
               <input type="text" name="payment[boleto_payer_document]" class="input-text" value=""
                      data-bind="attr: {
@@ -50,7 +50,7 @@
     </div>
 </fieldset>
 <!-- /ko -->
-<fieldset data-bind="attr: {class: 'fieldset payment items boletoard ' + getCode(), id: 'payment_form_payer_' + getCode()}">
+<fieldset data-bind="attr: {class: 'fieldset payment items', id: 'payment_form_payer_' + getCode()}">
     <!-- ko if: (isShowLegend())-->
     <legend class="legend">
         <span class="legend-title"><!-- ko i18n: 'Boleto Information'--><!-- /ko --></span>

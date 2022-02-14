@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -9,47 +9,41 @@
 namespace Moip\Magento2\Gateway\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
-use Magento\Framework\Exception\InputException;
-use Magento\Framework\Exception\NoSuchEntityException;
+use Magento\Payment\Gateway\Config\Config as PaymentConfig;
 use Magento\Store\Model\ScopeInterface;
 
-class ConfigCcVault extends \Magento\Payment\Gateway\Config\Config
+class ConfigCcVault extends PaymentConfig
 {
     /**
-     * CVV Enabled - Cc Vault.
-     *
      * @const string
      */
-    const CVV_ENABLED = 'cvv_enabled';
+    public const CVV_ENABLED = 'cvv_enabled';
 
     /**
-     * Method Code - Cc Vault.
-     *
      * @const string
      */
-    const METHOD = 'moip_magento2_cc_vault';
+    public const METHOD = 'moip_magento2_cc_vault';
 
     /**
-     * Config constructor.
-     *
      * @param ScopeConfigInterface $scopeConfig
-     * @param null                 $methodCode
+     * @param string               $methodCode
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        $methodCode = null
+        $methodCode = self::METHOD
     ) {
-        \Magento\Payment\Gateway\Config\Config::__construct($scopeConfig, $methodCode);
+        PaymentConfig::__construct($scopeConfig, $methodCode);
         $this->scopeConfig = $scopeConfig;
     }
 
     /**
-     * @throws InputException
-     * @throws NoSuchEntityException
+     * Get If Use Cvv.
+     *
+     * @param int|null $storeId
      *
      * @return bool
      */
-    public function useCvv($storeId = null)
+    public function useCvv($storeId = null): bool
     {
         $pathPattern = 'payment/%s/%s';
 

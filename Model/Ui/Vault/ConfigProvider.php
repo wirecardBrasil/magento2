@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,7 +19,8 @@ use Moip\Magento2\Gateway\Config\ConfigCcVault;
 
 class ConfigProvider implements ConfigProviderInterface
 {
-    const CODE = 'moip_magento2_cc_vault';
+    public const CODE = 'moip_magento2_cc_vault';
+
     /**
      * @var Config
      */
@@ -46,14 +47,18 @@ class ConfigProvider implements ConfigProviderInterface
     protected $configCc;
 
     /**
-     * @var \Magento\Framework\View\Asset\Source
+     * @var Source
      */
     protected $assetSource;
 
     /**
      * ConfigProvider constructor.
      *
-     * @param Config $config
+     * @param CartInterface $cart
+     * @param ConfigCc      $configCc
+     * @param ConfigCcVault $configCcVault
+     * @param CcConfig      $ccConfig
+     * @param Source        $assetSource
      */
     public function __construct(
         CartInterface $cart,

@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -8,7 +8,7 @@ define([
     "mageUtils"
 ], function ($, utils) {
     "use strict";
-     var typesMoip = [
+    var typesMoip = [
         {
             title: "Visa",
             type: "VI",
@@ -66,15 +66,15 @@ define([
             }
         },
         {
-                title: "Hiper",
-                type: "HI",
-                pattern: "^(637095|637612|637599|637609|637568)",
-                gaps: [4, 8, 12],
-                lengths: [12, 13, 14, 15, 16, 17, 18, 19],
-                code: {
-                    name: "CVV",
-                    size: 3
-                }
+            title: "Hiper",
+            type: "HI",
+            pattern: "^(637095|637612|637599|637609|637568)",
+            gaps: [4, 8, 12],
+            lengths: [12, 13, 14, 15, 16, 17, 18, 19],
+            code: {
+                name: "CVV",
+                size: 3
+            }
         },
         {
             title: "Elo",
@@ -99,7 +99,7 @@ define([
     ];
 
     var mixin = {
-         getCardTypes(cardNumber) {
+        getCardTypes(cardNumber) {
             var i, value,
                 result = [];
             if (utils.isEmpty(cardNumber)) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -25,7 +25,7 @@ use Moip\Magento2\Gateway\Config\Config;
 class CreateOrderAuthorizeClient implements ClientInterface
 {
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 
@@ -78,7 +78,7 @@ class CreateOrderAuthorizeClient implements ClientInterface
 
         try {
             $client->setUri($url.'orders');
-            $client->setConfig(['maxredirects' => 0, 'timeout' => 120]);
+            $client->setConfig(['maxredirects' => 0, 'timeout' => 45000]);
             $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
             $client->setRawData($this->json->serialize($request), 'application/json');
             $client->setMethod(ZendClient::POST);

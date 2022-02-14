@@ -15,16 +15,18 @@ class VaultDataBuilder implements BuilderInterface
     /**
      * Additional options in request to gateway.
      */
-    const OPTIONS = 'options';
+    public const OPTIONS = 'options';
 
     /**
      * The option that determines whether the payment method associated with
      * the successful transaction should be stored in the Vault.
      */
-    const STORE_IN_VAULT_ON_SUCCESS = 'storeInVaultOnSuccess';
+    public const STORE_IN_VAULT_ON_SUCCESS = 'storeInVaultOnSuccess';
 
     /**
-     * @inheritdoc
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject): array
     {

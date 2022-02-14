@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -16,7 +16,10 @@ use Magento\Payment\Gateway\Validator\ResultInterface;
  */
 class ResponseCodeValidator extends AbstractValidator
 {
-    const RESULT_CODE = 'RESULT_CODE';
+    /**
+     * @var string
+     */
+    public const RESULT_CODE = 'RESULT_CODE';
 
     /**
      * Validation.
@@ -47,6 +50,8 @@ class ResponseCodeValidator extends AbstractValidator
     }
 
     /**
+     * Is Successful Transaction.
+     *
      * @param array $response
      *
      * @return bool

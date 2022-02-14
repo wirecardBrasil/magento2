@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -10,7 +10,7 @@ define(
     ],
     function (Component) {
         "use strict";
-        
+
         return Component.extend({
             /**
              * @override

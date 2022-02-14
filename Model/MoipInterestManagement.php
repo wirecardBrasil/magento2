@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -28,8 +28,6 @@ use Moip\Magento2\Gateway\Config\ConfigCc;
 class MoipInterestManagement implements MoipInterestManagementInterface
 {
     /**
-     * Quote repository.
-     *
      * @var CartRepositoryInterface
      */
     protected $quoteRepository;
@@ -40,17 +38,12 @@ class MoipInterestManagement implements MoipInterestManagementInterface
     protected $priceCurrency;
 
     /**
-     * @var total
-     */
-    protected $total;
-
-    /**
      * @var Config
      */
     private $config;
 
     /**
-     * @var configCc
+     * @var ConfigCc
      */
     private $configCc;
 
@@ -118,10 +111,10 @@ class MoipInterestManagement implements MoipInterestManagementInterface
     /**
      * Calc value Interest.
      *
-     * @param $quote
-     * @param $installment
+     * @param CartRepositoryInterface $quote
+     * @param int                     $installment
      *
-     * @return $installmentInterest
+     * @return float
      */
     public function calcInterest($quote, $installment)
     {
@@ -136,7 +129,7 @@ class MoipInterestManagement implements MoipInterestManagementInterface
             if ($interest[$installment] > 0) {
                 $installmentInterest = $this->getInterestCompound($total, $interest[$installment], $installment);
                 if ($typeInstallment === 'simple') {
-                    $installmentInterest = $this->getInterestSimple($total, $interest[$installment], $installment);
+                    $installmentInterest = $this->getInterestSimple($total, $interest[$installment]);
                 }
             } elseif ($interest[$installment] < 0) {
                 $installmentInterest = $this->getInterestSimple($total, $interest[$installment]);
@@ -149,8 +142,8 @@ class MoipInterestManagement implements MoipInterestManagementInterface
     /**
      * Get Intereset for Simple.
      *
-     * @param $total
-     * @param $interest
+     * @param float $total
+     * @param float $interest
      *
      * @return float
      */
@@ -168,9 +161,9 @@ class MoipInterestManagement implements MoipInterestManagementInterface
     /**
      * Get Intereset for Compound.
      *
-     * @param $total
-     * @param $interest
-     * @param $portion
+     * @param float $total
+     * @param float $interest
+     * @param int   $portion
      *
      * @return float
      */

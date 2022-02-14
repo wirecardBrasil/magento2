@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,25 +19,22 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DeleteWebhook extends Command
 {
-    const WEBHOOK_ID = 'id';
+    /**
+     * @const string
+     */
+    public const WEBHOOK_ID = 'id';
 
     /**
-     * Delete.
-     *
-     * @var Moip\Magento2\Model\Console\Command\Preference\Delete
+     * @var Delete
      */
     protected $delete;
 
     /**
-     * State.
-     *
-     * @var \Magento\Framework\App\State
+     * @var State
      */
     protected $state;
 
     /**
-     * DeleteWebhook constructor.
-     *
      * @param State  $state
      * @param Delete $delete
      */
@@ -51,7 +48,10 @@ class DeleteWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Execute.
+     *
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      */
     protected function execute(
         InputInterface $input,
@@ -65,7 +65,9 @@ class DeleteWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Configure.
+     *
+     * @return void
      */
     protected function configure()
     {

@@ -1,15 +1,18 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
 -->
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
-    <group id="default">
+    <group id="moip_magento2_base">
         <job name="status_update_order_cc" instance="Moip\Magento2\Cron\StatusUpdateOrderCc" method="execute">
             <schedule>0 8 * * *</schedule>
+        </job>
+        <job name="status_update_order_checkout" instance="Moip\Magento2\Cron\StatusUpdateOrderCheckout" method="execute">
+            <schedule>0 9 * * 1-5</schedule>
         </job>
         <job name="status_update_order_boleto" instance="Moip\Magento2\Cron\StatusUpdateOrderBoleto" method="execute">
             <schedule>0 11 * * 1-5</schedule>

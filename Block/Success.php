@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -50,7 +50,7 @@ class Success extends \Magento\Framework\View\Element\Template
     }
 
     /**
-     * getPayment.
+     * Get Payment.
      *
      * @return MethodInstance
      */
@@ -74,11 +74,11 @@ class Success extends \Magento\Framework\View\Element\Template
     /**
      * Info payment.
      *
-     * @param  $info
+     * @param string $info
      *
      * @return string
      */
-    public function getInfo($info)
+    public function getInfo(string $info)
     {
         return  $this->getPayment()->getInfoInstance()->getAdditionalInformation($info);
     }

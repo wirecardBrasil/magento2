@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -20,37 +20,37 @@ class PurchasedItemsDataRequest implements BuilderInterface
     /**
      * BillingAddress block name.
      */
-    const PURCHASED_ITEMS = 'items';
+    public const PURCHASED_ITEMS = 'items';
 
     /**
      * The street address. Maximum 255 characters
      * Required.
      */
-    const PURCHASED_ITEM_PRODUCT = 'product';
+    public const PURCHASED_ITEM_PRODUCT = 'product';
 
     /**
      * The street number. 1 or 10 alphanumeric digits
      * Required.
      */
-    const PURCHASED_ITEM_QUANTITY = 'quantity';
+    public const PURCHASED_ITEM_QUANTITY = 'quantity';
 
     /**
      * The district address. Maximum 255 characters
      * Required.
      */
-    const PURCHASED_ITEM_DETAIL = 'detail';
+    public const PURCHASED_ITEM_DETAIL = 'detail';
 
     /**
      * The complement address. Maximum 255 characters
      * Required.
      */
-    const PURCHASED_ITEM_PRICE = 'price';
+    public const PURCHASED_ITEM_PRICE = 'price';
 
     /**
      * The Category Moip
      * Optional.
      */
-    const PURCHASED_ITEM_CATEGORY = 'category';
+    public const PURCHASED_ITEM_CATEGORY = 'category';
 
     /**
      * @var SubjectReader
@@ -75,7 +75,9 @@ class PurchasedItemsDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

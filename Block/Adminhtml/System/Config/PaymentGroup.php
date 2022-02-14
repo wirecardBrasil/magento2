@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -8,13 +8,14 @@
 
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
+use Magento\Config\Block\System\Config\Form\Fieldset;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\View\Helper\SecureHtmlRenderer;
 
 /**
  * Class PaymentGroup - Fieldset renderer for moip.
  */
-class PaymentGroup extends \Magento\Config\Block\System\Config\Form\Fieldset
+class PaymentGroup extends Fieldset
 {
     /**
      * @var \Magento\Config\Model\Config
@@ -31,8 +32,8 @@ class PaymentGroup extends \Magento\Config\Block\System\Config\Form\Fieldset
      * @param \Magento\Backend\Model\Auth\Session $authSession
      * @param \Magento\Framework\View\Helper\Js   $jsHelper
      * @param \Magento\Config\Model\Config        $backendConfig
-     * @param array                               $data
      * @param SecureHtmlRenderer|null             $secureRenderer
+     * @param array                               $data
      */
     public function __construct(
         \Magento\Backend\Block\Context $context,

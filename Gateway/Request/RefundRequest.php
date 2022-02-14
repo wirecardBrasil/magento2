@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -20,23 +20,44 @@ use Moip\Magento2\Model\Ui\ConfigProviderBoleto;
 class RefundRequest implements BuilderInterface
 {
     /**
-     * @var Moip Order Id
+     * @var string
      */
-    const MOIP_ORDER_ID = 'moip_order_id';
+    public const MOIP_ORDER_ID = 'moip_order_id';
 
-    const BANK_NUMBER = 'moip_magento2_boleto_bank_number';
+    /**
+     * @var string
+     */
+    public const BANK_NUMBER = 'moip_magento2_boleto_bank_number';
 
-    const AGENCY_NUMBER = 'moip_magento2_boleto_agency_number';
+    /**
+     * @var string
+     */
+    public const AGENCY_NUMBER = 'moip_magento2_boleto_agency_number';
 
-    const AGENCY_CHECK_NUMBER = 'moip_magento2_boleto_agency_check_number';
+    /**
+     * @var string
+     */
+    public const AGENCY_CHECK_NUMBER = 'moip_magento2_boleto_agency_check_number';
 
-    const ACCOUNT_NUMBER = 'moip_magento2_boleto_account_number';
+    /**
+     * @var string
+     */
+    public const ACCOUNT_NUMBER = 'moip_magento2_boleto_account_number';
 
-    const ACCOUNT_CHECK_NUMBER = 'moip_magento2_boleto_account_check_number';
+    /**
+     * @var string
+     */
+    public const ACCOUNT_CHECK_NUMBER = 'moip_magento2_boleto_account_check_number';
 
-    const HOLDER_FULLNAME = 'moip_magento2_boleto_account_holder_fullname';
+    /**
+     * @var string
+     */
+    public const HOLDER_FULLNAME = 'moip_magento2_boleto_account_holder_fullname';
 
-    const HOLDER_DOCUMENT_NUMBER = 'moip_magento2_boleto_account_holder_document_number';
+    /**
+     * @var string
+     */
+    public const HOLDER_DOCUMENT_NUMBER = 'moip_magento2_boleto_account_holder_document_number';
 
     /**
      * @var ConfigInterface
@@ -50,6 +71,7 @@ class RefundRequest implements BuilderInterface
 
     /**
      * @param ConfigInterface $config
+     * @param Config          $configPayment
      */
     public function __construct(
         ConfigInterface $config,
@@ -60,7 +82,9 @@ class RefundRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

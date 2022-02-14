@@ -1,0 +1,90 @@
+<?php
+/**
+ * Copyright © Moip by PagSeguro. All rights reserved.
+ * @author    Bruno Elisei <brunoelisei@o2ti.com>
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Payment\Block\Adminhtml\Transparent\Form $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+$code = $block->escapeHtml($block->getMethodCode());
+$ccInstallment = $block->getInfoData('checkout_qty_installments');
+?>
+<fieldset class="admin__fieldset payment-method" id="payment_form_<?= $block->escapeHtml($block->getMethodCode()) ?>" >
+    <?php if ($block->getTaxDocumentCapture()): ?>
+        <div class="field-text required admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */ $block->escapeHtml($code) ?>_payer_tax_document">
+                <span><?= $block->escapeHtml(__('Holder Tax Document')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" title="<?= $block->escapeHtml(__('Holder Tax Document')) ?>"
+                       class="required-entry admin__control-text"
+                       id="<?= /* @noEscape */ $code ?>_payer_tax_document"
+                       name="payment[checkout_payer_tax_document]"
+                       value="<?= /* @noEscape */ $block->getInfoData('checkout_payer_tax_document') ?>"/>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($block->getNameCapture()): ?>
+        <div class="field-text required admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */ $code ?>_payer_fullname">
+                <span><?= $block->escapeHtml(__('Holder Name')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <input type="text" title="<?= $block->escapeHtml(__('Holder Fullname')) ?>"
+                       class="required-entry admin__control-text"
+                       id="<?= /* @noEscape */ $code ?>_payer_fullname"
+                       name="payment[checkout_payer_fullname]"
+                       value="<?= /* @noEscape */ $block->getInfoData('checkout_payer_fullname') ?>"/>
+            </div>
+        </div>
+    <?php endif; ?>
+    <?php if ($block->getEnableInstallments()): ?>
+        <div class="field-text required admin__field _required">
+            <label class="admin__field-label" for="<?= /* @noEscape */ $code ?>_enable_installments">
+                <span><?= $block->escapeHtml(__('Allows Installment')) ?></span>
+            </label>
+            <div class="admin__field-control">
+                <?php // phpcs:ignore Generic.Files.LineLength ?>
+                <select id="<?= /* @noEscape */ $block->escapeHtml($code) ?>_enable_installments" name="payment[checkout_enable_installments]"
+                        class="admin__control-select required-entry">
+                    <option value="0">
+                            <?= $block->escapeHtml(__('No')) ?>
+                    </option>
+                    <option value="1" selected="selected">
+                            <?= $block->escapeHtml(__('Yes')) ?>
+                    </option>
+                </select>
+            </div>
+        </div>
+    <?php endif; ?>
+    <div class="field-number admin__field _required">
+        <label class="admin__field-label" for="<?= /* @noEscape */ $code ?>_expiration">
+            <span><?= $block->escapeHtml(__('Select Instalmment')) ?></span>
+        </label>
+        <div class="admin__field-control">
+            <select id="<?= /* @noEscape */ $code ?>_qty_installments" name="payment[checkout_qty_installments]"
+                        class="admin__control-select required-entry">
+                <?php foreach ($block->getSelectInstallments() as $k => $v): ?>
+                    <option value="<?= $block->escapeHtml($k) ?>"
+                            <?php if ($k == $ccInstallment): ?>selected="selected"<?php endif ?>>
+                        <?= $block->escapeHtml($v) ?>
+                    </option>
+                <?php endforeach; ?>
+            </select>
+        </div>
+    </div>
+    <div class="admin__field">
+        <label class="admin__field-label"><span><?= $block->escapeHtml(__('Instruction')) ?></span></label>
+        <div class="admin__field-control checkmo-mailing-address">
+            <?= /* @noEscape */ nl2br($block->escapeHtml($block->getInstruction())) ?>
+        </div>
+    </div>
+</fieldset>
+
+<?= /* @noEscape */ $secureRenderer->renderStyleAsTag(
+    "display:none",
+    'fieldset#payment_form_' . $block->escapeJs($block->getMethodCode())
+) ?>

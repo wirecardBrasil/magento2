@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,22 +19,56 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config as ConfigBase;
 
+/**
+ * Class Logout - Clear Moip Config.
+ */
 class Logout extends \Magento\Backend\App\Action
 {
+    /**
+     * @var TypeListInterface
+     */
     protected $cacheTypeList;
 
+    /**
+     * @var Pool
+     */
     protected $cacheFrontendPool;
 
+    /**
+     * @var JsonFactory
+     */
     protected $resultJsonFactory;
 
+    /**
+     * @var ConfigInterface
+     */
     protected $configInterface;
 
+    /**
+     * @var Config
+     */
     protected $resourceConfig;
 
-    protected $storeManager;
-
+    /**
+     * @var ConfigBase
+     */
     protected $configBase;
 
+    /**
+     * @var StoreManagerInterface
+     */
+    protected $storeManager;
+
+    /**
+     * @param Context               $context
+     * @param TypeListInterface     $cacheTypeList
+     * @param Pool                  $cacheFrontendPool
+     * @param JsonFactory           $resultJsonFactory
+     * @param ConfigInterface       $configInterface
+     * @param Config                $resourceConfig
+     * @param ConfigBase            $configBase
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         Context $context,
         TypeListInterface $cacheTypeList,
@@ -55,11 +89,21 @@ class Logout extends \Magento\Backend\App\Action
         parent::__construct($context);
     }
 
+    /**
+     * ACL - Check is Allowed.
+     *
+     * @return bool
+     */
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed('Moip_Magento2::logout');
     }
 
+    /**
+     * Excecute.
+     *
+     * @return json
+     */
     public function execute()
     {
         $params = $this->getRequest()->getParams();
@@ -75,6 +119,11 @@ class Logout extends \Magento\Backend\App\Action
         ]);
     }
 
+    /**
+     * Set Clear oAuth.
+     *
+     * @return void
+     */
     private function setClearOauth()
     {
         $environment = $this->configBase->getEnvironmentMode();
@@ -92,6 +141,11 @@ class Logout extends \Magento\Backend\App\Action
         return $this;
     }
 
+    /**
+     * Set Clear Mpa.
+     *
+     * @return void
+     */
     private function setClearMpa()
     {
         $environment = $this->configBase->getEnvironmentMode();

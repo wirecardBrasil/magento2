@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,55 +21,55 @@ class BillingAddressDataRequest implements BuilderInterface
     /**
      * BillingAddress block name.
      */
-    const BILLING_ADDRESS = 'billingAddress';
+    public const BILLING_ADDRESS = 'billingAddress';
 
     /**
      * The street address. Maximum 255 characters
      * Required.
      */
-    const STREET = 'street';
+    public const STREET = 'street';
 
     /**
      * The street number. 1 or 10 alphanumeric digits
      * Required.
      */
-    const STREET_NUMBER = 'streetNumber';
+    public const STREET_NUMBER = 'streetNumber';
 
     /**
      * The district address. Maximum 255 characters
      * Required.
      */
-    const STREET_DISTRICT = 'district';
+    public const STREET_DISTRICT = 'district';
 
     /**
      * The complement address. Maximum 255 characters
      * Required.
      */
-    const STREET_COMPLEMENT = 'complement';
+    public const STREET_COMPLEMENT = 'complement';
 
     /**
      * The postal code.
      * Required.
      */
-    const POSTAL_CODE = 'zipCode';
+    public const POSTAL_CODE = 'zipCode';
 
     /**
      * The ISO 3166-1 alpha-3.
      * Required.
      */
-    const COUNTRY_CODE = 'country';
+    public const COUNTRY_CODE = 'country';
 
     /**
      * The locality/city. 255 character maximum.
      * Required.
      */
-    const LOCALITY = 'city';
+    public const LOCALITY = 'city';
 
     /**
      * The state or province. The region must be a 2-letter abbreviation.
      * Required.
      */
-    const STATE = 'state';
+    public const STATE = 'state';
 
     /**
      * @var SubjectReader
@@ -104,14 +104,15 @@ class BillingAddressDataRequest implements BuilderInterface
     /**
      * Value For Field Address.
      *
-     * @param $adress
-     * @param $field
+     * @param OrderAdapterFactory $adress
+     * @param string              $field
      *
      * @return string value
      */
     public function getValueForAddress($adress, $field)
     {
         $value = (int) $this->config->getAddtionalValue($field);
+        $limitSend = 57;
 
         if ($field === self::STREET) {
             $limitSend = 57;
@@ -146,7 +147,9 @@ class BillingAddressDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

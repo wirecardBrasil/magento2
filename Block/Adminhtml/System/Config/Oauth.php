@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,18 +19,18 @@ use Moip\Magento2\Gateway\Config\Config;
 class Oauth extends Field
 {
     /**
-     * @var template
+     * @var string
      */
     protected $_template = 'Moip_Magento2::system/config/oauth.phtml';
 
     /**
-     * @var config
+     * @var Config
      */
     protected $config;
 
     /**
-     * @param Config
-     * @param Context
+     * @param Config  $config
+     * @param Context $context
      */
     public function __construct(
         Config $config,
@@ -40,10 +40,10 @@ class Oauth extends Field
         parent::__construct($context);
     }
 
-    /*
-     * Render
+    /**
+     * Render.
      *
-     * @param $element
+     * @param AbstractElement $element
      *
      * @return string
      */
@@ -54,10 +54,10 @@ class Oauth extends Field
         return parent::render($element);
     }
 
-    /*
-     * Elment Html
+    /**
+     * Elment Html.
      *
-     * @param $element
+     * @param AbstractElement $element
      *
      * @return string
      */
@@ -66,20 +66,20 @@ class Oauth extends Field
         return $this->_toHtml();
     }
 
-    /*
-     * Ajax Url
+    /**
+     * Ajax Url.
      *
-     * @return url
+     * @return string
      */
     public function getAjaxUrl()
     {
         return $this->getUrl('moip/system_config/logout');
     }
 
-    /*
-     * Url Authorize
+    /**
+     * Url Authorize.
      *
-     * @return url
+     * @return string
      */
     public function getUrlAuthorize()
     {
@@ -89,8 +89,8 @@ class Oauth extends Field
         return $baseUri.'?client_id='.$storeUri;
     }
 
-    /*
-     * Button Html
+    /**
+     * Button Html.
      *
      * @return string
      */
@@ -108,8 +108,8 @@ class Oauth extends Field
         return $button->toHtml();
     }
 
-    /*
-     * Info Text Button
+    /**
+     * Info Text Button.
      *
      * @return string
      */
@@ -132,8 +132,8 @@ class Oauth extends Field
         return $text;
     }
 
-    /*
-     * Type Js
+    /**
+     * Type Js.
      *
      * @return string
      */
@@ -146,8 +146,8 @@ class Oauth extends Field
         return 'getautorization';
     }
 
-    /*
-     * Url to connect
+    /**
+     * Url to connect.
      *
      * @return string
      */

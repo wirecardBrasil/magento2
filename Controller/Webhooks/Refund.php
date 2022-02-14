@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -34,7 +34,7 @@ use Moip\Magento2\Gateway\Config\Config;
 class Refund extends Action implements Crsf
 {
     /**
-     * createCsrfValidationException.
+     * Create Csrf Validation Exception.
      *
      * @param RequestInterface $request
      *
@@ -48,11 +48,11 @@ class Refund extends Action implements Crsf
     }
 
     /**
-     * validateForCsrf.
+     * Validate For Csrf.
      *
      * @param RequestInterface $request
      *
-     * @return bool true
+     * @return bool
      */
     public function validateForCsrf(RequestInterface $request): bool
     {
@@ -62,24 +62,44 @@ class Refund extends Action implements Crsf
     }
 
     /**
-     * @var logger
+     * @var Config
+     */
+    protected $config;
+
+    /**
+     * @var Logger
      */
     protected $logger;
 
     /**
-     * @var orderFactory
+     * @var OrderInterfaceFactory
      */
     protected $orderFactory;
 
     /**
-     * @var resultJsonFactory
+     * @var CreditmemoFactory
      */
-    protected $resultJsonFactory;
+    protected $creditmemoFactory;
 
     /**
-     * @var storeManager
+     * @var CreditmemoService
+     */
+    protected $creditmemoService;
+
+    /**
+     * @var Invoice
+     */
+    protected $invoice;
+
+    /**
+     * @var StoreManagerInterface
      */
     protected $storeManager;
+
+    /**
+     * @var JsonFactory
+     */
+    protected $resultJsonFactory;
 
     /**
      * @var Json
@@ -87,27 +107,38 @@ class Refund extends Action implements Crsf
     protected $json;
 
     /**
+     * @var OrderCommentSender
+     */
+    protected $orderCommentSender;
+
+    /**
      * @var CreditmemoRepositoryInterface
      */
     private $creditmemoRepository;
 
     /**
-     * @var schCriteriaBuilder
+     * @var SearchCriteriaBuilder
      */
     protected $schCriteriaBuilder;
 
     /**
-     * @param Context               $context
-     * @param logger                $logger
-     * @param Config                $config
-     * @param OrderInterfaceFactory $orderFactory
-     * @param JsonFactory           $resultJsonFactory
-     * @param Json                  $json
+     * @param Context                       $context
+     * @param Logger                        $logger
+     * @param Config                        $config
+     * @param OrderInterfaceFactory         $orderFactory
+     * @param CreditmemoFactory             $creditmemoFactory
+     * @param CreditmemoService             $creditmemoService
+     * @param Invoice                       $invoice
+     * @param StoreManagerInterface         $storeManager
+     * @param JsonFactory                   $resultJsonFactory
+     * @param Json                          $json
+     * @param CreditmemoRepositoryInterface $creditmemoRepository
+     * @param SearchCriteriaBuilder         $schCriteriaBuilder
      */
     public function __construct(
         Context $context,
-        Config $config,
         Logger $logger,
+        Config $config,
         OrderInterfaceFactory $orderFactory,
         CreditmemoFactory $creditmemoFactory,
         CreditmemoService $creditmemoService,
@@ -185,8 +216,9 @@ class Refund extends Action implements Crsf
                 }
             } else {
                 $extOrderId = $resource['refund']['_links']['order']['title'];
-                $creditmemo = $this->createNewCreditMemo($extOrderId, $extRefundId);
-                if ($creditmemo) {
+                $newCreditmemo = $this->createNewCreditMemo($extOrderId, $extRefundId);
+                if ($newCreditmemo) {
+                    $creditmemo = $newCreditmemo;
                     if ($extStatus === 'REQUESTED') {
                         $creditmemo->setState(Creditmemo::STATE_OPEN);
                     } elseif ($extStatus === 'COMPLETED') {
@@ -233,7 +265,7 @@ class Refund extends Action implements Crsf
     /**
      * Get Creditmemo.
      *
-     * @params $extOrderId
+     * @param string $transactionId
      *
      * @return creditmemo
      */
@@ -256,8 +288,8 @@ class Refund extends Action implements Crsf
     /**
      * Create new creditmemo.
      *
-     * @params $extOrderId
-     * @parmas $extRefundId
+     * @param string $extOrderId
+     * @param string $extRefundId
      *
      * @return creditmemo
      */

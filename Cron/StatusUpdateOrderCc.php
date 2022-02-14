@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -14,7 +14,7 @@ use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Moip\Magento2\Gateway\Config\ConfigCc;
 
 /*
- * Class StatusUpdateOrderCc
+ * Class StatusUpdateOrderCc - Cron fetch order
  */
 class StatusUpdateOrderCc
 {
@@ -29,20 +29,20 @@ class StatusUpdateOrderCc
     protected $order;
 
     /**
-     * @var collectionFactory
-     */
-    protected $collectionFactory;
-
-    /**
      * @var ConfigCc
      */
     protected $configCc;
 
-    /*
-     * @param order
-     * @param logger
-     * @param ConfigCc
-     * @param collectionFactory
+    /**
+     * @var CollectionFactory
+     */
+    protected $collectionFactory;
+
+    /**
+     * @param Order             $order
+     * @param Logger            $logger
+     * @param ConfigCc          $configCc
+     * @param CollectionFactory $collectionFactory
      */
     public function __construct(
         Order $order,
@@ -56,6 +56,11 @@ class StatusUpdateOrderCc
         $this->collectionFactory = $collectionFactory;
     }
 
+    /**
+     * Execute.
+     *
+     * @return void
+     */
     public function execute()
     {
         $orders = $this->collectionFactory->create()

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -20,29 +20,78 @@ use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Encryption\EncryptorInterface;
 use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config as ConfigBase;
 
+/**
+ * Class oAuth - Create Authorization.
+ */
 class Oauth extends \Magento\Backend\App\Action
 {
+    /**
+     * @var TypeListInterface
+     */
     protected $cacheTypeList;
 
+    /**
+     * @var Pool
+     */
     protected $cacheFrontendPool;
 
+    /**
+     * @var JsonFactory
+     */
     protected $resultJsonFactory;
 
+    /**
+     * @var ConfigInterface
+     */
     protected $configInterface;
 
+    /**
+     * @var Config
+     */
     protected $resourceConfig;
 
+    /**
+     * @var ConfigBase
+     */
     protected $configBase;
 
+    /**
+     * @var StoreManagerInterface
+     */
     protected $storeManager;
 
-    private $encryptor;
+    /**
+     * @var EncryptorInterface
+     */
+    protected $encryptor;
 
-    private $httpClientFactory;
+    /**
+     * @var ZendClientFactory
+     */
+    protected $httpClientFactory;
 
+    /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
+     * @param Context               $context
+     * @param TypeListInterface     $cacheTypeList
+     * @param Pool                  $cacheFrontendPool
+     * @param JsonFactory           $resultJsonFactory
+     * @param ConfigInterface       $configInterface
+     * @param Config                $resourceConfig
+     * @param ConfigBase            $configBase
+     * @param StoreManagerInterface $storeManager
+     * @param EncryptorInterface    $encryptor
+     * @param ZendClientFactory     $httpClientFactory
+     * @param Json                  $json
+     */
     public function __construct(
         Context $context,
         TypeListInterface $cacheTypeList,
@@ -53,7 +102,8 @@ class Oauth extends \Magento\Backend\App\Action
         ConfigBase $configBase,
         StoreManagerInterface $storeManager,
         EncryptorInterface $encryptor,
-        ZendClientFactory $httpClientFactory
+        ZendClientFactory $httpClientFactory,
+        Json $json
     ) {
         $this->cacheTypeList = $cacheTypeList;
         $this->cacheFrontendPool = $cacheFrontendPool;
@@ -64,14 +114,25 @@ class Oauth extends \Magento\Backend\App\Action
         $this->storeManager = $storeManager;
         $this->encryptor = $encryptor;
         $this->httpClientFactory = $httpClientFactory;
+        $this->json = $json;
         parent::__construct($context);
     }
 
+    /**
+     * ACL - Check is Allowed.
+     *
+     * @return bool
+     */
     protected function _isAllowed()
     {
         return $this->_authorization->isAllowed('Moip_Magento2::oauth');
     }
 
+    /**
+     * Excecute.
+     *
+     * @return json
+     */
     public function execute()
     {
         $params = $this->getRequest()->getParams();
@@ -80,7 +141,7 @@ class Oauth extends \Magento\Backend\App\Action
         if (isset($params['code'])) {
             $oauthResponse = $this->getAuthorize($params['code']);
             if ($oauthResponse) {
-                $oauthResponse = json_decode($oauthResponse, true);
+                $oauthResponse = $this->json->unserialize($oauthResponse);
                 if (isset($oauthResponse['access_token'])) {
                     $oauth = $oauthResponse['access_token'];
                     $this->setOauth($oauth);
@@ -103,16 +164,35 @@ class Oauth extends \Magento\Backend\App\Action
         return $resultRedirect;
     }
 
+    /**
+     * Get Url.
+     *
+     * @return string
+     */
     private function getUrlConfig()
     {
         return $this->getUrl('adminhtml/system_config/edit/section/payment/');
     }
 
+    /**
+     * Get Url Preference.
+     *
+     * @param string $oauth
+     *
+     * @return string
+     */
     private function getUrlPreference($oauth)
     {
         return $this->getUrl('moip/system_config/preference', ['oauth' => $oauth]);
     }
 
+    /**
+     * Set MPA.
+     *
+     * @param string $mpa
+     *
+     * @return void
+     */
     private function setMpa($mpa)
     {
         $environment = $this->configBase->getEnvironmentMode();
@@ -126,6 +206,13 @@ class Oauth extends \Magento\Backend\App\Action
         return $this;
     }
 
+    /**
+     * Set Key Public.
+     *
+     * @param string $keyPublic
+     *
+     * @return void
+     */
     private function setKeyPublic($keyPublic)
     {
         $environment = $this->configBase->getEnvironmentMode();
@@ -140,6 +227,13 @@ class Oauth extends \Magento\Backend\App\Action
         return $this;
     }
 
+    /**
+     * Set oAuth.
+     *
+     * @param string $oauth
+     *
+     * @return string
+     */
     private function setOauth($oauth)
     {
         $environment = $this->configBase->getEnvironmentMode();
@@ -154,6 +248,13 @@ class Oauth extends \Magento\Backend\App\Action
         return $this;
     }
 
+    /**
+     * Get Authorize.
+     *
+     * @param string $code
+     *
+     * @return json
+     */
     private function getAuthorize($code)
     {
         $url = ConfigBase::ENDPOINT_OAUTH_TOKEN_PRODUCTION;
@@ -189,6 +290,13 @@ class Oauth extends \Magento\Backend\App\Action
         return $result;
     }
 
+    /**
+     * Get Key Public.
+     *
+     * @param string $oauth
+     *
+     * @return string
+     */
     private function getKeyPublic($oauth)
     {
         $url = ConfigBase::URL_KEY_PRODUCTION;
@@ -205,7 +313,7 @@ class Oauth extends \Magento\Backend\App\Action
         $client->setHeaders($header);
         $client->setMethod(ZendClient::GET);
         $result = $client->request()->getBody();
-        $result = json_decode($result, true);
+        $result = $this->json->unserialize($result);
 
         return $result['keys']['encryption'];
     }

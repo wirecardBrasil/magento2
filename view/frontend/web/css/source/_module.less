@@ -1,269 +1,312 @@
-@label_floating-padding-x: 1rem;
-@label_floating-padding-y: 1rem;
-& when (@media-common = true) {
-  #payment_form_cc_moip_magento2_cc,
-  #payment_form_cc_moip_magento2_cc_vault,
-  #payment_form_cc_moip_magento2_boleto {
-    border: 1px solid;
-    border-color: @color-gray-light2;
+@label_floating-padding-x: 1.5rem;
+@label_floating-padding-y: 1.3rem;
+@moip-fields-input__padding-top: @label_floating-padding-y;
+@moip-fields-input__padding-bottom: @label_floating-padding-y;
+@moip-fields-input__padding-right: @indent__xs;
+@moip-fields-input__padding-left: @indent__s;
+@moip-fields-label__font-size: 1rem;
+@moip-fields-tooltip__padding: @indent__xs @indent__s;
+@moip-fields-tooltip-icon__font-size: 14px;
+@moip-checkout__box-shadow: 0 3px 5px rgba(57, 22, 58, .05);
+@moip-checkout__border-radius: 3px;
+@moip-checkout__margin-adjust: 21px;
 
-    .legend {
-      align-items: center;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      &:extend(.abs-visually-hidden-reset all);
+& when (@media-common =true) {
 
-      border-top-left-radius: 4px;
-      border-top-right-radius: 4px;
-      border-bottom: 1px solid;
-      border-color: @color-gray-light2;
-      padding: 10px 20px;
-      background-color: @color-gray-light01;
-      width: 100%;
+    .form-moip {
+        .payment-method-label {
+            display: table;
+            vertical-align: middle;
 
-      &-icon {
-        margin-right: 0;
-      }
-    }
+            .payment-method-label-icon {
+                display: table-cell;
+                line-height: 0;
+                vertical-align: middle;
 
-    .not-editable-title {
-      text-align: center;
-      .lib-heading(h3);
-
-      padding: @indent__base;
-    }
-  }
-
-  #payment_form_moip_magento2_cc,
-  #payment_form_moip_magento2_cc_vault,
-  #payment_form_moip_magento2_boleto {
-    .payment-method-label {
-      display: inline-flex;
-      align-items: center;
-
-      .payment-method-label-icon {
-        width: 25px;
-        text-align: center;
-        line-height: 1;
-        padding-right: 10px;
-      }
-    }
-
-    .checkout-payment-method {
-      .payments {
-        .legend {
-          &:extend(.abs-add-clearfix all);
-          &:extend(.abs-visually-hidden-reset all);
-        }
-      }
-    }
-
-    .legend {
-      .credit-card-types {
-        .item {
-          display: inline-block;
-          list-style: none;
-          margin: 0 @indent__xs 0 0;
-          vertical-align: top;
-
-          img {
-            -webkit-filter: grayscale(0%);
-            width: 20px;
-          }
-        }
-      }
-    }
-
-    .field-to-pay {
-      margin: 0 @indent__base;
-
-      &._hidden {
-        &:extend(.abs-visually-hidden all);
-
-      }
-    }
-
-    .fieldset {
-      .field {
-        display: inline-block;
-        width: 100%;
-        &.choice {
-          margin-bottom: @indent__base;
-        }
-        &.wirecard-input-group {
-          position: relative;
-          margin-bottom: @indent__base;
-          vertical-align: top;
-          display: inline-block;
-          box-sizing: border-box;
-
-          .control {
-            input[type="text"],
-            input[type="password"],
-            input[type="url"],
-            input[type="tel"],
-            input[type="search"],
-            input[type="number"],
-            input[type="datetime"],
-            input[type="email"],
-            select {
-              height: unset;
-              width: 100%;
-              padding: @label_floating-padding-y @label_floating-padding-x;
-            }
-
-            input::placeholder {
-              color: transparent;
-            }
-
-            input::-webkit-input-placeholder {
-              color: transparent;
-            }
-
-            input::-ms-input-placeholder {
-              color: transparent;
-            }
-
-            input::-moz-placeholder {
-              color: transparent;
-            }
-
-            .label {
-              padding: @label_floating-padding-y @label_floating-padding-x;
-              font-weight: normal;
-              pointer-events: none;
-              position: absolute;
-              top: 0;
-              display: block;
-              margin-bottom: 0;
-              transition: all 0.1s ease-in-out;
-              width: 80%;
-              text-overflow: ellipsis;
-              white-space: nowrap;
-              overflow: hidden;
-            }
-
-            &._with-tooltip {
-              input {
-                width: 100%;
-              }
-
-              .field-tooltip {
-                top: 6px;
-                right: @indent__xs;
-              }
-            }
-
-            select:not(:checked),
-            input:not(:placeholder-shown) {
-              padding-top: calc(@label_floating-padding-y + @label_floating-padding-y * (2 / 3)) !important;
-              padding-bottom: calc(@label_floating-padding-y / 3) !important;
-            }
-
-            select:not(:checked) ~ .label,
-            input:not(:placeholder-shown) ~ .label {
-              padding-top: calc(@label_floating-padding-y/3) !important;
-              padding-bottom: calc(@label_floating-padding-y/3) !important;
-              font-size: 10px;
-            }
-          }
-        }
-
-        &.number {
-          width: 70%;
-          float: left;
-
-          .credit-card-types {
-            line-height: 4;
-
-            .item {
-              &._hidden {
-                &:extend(.abs-visually-hidden all);
-              }
-
-              &._active {
                 img {
-                  -webkit-filter: grayscale(0%);
+                    width: 26px;
                 }
-              }
-
-              &._inactive {
-                opacity: 0.4;
-              }
-
-              img {
-                -webkit-filter: unset; // For Webkit browsers
-                -webkit-transition: all 0.6s ease; // Fade to color for Chrome and Safari
-              }
             }
-          }
-        }
 
-        &.cvv {
-          width: 30%;
-          float: right;
-          padding-left: 10px;
-        }
-
-        &.date {
-          margin-bottom: 0;
-
-          .group-2 {
-            display: inline-flex;
-            width: 100%;
-
-            .year {
-              padding-left: 10px;
+            .payment-method-label-title {
+                display: table-cell;
+                padding-left: 10px;
+                vertical-align: middle;
             }
-          }
         }
-      }
+
+        .checkout-payment-method {
+            .form {
+                margin-bottom: @indent__base;
+            }
+
+            .payments {
+                .legend {
+                    &:extend(.abs-add-clearfix all);
+                    &:extend(.abs-visually-hidden-reset all);
+                }
+            }
+        }
+
+        .legend {
+            .credit-card-types {
+                .item {
+                    display: inline-block;
+                    list-style: none;
+                    margin: 0 @indent__xs 0 0;
+                    text-align: right;
+                    vertical-align: top;
+
+                    img {
+                        filter: grayscale(0%);
+                        -webkit-filter: grayscale(0%);
+                        width: 20px;
+                    }
+                }
+            }
+        }
+
+        .field-to-pay {
+            margin: 0 @indent__s;
+
+            &._hidden {
+                &:extend(.abs-visually-hidden all);
+            }
+        }
+
+        .fieldset {
+            &.payment-moip {
+                border: 1px solid;
+                border-color: @color-gray-light2;
+        
+                /* stylelint-disable-next-line CssSyntaxError */
+                .lib-css(background-color, @color-white);
+                .lib-css(border-radius, @moip-checkout__border-radius);
+                .lib-css(padding-bottom, @indent__s);
+        
+                .legend {
+                    align-items: center;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between;
+                    &:extend(.abs-visually-hidden-reset all);
+        
+                    border-top-left-radius: 4px;
+                    border-top-right-radius: 4px;
+                    border-bottom: 1px solid;
+                    border-color: @color-gray-light2;
+                    padding: 10px 20px;
+                    background-color: @color-gray-light01;
+                    width: 100%;
+        
+                    &-icon {
+                        margin-right: 0;
+                        text-align: right;
+                    }
+                }
+        
+                .not-editable-title {
+                    padding: @indent__base;
+                    text-align: center;
+                    .lib-heading(h3);
+                }
+            }
+            .field {
+                &.choice {
+                    margin-bottom: @indent__base;
+                }
+
+                &.moip-input-group {
+                    box-sizing: border-box;
+                    display: inline-block;
+                    margin-bottom: @indent__base;
+                    position: relative;
+                    vertical-align: top;
+                    width: 100%;
+
+                    .control {
+
+                        input[type='text'],
+                        input[type='password'],
+                        input[type='url'],
+                        input[type='tel'],
+                        input[type='search'],
+                        input[type='number'],
+                        input[type='datetime'],
+                        input[type='email'],
+                        select {
+                            height: unset;
+                            padding: @label_floating-padding-y @label_floating-padding-x;
+                            width: 100%;
+                        }
+
+                        input::placeholder {
+                            color: transparent;
+                        }
+
+                        input::-webkit-input-placeholder {
+                            color: transparent;
+                        }
+
+                        input::-ms-input-placeholder {
+                            color: transparent;
+                        }
+
+                        input::-moz-placeholder {
+                            color: transparent;
+                        }
+
+                        .label {
+                            display: block;
+                            font-weight: normal;
+                            margin-bottom: 0;
+                            overflow: hidden;
+                            padding: @label_floating-padding-y @label_floating-padding-x;
+                            pointer-events: none;
+                            position: absolute;
+                            text-overflow: ellipsis;
+                            top: 0;
+                            transition: all .1s ease-in-out;
+                            white-space: nowrap;
+                            width: 80%;
+                        }
+
+                        &._with-tooltip {
+                            position: relative;
+
+                            input {
+                                width: 100%;
+                            }
+
+                            .label {
+                                padding-right: 20px;
+                                width: 60%;
+                            }
+
+                            .field-tooltip {
+                                right: @indent__xs;
+                                top: 6px;
+                            }
+                        }
+
+                        select:not(:checked),
+                        input:not(:placeholder-shown) {
+                            padding-bottom: calc(@label_floating-padding-y / 3) !important;
+                            padding-top: calc(@label_floating-padding-y + @label_floating-padding-y * (2 / 3)) !important;
+                        }
+
+                        select:not(:checked)~.label,
+                        input:not(:placeholder-shown)~.label {
+                            font-size: 10px;
+                            padding-bottom: calc(@label_floating-padding-y/3) !important;
+                            padding-top: calc(@label_floating-padding-y/3) !important;
+                        }
+                    }
+                }
+
+                &.number {
+                    float: left;
+                    width: 70%;
+
+                    .credit-card-types {
+                        line-height: 4;
+
+                        .item {
+                            &._hidden {
+                                &:extend(.abs-visually-hidden all);
+                            }
+
+                            &._active {
+                                img {
+                                    -webkit-filter: grayscale(0%);
+                                    filter: grayscale(0%);
+                                }
+                            }
+
+                            &._inactive {
+                                opacity: .4;
+                            }
+
+                            img {
+                                -webkit-filter: unset; // For Webkit browsers
+                                -webkit-transition: all .6s ease; // Fade to color for Chrome and Safari
+                                filter: unset;
+                                margin-right: 10px;
+                                transition: all .6s ease;
+                                width: 32px;
+                            }
+                        }
+                    }
+                }
+
+                &.cvv {
+                    float: right;
+                    padding-left: 10px;
+                    width: 30%;
+
+                    input {
+                        padding-right: 20px;
+                    }
+                }
+
+                &.date {
+                    margin-bottom: 0;
+
+                    .group-2 {
+                        display: inline-flex;
+                        width: 100%;
+
+                        .month {
+                            padding-left: 0;
+                        }
+
+                        .year {
+                            padding-left: 10px;
+                            padding-right: 0;
+                        }
+                    }
+                }
+            }
+        }
     }
 
-  }
-  #payment_form_moip_magento2_cc_vault {
-    .field-to-pay {
-      margin: 0 0;
-    }
-  }
-  .checkout-onepage-success {
-    .field .control._with-tooltip {
-      input {
-        margin-right: 0;
-        padding-right: @indent__xl;
-        width: 100%;
-      }
+    .checkout-onepage-success {
+        .field .control._with-tooltip {
+            input {
+                margin-right: 0;
+                padding-right: @indent__xl;
+                width: 100%;
+            }
 
-      button {
-        margin-top: -1px;
-      }
-    }
+            button {
+                margin-top: -1px;
+            }
+        }
 
-    .field {
-      &.wirecard-input-group {
-        margin: 0 auto;
-        max-width: 500px;
-      }
+        .field {
+            &.moip-input-group {
+                margin: 0 auto;
+                max-width: 500px;
+            }
+        }
     }
-  }
 }
 
 //
 //  Desktop
 //  _____________________________________________
 
-.media-width(@extremum, @break) when (@extremum = 'min') and (@break = @screen__m) {
-  #payment_form_moip_magento2_cc,
-  #payment_form_moip_magento2_cc_vault {
-    .legend {
-      .credit-card-types {
-        .item {
-          img {
-            width: 40px;
-          }
+.media-width(@extremum, @break) when (@extremum ='min') and (@break =@screen__m) {
+
+    .form-moip {
+        .legend {
+            .credit-card-types {
+                .item {
+                    img {
+                        width: 32px;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

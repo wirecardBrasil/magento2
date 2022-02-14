@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -8,21 +8,23 @@
 
 namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
+use Magento\Framework\Option\ArrayInterface;
+
 /**
  * Class TypeInterest - Define Type Interest.
  */
-class TypeInterest implements \Magento\Framework\Option\ArrayInterface
+class TypeInterest implements ArrayInterface
 {
     /**
      * Returns Options.
      *
-     * @return array attributesArrays
+     * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         return [
-            'simple'   => 'Juros Simples',
-            'compound' => 'Juros Composto',
+            'simple'   => __('Juros Simples'),
+            'compound' => __('Juros Composto'),
         ];
     }
 }

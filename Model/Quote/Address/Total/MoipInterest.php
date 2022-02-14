@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -45,8 +45,6 @@ class MoipInterest extends AbstractTotal
     protected $_payment;
 
     /**
-     * Payment MoipInterest constructor.
-     *
      * @param QuoteValidator   $quoteValidator
      * @param Session          $checkoutSession
      * @param PaymentInterface $payment
@@ -111,8 +109,8 @@ class MoipInterest extends AbstractTotal
     ) {
         $result = null;
         $interest = $total->getMoipInterestAmount();
-        $labelByInterest = $this->getLabelByInterest($interest);
-        if ((int) $interest !== 0) {
+        if ($interest) {
+            $labelByInterest = $this->getLabelByInterest($interest);
             $result = [
                 'code'  => $this->getCode(),
                 'title' => $labelByInterest,
@@ -136,11 +134,11 @@ class MoipInterest extends AbstractTotal
     /**
      * Get Subtotal label by Interest.
      *
-     * @param $interest | float
+     * @param string|null $interest
      *
      * @return Phrase
      */
-    public function getLabelByInterest($interest)
+    public function getLabelByInterest(string $interest)
     {
         if ($interest >= 0) {
             return __('Installment Interest');

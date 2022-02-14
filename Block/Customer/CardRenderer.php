@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -27,6 +27,8 @@ class CardRenderer extends AbstractCardRenderer
     }
 
     /**
+     * Get Last Numbers.
+     *
      * @return string
      */
     public function getNumberLast4Digits(): string
@@ -35,6 +37,8 @@ class CardRenderer extends AbstractCardRenderer
     }
 
     /**
+     * Get Expiration Date.
+     *
      * @return string
      */
     public function getExpDate(): string
@@ -43,6 +47,8 @@ class CardRenderer extends AbstractCardRenderer
     }
 
     /**
+     * Get Icon Url.
+     *
      * @return string
      */
     public function getIconUrl(): string
@@ -51,6 +57,8 @@ class CardRenderer extends AbstractCardRenderer
     }
 
     /**
+     * Get Icon Height.
+     *
      * @return int
      */
     public function getIconHeight(): int
@@ -59,6 +67,8 @@ class CardRenderer extends AbstractCardRenderer
     }
 
     /**
+     *  Get Icon Width.
+     *
      * @return int
      */
     public function getIconWidth(): int

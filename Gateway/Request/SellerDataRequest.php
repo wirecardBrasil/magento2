@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -23,43 +23,43 @@ class SellerDataRequest implements BuilderInterface
     /**
      * Receivers block name.
      */
-    const RECEIVERS = 'receivers';
+    public const RECEIVERS = 'receivers';
 
     /**
      * Moip Account block name.
      */
-    const RECEIVERS_MOIP_ACCOUNT = 'moipAccount';
+    public const RECEIVERS_MOIP_ACCOUNT = 'moipAccount';
 
     /**
      * Moip Account Id block name.
      */
-    const RECEIVERS_MOIP_ACCOUNT_ID = 'id';
+    public const RECEIVERS_MOIP_ACCOUNT_ID = 'id';
 
     /**
      * Type Receiver block name.
      */
-    const RECEIVERS_TYPE = 'type';
+    public const RECEIVERS_TYPE = 'type';
 
     /**
      * Secondary Type Receiver.
      * required.
      */
-    const RECEIVERS_TYPE_SECONDARY = 'SECONDARY';
+    public const RECEIVERS_TYPE_SECONDARY = 'SECONDARY';
 
     /**
      * Amount Receiver block name.
      */
-    const RECEIVERS_AMOUNT = 'amount';
+    public const RECEIVERS_AMOUNT = 'amount';
 
     /**
      * Fixed Receiver Type block name.
      */
-    const RECEIVERS_TYPE_FIXED = 'fixed';
+    public const RECEIVERS_TYPE_FIXED = 'fixed';
 
     /**
      * Percent Receiver Type block name.
      */
-    const RECEIVERS_TYPE_PERCENT = 'percent';
+    public const RECEIVERS_TYPE_PERCENT = 'percent';
 
     /**
      * @var SubjectReader
@@ -89,9 +89,9 @@ class SellerDataRequest implements BuilderInterface
     /**
      * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
-     * @param Config              $Config
-     * @param ConfigCc            $ConfigCc
-     * @param CheckoutHelper      $checkoutHelper
+     * @param Config              $config
+     * @param ConfigCc            $configCc
+     * @param PriceHelper         $checkoutHelper
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -108,7 +108,9 @@ class SellerDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {

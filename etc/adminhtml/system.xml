@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -10,7 +10,7 @@
     <system>
         <section id="payment">
             <group id="moip_base" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
-                <label><![CDATA[<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Wirecard Brasil (formerly Moip) is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>]]></label>
+                <label><![CDATA[<div class='moip-payment-logo'></div><div class='moip-payment-byline'><p>Moip by PagSeguro is a complete payment solution exclusive to <b>Brazil</b>.</p><p>The complete solution for receiving payments and simplifying your business finances. Our solution has everything you need to accept all payment methods.</p></div>]]></label>
                 <fieldset_css>complex moip-payment-section</fieldset_css>
                 <frontend_model>Moip\Magento2\Block\Adminhtml\System\Config\PaymentGroup</frontend_model>
                 <group id="attribute_relationship" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
@@ -18,7 +18,7 @@
                     <comment>List the attributes of your Magento the data expected by our API</comment>
                     <field id="type_cpf" translate="label select" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>The CPF/CNPJ will be an attribute obtained from the</label>
-                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCPF</source_model>
+                        <source_model>Moip\Magento2\Block\Adminhtml\System\Config\TypeCpf</source_model>
                         <config_path>payment/moip_magento2/type_cpf</config_path>
                         <validate>required-entry validate-select</validate>
                     </field>
@@ -213,7 +213,7 @@
                         <config_path>payment/moip_magento2_cc/payment_action</config_path>
                     </field>
                 </group>
-                <group id="moip_magento2_boleto" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <group id="moip_magento2_boleto" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Moip - Boleto</label>
                     <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Enabled</label>
@@ -270,7 +270,7 @@
                         <config_path>payment/moip_magento2_boleto/payment_action</config_path>
                     </field>
                 </group>
-                <group id="payment_config" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <group id="payment_config" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Payment Config</label>
                     <field id="debug" translate="label" type="select" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                         <label>Debug</label>
@@ -303,7 +303,7 @@
                         <config_path>payment/moip_magento2/sort_order</config_path>
                     </field>
                 </group>
-                <group id="payment_split" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
+                <group id="payment_split" translate="label" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">
                     <label>Payment Split</label>
                     <comment>The payment slipt, transfer part of the order amount to another moip account. This is only a small fraction of what the Marketplace Moip API is capable of.</comment>
                     <field id="use_split" translate="label" type="select" sortOrder="600" showInDefault="1" showInWebsite="1" showInStore="1" canRestore="1">

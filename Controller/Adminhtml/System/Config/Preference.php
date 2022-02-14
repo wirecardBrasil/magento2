@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,58 +19,71 @@ use Magento\Framework\Controller\Result\JsonFactory;
 use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\HTTP\ZendClient;
 use Magento\Framework\HTTP\ZendClientFactory;
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Store\Model\StoreManagerInterface;
 use Moip\Magento2\Gateway\Config\Config as ConfigBase;
 
 /*
- * Class Preferenc
+ * Class Preference - define webhooks
  */
 class Preference extends \Magento\Backend\App\Action
 {
-    /*
-     * @var cacheTypeList
+    /**
+     * @var TypeListInterface
      */
     protected $cacheTypeList;
 
-    /*
-     * @var cacheFrontendPool
+    /**
+     * @var Pool
      */
     protected $cacheFrontendPool;
 
-    /*
-     * @var resultJsonFactory
+    /**
+     * @var JsonFactory
      */
     protected $resultJsonFactory;
 
-    /*
-     * @var configInterface
+    /**
+     * @var ConfigInterface
      */
     protected $configInterface;
 
-    /*
-     * @var configBase
-     */
-    protected $configBase;
-
-    /*
-     * @var resourceConfig
+    /**
+     * @var Config
      */
     protected $resourceConfig;
 
-    /*
-     * @var storeManager
+    /**
+     * @var ConfigBase
+     */
+    protected $configBase;
+
+    /**
+     * @var StoreManagerInterface
      */
     protected $storeManager;
 
-    /*
-     * @param Context
-     * @param TypeListInterface
-     * @param Pool
-     * @param JsonFactory
-     * @param ConfigInterface
-     * @param Config
-     * @param ConfigBase
-     * @param StoreManagerInterface
+    /**
+     * @var ZendClientFactory
+     */
+    protected $httpClientFactory;
+
+    /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
+     * @param Context               $context
+     * @param TypeListInterface     $cacheTypeList
+     * @param Pool                  $cacheFrontendPool
+     * @param JsonFactory           $resultJsonFactory
+     * @param ConfigInterface       $configInterface
+     * @param Config                $resourceConfig
+     * @param ConfigBase            $configBase
+     * @param StoreManagerInterface $storeManager
+     * @param ZendClientFactory     $httpClientFactory
+     * @param Json                  $json
      */
     public function __construct(
         Context $context,
@@ -81,7 +94,8 @@ class Preference extends \Magento\Backend\App\Action
         Config $resourceConfig,
         ConfigBase $configBase,
         StoreManagerInterface $storeManager,
-        ZendClientFactory $httpClientFactory
+        ZendClientFactory $httpClientFactory,
+        Json $json
     ) {
         $this->cacheTypeList = $cacheTypeList;
         $this->cacheFrontendPool = $cacheFrontendPool;
@@ -91,13 +105,14 @@ class Preference extends \Magento\Backend\App\Action
         $this->configBase = $configBase;
         $this->storeManager = $storeManager;
         $this->httpClientFactory = $httpClientFactory;
+        $this->json = $json;
         parent::__construct($context);
     }
 
-    /*
-     * Is Allowed
+    /**
+     * ACL - Is Allowed.
      *
-     * @return boolean
+     * @return bool
      */
     protected function _isAllowed()
     {
@@ -105,7 +120,9 @@ class Preference extends \Magento\Backend\App\Action
     }
 
     /**
-     * {@inheritdoc}
+     * Execute.
+     *
+     * @return json
      */
     public function execute()
     {
@@ -164,8 +181,8 @@ class Preference extends \Magento\Backend\App\Action
         return $resultRedirect;
     }
 
-    /*
-     * Url Config
+    /**
+     * Get Url Config.
      *
      * @return string
      */
@@ -174,8 +191,8 @@ class Preference extends \Magento\Backend\App\Action
         return $this->getUrl('adminhtml/system_config/edit/section/payment/');
     }
 
-    /*
-     * Url Capture
+    /**
+     * Get Url Capture.
      *
      * @return string
      */
@@ -186,8 +203,8 @@ class Preference extends \Magento\Backend\App\Action
         return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/accept');
     }
 
-    /*
-     * Url Cancel
+    /**
+     * Get Url Cancel.
      *
      * @return string
      */
@@ -198,8 +215,8 @@ class Preference extends \Magento\Backend\App\Action
         return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/deny');
     }
 
-    /*
-     * Url Refund
+    /**
+     * Get Url Refund.
      *
      * @return string
      */
@@ -210,8 +227,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this->storeManager->getStore($storeId)->getUrl('moip/webhooks/refund');
     }
 
-    /*
-     * Set Url Info Refund
+    /**
+     * Set Url Info Refund.
+     *
+     * @param string $webhook
+     *
+     * @return void
      */
     private function setUrlInfoRefund($webhook)
     {
@@ -234,8 +255,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this;
     }
 
-    /*
-     * Set Url Info Cancel
+    /**
+     * Set Url Info Cancel.
+     *
+     * @param string $webhook
+     *
+     * @return void
      */
     private function setUrlInfoCancel($webhook)
     {
@@ -258,8 +283,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this;
     }
 
-    /*
-     * Set Url Info Capture
+    /**
+     * Set Url Info Capture.
+     *
+     * @param string $webhook
+     *
+     * @return void
      */
     private function setUrlInfoCapture($webhook)
     {
@@ -282,8 +311,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this;
     }
 
-    /*
-     * Set Url Webhook Refund
+    /**
+     * Set Url Webook Refund.
+     *
+     * @param string $url
+     *
+     * @return void
      */
     private function setUrlWebhookRefund($url)
     {
@@ -296,8 +329,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this->setWebhooks($webhook);
     }
 
-    /*
-     * Set Url Webhook Cancel
+    /**
+     * Set Url Webook Cancel.
+     *
+     * @param string $url
+     *
+     * @return void
      */
     private function setUrlWebhookCancel($url)
     {
@@ -310,8 +347,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this->setWebhooks($webhook);
     }
 
-    /*
-     * Set Url Webhook Capture
+    /**
+     * Set Url Webook Capture.
+     *
+     * @param string $url
+     *
+     * @return void
      */
     private function setUrlWebhookCapture($url)
     {
@@ -324,12 +365,12 @@ class Preference extends \Magento\Backend\App\Action
         return $this->setWebhooks($webhook);
     }
 
-    /*
-     * Set Webhooks
+    /**
+     * Set Webhooks.
      *
-     * @param $webhook
+     * @param string $webhook
      *
-     * @return array
+     * @return void
      */
     private function setWebhooks($webhook)
     {
@@ -346,11 +387,11 @@ class Preference extends \Magento\Backend\App\Action
         $client->setUri($url);
         $client->setConfig(['maxredirects' => 0, 'timeout' => 30]);
         $client->setHeaders('Authorization', 'Bearer '.$apiBearer);
-        $client->setRawData(json_encode($webhook), 'application/json');
+        $client->setRawData($this->json->serialize($webhook), 'application/json');
         $client->setMethod(ZendClient::POST);
 
         $result = $client->request()->getBody();
 
-        return json_decode($result, true);
+        return $this->json->unserialize($result);
     }
 }

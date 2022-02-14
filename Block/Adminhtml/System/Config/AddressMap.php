@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -10,24 +10,26 @@ namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
 use Magento\Customer\Model\Address;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class AddressMap - Maps address attributes.
  */
-class AddressMap implements \Magento\Framework\Option\ArrayInterface
+class AddressMap implements ArrayInterface
 {
     /**
-     * @var objectManager
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var address
+     * @var Address
      */
     protected $address;
 
     /**
      * @param ObjectManagerInterface $objectManager
+     * @param Address                $address
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -40,9 +42,9 @@ class AddressMap implements \Magento\Framework\Option\ArrayInterface
     /**
      * Returns Options.
      *
-     * @return array | attributesArrays
+     * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $customer_attributes = $this->address->getAttributes();
 

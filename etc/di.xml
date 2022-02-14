@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -31,7 +31,7 @@
     <virtualType name="Magento2BaseFacade" type="Magento\Payment\Model\Method\Adapter">
         <arguments>
             <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderBase::CODE</argument>
-            <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\Form</argument>
+            <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\FormCc</argument>
             <argument name="infoBlockType" xsi:type="string">Moip\Magento2\Block\InfoCc</argument>
             <argument name="valueHandlerPool" xsi:type="object">Magento2ValueHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
@@ -43,7 +43,7 @@
             <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderCc::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\FormCc</argument>
             <argument name="infoBlockType" xsi:type="string">Moip\Magento2\Block\InfoCc</argument>
-            <argument name="valueHandlerPool" xsi:type="object">Magento2ValueHandlerPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">Magento2ValueCcHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
         </arguments>
     </virtualType>
@@ -53,7 +53,7 @@
             <argument name="code" xsi:type="const">Moip\Magento2\Model\Ui\ConfigProviderBoleto::CODE</argument>
             <argument name="formBlockType" xsi:type="string">Moip\Magento2\Block\FormBoleto</argument>
             <argument name="infoBlockType" xsi:type="string">Moip\Magento2\Block\InfoBoleto</argument>
-            <argument name="valueHandlerPool" xsi:type="object">Magento2ValueHandlerPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">Magento2ValueBoletoHandlerPool</argument>
             <argument name="commandPool" xsi:type="object">Magento2BoletoCommandPool</argument>
         </arguments>
     </virtualType>
@@ -85,21 +85,21 @@
         <arguments>
             <argument name="executors" xsi:type="array">
                 <item name="moip_magento2_cc" xsi:type="string">Magento2CcCommandManager</item>
+                <item name="moip_magento2_boleto" xsi:type="string">Magento2BoletoCommandManager</item>
+                <item name="moip_magento2_cc_vault" xsi:type="string">Magento2CcCommandManager</item>
             </argument>
         </arguments>
     </type>
 
-    <virtualType name="Magento2CcVaultCommandManagerPool" type="Magento\Payment\Gateway\Command\CommandManagerPool">
-        <arguments>
-            <argument name="executors" xsi:type="array">
-                <item name="moip_magento2_cc" xsi:type="string">Magento2CcCommandManager</item>
-            </argument>
-        </arguments>
-    </virtualType>
-
     <virtualType name="Magento2CcCommandManager" type="Magento\Payment\Gateway\Command\CommandManager">
         <arguments>
             <argument name="commandPool" xsi:type="object">Magento2CcCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2BoletoCommandManager" type="Magento\Payment\Gateway\Command\CommandManager">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">Magento2BoletoCommandPool</argument>
         </arguments>
     </virtualType>
 
@@ -112,19 +112,19 @@
 
     <virtualType name="Magento2CcConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBase::METHOD_CODE_CC</argument>
+            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderCc::CODE</argument>
         </arguments>
     </virtualType>
 
     <virtualType name="Magento2VaultPaymentConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBase::METHOD_CODE_CC_VAULT</argument>
+            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderCc::VAULT_CODE</argument>
         </arguments>
     </virtualType>
 
     <virtualType name="Magento2BoletoConfig" type="Magento\Payment\Gateway\Config\Config">
         <arguments>
-            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBase::METHOD_CODE_BOLETO</argument>
+            <argument name="methodCode" xsi:type="const">\Moip\Magento2\Model\Ui\ConfigProviderBoleto::CODE</argument>
         </arguments>
     </virtualType>
 
@@ -135,7 +135,7 @@
         </arguments>
     </type>
 
-      <!-- Block Info -->
+    <!-- Block Info -->
     <type name="Moip\Magento2\Block\InfoBoleto">
         <arguments>
             <argument name="config" xsi:type="object">Magento2BoletoConfig</argument>
@@ -407,9 +407,36 @@
             </argument>
         </arguments>
     </virtualType>
+
     <virtualType name="Magento2BaseConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
         <arguments>
             <argument name="configInterface" xsi:type="object">Magento2BaseConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2ValueCcHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento2CcConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento2CcConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">Magento2CcConfig</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2ValueBoletoHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">Magento2BoletoConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Magento2BoletoConfigValueHandler" type="Magento\Payment\Gateway\Config\ConfigValueHandler">
+        <arguments>
+            <argument name="configInterface" xsi:type="object">Magento2BoletoConfig</argument>
         </arguments>
     </virtualType>
 
@@ -443,7 +470,68 @@
             </argument>
         </arguments>
     </virtualType>
+  
 
+    <!-- Authorize command -->
+    <virtualType name="Magento2CreateOrderAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Magento2CreateOrderAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">Magento2CreateOrderCheckoutResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Moip\Magento2\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Moip\Magento2\Gateway\Http\Client\CreateOrderAuthorizeClient</argument>
+            <argument name="validator" xsi:type="object">Magento2TransactionValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">Magento2VirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2CreateOrderAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Moip\Magento2\Gateway\Request\CreateOrderAuthorizationRequest</item>
+                <item name="detailTotals" xsi:type="string">Moip\Magento2\Gateway\Request\DetailTotalsDataRequest</item>
+                <item name="purchasedItems" xsi:type="string">Moip\Magento2\Gateway\Request\PurchasedItemsDataRequest</item>
+                <item name="taxDocument" xsi:type="string">Moip\Magento2\Gateway\Request\TaxDocumentDataRequest</item>
+                <item name="customer" xsi:type="string">Moip\Magento2\Gateway\Request\CustomerDataRequest</item>
+                <item name="address" xsi:type="string">Moip\Magento2\Gateway\Request\AddressDataRequest</item>
+                <item name="seller" xsi:type="string">Moip\Magento2\Gateway\Request\SellerDataRequest</item>
+                <item name="checkoutPreferences" xsi:type="string">Moip\Magento2\Gateway\Request\CheckoutPreferencesRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Authorization Request -->
+    <virtualType name="Magento2AuthorizationCheckoutRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="moipOrder" xsi:type="string">Moip\Magento2\Gateway\Request\CreateOrderAuthorizationRequest</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Magento2CreateOrderCheckoutResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="extordid" xsi:type="string">Moip\Magento2\Gateway\Response\ExtOrdIdCheckoutHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Moip\Magento2\Gateway\Request\CreateOrderAuthorizationRequest">
+        <arguments>
+            <argument name="config" xsi:type="object">Magento2BaseConfig</argument>
+        </arguments>
+    </type>
+    <type name="Moip\Magento2\Gateway\Http\Client\CreateOrderAuthorizeClient">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Moip\Magento2\Observer\AddMoipInterestToOrderObserver">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
 
     <!-- Logger, initialized with Magento2BaseConfig -->
     <virtualType name="Magento2Logger" type="Magento\Payment\Model\Method\Logger">
@@ -483,6 +571,18 @@
     </type>
 
     <type name="Moip\Magento2\Cron\StatusUpdateOrderCc">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Moip\Magento2\Cron\StatusUpdateOrderBoleto">
+        <arguments>
+            <argument name="logger" xsi:type="object">Magento2Logger</argument>
+        </arguments>
+    </type>
+
+    <type name="Moip\Magento2\Cron\StatusUpdateOrderCheckout">
         <arguments>
             <argument name="logger" xsi:type="object">Magento2Logger</argument>
         </arguments>

@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -24,7 +24,7 @@ define(
                     component: "Moip_Magento2/js/view/payment/method-renderer/moip_magento2_boleto"
                 }
             );
-        } 
+        }
 
         if (config[ccType].isActive) {
             rendererList.push(

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -8,6 +8,7 @@
 
 namespace Moip\Magento2\Model\Ui;
 
+use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Vault\Api\Data\PaymentTokenInterface;
 use Magento\Vault\Model\Ui\TokenUiComponentInterface;
 use Magento\Vault\Model\Ui\TokenUiComponentInterfaceFactory;
@@ -21,12 +22,22 @@ class TokenUiComponentProvider implements TokenUiComponentProviderInterface
     private $componentFactory;
 
     /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
+     * TokenUiComponentProvider constructor.
+     *
      * @param TokenUiComponentInterfaceFactory $componentFactory
+     * @param Json                             $json
      */
     public function __construct(
-        TokenUiComponentInterfaceFactory $componentFactory
+        TokenUiComponentInterfaceFactory $componentFactory,
+        Json $json
     ) {
         $this->componentFactory = $componentFactory;
+        $this->json = $json;
     }
 
     /**
@@ -38,7 +49,7 @@ class TokenUiComponentProvider implements TokenUiComponentProviderInterface
      */
     public function getComponentForToken(PaymentTokenInterface $paymentToken)
     {
-        $jsonDetails = json_decode($paymentToken->getTokenDetails() ?: '{}', true);
+        $jsonDetails = $this->json->unserialize($paymentToken->getTokenDetails());
         $component = $this->componentFactory->create(
             [
                 'config' => [

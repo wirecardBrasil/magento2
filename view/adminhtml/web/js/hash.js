@@ -2,10 +2,9 @@
  * Copyright © 2016 Magento. All rights reserved.
  * See COPYING.txt for license details.
  */
-define([
+ define([
 	"underscore",
-	"jquery",
-	"Moip_Magento2/js/view/payment/gateway/moip"
+	"jquery"
 ], function (_, $) {
 	"use strict";
 

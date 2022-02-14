@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -24,137 +24,137 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * Payment Instrument - Block name.
      */
-    const PAYMENT_INSTRUMENT = 'paymentInstrument';
+    public const PAYMENT_INSTRUMENT = 'paymentInstrument';
 
     /**
      * Installment count - Number of payment installments.
      */
-    const INSTALLMENT_COUNT = 'installmentCount';
+    public const INSTALLMENT_COUNT = 'installmentCount';
 
     /**
      * Statement descriptor - Invoice description.
      */
-    const STATEMENT_DESCRIPTOR = 'statementDescriptor';
+    public const STATEMENT_DESCRIPTOR = 'statementDescriptor';
 
     /**
      * Funding instrument - Block name.
      */
-    const FUNDING_INSTRUMENT = 'fundingInstrument';
+    public const FUNDING_INSTRUMENT = 'fundingInstrument';
 
     /**
      * Method - Block Name.
      */
-    const METHOD = 'method';
+    public const METHOD = 'method';
 
     /**
      * Credit card - Block name.
      */
-    const TYPE_CREDIT_CARD = 'creditCard';
+    public const TYPE_CREDIT_CARD = 'creditCard';
 
     /**
      * Credit card store - Sets whether to store the card.
      */
-    const CREDIT_CARD_STORE = 'store';
+    public const CREDIT_CARD_STORE = 'store';
 
     /**
      * Credit card hash - Card encryption data.
      */
-    const CREDIT_CARD_HASH = 'hash';
+    public const CREDIT_CARD_HASH = 'hash';
 
     /**
      * Credit card id - Card Id.
      */
-    const CREDIT_CARD_ID = 'id';
+    public const CREDIT_CARD_ID = 'id';
 
     /**
      * Credit card CVV - Card CVV data.
      */
-    const CREDIT_CARD_CVV = 'cvc';
+    public const CREDIT_CARD_CVV = 'cvc';
 
     /**
      * Credit card holder - Block name.
      */
-    const CREDIT_HOLDER = 'holder';
+    public const CREDIT_HOLDER = 'holder';
 
     /**
      * Credit card holder full name.
      */
-    const CREDIT_HOLDER_FULLNAME = 'fullname';
+    public const CREDIT_HOLDER_FULLNAME = 'fullname';
 
     /**
      * Credit card holder birth date.
      */
-    const CREDIT_HOLDER_BIRTH_DATA = 'birthdate';
+    public const CREDIT_HOLDER_BIRTH_DATA = 'birthdate';
 
     /**
      * Credit card holder tax document - Block name.
      */
-    const CREDIT_HOLDER_TAX_DOCUMENT = 'taxDocument';
+    public const CREDIT_HOLDER_TAX_DOCUMENT = 'taxDocument';
 
     /**
      * Credit card holder tax document type.
      */
-    const CREDIT_HOLDER_TAX_DOCUMENT_TYPE = 'type';
+    public const CREDIT_HOLDER_TAX_DOCUMENT_TYPE = 'type';
 
     /**
      * Credit card holder tax document number.
      */
-    const CREDIT_HOLDER_TAX_DOCUMENT_NUMBER = 'number';
+    public const CREDIT_HOLDER_TAX_DOCUMENT_NUMBER = 'number';
 
     /**
      * Credit card holder phone - Block name.
      */
-    const CREDIT_HOLDER_PHONE = 'phone';
+    public const CREDIT_HOLDER_PHONE = 'phone';
 
     /**
      * Credit card holder phone country code.
      */
-    const CREDIT_HOLDER_PHONE_COUNTRY_CODE = 'countryCode';
+    public const CREDIT_HOLDER_PHONE_COUNTRY_CODE = 'countryCode';
 
     /**
      * Credit card holder phone area code.
      */
-    const CREDIT_HOLDER_PHONE_AREA_CODE = 'areaCode';
+    public const CREDIT_HOLDER_PHONE_AREA_CODE = 'areaCode';
 
     /**
      * Credit card holder phone number.
      */
-    const CREDIT_HOLDER_PHONE_NUMBER = 'number';
+    public const CREDIT_HOLDER_PHONE_NUMBER = 'number';
 
     /**
      * Boleto - Block name.
      */
-    const TYPE_BOLETO = 'boleto';
+    public const TYPE_BOLETO = 'boleto';
 
     /**
      * Boleto expiration date - Due date.
      */
-    const BOLETO_EXPIRATION_DATE = 'expirationDate';
+    public const BOLETO_EXPIRATION_DATE = 'expirationDate';
 
     /**
      * Boleto instruction lines - Block name.
      */
-    const BOLETO_INSTRUCTION_LINES = 'instructionLines';
+    public const BOLETO_INSTRUCTION_LINES = 'instructionLines';
 
     /**
      * Boleto instruction lines first - First line impression data.
      */
-    const BOLETO_INSTRUCTION_LINES_FIRST = 'first';
+    public const BOLETO_INSTRUCTION_LINES_FIRST = 'first';
 
     /**
      * Boleto instruction lines second - Second line impression data.
      */
-    const BOLETO_INSTRUCTION_LINES_SECOND = 'second';
+    public const BOLETO_INSTRUCTION_LINES_SECOND = 'second';
 
     /**
      * Boleto instruction lines third - Third line impression data.
      */
-    const BOLETO_INSTRUCTION_LINES_THIRD = 'third';
+    public const BOLETO_INSTRUCTION_LINES_THIRD = 'third';
 
     /**
      * Boleto logo Uri - Url logo.
      */
-    const BOLETO_LOGO_URI = 'logoUri';
+    public const BOLETO_LOGO_URI = 'logoUri';
 
     /**
      * @var SubjectReader
@@ -185,6 +185,8 @@ class PaymentDataRequest implements BuilderInterface
      * @param SubjectReader       $subjectReader
      * @param OrderAdapterFactory $orderAdapterFactory
      * @param Config              $config
+     * @param ConfigCc            $configCc
+     * @param ConfigBoleto        $configBoleto
      */
     public function __construct(
         SubjectReader $subjectReader,
@@ -201,7 +203,9 @@ class PaymentDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {
@@ -237,12 +241,13 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * Data for Boleto.
      *
-     * @param $storeId
+     * @param int $storeId
      *
      * @return array
      */
     public function getDataPaymetBoleto($storeId)
     {
+        $instruction = [];
         $instruction[self::PAYMENT_INSTRUMENT] = [
             self::FUNDING_INSTRUMENT => [
                 self::STATEMENT_DESCRIPTOR => substr($this->config->getStatementDescriptor($storeId), 0, 13),
@@ -268,14 +273,14 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * Data for CC Vault.
      *
-     * @param $payment
-     * @param $orderAdapter
-     * @param $storeId
+     * @param OrderAdapterFactory $payment
+     * @param int                 $storeId
      *
      * @return array
      */
     public function getDataPaymetCCVault($payment, $storeId)
     {
+        $instruction = [];
         $extensionAttributes = $payment->getExtensionAttributes();
         $paymentToken = $extensionAttributes->getVaultPaymentToken();
 
@@ -299,14 +304,15 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * Data for CC.
      *
-     * @param $payment
-     * @param $orderAdapter
-     * @param $storeId
+     * @param PaymentDataObjectInterface $payment
+     * @param OrderAdapterFactory        $orderAdapter
+     * @param int                        $storeId
      *
      * @return array
      */
     public function getDataPaymetCC($payment, $orderAdapter, $storeId)
     {
+        $instruction = [];
         $phone = $payment->getAdditionalInformation('cc_holder_phone');
         if (!$phone) {
             $phone = $orderAdapter->getBillingAddress()->getTelephone();
@@ -359,10 +365,10 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * Value For Field Address.
      *
-     * @param $param_telefone
-     * @param $return_ddd
+     * @param string $param_telefone
+     * @param bool   $return_ddd
      *
-     * @return string value
+     * @return string
      */
     public function getNumberOrDDD($param_telefone, $return_ddd = false)
     {
@@ -392,9 +398,9 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * ValueForTaxDocument.
      *
-     * @param $orderAdapter
+     * @param OrderAdapterFactory $orderAdapter
      *
-     * @return value
+     * @return string
      */
     public function getValueForTaxDocument($orderAdapter)
     {
@@ -432,7 +438,7 @@ class PaymentDataRequest implements BuilderInterface
     /**
      * StructurePhone.
      *
-     * @param  $phone
+     * @param string $phone
      *
      * @return array
      */

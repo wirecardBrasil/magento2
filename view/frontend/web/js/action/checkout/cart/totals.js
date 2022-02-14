@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -14,58 +14,57 @@ define(
         'Magento_Customer/js/model/customer',
     ],
     function ($, quote, urlBuilder, errorProcessor, urlFormatter, getTotalsAction, customer) {
-    "use strict";
-    return {
-        /**
-         * Save Moip Interest by Installment
-         *
-         * @param installment
-         */
-        save(installment) {
-            var serviceUrl,
-                payload,
-                quoteId = quote.getQuoteId();
+        "use strict";
+        return {
+            /**
+             * Save Moip Interest by Installment
+             *
+             * @param installment
+             */
+            save(installment) {
+                var serviceUrl,
+                    payload,
+                    quoteId = quote.getQuoteId();
+                if (!customer.isLoggedIn()) {
+                    serviceUrl = urlBuilder.createUrl('/guest-carts/:cartId/set-installment-for-moip-interest', {
+                        cartId: quoteId
+                    });
+                    payload = {
+                        cartId: quoteId,
+                        installment: {
+                            installment_for_interest: installment
+                        }
+                    };
+                } else {
+                    serviceUrl = urlBuilder.createUrl('/carts/mine/set-installment-for-moip-interest', {});
+                    payload = {
+                        cartId: quoteId,
+                        installment: {
+                            installment_for_interest: installment
+                        }
+                    };
+                }
 
-            if (!customer.isLoggedIn()) {
-                serviceUrl = urlBuilder.createUrl('/guest-carts/:cartId/set-installment-for-moip-interest', {
-                    cartId: quoteId
-                });
-                payload = {
-                    cartId: quoteId,
-                    installment: {
-                        installment_for_interest: installment
+                var result = true;
+                $.ajax({
+                    url: urlFormatter.build(serviceUrl),
+                    data: JSON.stringify(payload),
+                    global: false,
+                    contentType: "application/json",
+                    type: "PUT",
+                    async: false
+                }).done(
+                    function (response) {
+                        var deferred = $.Deferred();
+                        getTotalsAction([], deferred);
                     }
-                };
-            } else {
-                serviceUrl = urlBuilder.createUrl('/carts/mine/set-installment-for-moip-interest', {});
-                payload = {
-                    cartId: quoteId,
-                    installment: {
-                        installment_for_interest: installment
+                ).fail(
+                    function (response) {
+                        result = false;
+                        errorProcessor.process(response);
                     }
-                };
+                );
+                return result;
             }
-
-            var result = true;
-            $.ajax({
-                url: urlFormatter.build(serviceUrl),
-                data: JSON.stringify(payload),
-                global: false,
-                contentType: "application/json",
-                type: "PUT",
-                async: false
-            }).done(
-                function (response) {
-                    var deferred = $.Deferred();
-                    getTotalsAction([], deferred); 
-                }
-            ).fail(
-                function (response) {
-                    result = false;
-                    errorProcessor.process(response);
-                }
-            );
-            return result;
-        }
-    };
-});
+        };
+    });

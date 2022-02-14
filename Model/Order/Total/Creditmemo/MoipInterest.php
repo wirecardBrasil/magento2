@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,6 +19,8 @@ use Magento\Sales\Model\Order\Creditmemo\Total\AbstractTotal;
 class MoipInterest extends AbstractTotal
 {
     /**
+     * Collect Data.
+     *
      * @param Creditmemo $creditmemo
      *
      * @return $this

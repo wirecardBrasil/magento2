@@ -1,216 +1,163 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
+declare(strict_types=1);
 
 namespace Moip\Magento2\Gateway\Config;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\Serialize\Serializer\Json;
+use Magento\Payment\Gateway\Config\Config as PaymentConfig;
 use Magento\Store\Model\ScopeInterface;
 
 /**
  * Class Config - Returns form of payment configuration properties.
  */
-class Config extends \Magento\Payment\Gateway\Config\Config
+class Config extends PaymentConfig
 {
     /**
-     * Method code - Base.
-     *
      * @const string
      */
-    const METHOD = 'moip_magento2';
+    public const METHOD = 'moip_magento2';
 
     /**
-     * Round up -  Used to define float in integers.
-     *
      * @const int
      */
-    const ROUND_UP = 100;
+    public const ROUND_UP = 100;
 
     /**
-     * endpoint of production.
-     *
      * @const string
      */
-    const ENDPOINT_PRODUCTION = 'https://api.moip.com.br/v2/';
+    public const ENDPOINT_PRODUCTION = 'https://api.moip.com.br/v2/';
 
     /**
-     * environment mode production.
-     *
      * @const string
      */
-    const ENVIRONMENT_PRODUCTION = 'production';
+    public const ENVIRONMENT_PRODUCTION = 'production';
 
     /**
-     * endpoint of sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_SANDBOX = 'https://sandbox.moip.com.br/v2/';
+    public const ENDPOINT_SANDBOX = 'https://sandbox.moip.com.br/v2/';
 
     /**
-     * environment mode sandbox.
-     *
      * @const string
      */
-    const ENVIRONMENT_SANDBOX = 'sandbox';
+    public const ENVIRONMENT_SANDBOX = 'sandbox';
 
     /**
-     * Client name.
-     *
-     * @const string
-     * */
-    const CLIENT = 'Magento2';
-
-    /**
-     * Client Version - API version.
-     *
      * @const string
      */
-    const CLIENT_VERSION = '2.0.0';
+    public const CLIENT = 'Magento2';
 
     /**
-     * Config Pattern for Atribute.
-     *
      * @const string
      */
-    const PATTERN_FOR_ATTRIBUTES = 'moip_magento2';
+    public const CLIENT_VERSION = '2.0.0';
 
     /**
-     * Config Pattern for Credentials.
-     *
      * @const string
      */
-    const PATTERN_FOR_CREDENTIALS = 'moip_credentials';
+    public const PATTERN_FOR_ATTRIBUTES = 'moip_magento2';
 
     /**
-     * URI For Oauth.
-     *
      * @const string
      */
-    const OAUTH_URI = 'http://moip.o2ti.com/magento/redirect/';
+    public const PATTERN_FOR_CREDENTIALS = 'moip_credentials';
 
     /**
-     * Scope App.
-     *
      * @const string
      */
-    const OAUTH_SCOPE = 'RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO,DEFINE_PREFERENCES,RETRIEVE_FINANCIAL_INFO';
+    public const OAUTH_URI = 'http://moip.o2ti.com/magento/redirect/';
 
     /**
-     * Token App - Sandbox.
-     *
      * @const string
      */
-    const OAUTH_TOKEN_SANDBOX = '8OKLQFT5XQZXU7CKXX43GPJOMIJPMSMF';
+    public const OAUTH_SCOPE = 'RECEIVE_FUNDS,REFUND,MANAGE_ACCOUNT_INFO,DEFINE_PREFERENCES,RETRIEVE_FINANCIAL_INFO';
 
     /**
-     * Key App - Sandbox.
-     *
      * @const string
      */
-    const OAUTH_KEY_SANDBOX = 'NT0UKOXS4ALNSVOXJVNXVKRLEOQCITHI5HDKW3LI';
+    public const OAUTH_TOKEN_SANDBOX = '8OKLQFT5XQZXU7CKXX43GPJOMIJPMSMF';
 
     /**
-     * URI For Keys - Sandbox.
-     *
      * @const string
      */
-    const URL_KEY_SANDBOX = 'https://sandbox.moip.com.br/v2/keys/';
+    public const OAUTH_KEY_SANDBOX = 'NT0UKOXS4ALNSVOXJVNXVKRLEOQCITHI5HDKW3LI';
 
     /**
-     * Endpoint For Oauth - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_OAUTH_SANDBOX = 'https://connect-sandbox.moip.com.br/oauth/authorize';
+    public const URL_KEY_SANDBOX = 'https://sandbox.moip.com.br/v2/keys/';
 
     /**
-     * Endpoint For Get Token Oauth - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_OAUTH_TOKEN_SANDBOX = 'https://connect-sandbox.moip.com.br/oauth/token';
+    public const ENDPOINT_OAUTH_SANDBOX = 'https://connect-sandbox.moip.com.br/oauth/authorize';
 
     /**
-     * Endpoint For Preferences - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_PREFERENCES_SANDBOX = 'https://sandbox.moip.com.br/v2/preferences/notifications/';
+    public const ENDPOINT_OAUTH_TOKEN_SANDBOX = 'https://connect-sandbox.moip.com.br/oauth/token';
 
     /**
-     * URI App Id - Sandbox.
-     *
      * @const string
      */
-    const APP_ID_SANDBOX = 'APP-9MUFQ39Y4CQU';
+    public const ENDPOINT_PREFERENCES_SANDBOX = 'https://sandbox.moip.com.br/v2/preferences/notifications/';
 
     /**
-     * Secrect For Oauth - Sandbox.
-     *
      * @const string
      */
-    const CLIENT_SECRECT_SANDBOX = '26xa86dbc7mhdyqq2w69vscvhz47cri';
+    public const APP_ID_SANDBOX = 'APP-9MUFQ39Y4CQU';
 
     /**
-     * Endpoint For Oauth - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_OAUTH_PRODUCTION = 'https://connect.moip.com.br/oauth/authorize';
+    public const CLIENT_SECRECT_SANDBOX = '26xa86dbc7mhdyqq2w69vscvhz47cri';
 
     /**
-     * Endpoint For Get Token Oauth - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_OAUTH_TOKEN_PRODUCTION = 'https://connect.moip.com.br/oauth/token';
+    public const ENDPOINT_OAUTH_PRODUCTION = 'https://connect.moip.com.br/oauth/authorize';
 
     /**
-     * Token App - Sandbox.
-     *
      * @const string
      */
-    const OAUTH_TOKEN_PPRODUCTION = 'EVCHBAUMKM0U4EE4YXIA8VMC0KBEPKN2';
+    public const ENDPOINT_OAUTH_TOKEN_PRODUCTION = 'https://connect.moip.com.br/oauth/token';
 
     /**
-     * Key App - Sandbox.
-     *
      * @const string
      */
-    const OAUTH_KEY_PRODUCTION = '4NECP62EKI8HRSMN3FGYOZNVYZOMBDY0EQHK9MHO';
+    public const OAUTH_TOKEN_PPRODUCTION = 'EVCHBAUMKM0U4EE4YXIA8VMC0KBEPKN2';
 
     /**
-     * URI For Keys - Production.
-     *
      * @const string
      */
-    const URL_KEY_PRODUCTION = 'https://api.moip.com.br/v2/keys/';
+    public const OAUTH_KEY_PRODUCTION = '4NECP62EKI8HRSMN3FGYOZNVYZOMBDY0EQHK9MHO';
 
     /**
-     * Endpoint For Preferences - Sandbox.
-     *
      * @const string
      */
-    const ENDPOINT_PREFERENCES_PRODUCTION = 'https://api.moip.com.br/v2/preferences/notifications/';
+    public const URL_KEY_PRODUCTION = 'https://api.moip.com.br/v2/keys/';
 
     /**
-     * URI App Id - Production.
-     *
      * @const string
      */
-    const APP_ID_PRODUCTION = 'APP-AKYBMMVU1FL1';
+    public const ENDPOINT_PREFERENCES_PRODUCTION = 'https://api.moip.com.br/v2/preferences/notifications/';
 
     /**
-     * Secrect For Oauth - Production.
-     *
      * @const string
      */
-    const CLIENT_SECRECT_PRODUCTION = 'db9pavx8542khvsyn3s0tpxyu2gom2m';
+    public const APP_ID_PRODUCTION = 'APP-AKYBMMVU1FL1';
+
+    /**
+     * @const string
+     */
+    public const CLIENT_SECRECT_PRODUCTION = 'db9pavx8542khvsyn3s0tpxyu2gom2m';
 
     /**
      * @var ScopeConfigInterface
@@ -218,14 +165,23 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     private $scopeConfig;
 
     /**
+     * @var Json
+     */
+    protected $json;
+
+    /**
      * @param ScopeConfigInterface $scopeConfig
+     * @param Json                 $json
+     * @param string               $methodCode
      */
     public function __construct(
         ScopeConfigInterface $scopeConfig,
-        $methodCode = null
+        Json $json,
+        $methodCode = self::METHOD
     ) {
-        \Magento\Payment\Gateway\Config\Config::__construct($scopeConfig, $methodCode);
+        PaymentConfig::__construct($scopeConfig, $methodCode);
         $this->scopeConfig = $scopeConfig;
+        $this->json = $json;
     }
 
     /**
@@ -233,9 +189,9 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @param int $amount
      *
-     * @return int
+     * @return float
      */
-    public function formatPrice($amount)
+    public function formatPrice($amount): float
     {
         return $amount * self::ROUND_UP;
     }
@@ -247,7 +203,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getApiUrl($storeId = null)
+    public function getApiUrl($storeId = null): ?string
     {
         $environment = $this->getEnvironmentMode($storeId);
 
@@ -263,7 +219,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getEnvironmentMode($storeId = null): string
+    public function getEnvironmentMode($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -285,7 +241,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayOauth($storeId = null): string
+    public function getMerchantGatewayOauth($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -315,7 +271,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayKeyPublic($storeId = null): string
+    public function getMerchantGatewayKeyPublic($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -344,7 +300,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayCaptureToken($storeId = null): string
+    public function getMerchantGatewayCaptureToken($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -374,7 +330,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayCancelToken($storeId = null): string
+    public function getMerchantGatewayCancelToken($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -404,7 +360,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayRefundToken($storeId = null): string
+    public function getMerchantGatewayRefundToken($storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -434,7 +390,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @return string
      */
-    public function getMerchantGatewayUsername($storeId = null): string
+    public function getMerchantGatewayUsername($storeId = null): ?string
     {
         $environment = $this->getEnvironmentMode($storeId);
 
@@ -445,13 +401,22 @@ class Config extends \Magento\Payment\Gateway\Config\Config
         }
     }
 
-    public function getStatementDescriptor($storeId = null)
+    /**
+     * Get Statement Descriptor.
+     *
+     * @param int|null $storeId
+     *
+     * @return string|null
+     */
+    public function getStatementDescriptor($storeId = null): ?string
     {
         return  $this->getAddtionalValue('statement_descriptor', $storeId);
     }
 
     /**
      * Cc Mapper.
+     *
+     * @param int|null $storeId
      *
      * @return array
      */
@@ -462,7 +427,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
             ScopeInterface::SCOPE_STORE,
             $storeId
         );
-        $result = json_decode($ccTypesMapper, true);
+        $result = $this->json->unserialize($ccTypesMapper);
 
         return is_array($result) ? $result : [];
     }
@@ -470,13 +435,12 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     /**
      * Gets the AddtionalValues.
      *
-     * @param string   $typePattern
      * @param string   $field
      * @param int|null $storeId
      *
-     * @return string
+     * @return string|null
      */
-    public function getAddtionalValue($field, $storeId = null): string
+    public function getAddtionalValue($field, $storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -490,13 +454,12 @@ class Config extends \Magento\Payment\Gateway\Config\Config
     /**
      * Gets the SlipValue.
      *
-     * @param string   $typePattern
      * @param string   $field
      * @param int|null $storeId
      *
-     * @return string
+     * @return string|null
      */
-    public function getSplitValue($field, $storeId = null): string
+    public function getSplitValue($field, $storeId = null): ?string
     {
         $pathPattern = 'payment/%s/%s';
 
@@ -512,7 +475,7 @@ class Config extends \Magento\Payment\Gateway\Config\Config
      *
      * @param int|null $storeId
      *
-     * @return string
+     * @return string|null
      */
     public function getMoipCategory($storeId = null): ?string
     {

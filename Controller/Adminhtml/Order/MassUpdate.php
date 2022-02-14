@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -16,20 +16,21 @@ use Magento\Sales\Model\ResourceModel\Order\CollectionFactory;
 use Magento\Ui\Component\MassAction\Filter;
 
 /**
- * Class MassDelete.
+ * Class Mass Update - Fetch Payment Review Update.
  */
 class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassAction
 {
-    /*
-     * @var Order Management
+    /**
+     * @var OrderManagementInterface
      */
     protected $orderManagement;
 
-    /*
-     * @param Context
-     * @param Filter
-     * @param CollectionFactory
-     * @param OrderManagementInterface
+    /**
+     * @param Context                  $context
+     * @param Filter                   $filter
+     * @param CollectionFactory        $collectionFactory
+     * @param OrderManagementInterface $orderManagement
+     * @param Order                    $order
      */
     public function __construct(
         Context $context,
@@ -44,12 +45,12 @@ class MassUpdate extends \Magento\Sales\Controller\Adminhtml\Order\AbstractMassA
         $this->order = $order;
     }
 
-    /*
-     * Mass Action
+    /**
+     * Mass Action.
      *
-     * @param collection
+     * @param AbstractCollection $collection
      *
-     * @return Url
+     * @return resultRedirectFactory
      */
     protected function massAction(AbstractCollection $collection)
     {

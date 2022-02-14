@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -26,66 +26,66 @@ class CustomerDataRequest implements BuilderInterface
      * Unique user id.
      * Required.
      */
-    const OWN_ID = 'ownId';
+    public const OWN_ID = 'ownId';
 
     /**
      * The first name value must be less than or equal to 255 characters.
      * Required.
      */
-    const FIRST_NAME = 'firstName';
+    public const FIRST_NAME = 'firstName';
 
     /**
      * The last name value must be less than or equal to 255 characters.
      * Required.
      */
-    const LAST_NAME = 'lastName';
+    public const LAST_NAME = 'lastName';
 
     /**
      * The full name value must be less than or equal to 255 characters.
      * Required.
      */
-    const FULL_NAME = 'fullname';
+    public const FULL_NAME = 'fullname';
 
     /**
      * The customer birth Date. Date Y-MM-dd.
      * Required.
      */
-    const BIRTH_DATE = 'birthDate';
+    public const BIRTH_DATE = 'birthDate';
 
     /**
      * The customer’s company. 255 character maximum.
      * Required.
      */
-    const COMPANY = 'company';
+    public const COMPANY = 'company';
 
     /**
      * The customer’s email address.
      * Required.
      */
-    const EMAIL = 'email';
+    public const EMAIL = 'email';
 
     /**
      * Phone block name.
      */
-    const PHONE = 'phone';
+    public const PHONE = 'phone';
 
     /*
      * Phone Country Code. Must be 2 characters and can (DDI)
      * Required.
      */
-    const PHONE_CONNTRY_CODE = 'countryCode';
+    public const PHONE_CONNTRY_CODE = 'countryCode';
 
     /*
      * Phone Area code. Must be 2 characters and can (DDD)
      * Required.
      */
-    const PHONE_AREA_CODE = 'areaCode';
+    public const PHONE_AREA_CODE = 'areaCode';
 
     /*
      * Phone Number. Must be 8 - 9 characters
      * Required.
      */
-    const PHONE_NUMBER = 'number';
+    public const PHONE_NUMBER = 'number';
 
     /**
      * @var SubjectReader
@@ -112,10 +112,10 @@ class CustomerDataRequest implements BuilderInterface
     /**
      * Value For Field Address.
      *
-     * @param $param_telefone
-     * @param $return_ddd
+     * @param string $param_telefone
+     * @param bool   $return_ddd
      *
-     * @return string value
+     * @return string
      */
     public function getNumberOrDDD($param_telefone, $return_ddd = false)
     {
@@ -145,8 +145,8 @@ class CustomerDataRequest implements BuilderInterface
     /**
      * StructurePhone.
      *
-     * @param  $phone full phone number,
-     * @param  $defaultCountryCode,
+     * @param string $phone
+     * @param string $defaultCountryCode
      *
      * @return array
      */
@@ -160,7 +160,9 @@ class CustomerDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {
@@ -192,6 +194,10 @@ class CustomerDataRequest implements BuilderInterface
         //* sobrescreve na order o name caso seja capturado no formulario de pagamento
         if ($payment->getAdditionalInformation('boleto_payer_fullname')) {
             $name = $payment->getAdditionalInformation('boleto_payer_fullname');
+        }
+
+        if ($payment->getAdditionalInformation('checkout_payer_fullname')) {
+            $name = $payment->getAdditionalInformation('checkout_payer_fullname');
         }
 
         if (!$name) {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -20,7 +20,7 @@ use Magento\Payment\Gateway\Helper;
 class SubjectReader
 {
     /**
-     * @var Checkout Session
+     * @var Session
      */
     private $checkoutSession;
 
@@ -54,7 +54,7 @@ class SubjectReader
      *
      * @return int|null
      */
-    public function readStoreId(array $subject): int
+    public function readStoreId(array $subject): ?int
     {
         $storeId = $subject['store_id'] ?? null;
 
@@ -97,6 +97,8 @@ class SubjectReader
     }
 
     /**
+     * Get Quote.
+     *
      * @return \Magento\Quote\Model\Quote
      */
     public function getQuote()
@@ -105,6 +107,8 @@ class SubjectReader
     }
 
     /**
+     * Get Order.
+     *
      * @return \Magento\Sales\Model\Order
      */
     public function getOrder()

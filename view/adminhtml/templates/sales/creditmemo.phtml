@@ -1,7 +1,7 @@
-<?php if($block->canRefundBoleto()): ?>
+<?php if ($block->canRefundBoleto()): ?>
 <section class="admin__page-section" id="bank-details-for-refund">
     <div class="admin__page-section-title">
-        <span class="title"><?= __('Bank details for refund'); ?></span>
+        <span class="title"><?= $block->escapeHtml(__('Bank details for refund')); ?></span>
     </div>
     <div class="admin__page-section-content form-data-moip">
         <div class="admin__field  field-refund-boleto">
@@ -11,10 +11,11 @@
                 </label>
             </div>
             <div class="admin__field-control control _with-tooltip">
-                <input type="text" class="input-text admin__control-text required-entry" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::HOLDER_FULLNAME ?>]" id="moip_magento2_boleto_holder_fullname" value="<?= $block->getBankNumber(); ?>">
+                <?php // phpcs:ignore Generic.Files.LineLength ?>
+                <input type="text" class="input-text admin__control-text required-entry" name="creditmemo[<?= $block->escapeHtml($block->getNameInputHolderName()) ?>]" id="moip_magento2_boleto_holder_fullname" value="">
                 <div class="admin__field-tooltip">
-                    <div data-bind="<?= $block->getTooltipConfig('fullname') ?>" class="hidden">
-                        <?= __('Name of the account holder.'); ?>
+                    <div data-bind="<?= /* @noEscape */ $block->getTooltipConfig('fullname') ?>" class="hidden">
+                        <?= $block->escapeHtml(__('Name of the account holder.')); ?>
                     </div>
                     <div class="tooltip" data-tooltip-trigger="moip_magento2_tooltip_fullname">
                         <span class="help"><span></span></span>
@@ -29,10 +30,11 @@
                 </label>
             </div>
             <div class="admin__field-control control _with-tooltip">
-                <input type="text" class="input-text admin__control-text required-entry validate-length minimum-length-11 maximum-length-14" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::HOLDER_DOCUMENT_NUMBER ?>]" id="moip_magento2_boleto_holder_document" value="<?= $block->getBankNumber(); ?>">
+                <?php // phpcs:ignore Generic.Files.LineLength ?>
+                <input type="text" class="input-text admin__control-text required-entry validate-length minimum-length-11 maximum-length-14" name="creditmemo[<?= $block->escapeHtml($block->getNameInputHolderDocument()) ?>]" id="moip_magento2_boleto_holder_document" value="">
                 <div class="admin__field-tooltip">
-                    <div data-bind="<?= $block->getTooltipConfig('document') ?>" class="hidden">
-                        <?= __('Tax document of the holder.'); ?>
+                    <div data-bind="<?= /* @noEscape */ $block->getTooltipConfig('document') ?>" class="hidden">
+                        <?= $block->escapeHtml(__('Tax document of the holder.')); ?>
                     </div>
                     <div class="tooltip" data-tooltip-trigger="moip_magento2_tooltip_document">
                         <span class="help"><span></span></span>
@@ -47,10 +49,12 @@
                 </label>
             </div>
             <div class="admin__field-control control _with-tooltip">
-                <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::BANK_NUMBER ?>]" id="moip_magento2_boleto_bank_number" value="<?= $block->getBankNumber(); ?>">
+                <?php // phpcs:ignore Generic.Files.LineLength ?>
+                <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= $block->escapeHtml($block->getNameInputBankNumber()) ?>]" id="moip_magento2_boleto_bank_number" value="">
                 <div class="admin__field-tooltip">
-                    <div data-bind="<?= $block->getTooltipConfig('bank_number') ?>" class="hidden">
-                        <?= __('See bank number <a href="%1" target="_blank">here</a>', 'https://docs.moip.com.br/reference#bancos'); ?>
+                    <div data-bind="<?= /* @noEscape */ $block->getTooltipConfig('bank_number') ?>" class="hidden">
+                        <?php // phpcs:ignore Generic.Files.LineLength ?>
+                        <?= $block->escapeHtml(__('See bank number <a href="%1" target="_blank">here</a>', 'https://docs.moip.com.br/reference#bancos')); ?>
                     </div>
                     <div class="tooltip" data-tooltip-trigger="moip_magento2_tooltip_bank_number">
                         <span class="help"><span></span></span>
@@ -66,7 +70,8 @@
                     </label>
                 </div>
                 <div class="admin__field-control control">
-                    <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::AGENCY_NUMBER ?>]" id="moip_magento2_boleto_agency_number" value="<?= $block->getBankNumber(); ?>">
+                    <?php // phpcs:ignore Generic.Files.LineLength ?>
+                    <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= $block->escapeHtml($block->getNameInputAgencyNumber()) ?>]" id="moip_magento2_boleto_agency_number" value="">
                 </div>
             </div>
             <div class="admin__field  field-refund-boleto agency-check-number">
@@ -76,7 +81,8 @@
                     </label>
                 </div>
                 <div class="admin__field-control control">
-                    <input type="text" class="input-text admin__control-text validate-not-negative-number" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::AGENCY_CHECK_NUMBER ?>]" id="moip_magento2_boleto_agency_check_number" value="<?= $block->getBankNumber(); ?>">
+                    <?php // phpcs:ignore Generic.Files.LineLength ?>
+                    <input type="text" class="input-text admin__control-text validate-not-negative-number" name="creditmemo[<?= $block->escapeHtml($block->getNameInputAgencyCheck()) ?>]" id="moip_magento2_boleto_agency_check_number" value="">
                 </div>
             </div>
         </div>
@@ -88,7 +94,8 @@
                     </label>
                 </div>
                 <div class="admin__field-control control">
-                    <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::ACCOUNT_NUMBER ?>]" id="moip_magento2_boleto_account_number" value="<?= $block->getBankNumber(); ?>">
+                    <?php // phpcs:ignore Generic.Files.LineLength ?>
+                    <input type="text" class="input-text admin__control-text required-entry validate-not-negative-number" name="creditmemo[<?= $block->escapeHtml($block->getNameInputAccountNumber()) ?>]" id="moip_magento2_boleto_account_number" value="">
                 </div>
             </div>
             <div class="admin__field  field-refund-boleto account-check-number">
@@ -98,7 +105,8 @@
                     </label>
                 </div>
                 <div class="admin__field-control control">
-                    <input type="text" class="input-text admin__control-text validate-not-negative-number" name="creditmemo[<?= \Moip\Magento2\Block\Adminhtml\Sales\Creditmemo::ACCOUNT_CHECK_NUMBER ?>]" id="moip_magento2_boleto_account_check_number" value="<?= $block->getBankNumber(); ?>">
+                    <?php // phpcs:ignore Generic.Files.LineLength ?>
+                    <input type="text" class="input-text admin__control-text validate-not-negative-number" name="creditmemo[<?= $block->escapeHtml($block->getNameInputAccountCheck()) ?>]" id="moip_magento2_boleto_account_check_number" value="">
                 </div>
             </div>
         </div>

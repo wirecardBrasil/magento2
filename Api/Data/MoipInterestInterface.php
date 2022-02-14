@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -16,14 +16,14 @@ namespace Moip\Magento2\Api\Data;
 interface MoipInterestInterface
 {
     /**
-     * @var string
+     * @const string
      */
-    const MOIP_INTEREST_AMOUNT = 'moip_interest_amount';
+    public const MOIP_INTEREST_AMOUNT = 'moip_interest_amount';
 
     /**
-     * @var string
+     * @const string
      */
-    const BASE_MOIP_INTEREST_AMOUNT = 'base_moip_interest_amount';
+    public const BASE_MOIP_INTEREST_AMOUNT = 'base_moip_interest_amount';
 
     /**
      * Get Installment for Moip Interest.

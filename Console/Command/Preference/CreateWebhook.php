@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,25 +19,25 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateWebhook extends Command
 {
-    const WEBHOOK_LINK = 'link';
+    /**
+     * @const string
+     */
+    public const WEBHOOK_LINK = 'link';
 
     /**
-     * Create.
-     *
-     * @var Moip\Magento2\Model\Console\Command\Preference\Create
+     * @var Create
      */
     protected $create;
 
     /**
-     * State.
-     *
-     * @var \Magento\Framework\App\State
+     * @var State
      */
     protected $state;
 
     /**
      * CreateWebhook constructor.
      *
+     * @param State  $state
      * @param Create $create
      */
     public function __construct(
@@ -50,7 +50,10 @@ class CreateWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Execute.
+     *
+     * @param InputInterface  $input
+     * @param OutputInterface $output
      */
     protected function execute(
         InputInterface $input,
@@ -64,7 +67,9 @@ class CreateWebhook extends Command
     }
 
     /**
-     * {@inheritdoc}
+     * Configure.
+     *
+     * @return void
      */
     protected function configure()
     {

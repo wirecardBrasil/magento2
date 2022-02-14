@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,7 +21,7 @@ class Totals extends Template
     /**
      * Get data (totals) source model.
      *
-     * @return DataObject
+     * @return \Magento\Sales\Model\Order
      */
     public function getSource()
     {
@@ -31,7 +31,7 @@ class Totals extends Template
     /**
      * Get Invoice data.
      *
-     * @return invoice
+     * @return \Magento\Sales\Model\Order
      */
     public function getInvoice()
     {

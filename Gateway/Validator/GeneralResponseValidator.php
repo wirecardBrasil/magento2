@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,7 +21,7 @@ class GeneralResponseValidator extends AbstractValidator
     /**
      * The result code.
      */
-    const RESULT_CODE_SUCCESS = '1';
+    public const RESULT_CODE_SUCCESS = '1';
 
     /**
      * @var SubjectReader
@@ -47,7 +47,11 @@ class GeneralResponseValidator extends AbstractValidator
     }
 
     /**
-     * {@inheritdoc}
+     * Validate.
+     *
+     * @param array $validationSubject
+     *
+     * @return ResultInterface
      */
     public function validate(array $validationSubject): ResultInterface
     {

@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -10,24 +10,26 @@ namespace Moip\Magento2\Block\Adminhtml\System\Config;
 
 use Magento\Customer\Model\Customer;
 use Magento\Framework\ObjectManagerInterface;
+use Magento\Framework\Option\ArrayInterface;
 
 /**
  * Class CustomerMap - Maps customer attributes.
  */
-class CustomerMap implements \Magento\Framework\Option\ArrayInterface
+class CustomerMap implements ArrayInterface
 {
     /**
-     * @var objectManager
+     * @var ObjectManagerInterface
      */
     protected $objectManager;
 
     /**
-     * @var customer
+     * @var Customer
      */
     protected $customer;
 
     /**
      * @param ObjectManagerInterface $objectManager
+     * @param Customer               $customer
      */
     public function __construct(
         ObjectManagerInterface $objectManager,
@@ -40,9 +42,9 @@ class CustomerMap implements \Magento\Framework\Option\ArrayInterface
     /**
      * Returns Options.
      *
-     * @return array | attributesArrays
+     * @return array
      */
-    public function toOptionArray()
+    public function toOptionArray(): array
     {
         $customer_attributes = $this->customer->getAttributes();
         $attributesArrays = [];

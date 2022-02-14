@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -19,74 +19,74 @@ use Moip\Magento2\Gateway\Config\Config;
 class DataAssignObserverCc extends AbstractDataAssignObserver
 {
     /**
-     * @const Method Name Block
+     * @const string
      */
-    const METHOD_NAME = 'method_name';
+    public const METHOD_NAME = 'method_name';
 
     /**
-     * @const Method Name
+     * @const string
      */
-    const METHOD_NAME_TYPE = 'Cartão de Crédito';
+    public const METHOD_NAME_TYPE = 'Cartão de Crédito';
 
     /**
-     * @const Hahs
+     * @const string
      */
-    const PAYER_HASH = 'cc_hash';
+    public const PAYER_HASH = 'cc_hash';
 
     /**
-     * @const Credit Card Number
+     * @const string
      */
-    const PAYER_CC_NUMBER = 'cc_number';
+    public const PAYER_CC_NUMBER = 'cc_number';
 
     /**
-     * @const Credit Card Type
+     * @const string
      */
-    const PAYER_CC_TYPE = 'cc_type';
+    public const PAYER_CC_TYPE = 'cc_type';
 
     /**
-     * @const Credit Card Exp Month
+     * @const string
      */
-    const PAYER_CC_EXP_M = 'cc_exp_month';
+    public const PAYER_CC_EXP_M = 'cc_exp_month';
 
     /**
-     * @const Credit Card Type
+     * @const string
      */
-    const PAYER_CC_EXP_Y = 'cc_exp_year';
+    public const PAYER_CC_EXP_Y = 'cc_exp_year';
 
     /**
-     * @const Installment
+     * @const string
      */
-    const PAYER_CC_INSTALLMENTS = 'cc_installments';
+    public const PAYER_CC_INSTALLMENTS = 'cc_installments';
 
     /**
-     * @const Holder Full Nane
+     * @const string
      */
-    const PAYER_HOLDER_FULLNAME = 'cc_holder_fullname';
+    public const PAYER_HOLDER_FULLNAME = 'cc_holder_fullname';
 
     /**
-     * @const Holder Birth Date
+     * @const string
      */
-    const PAYER_HOLDER_BIRTH_DATE = 'cc_holder_birth_date';
+    public const PAYER_HOLDER_BIRTH_DATE = 'cc_holder_birth_date';
 
     /**
-     * @const Holder Tax Document
+     * @const string
      */
-    const PAYER_HOLDER_TAX_DOCUMENT = 'cc_holder_tax_document';
+    public const PAYER_HOLDER_TAX_DOCUMENT = 'cc_holder_tax_document';
 
     /**
-     * @const Holder Phone
+     * @const string
      */
-    const PAYER_HOLDER_PHONE = 'cc_holder_phone';
+    public const PAYER_HOLDER_PHONE = 'cc_holder_phone';
 
     /**
-     * @const Use save card
+     * @const string
      */
-    const PAYER_CC_SAVE = 'is_active_payment_token_enabler';
+    public const PAYER_CC_SAVE = 'is_active_payment_token_enabler';
 
     /**
-     * @const Credit Card - CVV
+     * @const string
      */
-    const PAYER_CC_CID = 'cc_cid';
+    public const PAYER_CC_CID = 'cc_cid';
 
     /**
      * @var array
@@ -107,7 +107,7 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
     ];
 
     /**
-     * @var
+     * @var Config
      */
     protected $config;
 
@@ -121,7 +121,11 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
     }
 
     /**
+     * Execute.
+     *
      * @param Observer $observer
+     *
+     * @return void
      */
     public function execute(Observer $observer)
     {
@@ -169,9 +173,9 @@ class DataAssignObserverCc extends AbstractDataAssignObserver
     /**
      * Get Name for Cc Type.
      *
-     * @parm string
+     * @param string $type
      *
-     * @return array
+     * @return string
      */
     public function getFullTypeName(string $type): string
     {

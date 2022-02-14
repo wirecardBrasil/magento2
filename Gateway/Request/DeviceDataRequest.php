@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -21,17 +21,17 @@ class DeviceDataRequest implements BuilderInterface
     /**
      * Device data customer.
      */
-    const DEVICE_DATA = 'device';
+    public const DEVICE_DATA = 'device';
 
     /**
      * RemoteIP data.
      */
-    const REMOTE_IP = 'ip';
+    public const REMOTE_IP = 'ip';
 
     /**
      * RemoteUserAgent data.
      */
-    const REMOTE_USER_AGENT = 'userAgent';
+    public const REMOTE_USER_AGENT = 'userAgent';
 
     /**
      * @var SubjectReader
@@ -64,7 +64,9 @@ class DeviceDataRequest implements BuilderInterface
     }
 
     /**
-     * {@inheritdoc}
+     * Build.
+     *
+     * @param array $buildSubject
      */
     public function build(array $buildSubject)
     {
