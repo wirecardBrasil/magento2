@@ -11,66 +11,66 @@
         <span class="legend-title"><span text="getMaskedCard()"></span></span>
         <span class="legend-icon">
             <ul class="credit-card-types">
-              <li class="item">
-                  <img data-bind="attr: {
-                    'src': getIcons(getCardType()).url,
-                    'alt': getIcons(getCardType()).title
-                    }" class="payment-icon">
-              </li>
+                <li class="item">
+                    <img data-bind="attr: {
+                        'src': getIcons(getCardType()).url,
+                        'alt': getIcons(getCardType()).title
+                        }" class="payment-icon">
+                </li>
             </ul>
         </span>
     </legend>
     <!-- /ko -->
     <div class="field-to-pay"  data-bind="css: { _hidden:isPlaceOrderActionAllowed() }">
-      <p class="not-editable-title"><!-- ko i18n: 'Waiting...'--><!-- /ko --></p>
+        <p class="not-editable-title"><!-- ko i18n: 'Waiting...'--><!-- /ko --></p>
     </div>
     <div class="field-to-pay"  data-bind="css: { _hidden:!isPlaceOrderActionAllowed() }">
         <div class="field moip-input-group empty"></div>
         <!-- ko if: (hasVerification())-->
-          <div class="field moip-input-group required" data-bind="attr: {id: getId() + '_cc_type_cvv_div'}">
-              <div class="control _with-tooltip">
-                  <input type="number"
-                         class="input-text cvv"
-                         name="payment[cc_cid]"
-                         value=""
-                         data-bind="attr: {id: getId() + '_cc_cid',
-                              'data-validate': JSON.stringify({'required-number':true})},
-                              autocomplete: 'cc-csc',
-                              title: $t('CVV - Card Verification Number'),
-                              placeholder: $t('CVV - Card Verification Number'),
-                              enable: isActive($parents)"  maxlength="4"  minlength="3" />
-                  <div class="field-tooltip toggle">
-                      <span class="field-tooltip-action action-cvv"
-                            tabindex="0"
-                            data-toggle="dropdown"
-                            data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
-                          <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
-                      </span>
-                      <div class="field-tooltip-content"
-                           data-target="dropdown"><span translate="'For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number'"></span></div>
-                  </div>
-                  <label data-bind="attr: {for: getId() + '_cc_cid'}" class="label">
-                    <span><!-- ko i18n: 'CVV - Card Verification Number'--><!-- /ko --></span>
-                  </label>
-              </div>
-          </div>
+            <div class="field moip-input-group required" data-bind="attr: {id: getId() + '_cc_type_cvv_div'}">
+                <div class="control _with-tooltip">
+                    <input type="number"
+                            class="input-text cvv"
+                            name="payment[cc_cid]"
+                            value=""
+                            data-bind="attr: {id: getId() + '_cc_cid',
+                                'data-validate': JSON.stringify({'required-number':true})},
+                                autocomplete: 'cc-csc',
+                                title: $t('CVV - Card Verification Number'),
+                                placeholder: $t('CVV - Card Verification Number'),
+                                enable: isActive($parents)"  maxlength="4"  minlength="3" />
+                    <div class="field-tooltip toggle">
+                        <span class="field-tooltip-action action-cvv"
+                                tabindex="0"
+                                data-toggle="dropdown"
+                                data-bind="attr: {title: $t('What is this?')}, mageInit: {'dropdown':{'activeClass': '_active'}}">
+                            <span><!-- ko i18n: 'What is this?'--><!-- /ko --></span>
+                        </span>
+                        <div class="field-tooltip-content"
+                            data-target="dropdown"><span translate="'For Visa, MasterCard, DinersClub, Elo, Hiper, HiperCard a 3-digit number in reverse italics on the back of your credit card. For American Express a 4-digit number on the front, just above your credit card number'"></span></div>
+                    </div>
+                    <label data-bind="attr: {for: getId() + '_cc_cid'}" class="label">
+                        <span><!-- ko i18n: 'CVV - Card Verification Number'--><!-- /ko --></span>
+                    </label>
+                </div>
+            </div>
         <!-- /ko -->
         <div class="field moip-input-group installments">
-          <div class="control">
-              <select name="payment[cc_installments]"
-                      class="select select-year"
-                      data-bind="attr: {autocomplete: 'off', id: getId() + '_installments', 'data-container': getId() + '-installments', 'data-validate': JSON.stringify({required:true})},
-                                 enable: isActive($parents),
-                                 options: getInstallments(),
-                                 optionsValue: 'value',
-                                 optionsText: 'installments',
-                                 optionsCaption: $t('Select Instalmment'),
-                                 value: creditCardInstallment">
-              </select>
-              <label data-bind="attr: {for: getId() + '_installments'}" class="label">
+            <div class="control">
+                <select name="payment[cc_installments]"
+                        class="select select-year"
+                        data-bind="attr: {autocomplete: 'off', id: getId() + '_installments', 'data-container': getId() + '-installments', 'data-validate': JSON.stringify({required:true})},
+                                    enable: isActive($parents),
+                                    options: getInstallments(),
+                                    optionsValue: 'value',
+                                    optionsText: 'installments',
+                                    optionsCaption: $t('Select Instalmment'),
+                                    value: creditCardInstallment">
+                </select>
+                <label data-bind="attr: {for: getId() + '_installments'}" class="label">
                     <span><!-- ko i18n: 'Select Instalmment' --><!-- /ko --></span>
-              </label>
-          </div>
+                </label>
+            </div>
         </div>
     </div>
 </fieldset>

@@ -17,7 +17,6 @@
                visible="isRadioButtonVisible()"
         />
         <label attr="for: getCode()" class="label">
-            
             <span class="payment-method-label">
                 <span class="payment-method-label-icon"> 
                     <img data-bind="attr: {
@@ -29,11 +28,9 @@
                 <span class="payment-method-label-title" data-bind="text: getTitle()"></span> 
             </span>
         </label>
-        </label>
     </div>
     <div class="payment-method-content">
         <each args="getRegion('messages')" render=""></each>
-        
         <form class="form" id="co-payment-form" method="post" afterRender="initFormElement">
             <render args="ccForm"></render>
         </form>
