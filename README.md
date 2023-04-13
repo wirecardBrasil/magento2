@@ -1,3 +1,7 @@
+# Esse módulo foi DEPRECIADO!
+
+Recomendamos usar o novo módulo Magento 2 PagSeguro na url: https://github.com/pagseguro/payment-magento
+
 <img src="view/adminhtml/web/images/logo.svg" align="right" />
 
 # Moip para Magento 2
