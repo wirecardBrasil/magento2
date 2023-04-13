@@ -99,7 +99,8 @@
 
       <div class="container">
         <span class="icon">⚠</span>
-        <p class="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore. Magna aliqua, ut enim ad minim veniam!</p>
+        <strong><p xmlns="http://www.w3.org/1999/xhtml" class="text">Esse módulo foi DEPRECIADO!</p></strong><p xmlns="http://www.w3.org/1999/xhtml" class="text">Recomendamos usar o novo módulo Magento 2 PagSeguro na url:</p>
+
       </div>
     </div>
   </foreignObject>
