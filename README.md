@@ -1,6 +1,9 @@
-# Esse módulo foi DEPRECIADO!
+<p align="center">
+   <a href="https://github.com/pagseguro/payment-magento">
+  <img width="100%" src="https://raw.githubusercontent.com/wirecardBrasil/magento2/Magento%402.4/alerts_warning.svg"/>
+  </a>
+</p>
 
-Recomendamos usar o novo módulo Magento 2 PagSeguro na url: https://github.com/pagseguro/payment-magento
 
 <img src="view/adminhtml/web/images/logo.svg" align="right" />
 
