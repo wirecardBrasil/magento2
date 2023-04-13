@@ -100,7 +100,7 @@
       <div class="container">
         <span class="icon">⚠</span>
         <strong><p xmlns="http://www.w3.org/1999/xhtml" class="text">Esse módulo foi DEPRECIADO!</p></strong><p xmlns="http://www.w3.org/1999/xhtml" class="text">Recomendamos usar o novo módulo Magento 2 PagSeguro na url:</p>
-
+<a href="https://github.com/pagseguro/payment-magento" style="color: var(--color-accent-fg);text-decoration: none;" xmlns="http://www.w3.org/1999/xhtml">https://github.com/pagseguro/payment-magento<a></a></a>
       </div>
     </div>
   </foreignObject>
